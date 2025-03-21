@@ -1,0 +1,80 @@
+.tableContainer {
+  width: fit-content;
+  border: 1px solid #d1d5db;
+  position: fixed;
+  left: 50px;
+}
+
+.headerRow {
+  display: flex;
+  width: 100%;
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.headerCell {
+  position: relative;
+  border-right: 1px solid #d1d5db;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.headerCell:last-child {
+  border-right: none;
+}
+
+.cellContent {
+  padding: 8px;
+  cursor: move;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resizeIndicator {
+  right: 0;
+  top: 0;
+  position: absolute;
+  cursor: col-resize;
+  width: 4px;
+  height: 100%;
+  background-color: #d1d5db;
+  float: right;
+}
+
+.resizeIndicator:hover{
+  background-color: cadetblue;
+  border-right: cadetblue;
+}
+
+.tableBody {
+  width: 100%;
+}
+
+.dataRow {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dataRow:last-child {
+  border-bottom: none;
+}
+
+.dataRow:hover {
+  background-color: #f9fafb;
+}
+
+.dataCell {
+  padding: 8px;
+  border-right: 1px solid #e5e7eb;
+  cursor: move;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.dataCell.resize {
+  border-right: 1px solid cadetblue;
+}
