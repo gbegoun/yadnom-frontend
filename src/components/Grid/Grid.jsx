@@ -1,5 +1,98 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Row } from './Row.jsx';
 import '../../styles/components/Grid/grid.css';
+
+import { 
+  DndContext, 
+  closestCenter, 
+  KeyboardSensor, 
+  PointerSensor, 
+  useSensor, 
+  useSensors 
+} from '@dnd-kit/core';
+
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+const useColumnResize = (initialColumns) => {
+  const [columns, setColumns] = useState(initialColumns);
+  const [resizeState, setResizeState] = useState({ 
+    active: false, 
+    columnId: null, 
+    startX: 0, 
+    startWidth: 0 
+  });
+
+  const handleResizeMouseDown = useCallback((e, columnId) => {
+    e.preventDefault();
+    const column = columns.find(col => col.id === columnId);
+    
+    setResizeState({
+      active: true,
+      columnId,
+      startX: e.clientX,
+      startWidth: column.width
+    });
+  }, [columns]);
+
+  const handleResizeMouseMove = useCallback((e) => {
+    if (!resizeState.active) return;
+
+    const diff = e.clientX - resizeState.startX;
+    setColumns(prevColumns => prevColumns.map(col => {
+      if (col.id === resizeState.columnId) {
+        return { ...col, width: Math.max(50, resizeState.startWidth + diff) };
+      }
+      return col;
+    }));
+  }, [resizeState]);
+
+  const handleResizeMouseUp = useCallback(() => {
+    setResizeState(prev => ({
+      ...prev,
+      active: false,
+      columnId: null
+    }));
+  }, []);
+
+  useEffect(() => {
+    if (resizeState.active) {
+      window.addEventListener('mousemove', handleResizeMouseMove);
+      window.addEventListener('mouseup', handleResizeMouseUp);
+    }
+    
+    return () => {
+      window.removeEventListener('mousemove', handleResizeMouseMove);
+      window.removeEventListener('mouseup', handleResizeMouseUp);
+    };
+  }, [resizeState.active, handleResizeMouseMove, handleResizeMouseUp]);
+
+  return { columns, setColumns, resizeState, handleResizeMouseDown };
+};
+
+const TableHeader = ({ columns, onResizeStart }) => (
+  <div className="headerRow">
+    {columns.map((column) => (
+      <div
+        key={column.id}
+        className="headerCell"
+        style={{ width: `${column.width}px` }}
+      >
+        <div className="cellContent">
+          <span>{column.label}</span>
+        </div>
+        <div
+          className="resizeIndicator"
+          onMouseDown={(e) => onResizeStart(e, column.id)}
+        />
+      </div>
+    ))}
+  </div>
+);
 
 export const Grid = () => {
   // Sample data
@@ -18,149 +111,61 @@ export const Grid = () => {
   ];
 
   const [data, setData] = useState(initialData);
-  const [columns, setColumns] = useState(initialColumns);
-  const [dragState, setDragState] = useState({ type: null, index: null, targetIndex: null });
-  const [resizeState, setResizeState] = useState({ active: false, columnId: null, startX: 0, startWidth: 0 });
   
-  const resizeStateRef = useRef(resizeState);
+  const { 
+    columns, 
+    resizeState, 
+    handleResizeMouseDown 
+  } = useColumnResize(initialColumns);
 
-  const handleResizeMouseDown = useCallback((e, columnId) => {
-    e.preventDefault();
-    const column = columns.find(col => col.id === columnId);
-    const newState = { 
-      active: true, 
-      columnId, 
-      startX: e.clientX, 
-      startWidth: column.width 
-    };
-    
-    setResizeState(newState);
-    resizeStateRef.current = newState; 
-    
-    window.addEventListener('mousemove', handleResizeMouseMove);
-    window.addEventListener('mouseup', handleResizeMouseUp);
-  }, [columns]);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
-  const handleResizeMouseMove = useCallback((e) => {
-    const currentState = resizeStateRef.current;
-    if (!currentState.active) return;
-    
-    const diff = e.clientX - currentState.startX;
-    setColumns(prevColumns => prevColumns.map(col => {
-      if (col.id === currentState.columnId) {
-        return { ...col, width: Math.max(50, currentState.startWidth + diff) };
-      }
-      return col;
-    }));
-  }, []);
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
 
-  const handleResizeMouseUp = useCallback(() => {
-    setResizeState(prev => ({
-      ...prev,
-      active: false,
-      columnId: null
-    }));
-    
-    resizeStateRef.current = {
-      ...resizeStateRef.current,
-      active: false,
-      columnId: null
-    };
-    
-    window.removeEventListener('mousemove', handleResizeMouseMove);
-    window.removeEventListener('mouseup', handleResizeMouseUp);
-  }, [handleResizeMouseMove]);
-
-  const handleDragStart = (e, index, type) => {
-    setDragState({ type, index, targetIndex: null });
-    e.dataTransfer.effectAllowed = 'move';
-  };
-
-  const handleDragOver = (e, index, type) => {
-    e.preventDefault();
-    if (dragState.type !== type || dragState.index === index) return;
-    setDragState(prev => ({ ...prev, targetIndex: index }));
-  };
-
-  const handleDrop = () => {
-    const { type, index, targetIndex } = dragState;
-    if (!type || targetIndex === null) return;
-    
-    if (type === 'row') {
-      const newData = [...data];
-      const draggedItem = newData[index];
-      newData.splice(index, 1);
-      newData.splice(targetIndex, 0, draggedItem);
-      setData(newData);
-    } else if (type === 'column') {
-      const newColumns = [...columns];
-      const draggedItem = newColumns[index];
-      newColumns.splice(index, 1);
-      newColumns.splice(targetIndex, 0, draggedItem);
-      setColumns(newColumns);
+    if (active.id !== over.id) {
+      setData((items) => {
+        const oldIndex = items.findIndex(item => item.id === active.id);
+        const newIndex = items.findIndex(item => item.id === over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
     }
-    
-    setDragState({ type: null, index: null, targetIndex: null });
   };
-
-  useEffect(() => {
-    return () => {
-      window.removeEventListener('mousemove', handleResizeMouseMove);
-      window.removeEventListener('mouseup', handleResizeMouseUp);
-    };
-  }, [handleResizeMouseMove, handleResizeMouseUp]);
-
-  useEffect(() => {
-    console.log('Resize state changed:', resizeState);
-  }, [resizeState]);
-  
 
   return (
     <div className="tableContainer">
-      <div className="headerRow">
-        {columns.map((column, index) => (
-          <div
-            key={column.id}
-            className="headerCell"
-            style={{ width: `${column.width}px` }}
-            draggable
-            onDragStart={(e) => handleDragStart(e, index, 'column')}
-            onDragOver={(e) => handleDragOver(e, index, 'column')}
-            onDragEnd={handleDrop}
-          >
-            <div className="cellContent">
-              <span>{column.label}</span>
-            </div>
-            <div
-              className="resizeIndicator"
-              onMouseDown={(e) => handleResizeMouseDown(e, column.id)}
-            />
-          </div>
-        ))}
-      </div>
+      <TableHeader 
+        columns={columns} 
+        onResizeStart={handleResizeMouseDown} 
+      />
 
-      <div className="tableBody">
-        {data.map((row, rowIndex) => (
-          <div
-            key={row.id}
-            className="dataRow"
-            draggable
-            onDragStart={(e) => handleDragStart(e, rowIndex, 'row')}
-            onDragOver={(e) => handleDragOver(e, rowIndex, 'row')}
-            onDragEnd={handleDrop}
-          >
-            {columns.map((column) => (
-              <div
-                key={`${row.id}-${column.id}`}
-                className={`dataCell ${resizeState.columnId === column.id ? "resize" : ""}`}
-                style={{ width: `${column.width}px` }}
-              >
-                <span>{row[column.id]}</span>
-              </div>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          items={data.map(item => item.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="tableBody">
+            {data.map((row) => (
+              <Row
+                key={row.id}
+                id={row.id}
+                columns={columns}
+                row={row}
+                resizeState={resizeState}
+              />
             ))}
           </div>
-        ))}
-      </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 };
