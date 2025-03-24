@@ -1,10 +1,10 @@
-import './App.css'
+
 
 function RootCmp() {
 
   return (
     <>
-      
+      <h1>RootCmp</h1>
     </>
   )
 }
