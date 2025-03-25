@@ -5,18 +5,18 @@ export const GroupList = ({ columns, group }) => {
                 <span>Task Title </span>
                 {columns.map(column => {
                     return (
-                        <span>{column.title} </span>
+                        <span key={column.id}>{column.title} </span>
                     )
                 })}
             </div>
 
             {group.task.map(task => {
                 return (
-                    <div>
+                    <div key={task.id}>
                         <span>{task.title} - </span>
-                        {columns.map(column => {
+                        {columns.map((column, index) => {
                             return (
-                                <span>{task.column_values[column.id]} </span>
+                                <span key={index}>{task.column_values[column.id]} </span>
                             )
                         })}
                     </div>

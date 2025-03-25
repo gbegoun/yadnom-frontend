@@ -6,7 +6,6 @@ import {demo_data} from  "../../demo-data.js"
 export const Board = () => {
     const { boardId } = useParams();
     const board = demo_data["boards"][0]
-    console.log(board)
 
     return (
         <div>

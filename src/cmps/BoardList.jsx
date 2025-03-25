@@ -1,7 +1,7 @@
-export const BoardList = () => {
+export const BoardList = ({ columns, group }) => {
     return (
         <div>
-            <h1>BoardList</h1>
+            BoardList
         </div>
     );
 };
