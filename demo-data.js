@@ -1,4 +1,4 @@
-{
+export const demo_data = {
     "boards": [
       {
         "id": 1001,

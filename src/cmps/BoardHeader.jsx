@@ -1,7 +1,7 @@
-export const BoardHeaderder = () => {
+export const BoardHeader = ({ name }) => {
     return (
         <div>
-            <h1>BoardHeader</h1>
+            <h1>{name}</h1>
         </div>
     );
 };
