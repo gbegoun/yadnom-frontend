@@ -1,44 +1,45 @@
 export const demo_data = {
   "boards": [
     {
-      "id": 1001,
-      "name": "Yadnom Project Management Tool Development",
+      "_id": 1001,
+      "name": "Demo Yadnom Project Management Tool Development",
       "description": "End-to-end development of our new project management platform with kanban and dashboard capabilities",
       "members": [201, 202, 203, 204, 205, 206, 207],
       "created_at": "2025-01-10T08:00:00Z",
       "updated_at": "2025-03-24T17:30:00Z",
       "columns": [
         {
-          "id": "status_column",
+          "_id": "status_column",
           "title": "Status",
           "type": "status",
           "settings": {
             "options": [
-              {"id": "done", "label": "Done ✓", "color": "#00c875"},
-              {"id": "working", "label": "Working on it", "color": "#fdab3d"},
-              {"id": "stuck", "label": "Stuck", "color": "#e2445c"},
-              {"id": "planning", "label": "Planning", "color": "#579bfc"},
-              {"id": "testing", "label": "Testing", "color": "#a25ddc"}
+              {"_id": "done", "label": "Done ✓", "color": "#00c875"},
+              {"_id": "working", "label": "Working on it", "color": "#fdab3d"},
+              {"_id": "stuck", "label": "Stuck", "color": "#e2445c"},
+              {"_id": "planning", "label": "Planning", "color": "#579bfc"},
+              {"_id": "testing", "label": "Testing", "color": "#a25ddc"},
+              {"_id": "default", "label": "Default Label", "color": "#C4C4C4"}
             ],
-            "default_option": "planning"
+            "default_option": "default"
           }
         },
         {
-          "id": "sprint_column",
+          "_id": "sprint_column",
           "title": "Sprint",
           "type": "dropdown",
           "settings": {
             "options": [
-              {"id": "sprint1", "label": "Sprint 1", "color": "#66ccff"},
-              {"id": "sprint2", "label": "Sprint 2", "color": "#66ccff"},
-              {"id": "sprint3", "label": "Sprint 3", "color": "#66ccff"},
-              {"id": "sprint4", "label": "Sprint 4", "color": "#66ccff"},
-              {"id": "backlog", "label": "Backlog", "color": "#c4c4c4"}
+              {"_id": "sprint1", "label": "Sprint 1"},
+              {"_id": "sprint2", "label": "Sprint 2"},
+              {"_id": "sprint3", "label": "Sprint 3"},
+              {"_id": "sprint4", "label": "Sprint 4"},
+              {"_id": "backlog", "label": "Backlog"}
             ]
           }
         },
         {
-          "id": "owners_column",
+          "_id": "owners_column",
           "title": "Owners",
           "type": "people",
           "settings": {
@@ -46,36 +47,22 @@ export const demo_data = {
           }
         },
         {
-          "id": "effort_column",
-          "title": "Effort",
-          "type": "dropdown",
-          "settings": {
-            "options": [
-              {"id": "xs", "label": "XS", "color": "#00c875"},
-              {"id": "s", "label": "S", "color": "#0086c0"},
-              {"id": "m", "label": "M", "color": "#579bfc"},
-              {"id": "l", "label": "L", "color": "#fdab3d"},
-              {"id": "xl", "label": "XL", "color": "#e2445c"}
-            ],
-            "default_option": "m"
-          }
-        },
-        {
-          "id": "priority_column",
+          "_id": "priority_column",
           "title": "Priority",
           "type": "dropdown",
           "settings": {
             "options": [
-              {"id": "critical", "label": "Critical", "color": "#e2445c"},
-              {"id": "high", "label": "High", "color": "#ff9900"},
-              {"id": "medium", "label": "Medium", "color": "#fdab3d"},
-              {"id": "low", "label": "Low", "color": "#00c875"}
+              {"_id": "critical", "label": "Critical ⚠️️", "color": "#333333"},
+              {"_id": "high", "label": "High", "color": "#401694"},
+              {"_id": "medium", "label": "Medium", "color": "#5559df"},
+              {"_id": "low", "label": "Low", "color": "#579bfc"},
+              {"_id": "default", "label": "Default Label", "color": "#C4C4C4"}
             ],
             "default_option": "medium"
           }
         },
         {
-          "id": "due_date_column",
+          "_id": "due_date_column",
           "title": "Due Date",
           "type": "date",
           "settings": {
@@ -84,7 +71,7 @@ export const demo_data = {
           }
         },
         {
-          "id": "files_column",
+          "_id": "files_column",
           "title": "Files",
           "type": "file",
           "settings": {
@@ -93,9 +80,9 @@ export const demo_data = {
           }
         },
         {
-          "id": "progress_column",
+          "_id": "progress_column",
           "title": "Progress",
-          "type": "progress",
+          "type": "progress ",
           "settings": {
             "display_mode": "percentage"
           }
@@ -103,22 +90,21 @@ export const demo_data = {
       ],
       "groups": [
         {
-          "id": "grp_ui_design",
+          "_id": "grp_ui_design",
           "title": "UI/UX Design",
           "color": "#579bfc",
           "archived": false,
           "task": [
             {
-              "id": 6001,
+              "_id": 6001,
               "title": "User research & interviews",
               "created_at": "2025-01-12T09:00:00Z",
               "updated_at": "2025-01-22T15:30:00Z",
-              "creator_id": 204,
+              "creator__id": 204,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [204],
-                "effort_column": "l",
                 "priority_column": "high",
                 "due_date_column": "2025-01-22",
                 "files_column": ["user_research_findings.pdf"],
@@ -126,16 +112,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6002,
+              "_id": 6002,
               "title": "Create design system",
               "created_at": "2025-01-15T10:15:00Z",
               "updated_at": "2025-02-05T11:45:00Z",
-              "creator_id": 204,
+              "creator__id": 204,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [204],
-                "effort_column": "xl",
                 "priority_column": "high",
                 "due_date_column": "2025-02-05",
                 "files_column": ["design_system_v1.fig"],
@@ -143,16 +128,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6003,
+              "_id": 6003,
               "title": "Create board view wireframes",
               "created_at": "2025-01-25T13:10:00Z",
               "updated_at": "2025-02-10T16:20:00Z",
-              "creator_id": 204,
+              "creator__id": 204,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [204],
-                "effort_column": "m",
                 "priority_column": "high",
                 "due_date_column": "2025-02-10",
                 "files_column": ["board_view_wireframes.fig"],
@@ -160,16 +144,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6004,
+              "_id": 6004,
               "title": "Design dashboard UI",
               "created_at": "2025-02-08T09:00:00Z",
               "updated_at": "2025-02-20T14:30:00Z",
-              "creator_id": 204,
+              "creator__id": 204,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [204],
-                "effort_column": "l",
                 "priority_column": "medium",
                 "due_date_column": "2025-02-20",
                 "files_column": ["dashboard_ui_v1.fig", "dashboard_components.png"],
@@ -177,16 +160,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6005,
+              "_id": 6005,
               "title": "Create interactive prototypes",
               "created_at": "2025-02-15T11:00:00Z",
               "updated_at": "2025-03-01T13:15:00Z",
-              "creator_id": 204,
+              "creator__id": 204,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint3",
                 "owners_column": [204],
-                "effort_column": "l",
                 "priority_column": "medium",
                 "due_date_column": "2025-03-01",
                 "files_column": ["interactive_prototype_v1.fig"],
@@ -194,16 +176,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6006,
+              "_id": 6006,
               "title": "Design notification system UI",
               "created_at": "2025-03-05T10:00:00Z",
               "updated_at": "2025-03-18T16:20:00Z",
-              "creator_id": 204,
+              "creator__id": 204,
               "column_values": {
                 "status_column": "working",
                 "sprint_column": "sprint4",
                 "owners_column": [204],
-                "effort_column": "m",
                 "priority_column": "medium",
                 "due_date_column": "2025-03-25",
                 "files_column": ["notifications_draft.fig"],
@@ -213,22 +194,21 @@ export const demo_data = {
           ]
         },
         {
-          "id": "grp_frontend",
+          "_id": "grp_frontend",
           "title": "Frontend Development",
           "color": "#fdab3d",
           "archived": false,
           "task": [
             {
-              "id": 6007,
+              "_id": 6007,
               "title": "Set up React project structure",
               "created_at": "2025-01-20T09:30:00Z",
               "updated_at": "2025-01-25T14:15:00Z",
-              "creator_id": 203,
+              "creator__id": 203,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [203],
-                "effort_column": "s",
                 "priority_column": "high",
                 "due_date_column": "2025-01-25",
                 "files_column": [],
@@ -236,16 +216,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6008,
+              "_id": 6008,
               "title": "Implement component library",
               "created_at": "2025-01-26T08:45:00Z",
               "updated_at": "2025-02-15T11:10:00Z",
-              "creator_id": 203,
+              "creator__id": 203,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [203],
-                "effort_column": "xl",
                 "priority_column": "high",
                 "due_date_column": "2025-02-15",
                 "files_column": [],
@@ -253,16 +232,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6009,
+              "_id": 6009,
               "title": "Build board view components",
               "created_at": "2025-02-10T13:20:00Z",
               "updated_at": "2025-02-28T15:45:00Z",
-              "creator_id": 203,
+              "creator__id": 203,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [203],
-                "effort_column": "l",
                 "priority_column": "high",
                 "due_date_column": "2025-02-28",
                 "files_column": [],
@@ -270,16 +248,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6010,
+              "_id": 6010,
               "title": "Implement drag and drop functionality",
               "created_at": "2025-02-20T09:15:00Z",
               "updated_at": "2025-03-10T11:30:00Z",
-              "creator_id": 203,
+              "creator__id": 203,
               "column_values": {
                 "status_column": "testing",
                 "sprint_column": "sprint3",
                 "owners_column": [203],
-                "effort_column": "l",
                 "priority_column": "high",
                 "due_date_column": "2025-03-10",
                 "files_column": [],
@@ -287,16 +264,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6011,
-              "title": "Create dashboard widgets",
+              "_id": 6011,
+              "title": "Create dashboard w_idgets",
               "created_at": "2025-03-01T11:15:00Z",
               "updated_at": "2025-03-15T14:30:00Z",
-              "creator_id": 203,
+              "creator__id": 203,
               "column_values": {
                 "status_column": "working",
                 "sprint_column": "sprint3",
                 "owners_column": [203],
-                "effort_column": "l",
                 "priority_column": "medium",
                 "due_date_column": "2025-03-20",
                 "files_column": [],
@@ -304,16 +280,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6012,
+              "_id": 6012,
               "title": "Implement responsive layouts",
               "created_at": "2025-03-10T09:30:00Z",
               "updated_at": "2025-03-22T13:20:00Z",
-              "creator_id": 203,
+              "creator__id": 203,
               "column_values": {
                 "status_column": "stuck",
                 "sprint_column": "sprint4",
                 "owners_column": [203],
-                "effort_column": "m",
                 "priority_column": "medium",
                 "due_date_column": "2025-03-25",
                 "files_column": [],
@@ -323,22 +298,21 @@ export const demo_data = {
           ]
         },
         {
-          "id": "grp_backend",
+          "_id": "grp_backend",
           "title": "Backend Development",
           "color": "#00c875",
           "archived": false,
           "task": [
             {
-              "id": 6013,
+              "_id": 6013,
               "title": "Design database schema",
               "created_at": "2025-01-15T09:00:00Z",
               "updated_at": "2025-01-28T14:30:00Z",
-              "creator_id": 202,
+              "creator__id": 202,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [202],
-                "effort_column": "m",
                 "priority_column": "critical",
                 "due_date_column": "2025-01-28",
                 "files_column": ["database_schema_v1.pdf"],
@@ -346,16 +320,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6014,
+              "_id": 6014,
               "title": "Set up API structure",
               "created_at": "2025-01-25T10:00:00Z",
               "updated_at": "2025-02-05T13:20:00Z",
-              "creator_id": 202,
+              "creator__id": 202,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [202],
-                "effort_column": "m",
                 "priority_column": "high",
                 "due_date_column": "2025-02-05",
                 "files_column": ["api_docs_v1.pdf"],
@@ -363,16 +336,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6015,
+              "_id": 6015,
               "title": "Implement authentication system",
               "created_at": "2025-02-01T09:30:00Z",
               "updated_at": "2025-02-15T15:40:00Z",
-              "creator_id": 202,
+              "creator__id": 202,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [202, 206],
-                "effort_column": "l",
                 "priority_column": "critical",
                 "due_date_column": "2025-02-15",
                 "files_column": [],
@@ -380,16 +352,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6016,
+              "_id": 6016,
               "title": "Build board CRUD endpoints",
               "created_at": "2025-02-10T11:15:00Z",
               "updated_at": "2025-02-25T15:45:00Z",
-              "creator_id": 202,
+              "creator__id": 202,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [202],
-                "effort_column": "l",
                 "priority_column": "high",
                 "due_date_column": "2025-02-25",
                 "files_column": [],
@@ -397,16 +368,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6017,
+              "_id": 6017,
               "title": "Implement real-time updates",
               "created_at": "2025-02-20T10:00:00Z",
               "updated_at": "2025-03-10T14:15:00Z",
-              "creator_id": 202,
+              "creator__id": 202,
               "column_values": {
                 "status_column": "working",
                 "sprint_column": "sprint3",
                 "owners_column": [202, 206],
-                "effort_column": "xl",
                 "priority_column": "high",
                 "due_date_column": "2025-03-15",
                 "files_column": [],
@@ -414,16 +384,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6018,
+              "_id": 6018,
               "title": "Create activity logging system",
               "created_at": "2025-03-01T09:15:00Z",
               "updated_at": "2025-03-12T11:30:00Z",
-              "creator_id": 206,
+              "creator__id": 206,
               "column_values": {
                 "status_column": "working",
                 "sprint_column": "sprint3",
                 "owners_column": [206],
-                "effort_column": "m",
                 "priority_column": "medium",
                 "due_date_column": "2025-03-20",
                 "files_column": [],
@@ -431,16 +400,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6019,
+              "_id": 6019,
               "title": "Implement notification service",
               "created_at": "2025-03-05T11:30:00Z",
               "updated_at": "2025-03-20T15:40:00Z",
-              "creator_id": 206,
+              "creator__id": 206,
               "column_values": {
                 "status_column": "planning",
                 "sprint_column": "sprint4",
                 "owners_column": [206],
-                "effort_column": "l",
                 "priority_column": "medium",
                 "due_date_column": "2025-04-05",
                 "files_column": [],
@@ -450,22 +418,21 @@ export const demo_data = {
           ]
         },
         {
-          "id": "grp_testing",
+          "_id": "grp_testing",
           "title": "Testing & QA",
           "color": "#a25ddc",
           "archived": false,
           "task": [
             {
-              "id": 6020,
+              "_id": 6020,
               "title": "Create test plan",
               "created_at": "2025-01-20T09:00:00Z",
               "updated_at": "2025-02-01T14:30:00Z",
-              "creator_id": 205,
+              "creator__id": 205,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [205],
-                "effort_column": "m",
                 "priority_column": "high",
                 "due_date_column": "2025-02-01",
                 "files_column": ["test_plan_v1.pdf"],
@@ -473,16 +440,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6021,
+              "_id": 6021,
               "title": "Write unit tests for component library",
               "created_at": "2025-02-15T10:00:00Z",
               "updated_at": "2025-02-25T13:15:00Z",
-              "creator_id": 205,
+              "creator__id": 205,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [205, 203],
-                "effort_column": "m",
                 "priority_column": "medium",
                 "due_date_column": "2025-02-25",
                 "files_column": [],
@@ -490,16 +456,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6022,
+              "_id": 6022,
               "title": "Test authentication workflows",
               "created_at": "2025-02-16T09:30:00Z",
               "updated_at": "2025-02-23T13:15:00Z",
-              "creator_id": 205,
+              "creator__id": 205,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [205],
-                "effort_column": "s",
                 "priority_column": "high",
                 "due_date_column": "2025-02-23",
                 "files_column": ["auth_test_report.pdf"],
@@ -507,16 +472,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6023,
+              "_id": 6023,
               "title": "Integration testing for board view",
               "created_at": "2025-03-01T11:15:00Z",
               "updated_at": "2025-03-12T16:30:00Z",
-              "creator_id": 205,
+              "creator__id": 205,
               "column_values": {
                 "status_column": "testing",
                 "sprint_column": "sprint3",
                 "owners_column": [205],
-                "effort_column": "m",
                 "priority_column": "high",
                 "due_date_column": "2025-03-15",
                 "files_column": [],
@@ -524,16 +488,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6024,
+              "_id": 6024,
               "title": "Performance testing",
               "created_at": "2025-03-05T10:30:00Z",
               "updated_at": "2025-03-18T15:15:00Z",
-              "creator_id": 205,
+              "creator__id": 205,
               "column_values": {
                 "status_column": "planning",
                 "sprint_column": "sprint4",
                 "owners_column": [205],
-                "effort_column": "l",
                 "priority_column": "medium",
                 "due_date_column": "2025-04-01",
                 "files_column": [],
@@ -543,22 +506,21 @@ export const demo_data = {
           ]
         },
         {
-          "id": "grp_deployment",
+          "_id": "grp_deployment",
           "title": "DevOps & Infrastructure",
           "color": "#e2445c",
           "archived": false,
           "task": [
             {
-              "id": 6025,
+              "_id": 6025,
               "title": "Set up CI/CD pipeline",
               "created_at": "2025-01-18T09:15:00Z",
               "updated_at": "2025-01-30T13:30:00Z",
-              "creator_id": 207,
+              "creator__id": 207,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint1",
                 "owners_column": [207],
-                "effort_column": "l",
                 "priority_column": "high",
                 "due_date_column": "2025-01-30",
                 "files_column": ["cicd_workflow_docs.pdf"],
@@ -566,16 +528,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6026,
+              "_id": 6026,
               "title": "Configure staging environment",
               "created_at": "2025-02-01T10:00:00Z",
               "updated_at": "2025-02-12T15:30:00Z",
-              "creator_id": 207,
+              "creator__id": 207,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint2",
                 "owners_column": [207],
-                "effort_column": "m",
                 "priority_column": "high",
                 "due_date_column": "2025-02-12",
                 "files_column": [],
@@ -583,16 +544,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6027,
+              "_id": 6027,
               "title": "Set up monitoring and alerts",
               "created_at": "2025-02-15T11:30:00Z",
               "updated_at": "2025-03-01T14:15:00Z",
-              "creator_id": 207,
+              "creator__id": 207,
               "column_values": {
                 "status_column": "done",
                 "sprint_column": "sprint3",
                 "owners_column": [207],
-                "effort_column": "m",
                 "priority_column": "medium",
                 "due_date_column": "2025-03-01",
                 "files_column": ["monitoring_stack.pdf"],
@@ -600,16 +560,15 @@ export const demo_data = {
               }
             },
             {
-              "id": 6028,
+              "_id": 6028,
               "title": "Database scaling strategy",
               "created_at": "2025-03-02T09:30:00Z",
               "updated_at": "2025-03-20T13:45:00Z",
-              "creator_id": 207,
+              "creator__id": 207,
               "column_values": {
                 "status_column": "working",
                 "sprint_column": "sprint4",
                 "owners_column": [207, 202],
-                "effort_column": "l",
                 "priority_column": "medium",
                 "due_date_column": "2025-04-01",
                 "files_column": ["db_scaling_draft.pdf"],
@@ -621,56 +580,56 @@ export const demo_data = {
       ],
       "activities": [
         {
-          "id": "act_1001",
-          "entity_id": "6012",
+          "_id": "act_1001",
+          "entity__id": "6012",
           "entity_type": "item",
           "action": "update",
-          "user_id": "203",
+          "user__id": "203",
           "created_at": "2025-03-22T13:20:00Z",
           "Log_text": "Changed status from 'Working on it' to 'Stuck' - Need help with Safari flexbox issues"
         },
         {
-          "id": "act_1002",
-          "entity_id": "6010",
+          "_id": "act_1002",
+          "entity__id": "6010",
           "entity_type": "item",
           "action": "update",
-          "user_id": "203",
+          "user__id": "203",
           "created_at": "2025-03-10T11:30:00Z",
           "Log_text": "Changed status from 'Working on it' to 'Testing' - Ready for QA review"
         },
         {
-          "id": "act_1003",
-          "entity_id": "6023",
+          "_id": "act_1003",
+          "entity__id": "6023",
           "entity_type": "item",
           "action": "update",
-          "user_id": "205",
+          "user__id": "205",
           "created_at": "2025-03-12T16:30:00Z",
           "Log_text": "Added files: board_view_test_report_v1.pdf"
         },
         {
-          "id": "act_1004",
-          "entity_id": "6017",
+          "_id": "act_1004",
+          "entity__id": "6017",
           "entity_type": "item",
           "action": "update",
-          "user_id": "202",
+          "user__id": "202",
           "created_at": "2025-03-10T14:15:00Z",
           "Log_text": "Updated progress to 75% - Socket implementation complete, still working on conflict resolution"
         },
         {
-          "id": "act_1005",
-          "entity_id": "grp_deployment",
+          "_id": "act_1005",
+          "entity__id": "grp_deployment",
           "entity_type": "group",
           "action": "create",
-          "user_id": "201",
+          "user__id": "201",
           "created_at": "2025-01-15T09:00:00Z",
           "Log_text": "Created new group: DevOps & Infrastructure"
         },
         {
-          "id": "act_1006",
-          "entity_id": "6006",
+          "_id": "act_1006",
+          "entity__id": "6006",
           "entity_type": "item",
           "action": "update",
-          "user_id": "204",
+          "user__id": "204",
           "created_at": "2025-03-18T16:20:00Z",
           "Log_text": "Updated design files: added notifications_draft.fig"
         }
