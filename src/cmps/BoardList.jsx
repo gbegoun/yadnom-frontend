@@ -1,32 +1,39 @@
 import { useState, useEffect } from "react";
-import { boardService } from "../services/board/board.service.local.js"
+import { boardService } from "../services/board/index.js";
+import { loadBoards, addNewBoard } from "../store/actions/board.actions.js"
+import * as ReactRedux from 'react-redux';
+
+const { useSelector } = ReactRedux
 
 export const BoardList = () => {
-    const [boards, setBoards] = useState(null);
 
-    function loadBoards() {
-        boardService.query()
-            .then(setBoards)
-            .catch(err => {
-                console.log('Problems getting boards:', err);
-            });
+    const boards = useSelector(storeState => storeState.boardModule.boards)
+
+    const onAddBoard = () => {
+        addNewBoard();
+    }
+
+    function removeBoard() {
+
     }
 
     useEffect(() => {
         loadBoards();
-        console.log(boards);
-    },[]);
+    }, []);
+
 
     if (!boards) {
         return (<div>Loading...</div>);
     }
+
     return (
         <div>
             <h1>Boards List</h1>
-            {boards && boards.map(board=>{
-                return(
+            <button onClick={() => onAddBoard()}>Add Board</button>
+            {boards && boards.map(board => {
+                return (
                     <div key={board._id}>
-                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a>
+                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a><button onClick={removeBoard(board._id)}>X</button>
                     </div>
                 );
             })}

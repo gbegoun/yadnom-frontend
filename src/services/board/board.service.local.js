@@ -18,6 +18,7 @@ window.cs = boardService
 
 async function query(filterBy = {}) {
     var boards = await storageService.query(STORAGE_KEY)
+    console.log("123", boards)
     // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
 
     // if (txt) {
@@ -51,23 +52,11 @@ async function remove(boardId) {
 
 async function save(board) {
     var savedBoard
+
     if (board._id) {
-        const boardToSave = {
-            _id: board._id,
-            price: board.price,
-            speed: board.speed,
-        }
-        savedBoard = await storageService.put(STORAGE_KEY, boardToSave)
+        savedBoard = await storageService.put(STORAGE_KEY, board)
     } else {
-        const boardToSave = {
-            vendor: board.vendor,
-            price: board.price,
-            speed: board.speed,
-            // Later, owner is set by the backend
-            owner: userService.getLoggedinUser(),
-            msgs: []
-        }
-        savedBoard = await storageService.post(STORAGE_KEY, boardToSave)
+        savedBoard = await storageService.post(STORAGE_KEY, board)
     }
     return savedBoard
 }
@@ -91,10 +80,9 @@ async function _createBoards() {
     let boards = loadFromStorage(STORAGE_KEY)
     
     if (!boards) {
-        console.log(" Demo Boards")
+        console.log("Creating Demo Boards")
         const module = await import("../../../demo-data.js");
         const boards = module.demo_data["boards"];
-        console.log(boards)
         saveToStorage(STORAGE_KEY, boards)
     }
 }

@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../cmps/BoardHeader.jsx';
 import { GroupList } from '../cmps/GroupList.jsx';
-import { boardService } from '../services/board/board.service.local.js';
+import { boardService } from '../services/board/index.js';
+// import { boardService } from '../services/board/board.service.local.js';
 import { useEffect, useState } from 'react';
 
 export const Board = () => {
