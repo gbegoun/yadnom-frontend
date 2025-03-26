@@ -1,7 +1,7 @@
 export const demo_data = {
   "boards": [
     {
-      "id": 1001,
+      "_id": "B1001",
       "name": "Yadnom Project Management Tool Development",
       "description": "End-to-end development of our new project management platform with kanban and dashboard capabilities",
       "members": [201, 202, 203, 204, 205, 206, 207],

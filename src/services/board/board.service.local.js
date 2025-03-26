@@ -1,9 +1,10 @@
 
 import { storageService } from '../async-storage.service'
-import { makeId } from '../util.service'
+import { loadFromStorage, saveToStorage, makeId } from '../util.service'
 import { userService } from '../user'
 
-const STORAGE_KEY = 'board'
+const STORAGE_KEY = 'BOARD'
+_createBoards()
 
 export const boardService = {
     query,
@@ -15,27 +16,27 @@ export const boardService = {
 window.cs = boardService
 
 
-async function query(filterBy = { txt: '', price: 0 }) {
+async function query(filterBy = {}) {
     var boards = await storageService.query(STORAGE_KEY)
-    const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
+    // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
 
-    if (txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
-    }
-    if (minSpeed) {
-        boards = boards.filter(board => board.speed >= minSpeed)
-    }
-    if(sortField === 'vendor' || sortField === 'owner'){
-        boards.sort((board1, board2) => 
-            board1[sortField].localeCompare(board2[sortField]) * +sortDir)
-    }
-    if(sortField === 'price' || sortField === 'speed'){
-        boards.sort((board1, board2) => 
-            (board1[sortField] - board2[sortField]) * +sortDir)
-    }
-    
-    boards = boards.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
+    // if (txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
+    // }
+    // if (minSpeed) {
+    //     boards = boards.filter(board => board.speed >= minSpeed)
+    // }
+    // if (sortField === 'vendor' || sortField === 'owner') {
+    //     boards.sort((board1, board2) =>
+    //         board1[sortField].localeCompare(board2[sortField]) * +sortDir)
+    // }
+    // if (sortField === 'price' || sortField === 'speed') {
+    //     boards.sort((board1, board2) =>
+    //         (board1[sortField] - board2[sortField]) * +sortDir)
+    // }
+
+    // boards = boards.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
     return boards
 }
 
@@ -84,4 +85,16 @@ async function addBoardMsg(boardId, txt) {
     await storageService.put(STORAGE_KEY, board)
 
     return msg
+}
+
+async function _createBoards() {
+    let boards = loadFromStorage(STORAGE_KEY)
+    
+    if (!boards) {
+        console.log(" Demo Boards")
+        const module = await import("../../../demo-data.js");
+        const boards = module.demo_data["boards"];
+        console.log(boards)
+        saveToStorage(STORAGE_KEY, boards)
+    }
 }
