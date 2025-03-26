@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { boardService } from "../services/board/index.js";
-import { loadBoards, addNewBoard } from "../store/actions/board.actions.js"
+import { useEffect } from "react";
+import { loadBoards, addNewBoard, removeBoard } from "../store/actions/board.actions.js"
 import * as ReactRedux from 'react-redux';
 
 const { useSelector } = ReactRedux
@@ -13,8 +12,8 @@ export const BoardList = () => {
         addNewBoard();
     }
 
-    function removeBoard() {
-
+    const onRemoveBoard = (boardId) => {
+        removeBoard(boardId);
     }
 
     useEffect(() => {
@@ -33,7 +32,7 @@ export const BoardList = () => {
             {boards && boards.map(board => {
                 return (
                     <div key={board._id}>
-                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a><button onClick={removeBoard(board._id)}>X</button>
+                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a><button onClick={() => onRemoveBoard(board._id)}>X</button>
                     </div>
                 );
             })}

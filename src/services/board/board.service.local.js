@@ -4,7 +4,7 @@ import { loadFromStorage, saveToStorage, makeId } from '../util.service'
 import { userService } from '../user'
 
 const STORAGE_KEY = 'BOARD'
-_createBoards()
+await _createBoards()
 
 export const boardService = {
     query,
@@ -15,10 +15,8 @@ export const boardService = {
 }
 window.cs = boardService
 
-
 async function query(filterBy = {}) {
     var boards = await storageService.query(STORAGE_KEY)
-    console.log("123", boards)
     // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
 
     // if (txt) {
@@ -46,7 +44,6 @@ function getById(boardId) {
 }
 
 async function remove(boardId) {
-    // throw new Error('Nope')
     await storageService.remove(STORAGE_KEY, boardId)
 }
 
@@ -79,7 +76,7 @@ async function addBoardMsg(boardId, txt) {
 async function _createBoards() {
     let boards = loadFromStorage(STORAGE_KEY)
     
-    if (!boards) {
+    if (!boards || !boards.length) {
         console.log("Creating Demo Boards")
         const module = await import("../../../demo-data.js");
         const boards = module.demo_data["boards"];
