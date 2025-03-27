@@ -6,14 +6,14 @@ export const storageService = {
     remove,
 }
 
-function query(entityType, delay = 500) {
+function query(entityType, delay = 100) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
     return new Promise(resolve => setTimeout(() => resolve(entities), delay))
 }
 
 function get(entityType, entityId) {
     return query(entityType).then(entities => {
-        const entity = entities.find(entity => entity._id === entityId)
+        const entity = entities.find(entity =>  entity._id === entityId)
         if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         return entity
     })
@@ -34,7 +34,9 @@ function put(entityType, updatedEntity) {
         if (idx < 0) throw new Error(`Update failed, cannot find entity with id: ${updatedEntity._id} in: ${entityType}`)
         const entityToUpdate = {...entities[idx], ...updatedEntity}
         entities.splice(idx, 1, entityToUpdate)
+        
         _save(entityType, entities)
+        
         return entityToUpdate
     })
 }

@@ -5,7 +5,7 @@ export const GroupList = ({ columns, group }) => {
                 <span>Task Title </span>
                 {columns.map(column => {
                     return (
-                        <span key={column.id}>{column.title} </span>
+                        <span key={column.id}>{column.title}</span>
                     )
                 })}
             </div>

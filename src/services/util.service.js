@@ -1,12 +1,7 @@
-export function makeId(length = 6) {
-    var txt = ''
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+import { nanoid } from 'nanoid'
 
-    for (var i = 0; i < length; i++) {
-        txt += possible.charAt(Math.floor(Math.random() * possible.length))
-    }
-
-    return txt
+export function makeId(length = 12) {
+    return nanoid(length)
 }
 
 export function makeLorem(size = 100) {
