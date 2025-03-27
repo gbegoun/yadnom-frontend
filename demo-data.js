@@ -143,7 +143,7 @@ export const demo_data = {
                     "title": "UI/UX Design",
                     "color": "#66ccff",
                     "archived": false,
-                    "task": [
+                    "tasks": [
                         {
                             "_id": 6001,
                             "title": "User research & interviews",
@@ -271,7 +271,7 @@ export const demo_data = {
                     "title": "Frontend Development",
                     "color": "#fdab3d",
                     "archived": false,
-                    "task": [
+                    "tasks": [
                         {
                             "_id": 6007,
                             "title": "Set up React project structure",
@@ -393,7 +393,7 @@ export const demo_data = {
                     "title": "Backend Development",
                     "color": "#00c875",
                     "archived": false,
-                    "task": [
+                    "tasks": [
                         {
                             "_id": 6013,
                             "title": "Design database schema",
@@ -538,7 +538,7 @@ export const demo_data = {
                     "title": "Testing & QA",
                     "color": "#9d50dd",
                     "archived": false,
-                    "task": [
+                    "tasks": [
                         {
                             "_id": 6020,
                             "title": "Create test plan",
@@ -644,7 +644,7 @@ export const demo_data = {
                     "title": "DevOps & Infrastructure",
                     "color": "#df2f4a",
                     "archived": false,
-                    "task": [
+                    "tasks": [
                         {
                             "_id": 6025,
                             "title": "Set up CI/CD pipeline",

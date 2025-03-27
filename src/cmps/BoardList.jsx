@@ -32,7 +32,8 @@ export const BoardList = () => {
             {boards && boards.map(board => {
                 return (
                     <div key={board._id}>
-                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a><button onClick={() => onRemoveBoard(board._id)}>X</button>
+                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a>
+                        <button onClick={() => onRemoveBoard(board._id)}>X</button>
                     </div>
                 );
             })}

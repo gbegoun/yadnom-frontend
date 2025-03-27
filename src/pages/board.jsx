@@ -7,27 +7,27 @@ import { useEffect, useState } from 'react';
 
 export const Board = () => {
     const { boardId } = useParams();
-    const [board, setBaord] = useState(null);
+    const [board, setBoard] = useState(null);
 
     useEffect(() => {
         loadBoard()
     }, []);
 
-    function loadBoard(){
+    function loadBoard() {
         boardService.getById(boardId)
-        .then(setBaord)
-        .catch(err => {console.log(err)});
-        
+            .then(setBoard)
+            .catch(err => { console.log(err) });
+
     }
 
-    if(!board) return (<div>Loading...</div>)
+    if (!board) return (<div>Loading...</div>)
     return (
-        <>
-        {board && <div>
-            <BoardHeader name={board.name} />
-            <GroupList columns={board.columns} group={board.groups[0]} />
-        </div>
-        }
-        </>
+        <main>
+            {board && <div>
+                <BoardHeader name={board.name} />
+                <GroupList columns={board.columns} groups={board.groups} />
+            </div>
+            }
+        </main>
     );
 };
