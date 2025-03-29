@@ -1,7 +1,8 @@
-export const GroupHeader = () => {
+export const GroupHeader = ({ title, color }) => {
+    
     return (
-        <div>
-            <h1>GroupHeader</h1>
+        <div className="group-header" style={{ '--color-indicator': color }}>
+            <span>↓ {title}</span>
         </div>
     );
 };
