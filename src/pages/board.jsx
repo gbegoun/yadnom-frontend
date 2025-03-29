@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../cmps/BoardHeader.jsx';
+import { BoardFilter } from '../cmps/BoardFilter.jsx';
 import { GroupList } from '../cmps/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 // import { boardService } from '../services/board/board.service.local.js';
@@ -20,12 +21,15 @@ export const Board = () => {
 
     }
 
+    const { name , columns, groups } = board || {};
+
     if (!board) return (<div>Loading...</div>)
     return (
         <main>
             {board && <div>
-                <BoardHeader name={board.name} />
-                <GroupList columns={board.columns} groups={board.groups} />
+                <BoardHeader name={name} />
+                <BoardFilter board={board} />
+                <GroupList columns={columns} groups={groups} />
             </div>
             }
         </main>
