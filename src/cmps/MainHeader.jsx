@@ -1,8 +1,9 @@
+
 export const MainHeader = () => {
     return (
-        <div>
-            <img src="../src/assets/styles/icons/logo.png" alt="Logo" style={{ height: '24px', marginRight: '10px', verticalAlign: 'middle' }} />
-            <h1 style={{ display: 'inline', fontSize: '24px' }}>yandom</h1>
+        <div className="main-header">
+            <img src="../src/assets/styles/icons/logo.png" alt="Logo" className="main-header-logo" />
+            <h1 className="main-header-title">yandom</h1>
         </div>
     );
 };
