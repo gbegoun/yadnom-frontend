@@ -1,6 +1,6 @@
-import { boardService } from '../../services/board'
+import { boardService, getEmptyGroup, getEmptyTask } from '../../services/board'
 import { store } from '../store'
-import { ADD_NEW_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG } from '../reducers/board.reducer'
+import { ADD_NEW_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG, ADD_TASK_GROUP } from '../reducers/board.reducer'
 
 export async function loadBoards(filterBy) {
     try {
@@ -24,7 +24,7 @@ export async function loadBoard(boardId) {
 
 export async function removeBoard(boardId) {
     try {
-        await boardService.remove(boardId)
+        await boardService.removeBoard(boardId)
         store.dispatch(getCmdRemoveBoard(boardId))
     } catch (err) {
         console.log('Cannot remove board', err)
@@ -34,8 +34,8 @@ export async function removeBoard(boardId) {
 
 export async function addNewBoard() {
     try {
-        const newBoard = boardService.getEmptyBoard()     
-        const savedBoard = await boardService.save(newBoard)
+        const newBoard = boardService.getEmptyBoard()
+        const savedBoard = await boardService.saveBoard(newBoard)
         store.dispatch(getCmdAddNewBoard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -62,6 +62,52 @@ export async function addBoardMsg(boardId, txt) {
         return msg
     } catch (err) {
         console.log('Cannot add board msg', err)
+        throw err
+    }
+}
+
+export async function addTaskGroup(boardId, position) {
+    try {
+        const board = await boardService.getById(boardId)
+
+        if (!board.groups) board.groups = []
+        const group = getEmptyGroup()
+
+        if (position === 'top') board.groups.unshift(group)
+        else board.groups.push(group)
+
+        const savedBoard = await boardService.saveBoard(board)
+        store.dispatch(getCmdUpdateBoard(savedBoard))
+        return group
+
+    } catch (err) {
+        console.log('Cannot add task group', err)
+        throw err
+    }
+}
+
+export async function addNewTask(boardId, groupId) {
+    try {
+        const board = await boardService.getById(boardId)
+        var group;
+        const task = getEmptyTask(board.columns)
+
+        if (groupId) {
+            group = board.groups.find(group => group._id === groupId)
+        } else {
+            group = board.groups[0]
+        }
+
+        if (groupId) group.tasks.unshift(task)
+        else group.tasks.push(task)
+
+        const savedBoard = await boardService.saveBoard(board)
+        store.dispatch(getCmdUpdateBoard(savedBoard))
+
+        return task
+
+    } catch (err) {
+        console.log('Cannot add new task', err)
         throw err
     }
 }

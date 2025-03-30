@@ -8,34 +8,20 @@ await _createBoards()
 
 export const boardService = {
     query,
+    // Board operations
     getById,
-    save,
-    remove,
-    addBoardMsg
+    saveBoard,
+    removeBoard,
+    addBoardMsg,
+
+    // Group operations
+    // saveGroup,
+    // removeGroup
 }
 window.cs = boardService
 
 async function query(filterBy = {}) {
     var boards = await storageService.query(STORAGE_KEY)
-    // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
-
-    // if (txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
-    // }
-    // if (minSpeed) {
-    //     boards = boards.filter(board => board.speed >= minSpeed)
-    // }
-    // if (sortField === 'vendor' || sortField === 'owner') {
-    //     boards.sort((board1, board2) =>
-    //         board1[sortField].localeCompare(board2[sortField]) * +sortDir)
-    // }
-    // if (sortField === 'price' || sortField === 'speed') {
-    //     boards.sort((board1, board2) =>
-    //         (board1[sortField] - board2[sortField]) * +sortDir)
-    // }
-
-    // boards = boards.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
     return boards
 }
 
@@ -43,11 +29,11 @@ function getById(boardId) {
     return storageService.get(STORAGE_KEY, boardId)
 }
 
-async function remove(boardId) {
+async function removeBoard(boardId) {
     await storageService.remove(STORAGE_KEY, boardId)
 }
 
-async function save(board) {
+async function saveBoard(board) {
     var savedBoard
 
     if (board._id) {

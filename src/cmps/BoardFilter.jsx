@@ -5,7 +5,7 @@ export const BoardFilter = ({ board }) => {
         <div>
             <h1>BoardFilter</h1>
             <div>
-                <TaskAdd />
+                <TaskAdd/>
                 <span>Search</span> <span>Person</span> <span>...</span>
             </div>
             <span>---------------------------</span>
