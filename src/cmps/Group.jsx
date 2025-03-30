@@ -1,6 +1,5 @@
 
 export const Group = ({ group, columns }) => {
-    
     return (
         <div className="group-container">
             <div className="group">
@@ -8,13 +7,13 @@ export const Group = ({ group, columns }) => {
                     <thead>
                         <tr>
                             <th>Task</th>
-                            {columns.map(column => (
+                            {columns && columns.map(column => (
                                 <th key={column._id}>{column.title}</th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {group.tasks.map(task => (
+                        {group.tasks && group.tasks.map(task => (
                             <tr key={task._id}>
                                 <td>{task.title}</td>
                                 {columns.map(column => (
