@@ -94,14 +94,13 @@ export async function addNewTask(boardId, groupId) {
 
         if (groupId) {
             group = board.groups.find(group => group._id === groupId)
+            group.tasks.push(task)
         } else {
             group = board.groups[0]
+            group.tasks.unshift(task)
         }
 
-        if (groupId) group.tasks.unshift(task)
-        else group.tasks.push(task)
-
-        const savedBoard = await boardService.saveBoard(board)
+        await boardService.saveBoard(board)
         store.dispatch(getCmdUpdateBoard(savedBoard))
 
         return task

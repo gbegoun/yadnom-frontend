@@ -24,11 +24,9 @@ export function getEmptyGroup() {
         title: "New Group",
         tasks: []
     }
-
 }
 
 export function getEmptyTask(columns = []) {
-    console.log('columns', columns) 
     const task = {
         _id: makeId(),      
         title: 'New Task',
