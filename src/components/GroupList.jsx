@@ -1,18 +1,9 @@
-import { GroupHeader } from "./GroupHeader";
-import { TaskList } from "./TaskList";
-
+import { GroupPreview } from "./GroupPreview";
 export const GroupList = ({ columns, groups }) => {
 
     return (
         <div>
-            {groups.map(group => {
-                return (
-                    <div key={group._id}>
-                        <GroupHeader title={group.title} color={group.color} />
-                        <TaskList group={group} columns={columns} />
-                    </div>
-                )
-            })}
+            {groups.map(group => <GroupPreview key={group._id} columns={columns} group={group} />)}
         </div>
-    );
-};
+    )
+}
