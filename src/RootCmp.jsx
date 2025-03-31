@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home } from "./pages/home.jsx"
 import { Board } from "./pages/board.jsx"
-import { MainHeader } from "./cmps/MainHeader.jsx"
-import { MainSidebar } from "./cmps/MainSidebar.jsx"
+import { MainHeader } from "./components/MainHeader.jsx"
+import { MainSidebar } from "./components/MainSidebar.jsx"
 import { store } from './store/store.js'
 import { Provider } from 'react-redux'
 

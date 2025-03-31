@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { BoardHeader } from '../cmps/BoardHeader.jsx';
-import { BoardFilter } from '../cmps/BoardFilter.jsx';
-import { GroupList } from '../cmps/GroupList.jsx';
+import { BoardHeader } from '../components/BoardHeader.jsx';
+import { BoardFilter } from '../components/BoardFilter.jsx';
+import { GroupList } from '../components/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 import { useEffect, useState } from 'react';
 import { BoardContext } from '../contexts/BoardContext';
@@ -15,8 +15,8 @@ export const Board = () => {
         loadBoard()
     }, [board]);
 
-    const onNewGroupClicked = (position) => {
-        addTaskGroup(board)
+    const onNewGroupClicked = (isTopPosition = true) => {
+        addTaskGroup(board,isTopPosition)
             .then(group => { addNewTask(board, group._id) })
     };
 
@@ -43,6 +43,7 @@ export const Board = () => {
                 </div>
                 }
             </main>
+            <button onClick={()=>onNewGroupClicked(false)}>Add new group</button>
         </BoardContext.Provider>
     );
 };

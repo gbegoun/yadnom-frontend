@@ -1,4 +1,4 @@
-import { BoardList } from "../cmps/BoardList";
+import { BoardList } from "../components/BoardList";
 
 export const Home = () => {
     return (
