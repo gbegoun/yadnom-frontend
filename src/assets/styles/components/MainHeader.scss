@@ -5,7 +5,7 @@
 }
 
 .main-header-logo {
-    height: 35px;
+    height: 30px;
     margin-right: 10px;
     margin-left: 5px;
     &:hover {
@@ -23,16 +23,6 @@
 }
 
 .main-header-notification {
-    height: 25px;
-    display: flex;
-    align-items: center;
-    &:hover {
-        transform: scale(1.1); 
-        cursor: pointer;
-    }
-}
-
-.main-header-products-switcher {
     height: 20px;
     display: flex;
     align-items: center;
@@ -42,8 +32,18 @@
     }
 }
 
+.main-header-products-switcher {
+    height: 15px;
+    display: flex;
+    align-items: center;
+    &:hover {
+        transform: scale(1.1); 
+        cursor: pointer;
+    }
+}
+
 .main-header-profile {
-    height: 35px;
+    height: 30px;
     display: flex;
     &:hover {
         transform: scale(1.1); 

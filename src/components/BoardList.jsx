@@ -26,17 +26,31 @@ export const BoardList = () => {
     }
 
     return (
-        <div>
-            <h1>Boards List</h1>
-            <button onClick={() => onAddBoard()}>Add Board</button>
-            {boards && boards.map(board => {
-                return (
-                    <div key={board._id}>
-                        <a href={`/boards/${board._id}`}>{board.title || board._id}</a>
-                        <button onClick={() => onRemoveBoard(board._id)}>X</button>
-                    </div>
-                );
-            })}
+        <div className="board-list">
+            <button className="add-board-btn" onClick={() => onAddBoard()}>Add Board</button>
+            <div className="board-items">
+                {boards && boards.map(board => {
+                    return (
+                        <a key={board._id} href={`/boards/${board._id}`} className="board-item">
+                            <img src="../src/assets/icons/home_page_default_board_img.svg" alt="board image" />
+                            <div className="board-content">
+                                <h3>{board.title || board._id}</h3>
+                                <p>{board.description}</p>
+                            </div>
+                            <div className="board-actions">
+                                <img src="../src/assets/icons/star_favorite.svg" alt="favorite" className="favorite-icon" />
+                                <button className="remove-btn"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        onRemoveBoard(board._id);
+                                    }}>
+                                    Remove
+                                </button>
+                            </div>
+                        </a>
+                    );
+                })}
+            </div>
         </div>
     );
 };

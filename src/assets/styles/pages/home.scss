@@ -1,0 +1,23 @@
+.home-container {   
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.icon-span-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-span-container span {
+    font-weight: bold;
+}
+
+.icon-button {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
