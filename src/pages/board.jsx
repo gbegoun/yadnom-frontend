@@ -16,12 +16,13 @@ export const Board = () => {
     }, [board]);
 
     const onNewGroupClicked = (isTopPosition = true) => {
-        addTaskGroup(board,isTopPosition)
+        addTaskGroup(board, isTopPosition)
             .then(group => { addNewTask(board, group._id) })
     };
 
-    const onNewTaskClicked = () => {
-        addNewTask(board)
+    const onNewTaskClicked = (groupId = null) => {
+        console.log('groupId', groupId)
+        addNewTask(board, groupId)
     };
 
     function loadBoard() {
@@ -43,7 +44,7 @@ export const Board = () => {
                 </div>
                 }
             </main>
-            <button onClick={()=>onNewGroupClicked(false)}>Add new group</button>
+            <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
         </BoardContext.Provider>
     );
 };

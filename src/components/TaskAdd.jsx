@@ -7,7 +7,7 @@ export const TaskAdd = () => {
     return (
         <div>
             <button onClick={() => onNewGroupClicked("top")}>New Group</button>
-            <button onClick={() => onNewTaskClicked("top")}>New Task</button>
+            <button onClick={() => onNewTaskClicked()}>New Task</button>
         </div>
     );
 };

@@ -1,7 +1,11 @@
-export const GroupFooter = () => {
+import { useContext } from 'react';
+import { BoardContext } from '../contexts/BoardContext.jsx';
+
+export const GroupFooter = ({group}) => {
+    const { onNewTaskClicked } = useContext(BoardContext);
     return (
         <div>
-            <h1>GroupFooter</h1>
+            <button onClick={() => onNewTaskClicked(group._id)}>+Add item</button>
         </div>
     );
 };

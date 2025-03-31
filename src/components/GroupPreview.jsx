@@ -8,7 +8,7 @@ export const GroupPreview = ({ columns, group }) => {
         <div key={group._id}>
             <GroupHeader title={group.title} color={group.color} />
             <TaskList group={group} columns={columns} />
-            <GroupFooter group={group} columns={columns} />
+            <GroupFooter group={group}/>
         </div>
     );
 };
