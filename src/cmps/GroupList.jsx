@@ -1,5 +1,5 @@
 import { GroupHeader } from "./GroupHeader";
-import { Group } from "./Group";
+import { TaskList } from "./TaskList";
 
 export const GroupList = ({ columns, groups }) => {
 
@@ -9,7 +9,7 @@ export const GroupList = ({ columns, groups }) => {
                 return (
                     <div key={group._id}>
                         <GroupHeader title={group.title} color={group.color} />
-                        <Group group={group} columns={columns} />
+                        <TaskList group={group} columns={columns} />
                     </div>
                 )
             })}

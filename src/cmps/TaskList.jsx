@@ -1,5 +1,5 @@
 
-export const Group = ({ group, columns }) => {
+export const TaskList = ({ group, columns }) => {
     return (
         <div className="group-container">
             <div className="group">

@@ -16,13 +16,12 @@ export const Board = () => {
     }, [board]);
 
     const onNewGroupClicked = (position) => {
-
-        addTaskGroup(boardId, position)
-            .then(group => { addNewTask(boardId, group._id) })
+        addTaskGroup(board)
+            .then(group => { addNewTask(board, group._id) })
     };
 
     const onNewTaskClicked = () => {
-        addNewTask(boardId)
+        addNewTask(board)
     };
 
     function loadBoard() {

@@ -14,7 +14,7 @@ export const statusColumn = {
                     { id: 'working', label: 'Working on it', color: '#fdab3d' },
                     { id: 'stuck', label: 'Stuck', color: '#e2445c' }
                 ]
-            }
+            },
         }
     }
 }

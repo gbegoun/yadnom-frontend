@@ -32,12 +32,12 @@ export function getEmptyTask(columns = []) {
         title: 'New Task',
         created_at: Date.now(),
         updated_at: Date.now(),
-        column_values: {},  
+        column_values: {}
     }
-    
+
     columns.forEach(column => {
-        task.column_values[column._id] = column.defaultValue || null;
-    });
+        task.column_values[column._id] = column.defaultValue || null
+    })
     
     return task;
 }

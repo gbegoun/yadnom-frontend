@@ -66,14 +66,12 @@ export async function addBoardMsg(boardId, txt) {
     }
 }
 
-export async function addTaskGroup(boardId, position) {
+export async function addTaskGroup(board, isPositionTop=true) {
     try {
-        const board = await boardService.getById(boardId)
-
         if (!board.groups) board.groups = []
         const group = getEmptyGroup()
 
-        if (position === 'top') board.groups.unshift(group)
+        if (isPositionTop) board.groups.unshift(group)
         else board.groups.push(group)
 
         const savedBoard = await boardService.saveBoard(board)
@@ -86,16 +84,16 @@ export async function addTaskGroup(boardId, position) {
     }
 }
 
-export async function addNewTask(boardId, groupId) {
+export async function addNewTask(board, groupId) {
     try {
-        const board = await boardService.getById(boardId)
-        var group;
         const task = getEmptyTask(board.columns)
-
+        
         if (groupId) {
+            let group;
             group = board.groups.find(group => group._id === groupId)
             group.tasks.push(task)
         } else {
+            let group;
             group = board.groups[0]
             group.tasks.unshift(task)
         }
