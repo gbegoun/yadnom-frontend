@@ -1,0 +1,12 @@
+.board-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    a {
+        color: #0073ea;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,9 +1,9 @@
 
 export const TaskList = ({ group, columns }) => {
     return (
-        <div className="group-container">
-            <div className="group">
-                <table className="group-table">
+        <div className="task-list-container">
+            <div className="task-list">
+                <table className="task-list-table">
                     <thead>
                         <tr>
                             <th>Task</th>
