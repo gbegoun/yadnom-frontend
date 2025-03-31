@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { loadBoards, addNewBoard, removeBoard } from "../store/actions/board.actions.js"
+import { loadBoards, addNewBoard, removeBoard } from "../../store/actions/board.actions.js"
 import * as ReactRedux from 'react-redux';
 
 const { useSelector } = ReactRedux

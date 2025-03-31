@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
-import { BoardHeader } from '../components/BoardHeader.jsx';
-import { BoardFilter } from '../components/BoardFilter.jsx';
-import { GroupList } from '../components/GroupList.jsx';
-import { boardService } from '../services/board/index.js';
 import { useEffect, useState } from 'react';
-import { BoardContext } from '../contexts/BoardContext';
 import { addTaskGroup, addNewTask } from "../store/actions/board.actions.js"
+import { BoardContext } from '../contexts/BoardContext';
+import { BoardHeader } from '../components/board/BoardHeader.jsx';
+import { BoardFilter } from '../components/board/BoardFilter.jsx';
+import { GroupList } from '../components/group/GroupList.jsx';
+import { boardService } from '../services/board/index.js';
 
 export const Board = () => {
     const { boardId } = useParams();
@@ -20,8 +20,8 @@ export const Board = () => {
             .then(group => { addNewTask(board, group._id) })
     };
 
-    const onNewTaskClicked = () => {
-        addNewTask(board)
+    const onNewTaskClicked = (groupId = null) => {
+        addNewTask(board, groupId)
     };
 
     function loadBoard() {
