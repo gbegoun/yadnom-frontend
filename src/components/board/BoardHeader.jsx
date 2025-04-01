@@ -1,4 +1,4 @@
-import { BoardFilter } from '../components/BoardFilter.jsx';
+import { BoardFilter } from './BoardFilter.jsx';
 
 export const BoardHeader = ({ board }) => {
     return (

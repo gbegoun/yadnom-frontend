@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { BoardHeader } from '../components/BoardHeader.jsx';
-import { GroupList } from '../components/GroupList.jsx';
+import { BoardHeader } from '../components/board/BoardHeader.jsx';
+import { GroupList } from '../components/group/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 import { useEffect, useState } from 'react';
 import { BoardContext } from '../contexts/BoardContext';

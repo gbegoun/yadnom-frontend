@@ -1,5 +1,5 @@
 import { GroupHeader } from "./GroupHeader";
-import { TaskList } from "./TaskList";
+import { TaskList } from "../task/TaskList";
 import {GroupFooter} from "./GroupFooter";
 
 export const GroupPreview = ({ columns, group }) => {

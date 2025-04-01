@@ -1,4 +1,4 @@
-import { TaskAdd } from "./TaskAdd";
+import { TaskAdd } from "../task/TaskAdd";
 
 export const BoardFilter = ({ board }) => {
 
