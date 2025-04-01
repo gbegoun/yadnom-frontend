@@ -5,7 +5,7 @@ export const GroupFooter = ({group}) => {
     const { onNewTaskClicked } = useContext(BoardContext);
     return (
         <div>
-            <button onClick={() => onNewTaskClicked(group._id)}>+Add item</button>
+            <button onClick={() => onNewTaskClicked(group._id)}>+ Add task</button>
         </div>
     );
 };

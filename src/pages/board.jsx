@@ -35,13 +35,13 @@ export const Board = () => {
     if (!board) return (<div>Loading...</div>)
     return (
         <BoardContext.Provider value={{ onNewGroupClicked, onNewTaskClicked }}>
-            <main>
+            <main className="board-container">
                 {board && <div>
                     <BoardHeader board={board} />
                     <GroupList columns={columns} groups={groups} />
                 </div>}
+                <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
             </main>
-            <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
         </BoardContext.Provider>
     );
 };

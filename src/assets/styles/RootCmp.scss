@@ -7,61 +7,61 @@
     width: 100vw;
     background-color: $clr44;
     color: $gray4;
-}
 
-.main-header {
-    font-family: figtree, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: $clr37;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 0 20px;
-    height: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-}
+    .main-header {
+        font-family: figtree, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $clr37;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 0 20px;
+        height: 60px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
 
-.main-layout {
-    display: flex;
-    flex: 1;
-    margin-left: 220px; // Offset for the fixed sidebar width
-}
+    .main-layout {
+        display: flex;
+        flex: 1;
+        margin-left: 220px; // Offset for the fixed sidebar width
+    }
 
-.main-sidebar {
-    font-size: 15px;
-    width: 220px;
-    background-color: $clr37;
-    border-right: 1px solid #e0e0e0;
-    padding: 20px;
-    overflow-y: auto;
-    position: fixed;
-    top: 60px; // Below the header
-    left: 0;
-    height: calc(100vh - 60px); // Adjust for the fixed header height
-}
+    .main-sidebar {
+        font-size: 15px;
+        width: 220px;
+        background-color: $clr37;
+        border-right: 1px solid #e0e0e0;
+        padding: 20px;
+        overflow-y: auto;
+        position: fixed;
+        top: 60px; // Below the header
+        left: 0;
+        height: calc(100vh - 60px); // Adjust for the fixed header height
+    }
 
-main {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    background-color: #ffffff;
-    margin-top: 25px; 
-    margin-left: 0; // Remove any left margin
-}
+    main {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background-color: #ffffff;
+        margin-top: 25px;
+        margin-left: 0; // Remove any left margin
+    }
 
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-    color: $clr8;
-    text-align: center;
-    margin-top: 20px;
-}
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: $clr8;
+        text-align: center;
+        margin-top: 20px;
+    }
 
-main h1 {
-    text-align: left;
+    main h1 {
+        text-align: left;
+    }
 }

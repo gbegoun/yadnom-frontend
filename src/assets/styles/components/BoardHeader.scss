@@ -4,7 +4,6 @@
     gap: 5px;
     padding: 0px;
     background-color: $clr43;
-    border-bottom: 1px solid #ddd;
 
     .info-layer {
         display: flex;
@@ -23,6 +22,7 @@
     }
 
     .users-integration {
+        justify-content: flex-end;
         margin-left: 10px;
     }
 
