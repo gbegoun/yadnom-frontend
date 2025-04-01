@@ -1,9 +1,43 @@
 .board-header {
-    padding: 10px;
-    background-color: #f4f5f7;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+    padding: 0px;
+    background-color: $clr43;
     border-bottom: 1px solid #ddd;
-    h1 {
-        font-size: 20px;
-        color: #333;
+
+    .info-layer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        h2 {
+            font-size: 18px;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        img {
+            margin: 0;
+        }
+    }
+
+    .users-integration {
+        margin-left: 10px;
+    }
+
+    .tables-row {
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .divider {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 0;
+    }
+
+    .filter-plus-new-item-container {
+        text-align: left;
     }
 }

@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../components/BoardHeader.jsx';
-import { BoardFilter } from '../components/BoardFilter.jsx';
 import { GroupList } from '../components/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 import { useEffect, useState } from 'react';
@@ -31,18 +30,16 @@ export const Board = () => {
             .catch(err => { console.log(err) });
     }
 
-    const { name, columns, groups } = board || {};
+    const { columns, groups } = board || {};
 
     if (!board) return (<div>Loading...</div>)
     return (
         <BoardContext.Provider value={{ onNewGroupClicked, onNewTaskClicked }}>
             <main>
                 {board && <div>
-                    <BoardHeader name={name} />
-                    <BoardFilter board={board} />
+                    <BoardHeader board={board} />
                     <GroupList columns={columns} groups={groups} />
-                </div>
-                }
+                </div>}
             </main>
             <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
         </BoardContext.Provider>
