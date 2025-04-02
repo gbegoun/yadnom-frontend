@@ -141,7 +141,7 @@ export const demo_data = {
                 {
                     "_id": "grp_ui_design",
                     "title": "UI/UX Design",
-                    "color": "#66ccff",
+                    "color": "#ff007f",
                     "archived": false,
                     "tasks": [
                         {

@@ -21,12 +21,9 @@
 
 // Components
 @import "components/MainHeader";
-@import "components/TaskList.scss";
 @import "components/UserDetails";
 @import "components/UserMsg";
-@import "components/TaskPreview";
-@import "components/TaskDetails";
-@import "components/TaskAdd";
+@import "components/task/task";
 @import "components/MainSidebar";
 @import "components/Items/Text";
 @import "components/Items/People";
@@ -40,4 +37,4 @@
 @import "components/BoardDetails";
 
 // group
-@import "components/group/Group";
+@import "components/group/group";

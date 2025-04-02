@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.group-header-column-row {
+    display: flex;
+    height: 36px;        
+    box-sizing: content-box;
+}
+
+
+.group-header-left-indicator {
+    background-color: var(--color-indicator, #000);
+    border-top-left-radius: 6px;
+    width: 6px;    
+}
+
+
+.group-header-column-checkbox-wrapper {
+    display: flex;
+    width:34px;    
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #d0d4e4;
+    border-right: 1px solid #d0d4e4;
+    cursor: pointer;
+}
+
+.group-header-column-checkbox{
+    width:16px;
+    height:16px;
+}
+
+
+.group-header-column-cell {
+    border-top: 1px solid #d0d4e4;
+    font-family: 'Figtree';
+    font-weight: light;
+    color: #323338;
+    font-size: 14px;
+    height: 100%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #d0d4e4;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.group-header-column-title{
+    width:300px; 
+}
+
+.group-header-column-last-cell{
+    border-top: 1px solid #d0d4e4;
+    height: 100%;
+    width: 100vw;
+}
