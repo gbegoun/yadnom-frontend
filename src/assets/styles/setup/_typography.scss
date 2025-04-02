@@ -1,8 +1,16 @@
 @font-face {
-    font-family: poppins;
-    src: url(../../fonts/Poppins/Poppins-Regular.ttf);
+    font-family: 'Poppins';
+    src: url('../../fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+
 }
+
 @font-face {
-    font-family: figtree;
-    src: url(../../fonts/Figtree/Figtree-Regular.ttf);
+    font-family: 'Figtree';
+    src: url('../../fonts/Figtree/Figtree-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }

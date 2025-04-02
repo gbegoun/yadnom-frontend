@@ -21,7 +21,6 @@
 
 // Components
 @import "components/MainHeader";
-@import "components/GroupHeader";
 @import "components/TaskList.scss";
 @import "components/UserDetails";
 @import "components/UserMsg";
@@ -34,10 +33,11 @@
 @import "components/Items/Labels";
 @import "components/Items/Date";
 @import "components/ItemModal";
-@import "components/GroupTitle";
-@import "components/GroupFooter";
 @import "components/DynamicItem";
 @import "components/BoardList";
 @import "components/BoardHeader";
 @import "components/BoardFilter";
 @import "components/BoardDetails";
+
+// group
+@import "components/group/Group";
