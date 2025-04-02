@@ -20,7 +20,7 @@ function RootCmp() {
             <MainSidebar />
           </aside>
 
-          <main>
+          <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/boards/:boardId" element={<Board />} />

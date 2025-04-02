@@ -1,33 +1,63 @@
-.main-container {
-    display: grid;
-    grid-template-columns: 1rem 1fr 1rem;
+.app-container {
+    font-family: Poppins, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ECEFF8;
+    color: $gray4;
 
-    > * {
-        grid-column: 2;
-
-        &.full {
-            grid-column: 1 / -1;
-        }
+    .main-header {
+        font-family: Figtree, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: inherit;
+        padding: 0 20px;
+        height: 56px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; // Ensure it stays on top
     }
 
-    // @include for-narrow-layout {
-    //     grid-template-columns: 
-    //         minmax(20px, 1fr)
-    //         minmax(auto, $mobile-breakpoint)
-    //         minmax(20px, 1fr);
-    // }
-    // @include for-normal-layout {
-    //     grid-template-columns: 
-    //         minmax(20px, 1fr)
-    //         minmax(auto, $narrow-breakpoint)
-    //         minmax(20px, 1fr);
-    // }
-    // @include for-wide-layout {
-    //     grid-template-columns: 
-    //         minmax(20px, 1fr)
-    //         minmax(auto, $normal-breakpoint)
-    //         minmax(20px, 1fr);
-    // }
+    .main-layout {
+        display: flex;
+        flex: 1;
+        margin-top: 48px; // Offset for the fixed header
+        overflow: hidden;
+
+        .main-sidebar {
+            width: 220px;
+            background: linear-gradient(to right, #FFFFFF, #ECEFF8);
+            padding: 6px;
+            border-top-left-radius: 15px;
+            flex-shrink: 0; // Prevent shrinking
+            height: calc(100vh - 56px); // Adjust for the fixed header height
+            position: relative;
+        }
+
+        .main-content {
+            flex: 1; // Take up remaining space
+            background-color: #ffffff;
+            padding: 18px 38px;
+            overflow-y: auto;
+            border-top-left-radius: 15px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: $clr8;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        main h1 {
+            text-align: left;
+        }
+    }
 }
 
 .card-grid {

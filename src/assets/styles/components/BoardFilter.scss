@@ -1,9 +1,10 @@
 .board-filter-container {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     span {
-        font-size: 14px;
-        color: #555;
+        font-size: rem(14px);
     }
 }
