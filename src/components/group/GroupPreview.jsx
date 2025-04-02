@@ -1,14 +1,13 @@
-import { GroupHeader } from "./header/GroupHeader";
+import { GroupHeader } from "./GroupHeader";
 import { TaskList } from "../task/TaskList";
-import {GroupFooter} from "./GroupFooter";
+import { GroupFooter } from "./GroupFooter";
 
 export const GroupPreview = ({ columns, group }) => {
-
     return (
-        <div key={group._id}>
+        <div className="group-preview" key={group._id}>
             <GroupHeader title={group.title} color={group.color} columns={columns} />
             <TaskList group={group} columns={columns} />
-            <GroupFooter group={group}/>
+            <GroupFooter group={group} columns={columns} />
         </div>
     );
 };

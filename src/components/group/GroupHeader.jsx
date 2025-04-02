@@ -5,7 +5,7 @@ export const GroupHeader = ({ title, color, columns }) => {
     return (
         <div className="group-header">
             <GroupHeaderTitleRow title={title} color={color} />
-            <GroupHeaderColumnRow columns={columns} />
+            <GroupHeaderColumnRow columns={columns} color={color} />
         </div>
     )
 }
