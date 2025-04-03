@@ -13,9 +13,10 @@
     width:34px;    
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #d0d4e4;
+    border-bottom: 1px solid #d0d4e4;
     border-right: 1px solid #d0d4e4;
     cursor: pointer;
+    
 }
 
 .task-checkbox{
@@ -32,7 +33,7 @@
     height: 100%;
     width: 300px;
     text-align: center;
-    border-top: 1px solid #d0d4e4;
+    border-bottom: 1px solid #d0d4e4;
     border-right: 1px solid #d0d4e4;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -53,7 +54,7 @@
     padding-right: 8px;
     line-height: 36px;
     text-align: center;
-    border-top: 1px solid #d0d4e4;
+    border-bottom: 1px solid #d0d4e4;
     border-right: 1px solid #d0d4e4;
     overflow: hidden;
     text-overflow: ellipsis;   
@@ -62,6 +63,6 @@
 }
 
 .task-preview-last-cell{
-    border-top: 1px solid #d0d4e4;
+    border-bottom: 1px solid #d0d4e4;
     width:100vw;
 }
