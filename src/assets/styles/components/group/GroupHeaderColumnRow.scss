@@ -2,9 +2,7 @@
 
 .group-header-column-row {
     display: flex;
-    height: 36px;        
-    box-sizing: content-box;
-    
+    height: 36px;      
 }
 
 
@@ -24,11 +22,13 @@
     border-right: 1px solid #d0d4e4;
     border-bottom: 1px solid #d0d4e4;    
     cursor: pointer;
+    
 }
 
 .group-header-column-checkbox{
     width:16px;
     height:16px;
+
 }
 
 
@@ -49,13 +49,13 @@
     padding-right: 4px;
 }
 
-.group-header-column-title{
-    width:300px; 
+.group-header-columns-wrapper{
+    display: flex;
 }
 
 .group-header-column-last-cell{
     border-bottom: 1px solid #d0d4e4;
     border-top: 1px solid #d0d4e4;
     height: 100%;
-    width: 100vw;
+    width: 100dvw;      
 }

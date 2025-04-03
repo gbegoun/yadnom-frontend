@@ -4,6 +4,9 @@
 @import "./GroupFooterSummary";
 @import "./GroupHeaderColumnTitle";
 @import "./GroupFooterNewTask";
+
 .group-preview{
-    margin-bottom: 34px;    
+    height: 100%;
+    width: max-content;
+    box-sizing: border-box;
 }

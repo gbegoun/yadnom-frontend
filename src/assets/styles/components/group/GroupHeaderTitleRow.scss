@@ -5,7 +5,11 @@
     display: flex;
     align-items: center;    
     height: 36px;
+    width: max-content;
     color: var(--color-indicator, #000);
+    position: sticky;
+    left:0;
+
 }
 
 .collapse-group-icon-wrapper{

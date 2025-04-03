@@ -1,4 +1,4 @@
-export const TaskTitle = ({ task, color }) => {
+export const TaskPreviewTitle = ({ task, color }) => {
     return (
         <div className="task-title-wrapper">
             <div className="task-left-indicator" style={{ backgroundColor: color }} />
