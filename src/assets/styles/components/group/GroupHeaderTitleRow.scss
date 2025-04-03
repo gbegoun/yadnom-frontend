@@ -1,33 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
+.group-header{
+    display:grid;
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
+}
 .group-header-title-row {
     font-family: 'Poppins', sans-serif;
-    display: flex;
+    display: grid;
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
     align-items: center;    
     height: 36px;
     width: max-content;
     color: var(--color-indicator, #000);
-
-    position: sticky;
-    left:0;
-
 }
 
 .collapse-group-icon-wrapper{
+    grid-column: 2;
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 34px;
+    justify-content: center;
 }
 .collapse-group-icon {
-    justify-content: center;
-    align-items: center;
     width: 22px;
     height: 22px;
 }
 
-
 .group-header-title-text {
+    display:flex;
+    grid-column: 3;
     font-size: 18px;
     font-weight: 500;
     padding: 5px;

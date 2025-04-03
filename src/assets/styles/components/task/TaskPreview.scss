@@ -1,58 +1,25 @@
 .task-preview {
+    display:grid;
+    grid-column:1/-1;
+    grid-template-columns: subgrid;
+}
+
+.task-preview-item-wrapper{    
+    grid-column: 4;
     display: flex;
-    height: 36px;       
-}
-
-.task-left-indicator{
-    width: 6px;    
-    background-color: #000; 
-}
-
-.task-checkbox-wrapper{
-    display: flex;
-    width:34px;    
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #d0d4e4;
-    border-right: 1px solid #d0d4e4;
-    cursor: pointer;
-    
-}
-
-.task-checkbox{
-    width:16px;
-    height:16px;
-}
-
-.task-title{
-    display: flex;
-    font-family: 'Figtree';
-    font-weight: light;
-    color: #323338;
-    font-size: 14px;
-    height: 100%;
-    width: 300px;
-    text-align: center;
-    border-bottom: 1px solid #d0d4e4;
-    border-right: 1px solid #d0d4e4;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; 
-    align-items: center;
-    padding-left: 36px;
 }
 
 .task-preview-item {
-    display: block;
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;
     font-family: 'Figtree';
     font-weight: light;
     color: #323338;
     font-size: 13px;
-    height: 100%;
     width: 100px;
     padding-left: 8px;
     padding-right: 8px;
-    line-height: 36px;
     text-align: center;
     border-bottom: 1px solid #d0d4e4;
     border-right: 1px solid #d0d4e4;
@@ -63,6 +30,7 @@
 }
 
 .task-preview-last-cell{
+    grid-column: 5;
     border-bottom: 1px solid #d0d4e4;
-    width:100dvw;
+    width: max(250px, 100%);
 }

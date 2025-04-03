@@ -1,6 +1,5 @@
-.task-list {
+.group-preview{
     display: grid;
     grid-column: 1/-1;
     grid-template-columns: subgrid;
-    grid-auto-rows: 36px;
 }

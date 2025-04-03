@@ -1,0 +1,5 @@
+.group-list {
+    display: grid;
+    grid-template-columns: 6px 34px 300px auto 1fr;
+    grid-auto-flow: row;
+}

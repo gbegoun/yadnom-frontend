@@ -4,10 +4,5 @@
 @import "./GroupFooterSummary";
 @import "./GroupHeaderColumnTitle";
 @import "./GroupFooterNewTask";
-
-.group-preview{
-    height: 100%;
-    width: max-content;
-    box-sizing: border-box;
-
-}
+@import "./GroupList";
+@import "./GroupPreview";
