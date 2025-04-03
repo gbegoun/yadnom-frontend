@@ -1,7 +1,10 @@
 .group-header-column-title-wrapper{
     display: flex;
+    position: sticky;
+    left:0;
 }
 
-.group-header-columns-wrapper{
-    display: flex;
+.group-header-column-title{
+    width:300px; 
 }
+

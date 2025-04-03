@@ -2,50 +2,51 @@
 
 .group-footer-summary {
     z-index: 2;
+    display: flex;
     position: relative;
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    align-items: center;    
     color: var(--color-indicator, #000);
-    height: 34px;
+    height: max-content;
     padding-left: 6px;
-    
-    
+    height: 70px;
 }
 
-.group-footer-summary-blank{
-    width:333px;
-    height:100%;
+.group-footer-summary-blank {
+    position: sticky;
+    left: 0;
+    width: 333px;
+    height: 100%;
     
+    background-color: white;
+
 }
 
-.group-footer-summary-item-wrapper{
+.group-footer-summary-item-wrapper {
     display: flex;
+    height: 34px;
     justify-content: center;
     align-items: center;
     border-left: 1px solid #d0d4e4;
     border-bottom: 1px solid #d0d4e4;
     border-bottom-left-radius: 6px;
     background-color: #fff;
-    height: 100%;
     box-shadow: 0px 5px 5px rgba(190, 190, 190, 0.1);
 }
 
 .group-footer-summary-item {
     display: flex;
-    align-items: center;  
+    align-items: center;
     justify-content: center;
     font-family: 'Figtree', sans-serif;
     font-weight: 400;
     font-size: 14px;
     color: rgb(103, 104, 121);
-    width:100px;
+    width: 100px;
     height: 100%;
     border-right: 1px solid #d0d4e4;
 }
 
-.group-footer-last-cell{
-    width: 100vw;
+.group-footer-last-cell {
+    width: 100dvw;
     border-right: 1px solid #d0d4e4;
-
 }
