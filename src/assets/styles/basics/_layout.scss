@@ -1,5 +1,5 @@
 .app-container {
-    font-family: Poppins, sans-serif;
+    font-family: figtree, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -14,7 +14,7 @@
         justify-content: space-between;
         background-color: inherit;
         padding: 0 20px;
-        height: 56px;
+        height: 48px;
         position: fixed;
         top: 0;
         left: 0;
@@ -25,8 +25,11 @@
     .main-layout {
         display: flex;
         flex: 1;
-        margin-top: 48px; // Offset for the fixed header
+        margin-top: 40px; // Offset for the fixed header
+        border-top-left-radius: 15px;
+        background-color: #ECEFF8;
         overflow: hidden;
+        
 
         .main-sidebar {
             width: 220px;
@@ -34,8 +37,9 @@
             padding: 6px;
             border-top-left-radius: 15px;
             flex-shrink: 0; // Prevent shrinking
-            height: calc(100vh - 56px); // Adjust for the fixed header height
+            height: calc(100vh - 40px); // Adjust for the fixed header height
             position: relative;
+            left: 6px;
         }
 
         .main-content {
@@ -43,7 +47,9 @@
             background-color: #ffffff;
             padding: 18px 38px;
             overflow-y: auto;
+            overflow-x: auto;
             border-top-left-radius: 15px;
+            z-index: 2;
         }
 
         h1 {

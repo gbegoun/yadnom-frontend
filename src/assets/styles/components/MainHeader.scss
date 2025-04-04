@@ -2,53 +2,67 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
 
-.main-header-logo {
-    height: 30px;
-    margin-right: 10px;
-    margin-left: 5px;
-    &:hover {
-        opacity: 0.8; 
-        cursor: pointer;
+    .main-header-logo {
+        height: 30px;
+        margin-right: 10px;
+        margin-left: 5px;
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    }
+
+    .main-header-right-group {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .main-header-left-icons {
+            height: 20px;
+
+            &:hover {
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+        }
+
+        .main-header-products-switcher {
+            height: 15px;
+
+            &:hover {
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+        }
+
+        .avatar-container {
+            background-color: #FFFFFF;
+            width: 67px;
+            height: 31px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 4px 4px 8px;
+            border-top-right-radius: 17px;
+            border-bottom-right-radius: 17px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+
+            .main-header-profile {
+                height: 24px;
+            }
+
+            .main-header-simple-logo {
+                height: 24px;
+
+            }
+
+            &:hover {
+                background-color: #dbdfe7;
+                cursor: pointer;
+            }
+        }
     }
 }
-
-.main-header-right-group {
-    display: flex; 
-    align-items: center;
-    justify-content: flex-end; 
-    gap: 20px; 
-    margin-left: auto; 
-}
-
-.main-header-notification {
-    height: 20px;
-    display: flex;
-    align-items: center;
-    &:hover {
-        transform: scale(1.1); 
-        cursor: pointer;
-    }
-}
-
-.main-header-products-switcher {
-    height: 15px;
-    display: flex;
-    align-items: center;
-    &:hover {
-        transform: scale(1.1); 
-        cursor: pointer;
-    }
-}
-
-.main-header-profile {
-    height: 30px;
-    display: flex;
-    &:hover {
-        transform: scale(1.1); 
-        cursor: pointer;
-    }
-}
-
-
