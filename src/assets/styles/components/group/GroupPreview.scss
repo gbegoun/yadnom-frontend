@@ -1,5 +1,6 @@
-.group-preview{
+.group-preview{    
     display: grid;
+    height:min-content;
     grid-column: 1/-1;
     grid-template-columns: subgrid;
 }
