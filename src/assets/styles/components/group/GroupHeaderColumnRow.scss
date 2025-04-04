@@ -1,36 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 .group-header-column-row {
-    display: flex;
+    display:grid;
+    grid-column: 1/-1;
     height: 36px;      
+    grid-template-columns: subgrid;
 }
 
-
-.group-header-left-indicator {
-    background-color: var(--color-indicator, #000);
-    border-top-left-radius: 6px;
-    width: 6px;    
+.group-header-columns-wrapper{
+    display: grid;
+    grid-column: 2;
+    grid-template-columns: repeat(fit-content(100%));
+    grid-auto-flow: column;
 }
-
-
-.group-header-column-checkbox-wrapper {
-    display: flex;
-    width:34px;        
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid #d0d4e4;
-    border-right: 1px solid #d0d4e4;
-    border-bottom: 1px solid #d0d4e4;    
-    cursor: pointer;
-    
-}
-
-.group-header-column-checkbox{
-    width:16px;
-    height:16px;
-
-}
-
 
 .group-header-column-cell {
     border-top: 1px solid #d0d4e4;
@@ -38,7 +20,6 @@
     font-weight: light;
     color: #323338;
     font-size: 14px;
-    height: 100%;
     width: 100px;
     display: flex;
     align-items: center;
@@ -49,13 +30,9 @@
     padding-right: 4px;
 }
 
-.group-header-columns-wrapper{
-    display: flex;
-}
-
 .group-header-column-last-cell{
+    grid-column: 3;
     border-bottom: 1px solid #d0d4e4;
     border-top: 1px solid #d0d4e4;
-    height: 100%;
     width: 100dvw;      
 }

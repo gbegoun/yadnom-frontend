@@ -6,8 +6,8 @@ export const GroupHeaderColumnRow = ({ columns, color }) => {
             <GroupHeaderColumnTitle color={color} />
             <div className = "group-header-columns-wrapper">
                 {columns.map((column, index) => <div key={index} className="group-header-column-cell">{column.title}</div>)}
-                <div className="group-header-column-last-cell" />
             </div>
+            <div className="group-header-column-last-cell" />
             
         </div>
     )

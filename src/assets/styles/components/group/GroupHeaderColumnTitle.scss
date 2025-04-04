@@ -1,10 +1,44 @@
 .group-header-column-title-wrapper{
-    display: flex;
+    display:grid;
+    grid-column: 1;
+    grid-template-columns: repeat(4,fit-content(100%));
     position: sticky;
     left:0;
+    background-color: white;
+}
+
+.group-header-column-title-menu{
+    display:flex;
+    grid-column: 1;    
+    width: 40px;    
+}
+.group-header-left-indicator {
+    display:grid;
+    grid-column: 2;
+    background-color: var(--color-indicator, #000);
+    border-top-left-radius: 6px;
+    width: 6px;    
 }
 
 .group-header-column-title{
-    width:300px; 
+    width: 300px;
+}
+
+.group-header-column-checkbox-wrapper {
+    display: flex;
+    width:34px;        
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #d0d4e4;
+    border-right: 1px solid #d0d4e4;
+    border-bottom: 1px solid #d0d4e4;    
+    cursor: pointer;
+    
+}
+
+.group-header-column-checkbox{
+    width:16px;
+    height:16px;
+
 }
 

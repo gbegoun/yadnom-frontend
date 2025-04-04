@@ -1,5 +1,8 @@
 .group-list {
+    overflow: auto;
+    height: 900px; 
+    width: 1400px;
     display: grid;
-    grid-template-columns: 6px 34px 300px auto 1fr;
+    grid-template-columns: repeat(4,auto);
     grid-auto-flow: row;
 }

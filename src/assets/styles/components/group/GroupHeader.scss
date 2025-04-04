@@ -1,0 +1,9 @@
+.group-header{
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    display:grid;
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
+    background-color: white;
+}
