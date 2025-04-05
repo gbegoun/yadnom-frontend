@@ -1,0 +1,8 @@
+.group-list {
+    overflow: auto;
+    height: 700px; 
+    width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(4,auto);
+    grid-auto-rows: min-content;    
+}

@@ -1,0 +1,58 @@
+.task-preview-title-wrapper {
+    display: grid;
+    grid-column: 1;
+    grid-template-columns: repeat(4, fit-content(100%));  
+    position: sticky;
+    left: 0;
+    background-color: white;
+
+}
+
+.task-preview-menu {
+    
+    display: flex;
+    grid-column: 1;
+    width: 40px;
+}
+
+.task-left-indicator {
+    width: 6px;
+    display: flex;
+    grid-column: 2;
+    background-color: #000;
+}
+
+.task-checkbox-wrapper {
+    display: flex;
+    width: 34px;
+    grid-column: 3;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #d0d4e4;
+    border-right: 1px solid #d0d4e4;
+    cursor: pointer;
+}
+
+.task-checkbox {
+    display: flex;
+    width: 16px;
+    height: 16px;
+}
+
+.task-title {
+    display: flex;
+    grid-column: 4;
+    width: 300px;
+    font-family: 'Figtree';
+    font-weight: light;
+    color: #323338;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid #d0d4e4;
+    border-right: 1px solid #d0d4e4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-items: center;
+    padding-left: 36px;
+}

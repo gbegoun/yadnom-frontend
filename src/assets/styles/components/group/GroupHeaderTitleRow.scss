@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+.group-header-title-row {
+    font-family: 'Poppins', sans-serif;
+    display: grid;
+    grid-column: 1/-1;
+    grid-template-columns: 46px 30px max-content max-content;
+    height: 36px;
+    width: max-content;
+    color: var(--color-indicator, #000);
+    position: sticky;
+    left:0;
+}
+
+.group-header-title-menu{
+    display: flex;
+    grid-column: 1;
+}
+
+.collapse-group-icon-wrapper{
+    display: flex;
+    grid-column: 2;
+    align-items: center;
+    justify-content: center;
+}
+.collapse-group-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.group-header-title-text {
+    align-items: center;
+    justify-content: center;
+    display:flex;
+    grid-column: 3;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px;
+    letter-spacing: -0.1px;
+}
+
+.group-header-summary-text {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 4px;
+    color: rgb(103, 104, 121);
+}
