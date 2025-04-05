@@ -1,9 +1,7 @@
 .app-container {
     font-family: figtree, sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    display: grid;
+    grid-template-rows: auto 1fr;
     background-color: #ECEFF8;
     color: $gray4;
 
@@ -15,20 +13,15 @@
         background-color: inherit;
         padding: 0 20px;
         height: 48px;
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
-        z-index: 1000; // Ensure it stays on top
     }
 
     .main-layout {
-        display: flex;
-        flex: 1;
-        margin-top: 40px; // Offset for the fixed header
+        display: grid;
+        grid-template-columns: auto 1fr;
         border-top-left-radius: 15px;
         background-color: #ECEFF8;
-        overflow: hidden;
+        padding-left: 12px;
         
 
         .main-sidebar {
@@ -36,20 +29,13 @@
             background: linear-gradient(to right, #FFFFFF, #ECEFF8);
             padding: 6px;
             border-top-left-radius: 15px;
-            flex-shrink: 0; // Prevent shrinking
-            height: calc(100vh - 40px); // Adjust for the fixed header height
-            position: relative;
-            left: 6px;
+            height: 100vh;
         }
 
         .main-content {
-            flex: 1; // Take up remaining space
             background-color: #ffffff;
             padding: 18px 38px;
-            overflow-y: auto;
-            overflow-x: auto;
             border-top-left-radius: 15px;
-            z-index: 2;
         }
 
         h1 {

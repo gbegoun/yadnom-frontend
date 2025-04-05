@@ -6,10 +6,14 @@ html {
     line-height: 1.5;
     font-family: Figtree, Poppins, Roboto, "Noto Sans Hebrew", "Noto Kufi Arabic", "Noto Sans JP", sans-serif;
     background-color: #ECEFF8;
+    
 }
     
 body {
     font-size: rem(15px);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
