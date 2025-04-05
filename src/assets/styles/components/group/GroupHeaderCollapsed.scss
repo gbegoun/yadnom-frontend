@@ -12,6 +12,9 @@
     grid-template-columns: repeat(3, max-content) 1fr;
     grid-template-rows: 38px 22px;
     border-right: 1px solid #d0d4e4;
+    position: sticky;
+    left:0;
+    background-color: white;
 
 }
 
