@@ -4,5 +4,6 @@
     width: 1200px;
     display: grid;
     grid-template-columns: repeat(4,auto);
-    grid-auto-rows: min-content;    
+    grid-auto-rows: min-content; 
+    margin-left: -38px; // Ofir: added to fix the gap between the group list and the sidebar   
 }

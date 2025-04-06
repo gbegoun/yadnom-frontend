@@ -5,11 +5,13 @@
     align-items: center;
     gap: 10px;
     padding: 0px;
+    margin-bottom: 24px;
 
     .info-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        // width: 100dvw;
 
         .title-container {
             display: flex;
@@ -112,7 +114,6 @@
     }
 
     .filter-plus-new-item-row {
-        text-align: left;
+        display: flex;
     }
-    
 }

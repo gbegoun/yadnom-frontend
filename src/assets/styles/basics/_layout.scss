@@ -26,15 +26,15 @@
         .main-sidebar {
             width: 220px;
             background: linear-gradient(to right, #FFFFFF, #ECEFF8);
-            padding: 6px;
             border-top-left-radius: 15px;
             height: 100vh;
         }
 
         .main-content {
             background-color: #ffffff;
-            padding: 18px 38px;
+            padding: 18px 30px 0px 38px;
             border-top-left-radius: 15px;
+            overflow: auto;
         }
 
         h1 {
