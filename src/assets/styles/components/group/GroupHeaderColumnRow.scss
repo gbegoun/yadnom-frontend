@@ -9,9 +9,8 @@
 
 .group-header-columns-wrapper{
     display: grid;
-    grid-column: 2;
-    grid-template-columns: repeat(fit-content(100%));
     grid-auto-flow: column;
+    grid-column: 2;
 }
 
 .group-header-column-cell {

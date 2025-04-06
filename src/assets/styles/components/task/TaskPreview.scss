@@ -1,19 +1,18 @@
 .task-preview {
-    display:grid;
-    grid-column:1/-1;
+    display: grid;
+    grid-column: 1/-1;
     grid-template-columns: subgrid;
-    
-    
 }
 
-.task-preview-item-wrapper{    
+.task-preview-item-wrapper {
     grid-column: 2;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
 }
 
 .task-preview-item {
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
     justify-content: center;
     font-family: 'Figtree';
     font-weight: light;
@@ -26,13 +25,13 @@
     border-bottom: 1px solid #d0d4e4;
     border-right: 1px solid #d0d4e4;
     overflow: hidden;
-    text-overflow: ellipsis;   
-    white-space: nowrap;  
+    text-overflow: ellipsis;    
+    white-space: nowrap;
     color: rgb(102, 102, 102);
 }
 
-.task-preview-last-cell{
-    display:flex;
+.task-preview-last-cell {
+    display: flex;
     grid-column: 3;
     border-bottom: 1px solid #d0d4e4;
     width: max(250px, 100%);
