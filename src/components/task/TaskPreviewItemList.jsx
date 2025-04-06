@@ -1,12 +1,17 @@
-import { TaskPreviewTitle } from "./TaskPreviewTitle"
-import { TaskPreviewItemList } from "./TaskPreviewItemList"
 
-export const TaskPreview = ({ task, columns, color }) => {
+export const TaskPreviewItemList = ({ task, columns, color }) => {
     return (
-        <div className="task-preview">
-            <TaskPreviewTitle task={task} color={color} />
-            <TaskPreviewItemList task={task} columns={columns} />
-            <div className="task-preview-last-cell" />
+        <div className="task-preview-item-wrapper">
+            {columns.map(column =>
+                <div
+                    key={column._id}
+                    className="task-preview-item"
+                    style={{width:column.width}}
+                    >
+                    {task.column_values[column._id]}
+                    
+                </div>
+            )}
         </div>
     )
 }
