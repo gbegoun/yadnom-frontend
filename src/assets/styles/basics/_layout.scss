@@ -6,14 +6,13 @@
     color: $gray4;
 
     .main-header {
-        font-family: Figtree, sans-serif;
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: inherit;
-        padding: 0 20px;
+        padding: 0px 10px 0px 4px;
         height: 48px;
-        width: 100%;
+        width: 100vw;
     }
 
     .main-layout {
