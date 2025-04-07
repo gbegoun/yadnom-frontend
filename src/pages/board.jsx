@@ -12,10 +12,7 @@ export const Board = () => {
 
     useEffect(() => {
         loadBoard()
-    }, []);
-
-    // useEffect(() => {
-    // }, [board]);
+    }, [board]);
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
