@@ -28,17 +28,18 @@ export const BoardList = () => {
     return (
         <div className="board-list">
             <button className="add-board-btn" onClick={() => onAddBoard()}>Add Board</button>
-            <div className="board-items">
+            <ul className="board-items">
                 {boards && boards.map(board => {
                     return (
                         <a key={board._id} href={`/boards/${board._id}`} className="board-item">
                             <img src="../src/assets/icons/home_page_default_board_img.svg" alt="board image" />
                             <div className="board-content">
-                                <h3>{board.title || board._id}</h3>
+                                <img src="../src/assets/icons/board_icon.svg" alt="board" className="board-icon" />
+                                <h3>{board.name || board._id}</h3>
+                                <img src="../src/assets/icons/star_favorite.svg" alt="favorite" className="favorite-icon" />
                                 <p>{board.description}</p>
                             </div>
                             <div className="board-actions">
-                                <img src="../src/assets/icons/star_favorite.svg" alt="favorite" className="favorite-icon" />
                                 <button className="remove-btn"
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -50,7 +51,7 @@ export const BoardList = () => {
                         </a>
                     );
                 })}
-            </div>
+            </ul>
         </div>
     );
 };

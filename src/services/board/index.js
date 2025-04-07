@@ -1,14 +1,14 @@
 const { DEV, VITE_LOCAL } = import.meta.env
 
-import { getRandomIntInclusive, makeId } from '../util.service'
+import { getRandomIntInclusive, makeId, makeLorem } from '../util.service'
 import { boardService as local } from './board.service.local'
 import { boardService as remote } from './board.service.remote'
 import { columnTypes } from './column-types'
 
 export function getEmptyBoard() {
     return {
-        name: null,
-        description: null,
+        name: makeLorem(getRandomIntInclusive(1,3)), // Ofir - add for mockup data
+        description: makeLorem(getRandomIntInclusive(5,20)),    // Ofir - add for mockup data
         members: [],
         created_at: Date.now(),
         updated_at: Date.now(),
