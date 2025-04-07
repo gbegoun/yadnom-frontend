@@ -2,6 +2,25 @@
     display: grid;
     grid-column: 1/-1;
     grid-template-columns: subgrid;
+    background-color: white;
+}
+
+.task-preview:hover{
+    z-index: 5;
+    background-color: white;
+}
+
+.task-preview:hover .task-checkbox-wrapper,
+.task-preview:hover .task-preview-item-wrapper,
+.task-preview:hover .task-preview-last-cell {
+    background-color: rgb(247, 247, 247);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+    
+}
+.task-preview:hover .task-title{
+    z-index: 5;
+    background-color: rgb(247, 247, 247);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
 }
 
 .task-preview-item-wrapper {

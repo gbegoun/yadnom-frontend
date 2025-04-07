@@ -5,6 +5,7 @@
     position: sticky;
     left: 0;
     background-color: white;
+    z-index: 3;
 
 }
 
@@ -13,6 +14,7 @@
     display: flex;
     grid-column: 1;
     width: 40px;
+    background-color: white;
 }
 
 .task-left-indicator {
