@@ -89,7 +89,7 @@ export const demo_data = {
                 {
                     "_id": "priority_column",
                     "title": "Priority",
-                    "type": "status",
+                    "type": "label",
                     "settings": {
                         "options": [
                             {
