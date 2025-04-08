@@ -1,6 +1,6 @@
-export const People = ({ column, value }) => {
+export const People = ({ value }) => {
 
-    const label = value.join(', ');
+    const label =  value?.length ? value.join(', ') : "";
 
 
     return (
