@@ -17,7 +17,7 @@ export const demo_data = {
                 {
                     "_id": "status_column",
                     "title": "Status",
-                    "type": "status",
+                    "type": "label",
                     "width": "130px",
                     "settings": {
                         "options": [

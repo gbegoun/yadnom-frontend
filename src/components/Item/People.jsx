@@ -1,7 +1,11 @@
-export const People = () => {
+export const People = ({ column, value }) => {
+
+    const label = value.join(', ');
+
+
     return (
-        <div>
-            <h1>People</h1>
+        <div className="poeple-item">
+            <span>{label}</span>
         </div>
-    );
-};
+    )
+}

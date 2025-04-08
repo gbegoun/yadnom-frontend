@@ -1,15 +1,17 @@
+import { DynamicItem } from "../item/DynamicItem"
 
-export const TaskPreviewItemList = ({ task, columns, color }) => {
+
+
+export const TaskPreviewItemList = ({ task, columns }) => {
     return (
         <div className="task-preview-item-wrapper">
             {columns.map(column =>
                 <div
                     key={column._id}
                     className="task-preview-item"
-                    style={{width:column.width}}
-                    >
-                    {task.column_values[column._id]}
-                    
+                    style={{ width: column.width }}
+                >
+                    <DynamicItem column={column} value={task.column_values[column._id]} />
                 </div>
             )}
         </div>
