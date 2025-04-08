@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-
-const ModalContext = createContext();
+import { ModalContext } from './useModal';
 
 // Modal Provider component
 export const ModalProvider = ({ children }) => {
@@ -37,5 +36,3 @@ export const ModalProvider = ({ children }) => {
     );
 };
 
-// Custom hook to use the modal context
-export const useModal = () => useContext(ModalContext);

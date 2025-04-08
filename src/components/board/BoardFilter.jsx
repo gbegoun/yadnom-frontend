@@ -1,8 +1,8 @@
 import { TaskAdd } from "../task/TaskAdd";
-import { useModal } from "../../contexts/ModalContext.jsx";
+import { useModal } from '../../contexts/modal/useModal.jsx';
 
 
-export const BoardFilter = ({ board }) => {
+export const BoardFilter = (/* { board } */) => {
     const { openModal } = useModal();
 
     const handleSearchClick = () => {

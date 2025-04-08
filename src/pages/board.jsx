@@ -3,7 +3,7 @@ import { BoardHeader } from '../components/board/BoardHeader.jsx';
 import { GroupList } from '../components/group/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 import { useEffect, useState } from 'react';
-import { BoardContext } from '../contexts/BoardContext';
+import { BoardContext } from '../contexts/board/BoardContext.jsx';
 import { addTaskGroup, addNewTask } from "../store/actions/board.actions.js"
 
 export const Board = () => {

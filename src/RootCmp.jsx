@@ -4,7 +4,7 @@ import { Home } from "./pages/home.jsx"
 import { Board } from "./pages/board.jsx"
 import { MainHeader } from "./components/MainHeader.jsx"
 import { MainSidebar } from "./components/MainSidebar.jsx"
-import { ModalProvider } from './contexts/ModalContext.jsx'
+import { ModalProvider } from './contexts/modal/ModalContext.jsx'
 import { store } from './store/store.js'
 import { Provider } from 'react-redux'
 
@@ -24,8 +24,9 @@ function RootCmp() {
   // }, []);
 
   return (
-    <ModalProvider>
-      <Provider store={store}>
+
+    <Provider store={store}>
+      <ModalProvider>
         <div className="app-container">
           <header className="main-header">
             <MainHeader />
@@ -45,8 +46,9 @@ function RootCmp() {
             </main>
           </div>
         </div>
-      </Provider>
-    </ModalProvider>
+      </ModalProvider>
+    </Provider>
+
   )
 }
 
