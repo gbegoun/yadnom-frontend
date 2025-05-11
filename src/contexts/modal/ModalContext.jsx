@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { ModalContext } from './useModal';
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import { ModalContext } from './useModal'
 
 // Modal Provider component
 export const ModalProvider = ({ children }) => {
-    const [modalContent, setModalContent] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [modalContent, setModalContent] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [position, setPosition] = useState({ x: 0, y: 0 })
 
     const openModal = (content, mousePosition) => {
-        setModalContent(content);
-        setPosition(mousePosition || { x: window.innerWidth / 2, y: window.innerHeight / 2 });
-        setIsModalOpen(true);
-    };
+        setModalContent(content)
+        setPosition(mousePosition || { x: window.innerWidth / 2, y: window.innerHeight / 2 })
+        setIsModalOpen(true)
+    }
 
     const closeModal = () => {
-        setModalContent(null);
-        setIsModalOpen(false);
-        setPosition({ x: 0, y: 0 });
-    };
+        setModalContent(null)
+        setIsModalOpen(false)
+        setPosition({ x: 0, y: 0 })
+    }
 
     return (
         <ModalContext.Provider value={{ openModal, closeModal }}>
@@ -39,6 +39,6 @@ export const ModalProvider = ({ children }) => {
                     document.getElementById('modal-root')
                 )}
         </ModalContext.Provider>
-    );
-};
+    )
+}
 
