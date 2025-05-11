@@ -1,20 +1,41 @@
 import { TaskAdd } from "../task/TaskAdd";
 import { useModal } from '../../contexts/modal/useModal.jsx';
-
+import { useState, useRef, useEffect } from 'react';
 
 export const BoardFilter = (/* { board } */) => {
     const { openModal } = useModal();
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [searchText, setSearchText] = useState('');
+    const searchContainerRef = useRef(null);
+
+    useEffect(() => {
+        // Only add the listener if the search is visible
+        if (!isSearchVisible) return;
+
+        const handleClickOutside = (event) => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+                setIsSearchVisible(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Cleanup
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isSearchVisible]); // Only re-run if isSearchVisible changes
 
     const handleSearchClick = () => {
-        openModal(
-            <div>
-                <h2>Search</h2>
-                <input type="text" placeholder="Search tasks..." />
-                <button onClick={() => alert('Search initiated!')}>Search</button>
-            </div>
-        );
+        setIsSearchVisible(!isSearchVisible);
     };
-    
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        alert(`Searching for: ${searchText}`);
+        setIsSearchVisible(false);
+        // Here you would typically implement the actual search functionality
+    };
+
     const handlePersonClick = () => {
         openModal(
             <div>
@@ -28,7 +49,7 @@ export const BoardFilter = (/* { board } */) => {
             </div>
         );
     };
-    
+
     const handleFilterClick = () => {
         openModal(
             <div>
@@ -45,7 +66,7 @@ export const BoardFilter = (/* { board } */) => {
             </div>
         );
     };
-    
+
     const handleSortClick = () => {
         openModal(
             <div>
@@ -59,7 +80,7 @@ export const BoardFilter = (/* { board } */) => {
             </div>
         );
     };
-    
+
     const handleHideClick = () => {
         openModal(
             <div>
@@ -76,7 +97,7 @@ export const BoardFilter = (/* { board } */) => {
             </div>
         );
     };
-    
+
     const handleGroupByClick = () => {
         openModal(
             <div>
@@ -90,7 +111,7 @@ export const BoardFilter = (/* { board } */) => {
             </div>
         );
     };
-    
+
     const handleOptionsClick = () => {
         openModal(
             <div>
@@ -100,15 +121,32 @@ export const BoardFilter = (/* { board } */) => {
             </div>
         );
     };
-    
-    
+
     return (
         <div className="board-filter-container">
             <TaskAdd />
-            <button className="filter-btn" onClick={handleSearchClick}>
-                <img src="..\src\assets\icons\search_icon.svg" alt="search" />
-                Search
-            </button>
+            <div className="search-container" ref={searchContainerRef}>
+                {isSearchVisible ? (
+                    <form onSubmit={handleSearchSubmit} className="search-form">
+                        <input
+                            type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            placeholder="Search tasks..."
+                            autoFocus
+                            className="search-input"
+                        />
+                        <button type="submit" className="search-submit">
+                            <img src="..\src\assets\icons\search_icon.svg" alt="search" />
+                        </button>
+                    </form>
+                ) : (
+                    <button className="filter-btn" onClick={handleSearchClick}>
+                        <img src="..\src\assets\icons\search_icon.svg" alt="search" />
+                        Search
+                    </button>
+                )}
+            </div>
             <button className="filter-btn" onClick={handlePersonClick}>
                 <img src="..\src\assets\icons\person_icon.svg" alt="person" />
                 Person

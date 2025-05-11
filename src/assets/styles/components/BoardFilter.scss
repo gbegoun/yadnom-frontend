@@ -3,6 +3,57 @@
     align-items: center;
     justify-content: center;
     gap: 14px;
+
+    .search-container {
+        position: relative;
+        
+        .search-form {
+            display: flex;
+            align-items: center;
+            
+            .search-input {
+                padding: 6px 32px 6px 12px;
+                border: 1px solid #d0d4e4;
+                border-radius: 4px;
+                font-size: 14px;
+                min-width: 200px;
+                height: 32px;
+                color: #323338;
+                background-color: $clr6;
+                
+                &:focus {
+                    outline: none;
+                    border-color: #0073ea;
+                    box-shadow: 0 0 0 2px rgba(0, 115, 234, 0.2);
+                }
+
+                &::placeholder {
+                    color: #676879;
+                }
+            }
+            
+            .search-submit {
+                position: absolute;
+                right: 4px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                padding: 4px;
+                cursor: pointer;
+                
+                img {
+                    width: 16px;
+                    height: 16px;
+                    opacity: 0.6;
+                }
+
+                &:hover img {
+                    opacity: 1;
+                }
+            }
+        }
+    }
 }
 
 .filter-btn {
