@@ -12,17 +12,25 @@ export const Board = () => {
 
     useEffect(() => {
         loadBoard()
-    }, [board]);
+    }, [boardId])
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
-            .then(group => { addNewTask(board, group._id) })
-    };
+            .then(group => {
+                addNewTask(board, group._id)
+                    .then(() => {
+                        loadBoard()
+                    })
+            })
+    }
 
     const onNewTaskClicked = (groupId = null) => {
         console.log('groupId', groupId)
         addNewTask(board, groupId)
-    };
+            .then(() => {
+                loadBoard()
+            })
+    }
 
     function loadBoard() {
         boardService.getById(boardId)
@@ -43,5 +51,5 @@ export const Board = () => {
                 <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
             </main>
         </BoardContext.Provider>
-    );
-};
+    )
+}

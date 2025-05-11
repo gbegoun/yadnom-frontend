@@ -1,0 +1,14 @@
+.dropdown-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    span {
+        margin: 2px 13px;
+        background-color: #cce5ff;
+        font-size: 12px;
+        color: #323338;
+        border-radius: 20px;
+        padding:  4px 8px;
+    }
+}

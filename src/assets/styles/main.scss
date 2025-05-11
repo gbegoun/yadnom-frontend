@@ -25,15 +25,15 @@
 @import "components/MainSidebar";
 @import "components/Items/Text";
 @import "components/Items/People";
-@import "components/Items/Labels";
+@import "components/Items/Label";
 @import "components/Items/Date";
 @import "components/ItemModal";
+@import "components/Items/Dropdown.scss";
 @import "components/DynamicItem";
 @import "components/BoardList";
 @import "components/BoardHeader";
 @import "components/BoardFilter";
 @import "components/BoardDetails";
 @import 'components/Modal.scss';
-
 // group
 @import "components/group/group";
