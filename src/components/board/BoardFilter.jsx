@@ -9,23 +9,21 @@ import { HideColumnsModal } from '../modal_types/HideColumnsModal.jsx'
 import { GroupByModal } from '../modal_types/GroupByModal.jsx'
 import { OptionsModal } from '../modal_types/OptionsModal.jsx'
 
-export const BoardFilter = (/* { board } */) => {
+export const BoardFilter = (/* { board } */) => {    
     const { openModal } = useModal()
     const [isSearchVisible, setIsSearchVisible] = useState(false)
-    const [searchText, setSearchText] = useState('')
     const searchContainerRef = useRef(null)
 
     useEffect(() => {
         // Only add the listener if the search is visible
         if (!isSearchVisible) return
 
-        const handleClickOutside = (event) => {
-            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+        const handleClickOutside = (e) => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) 
                 setIsSearchVisible(false)
-            }
         }
+        
         document.addEventListener('mousedown', handleClickOutside)
-
         // Cleanup
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
@@ -38,8 +36,11 @@ export const BoardFilter = (/* { board } */) => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault()
+        const formData = new FormData(e.target)
+        const searchText = formData.get('search')
         alert(`Searching for: ${searchText}`)
         setIsSearchVisible(false)
+        e.target.reset()
         // Here you would implement the search functionality
     }
 
@@ -78,11 +79,9 @@ export const BoardFilter = (/* { board } */) => {
             <TaskAdd />
             <div className="search-container" ref={searchContainerRef}>
                 {isSearchVisible ? (
-                    <form onSubmit={handleSearchSubmit} className="search-form">
-                        <input
+                    <form onSubmit={handleSearchSubmit} className="search-form">                        <input
                             type="text"
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
+                            name="search"
                             placeholder="Search tasks..."
                             autoFocus
                             className="search-input"
