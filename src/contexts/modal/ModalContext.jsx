@@ -26,19 +26,13 @@ export const ModalProvider = ({ children }) => {
             {isModalOpen &&
                 ReactDOM.createPortal(
                     <div className="modal-overlay" onClick={closeModal}>
-                        <div 
-                            className="modal-content" 
-                            onClick={(e) => e.stopPropagation()}
-                            style={{
+                        <div
+                            className="modal-content" onClick={(e) => e.stopPropagation()} style={{
                                 position: 'fixed',
                                 left: `${position.x}px`,
-                                top: `${position.y}px`,
-                                transform: 'translate(-50%, -50%)'
+                                top: `${position.y}px`
                             }}
                         >
-                            <button className="modal-close-btn" onClick={closeModal}>
-                                ×
-                            </button>
                             {modalContent}
                         </div>
                     </div>,

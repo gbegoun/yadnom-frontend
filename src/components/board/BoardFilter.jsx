@@ -1,126 +1,77 @@
-import { TaskAdd } from "../task/TaskAdd";
-import { useModal } from '../../contexts/modal/useModal.jsx';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react'
+
+import { TaskAdd } from "../task/TaskAdd.jsx"
+import { useModal } from '../../contexts/modal/useModal.jsx'
+import { PersonFilterModal } from '../modal_types/PersonFilterModal.jsx'
+import { AdvancedFilterModal } from '../modal_types/AdvancedFilterModal.jsx'
+import { SortTasksModal } from '../modal_types/SortTasksModal.jsx'
+import { HideColumnsModal } from '../modal_types/HideColumnsModal.jsx'
+import { GroupByModal } from '../modal_types/GroupByModal.jsx'
+import { OptionsModal } from '../modal_types/OptionsModal.jsx'
 
 export const BoardFilter = (/* { board } */) => {
-    const { openModal } = useModal();
-    const [isSearchVisible, setIsSearchVisible] = useState(false);
-    const [searchText, setSearchText] = useState('');
-    const searchContainerRef = useRef(null);
+    const { openModal } = useModal()
+    const [isSearchVisible, setIsSearchVisible] = useState(false)
+    const [searchText, setSearchText] = useState('')
+    const searchContainerRef = useRef(null)
 
     useEffect(() => {
         // Only add the listener if the search is visible
-        if (!isSearchVisible) return;
+        if (!isSearchVisible) return
 
         const handleClickOutside = (event) => {
             if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
-                setIsSearchVisible(false);
+                setIsSearchVisible(false)
             }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
+        }
+        document.addEventListener('mousedown', handleClickOutside)
 
         // Cleanup
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isSearchVisible]); // Only re-run if isSearchVisible changes
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isSearchVisible]) // Only re-run if isSearchVisible changes
 
     const handleSearchClick = () => {
-        setIsSearchVisible(!isSearchVisible);
-    };
+        setIsSearchVisible(!isSearchVisible)
+    }
 
     const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        alert(`Searching for: ${searchText}`);
-        setIsSearchVisible(false);
-        // Here you would typically implement the actual search functionality
-    };
+        e.preventDefault()
+        alert(`Searching for: ${searchText}`)
+        setIsSearchVisible(false)
+        // Here you would implement the search functionality
+    }
 
-    const handlePersonClick = () => {
-        openModal(
-            <div>
-                <h2>Filter by Person</h2>
-                <select>
-                    <option value="person1">Person 1</option>
-                    <option value="person2">Person 2</option>
-                    <option value="person3">Person 3</option>
-                </select>
-                <button onClick={() => alert('Person filter applied!')}>Apply</button>
-            </div>
-        );
-    };
+    const handlePersonClick = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        openModal(<PersonFilterModal />, { x: rect.left, y: rect.bottom })
+    }
 
-    const handleFilterClick = () => {
-        openModal(
-            <div>
-                <h2>Advanced Filters</h2>
-                <label>
-                    <input type="checkbox" />
-                    Completed Tasks
-                </label>
-                <label>
-                    <input type="checkbox" />
-                    High Priority
-                </label>
-                <button onClick={() => alert('Filters applied!')}>Apply</button>
-            </div>
-        );
-    };
+    const handleFilterClick = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        openModal(<AdvancedFilterModal />, { x: rect.left, y: rect.bottom })
+    }
 
-    const handleSortClick = () => {
-        openModal(
-            <div>
-                <h2>Sort Tasks</h2>
-                <select>
-                    <option value="date">By Date</option>
-                    <option value="priority">By Priority</option>
-                    <option value="status">By Status</option>
-                </select>
-                <button onClick={() => alert('Tasks sorted!')}>Sort</button>
-            </div>
-        );
-    };
+    const handleSortClick = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        openModal(<SortTasksModal />, { x: rect.left, y: rect.bottom })
+    }
 
-    const handleHideClick = () => {
-        openModal(
-            <div>
-                <h2>Hide Columns</h2>
-                <label>
-                    <input type="checkbox" />
-                    Due Date
-                </label>
-                <label>
-                    <input type="checkbox" />
-                    Assignee
-                </label>
-                <button onClick={() => alert('Columns hidden!')}>Apply</button>
-            </div>
-        );
-    };
+    const handleHideClick = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        openModal(<HideColumnsModal />, { x: rect.left, y: rect.bottom })
+    }
 
-    const handleGroupByClick = () => {
-        openModal(
-            <div>
-                <h2>Group Tasks By</h2>
-                <select>
-                    <option value="status">Status</option>
-                    <option value="priority">Priority</option>
-                    <option value="assignee">Assignee</option>
-                </select>
-                <button onClick={() => alert('Tasks grouped!')}>Group</button>
-            </div>
-        );
-    };
+    const handleGroupByClick = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        openModal(<GroupByModal />, { x: rect.left, y: rect.bottom })
+    }
 
-    const handleOptionsClick = () => {
-        openModal(
-            <div>
-                <h2>Options</h2>
-                <p>Additional settings and options can go here.</p>
-                <button onClick={() => alert('Options applied!')}>Apply</button>
-            </div>
-        );
-    };
+    const handleOptionsClick = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        openModal(<OptionsModal />, { x: rect.left, y: rect.bottom + 5 })
+    }
 
     return (
         <div className="board-filter-container">
@@ -171,5 +122,5 @@ export const BoardFilter = (/* { board } */) => {
                 <img src="..\src\assets\icons\options_icon.svg" alt="options" />
             </button>
         </div>
-    );
-};
+    )
+}
