@@ -7,21 +7,22 @@ import { MainSidebar } from "./components/MainSidebar.jsx"
 import { ModalProvider } from './contexts/modal/ModalContext.jsx'
 import { store } from './store/store.js'
 import { Provider } from 'react-redux'
+import { useEffect } from 'react'
 
 function RootCmp() {
 
   // Ofir - I put this here for farther consideration, I'm not sure if we need it here or inside the index.html file
-  // useEffect(() => {
-  //   // Dynamically create the modal root div
-  //   const modalRoot = document.createElement('div');
-  //   modalRoot.id = 'modal-root';
-  //   document.body.appendChild(modalRoot);
+  useEffect(() => {
+    // Dynamically create the modal root div
+    const modalRoot = document.createElement('div');
+    modalRoot.id = 'modal-root';
+    document.body.appendChild(modalRoot);
 
-  //   // Cleanup on unmount
-  //   return () => {
-  //     document.body.removeChild(modalRoot);
-  //   };
-  // }, []);
+    // Cleanup on unmount
+    return () => {
+      document.body.removeChild(modalRoot);
+    };
+  }, []);
 
   return (
 
