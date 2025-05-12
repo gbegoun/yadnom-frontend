@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BoardList } from "../components/board/BoardList";
 
-export const Home = () => {
+export const HomePage = () => {
 
     const [isExpanded, setIsExpanded] = useState(false);
 

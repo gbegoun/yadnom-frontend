@@ -31,7 +31,7 @@ export const BoardList = () => {
             <ul className="board-items">
                 {boards && boards.map(board => {
                     return (
-                        <a key={board._id} href={`/boards/${board._id}`} className="board-item">
+                        <a key={board._id} href={`/board/${board._id}`} className="board-item">
                             <img src="../src/assets/icons/home_page_default_board_img.svg" alt="board image" />
                             <div className="board-content">
                                 <img src="../src/assets/icons/board_icon.svg" alt="board" className="board-icon" />

@@ -14,6 +14,12 @@ export const Board = () => {
         loadBoard()
     }, [boardId])
 
+    function loadBoard() {
+        boardService.getById(boardId)
+            .then(setBoard)
+            .catch(err => { console.log(err) });
+    }
+
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
             .then(group => {
@@ -30,12 +36,6 @@ export const Board = () => {
             .then(() => {
                 loadBoard()
             })
-    }
-
-    function loadBoard() {
-        boardService.getById(boardId)
-            .then(setBoard)
-            .catch(err => { console.log(err) });
     }
 
     const { columns, groups } = board || {};

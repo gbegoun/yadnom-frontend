@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import { Home } from "./pages/home.jsx"
-import { Board } from "./pages/board.jsx"
+import { HomePage } from "./pages/HomePage.jsx"
+import { Board } from "./pages/Board.jsx"
 import { MainHeader } from "./components/MainHeader.jsx"
 import { MainSidebar } from "./components/MainSidebar.jsx"
 import { ModalProvider } from './contexts/modal/ModalContext.jsx'
@@ -24,8 +24,8 @@ function RootCmp() {
 
             <main className="main-content">
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/boards/:boardId" element={<Board />} />
+                <Route path="" element={<HomePage />} />
+                <Route path="/board/:boardId" element={<Board />} />
                 <Route path="*" element={<h1>404 Not Found</h1>} />
               </Routes>
             </main>
