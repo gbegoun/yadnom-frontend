@@ -2,11 +2,12 @@ import { GroupHeader } from "./GroupHeader";
 import { TaskList } from "../task/TaskList";
 import { GroupFooter } from "./GroupFooter";
 import { GroupHeaderCollapsed } from "./GroupHeaderCollapsed";
+import { GroupHeaderSorting } from "./GroupHeaderSorting";
 import { useState } from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export const GroupPreview = ({ id, columns, group, isSorting }) => {
+export const GroupPreview = ({ id, columns, group, isSorting, isDragging }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const {
@@ -22,7 +23,32 @@ export const GroupPreview = ({ id, columns, group, isSorting }) => {
         transition,
     };
 
-    if (isCollapsed || isSorting) {
+    if  ( isDragging ) {
+        return (
+           <div ref={setNodeRef}
+                style={style}
+                {...attributes}
+                {...listeners}
+                className="group-dragging-placeholer"/> 
+        )
+    }
+
+    if (isSorting)
+    {
+        return (
+            <div 
+                ref={setNodeRef}
+                style={style}
+                {...attributes}
+                {...listeners}
+                className="group-preview collapsed" 
+            >
+                <GroupHeaderSorting title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed}/>
+            </div>
+        )
+    }
+
+    if (isCollapsed ) {
         return (
             <div 
                 ref={setNodeRef}

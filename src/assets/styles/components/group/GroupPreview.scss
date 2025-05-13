@@ -1,6 +1,18 @@
-.group-preview{    
+.group-preview {
     display: grid;
-    height:min-content;
+    height: min-content;
     grid-column: 1/-1;
     grid-template-columns: subgrid;
+}
+
+.group-dragging-placeholer {
+    display: grid;
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
+    margin-bottom: 16px;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px dashed #d0d4e4;
 }
