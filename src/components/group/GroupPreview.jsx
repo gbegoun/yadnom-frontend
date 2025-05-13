@@ -7,7 +7,16 @@ import { useState } from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export const GroupPreview = ({ id, columns, group, isSorting, isDragging }) => {
+export const GroupPreview = ({ 
+    id, 
+    columns, 
+    group, 
+    isSorting, 
+    isDragging, 
+    isActiveDropArea,
+    dropIndex,  // Renamed from activeDropIndex
+    draggingTaskId 
+}) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const {
@@ -16,12 +25,24 @@ export const GroupPreview = ({ id, columns, group, isSorting, isDragging }) => {
         setNodeRef,
         transform,
         transition,
-    } = useSortable({ id });
+    } = useSortable({ 
+        id,
+        data: {
+            type: 'group',
+            group
+        }
+    });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
     };
+
+    // Add a highlight style when this group is the active drop area
+    if (isActiveDropArea) {
+        style.backgroundColor = 'rgba(0, 120, 255, 0.1)';
+        style.boxShadow = '0 0 0 2px rgba(0, 120, 255, 0.5)';
+    }
 
     if (isDragging) {
         return (
@@ -66,10 +87,15 @@ export const GroupPreview = ({ id, columns, group, isSorting, isDragging }) => {
                 style={style}
                 {...attributes}
                 {...listeners}
-                className="group-preview"
+                className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
             >
                 <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
-                <TaskList group={group} columns={columns} />
+                <TaskList 
+                    group={group} 
+                    columns={columns} 
+                    draggingTaskId={draggingTaskId}
+                    dropIndex={dropIndex}  // Pass through the drop index
+                />
                 <GroupFooter group={group} columns={columns} />
             </div>
         )

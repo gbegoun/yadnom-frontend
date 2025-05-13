@@ -10,7 +10,14 @@ export const TaskPreview = ({ id, task, columns, color, groupId, isDragging }) =
         setNodeRef,
         transform,
         transition
-    } = useSortable({ id });
+    } = useSortable({ 
+        id,
+        data: {
+            type: 'task',
+            task,
+            groupId
+        }
+    });
 
     const style = {
         transform: CSS.Transform.toString(transform),
