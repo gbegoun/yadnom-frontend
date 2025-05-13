@@ -14,7 +14,7 @@ export const GroupPreview = ({
     isSorting, 
     isDragging, 
     isActiveDropArea,
-    dropIndex,  // Renamed from activeDropIndex
+    dropIndex,  
     draggingTaskId 
 }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -38,7 +38,6 @@ export const GroupPreview = ({
         transition,
     };
 
-    // Add a highlight style when this group is the active drop area
     if (isActiveDropArea) {
         style.backgroundColor = 'rgba(0, 120, 255, 0.1)';
         style.boxShadow = '0 0 0 2px rgba(0, 120, 255, 0.5)';

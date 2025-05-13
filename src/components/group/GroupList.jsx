@@ -56,57 +56,35 @@ export const GroupList = ({ columns, groups }) => {
 
     const handleDragOver = useCallback((event) => {
         const { active, over } = event
-
+        // If not over anything, reset and return
         if (!over) {
-            setActiveGroupId(null)
-            setDropIndices({})
+            // setActiveGroupId(null)
             return
         }
-
-        if (active.data.current?.type === 'task') {
-            let targetGroupId
-            let dropIndex = null
-
-            if (over.data.current?.type === 'task') {
-                targetGroupId = over.data.current.groupId
-
-                const targetGroup = items.find(g => g._id === targetGroupId)
-                if (targetGroup) {
-                    const overTaskIndex = targetGroup.tasks.findIndex(t => t._id === over.id)
-
-                    const overRect = event.over?.rect
-                    const pointerY = event.activatorEvent?.clientY || 0
-
-                    const isInBottomHalf = overTaskIndex !== -1 &&
-                        overRect &&
-                        pointerY > (overRect.top + overRect.height / 2)
-
-                    dropIndex = isInBottomHalf ? overTaskIndex + 1 : overTaskIndex
-
-                    console.log(`Over task ${over.id} in group ${targetGroupId}, position ${dropIndex}, bottom half: ${isInBottomHalf}`)
+        
+        // Only process if we're dragging a task
+        if (draggingType === 'task') {
+            let targetGroupId = null;
+            
+            // If over a group directly
+            if (over.id) {
+                // Since tasks in TaskPreview don't have groupId in data,
+                // we need to find which group contains this task
+                for (const group of items) {
+                    if (group.tasks?.some(task => task._id === over.id)) {
+                        targetGroupId = group._id;
+                        console.log('Over task in group:', targetGroupId);
+                        break;
+                    }
                 }
-            } else if (over.data.current?.type === 'group') {
-                targetGroupId = over.id
-
-                const targetGroup = items.find(g => g._id === targetGroupId)
-                dropIndex = targetGroup?.tasks?.length || 0
-
-                console.log(`Over group ${targetGroupId}, appending at position ${dropIndex}`)
             }
-
+            
+            // If we determined a group, update the active group
             if (targetGroupId) {
-                setActiveGroupId(targetGroupId)
-
-                setDropIndices(prev => {
-                    const newIndices = { ...prev }
-                    newIndices[targetGroupId] = dropIndex
-
-                    console.log('Updated drop indices:', newIndices)
-                    return newIndices
-                })
+                setActiveGroupId(targetGroupId);
             }
         }
-    }, [items])
+    }, [draggingType, items])
 
     const handleDragEnd = useCallback((event) => {
         const { active, over } = event
@@ -128,39 +106,7 @@ export const GroupList = ({ columns, groups }) => {
                 return arrayMove(items, oldIndex, newIndex)
             })
         } else if (draggingType === 'task') {
-            console.log('Task moved:', active.id)
-            console.log('From group:', sourceGroupId)
-            console.log('To group:', activeGroupId)
 
-            if (sourceGroupId && activeGroupId && sourceGroupId !== activeGroupId) {
-                setItems(prevItems => {
-                    const newItems = [...prevItems]
-                    const sourceGroupIndex = newItems.findIndex(g => g._id === sourceGroupId)
-                    const targetGroupIndex = newItems.findIndex(g => g._id === activeGroupId)
-
-                    if (sourceGroupIndex === -1 || targetGroupIndex === -1) return prevItems
-
-                    const sourceGroup = newItems[sourceGroupIndex]
-                    const taskToMoveIndex = sourceGroup.tasks.findIndex(t => t._id === active.id)
-
-                    if (taskToMoveIndex === -1) return prevItems
-
-                    const taskToMove = { ...sourceGroup.tasks[taskToMoveIndex] }
-
-                    newItems[sourceGroupIndex] = {
-                        ...sourceGroup,
-                        tasks: sourceGroup.tasks.filter((_, i) => i !== taskToMoveIndex)
-                    }
-
-                    const targetGroup = newItems[targetGroupIndex]
-                    newItems[targetGroupIndex] = {
-                        ...targetGroup,
-                        tasks: [...targetGroup.tasks, taskToMove]
-                    }
-
-                    return newItems
-                })
-            }
         }
 
         setIsSorting(false)
@@ -190,7 +136,6 @@ export const GroupList = ({ columns, groups }) => {
                 >
                     {items.map(group => {
                         const groupDropIndex = dropIndices[group._id];
-                        console.log(`Rendering group ${group._id} with dropIndex:`, groupDropIndex);
 
                         return (
                             <GroupPreview
