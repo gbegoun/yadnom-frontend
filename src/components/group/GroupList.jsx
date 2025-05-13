@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback,useRef } from "react"
 import { GroupPreview } from "./GroupPreview"
 import {
     DndContext,
@@ -10,6 +10,7 @@ import {
     DragOverlay,
 } from "@dnd-kit/core"
 import {
+
     arrayMove,
     SortableContext,
     sortableKeyboardCoordinates,
@@ -17,21 +18,29 @@ import {
 } from "@dnd-kit/sortable"
 
 
+
 export const GroupList = ({ columns, groups }) => {
+    const hasMovedRef = useRef(false);
+
     const [items, setItems] = useState(groups)
     const [isSorting, setIsSorting] = useState(false)
     const [draggingId, setDraggingId] = useState(null)
+    // const [yOffset, setYoffset] = useState(0)
+    const yOffset = useRef(0)
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                delay: 100
+                distance: 10
             }
         }),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
-        })
+        useSensor(KeyboardSensor)
     )
+
+    const handleDragStart = useCallback((event) => {
+        setDraggingId(event.active.id)
+        setIsSorting(true)
+    }, [])
 
     const handleDragEnd = useCallback((event) => {
         const { active, over } = event
@@ -48,11 +57,7 @@ export const GroupList = ({ columns, groups }) => {
         setDraggingId(null)
     }, [])
 
-    const handleDragStart = useCallback((event) => {
-        console.log('drag start', event.active.id)
-        setDraggingId(event.active.id)
-        setIsSorting(true)
-    }, [])
+
 
     const getDraggingItem = useCallback(() => {
         return items.find(item => item._id === draggingId)
@@ -82,24 +87,15 @@ export const GroupList = ({ columns, groups }) => {
                     ))}
                 </SortableContext>
             </div>
-            <DragOverlay
-                modifiers={[
-                    ({ transform }) => ({
-                        ...transform,
-                        y: transform.y,
-                    }),
-                ]}
-            >
-                {isSorting ? (
-                    <div className="drag-overlay">
-                        <GroupPreview
-                            id={draggingId}
-                            columns={columns}
-                            group={getDraggingItem()}
-                            isSorting={isSorting}
-                        />
-                    </div>
-                ) : null}
+            <DragOverlay>
+                <div className="drag-overlay" >
+                    <GroupPreview
+                        id={draggingId}
+                        columns={columns}
+                        group={getDraggingItem()}
+                        isSorting={isSorting}
+                    />
+                </div>
             </DragOverlay>
         </DndContext>
     )
