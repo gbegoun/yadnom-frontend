@@ -13,13 +13,12 @@ export const TaskList = ({ group, columns }) => {
     return (
         <div className="task-list">
             <SortableContext
-                tasks={tasks.map(task => task._id)}
+                items={tasks.map(task => task._id)}
                 strategy={verticalListSortingStrategy}
             >
                 {tasks.map(task => (
                     <TaskPreview key={task._id} task={task} columns={columns} color={group.color} />
                 ))}
-
             </SortableContext>
         </div>
     )
