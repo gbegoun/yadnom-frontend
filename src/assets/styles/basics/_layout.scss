@@ -4,6 +4,8 @@
     grid-template-rows: auto 1fr;
     background-color: #ECEFF8;
     color: $gray4;
+    height: 100dvh; 
+    overflow: hidden; 
 
     .main-header {
         display: flex;
@@ -21,20 +23,23 @@
         border-top-left-radius: 15px;
         background-color: #ECEFF8;
         padding-left: 12px;
-        
+        overflow: hidden; 
 
         .main-sidebar {
             width: 220px;
             background: linear-gradient(to right, #FFFFFF, #ECEFF8);
             padding: 6px;
             border-top-left-radius: 15px;
-            height: 100vh;
+            height: 100%; 
+            overflow-y: auto; 
         }
 
         .main-content {
             background-color: #ffffff;
             padding: 18px 38px;
             border-top-left-radius: 15px;
+            overflow: auto;
+            height: 100%; 
         }
 
         h1 {

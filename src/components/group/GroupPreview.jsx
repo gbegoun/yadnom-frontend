@@ -23,41 +23,40 @@ export const GroupPreview = ({ id, columns, group, isSorting, isDragging }) => {
         transition,
     };
 
-    if  ( isDragging ) {
+    if (isDragging) {
         return (
-           <div ref={setNodeRef}
+            <div ref={setNodeRef}
                 style={style}
                 {...attributes}
                 {...listeners}
-                className="group-dragging-placeholer"/> 
+                className="group-dragging-placeholer" />
         )
     }
 
-    if (isSorting)
-    {
+    if (isSorting) {
         return (
-            <div 
+            <div
                 ref={setNodeRef}
                 style={style}
                 {...attributes}
                 {...listeners}
-                className="group-preview collapsed" 
+                className="group-preview collapsed"
             >
-                <GroupHeaderSorting title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed}/>
+                <GroupHeaderSorting title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     }
 
-    if (isCollapsed ) {
+    if (isCollapsed) {
         return (
-            <div 
+            <div
                 ref={setNodeRef}
                 style={style}
                 {...attributes}
                 {...listeners}
-                className="group-preview collapsed" 
+                className="group-preview collapsed"
             >
-                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed}/>
+                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     } else {

@@ -82,7 +82,14 @@ export const GroupList = ({ columns, groups }) => {
                     ))}
                 </SortableContext>
             </div>
-            <DragOverlay>
+            <DragOverlay
+                modifiers={[
+                    ({ transform }) => ({
+                        ...transform,
+                        y: transform.y,
+                    }),
+                ]}
+            >
                 {isSorting ? (
                     <div className="drag-overlay">
                         <GroupPreview
