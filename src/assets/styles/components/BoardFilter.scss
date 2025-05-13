@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 10px;
 
     .search-container {
         position: relative;
@@ -13,18 +13,19 @@
             
             .search-input {
                 padding: 6px 32px 6px 12px;
+                margin: auto;
                 border: 1px solid #d0d4e4;
                 border-radius: 4px;
                 font-size: 14px;
-                min-width: 200px;
-                height: 32px;
+                min-width: 250px;
+                height: 30px;
                 color: #323338;
                 background-color: $clr6;
                 
                 &:focus {
                     outline: none;
                     border-color: #0073ea;
-                    box-shadow: 0 0 0 2px rgba(0, 115, 234, 0.2);
+                    box-shadow: 0 0 0 1px rgba(0, 115, 234, 0.2);
                 }
 
                 &::placeholder {

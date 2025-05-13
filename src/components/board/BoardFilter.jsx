@@ -88,7 +88,7 @@ export const BoardFilter = (/* { board } */) => {
                             className="search-input"
                         />
                         <button type="submit" className="search-submit">
-                            <SVGService.SearchIcon />
+                            {/* <SVGService.SearchIcon /> */}
                         </button>
                     </form>
                 ) : (
