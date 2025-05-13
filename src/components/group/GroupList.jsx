@@ -17,16 +17,11 @@ import {
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 
-
-
 export const GroupList = ({ columns, groups }) => {
-    const hasMovedRef = useRef(false);
 
     const [items, setItems] = useState(groups)
     const [isSorting, setIsSorting] = useState(false)
     const [draggingId, setDraggingId] = useState(null)
-    // const [yOffset, setYoffset] = useState(0)
-    const yOffset = useRef(0)
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
