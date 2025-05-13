@@ -54,11 +54,20 @@ export const GroupList = ({ columns, groups }) => {
 
     }, [])
 
+    const GetGroupIdForItemID = (itemId) => {
+        for (const group of items) {
+            if (group.tasks?.some(task => task._id === itemId)) {
+                console.log('Found group for task:', group._id);
+                return group._id;
+            }
+        }
+        return null;
+    }
     const handleDragOver = useCallback((event) => {
         const { active, over } = event
         // If not over anything, reset and return
         if (!over) {
-            // setActiveGroupId(null)
+            setActiveGroupId(null)
             return
         }
         
@@ -70,14 +79,9 @@ export const GroupList = ({ columns, groups }) => {
             if (over.id) {
                 // Since tasks in TaskPreview don't have groupId in data,
                 // we need to find which group contains this task
-                for (const group of items) {
-                    if (group.tasks?.some(task => task._id === over.id)) {
-                        targetGroupId = group._id;
-                        console.log('Over task in group:', targetGroupId);
-                        break;
-                    }
-                }
+                targetGroupId = GetGroupIdForItemID(over.id);
             }
+            
             
             // If we determined a group, update the active group
             if (targetGroupId) {
