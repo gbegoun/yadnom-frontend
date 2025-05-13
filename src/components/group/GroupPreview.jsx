@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export const GroupPreview = ({ id, columns, group }) => {
+export const GroupPreview = ({ id, columns, group, isSorting }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const {
@@ -22,7 +22,7 @@ export const GroupPreview = ({ id, columns, group }) => {
         transition,
     };
 
-    if (isCollapsed) {
+    if (isCollapsed || isSorting) {
         return (
             <div 
                 ref={setNodeRef}
@@ -31,7 +31,7 @@ export const GroupPreview = ({ id, columns, group }) => {
                 {...listeners}
                 className="group-preview collapsed" 
             >
-                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed}/>
             </div>
         )
     } else {

@@ -17,7 +17,8 @@ import {
 
 export const GroupList = ({ columns, groups }) => {
     const [items, setItems] = useState(groups);
-
+    const [isSorting, setIsSorting] = useState(false);
+    
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -37,18 +38,21 @@ export const GroupList = ({ columns, groups }) => {
                 const oldIndex = items.findIndex(item => item._id === active.id);
                 const newIndex = items.findIndex(item => item._id === over.id);
                 
-                // This is where you would update the backend with the new order
-                // You could add an API call here or dispatch an action
-                
                 return arrayMove(items, oldIndex, newIndex);
             });
         }
+        setIsSorting(false);
+    }, []);
+
+    const handleDragStart = useCallback(() => {
+        setIsSorting(true);
     }, []);
 
     return (
         <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
+            onDragStart={handleDragStart} 
             onDragEnd={handleDragEnd}
         >
             <div className="group-list">
@@ -62,6 +66,7 @@ export const GroupList = ({ columns, groups }) => {
                             id={group._id}
                             columns={columns} 
                             group={group} 
+                            isSorting={isSorting}
                         />
                     ))}
                 </SortableContext>
