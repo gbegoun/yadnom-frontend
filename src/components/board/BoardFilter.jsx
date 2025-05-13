@@ -8,6 +8,7 @@ import { SortTasksModal } from '../modal_types/SortTasksModal.jsx'
 import { HideColumnsModal } from '../modal_types/HideColumnsModal.jsx'
 import { GroupByModal } from '../modal_types/GroupByModal.jsx'
 import { OptionsModal } from '../modal_types/OptionsModal.jsx'
+import SVGService from '../../services/svg/svg.service'
 
 export const BoardFilter = (/* { board } */) => {    
     const { openModal } = useModal()
@@ -87,38 +88,38 @@ export const BoardFilter = (/* { board } */) => {
                             className="search-input"
                         />
                         <button type="submit" className="search-submit">
-                            <img src="..\src\assets\icons\search_icon.svg" alt="search" />
+                            <SVGService.SearchIcon />
                         </button>
                     </form>
                 ) : (
                     <button className="filter-btn" onClick={handleSearchClick}>
-                        <img src="..\src\assets\icons\search_icon.svg" alt="search" />
+                        <SVGService.SearchIcon />
                         Search
                     </button>
                 )}
             </div>
             <button className="filter-btn" onClick={handlePersonClick}>
-                <img src="..\src\assets\icons\person_icon.svg" alt="person" />
+                <SVGService.PersonIcon />
                 Person
             </button>
             <button className="filter-btn" onClick={handleFilterClick}>
-                <img src="..\src\assets\icons\filter_icon.svg" alt="filter" />
+                <SVGService.FilterIcon />
                 Filter
             </button>
             <button className="filter-btn" onClick={handleSortClick}>
-                <img src="..\src\assets\icons\sort_icon.svg" alt="sort" />
+                <SVGService.SortIcon />
                 Sort
             </button>
             <button className="filter-btn" onClick={handleHideClick}>
-                <img src="..\src\assets\icons\hide_icon.svg" alt="hide" />
+                <SVGService.HideIcon />
                 Hide
             </button>
             <button className="filter-btn" onClick={handleGroupByClick}>
-                <img src="..\src\assets\icons\group_by_icon.svg" alt="group by" />
+                <SVGService.GroupByIcon />
                 Group by
             </button>
             <button className="filter-btn" onClick={handleOptionsClick}>
-                <img src="..\src\assets\icons\options_icon.svg" alt="options" />
+                <SVGService.OptionsIcon />
             </button>
         </div>
     )

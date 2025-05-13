@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BoardList } from "../components/board/BoardList";
+import SVGService from '../services/svg/svg.service';
 
 export const HomePage = () => {
 
@@ -14,12 +15,12 @@ export const HomePage = () => {
             <h1>Welcome to the Board Manager</h1>
             <div className="icon-span-container">
                 {isExpanded ? 
-                    <img src="../src/assets/icons/collapse_group_icon.svg" alt="close item"
+                    <SVGService.CollapseGroupIcon
                         onClick={toggleIcon}
                         className="icon-button"
                     />
                 : 
-                    <img src="../src/assets/icons/expand_item_icon.svg" alt="expand item"
+                    <SVGService.ExpandItemIcon
                         onClick={toggleIcon}
                         className="icon-button"
                     />
