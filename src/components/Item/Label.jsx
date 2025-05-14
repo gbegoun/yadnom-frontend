@@ -1,13 +1,27 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
 import { useModal } from '../../contexts/modal/useModal'
 import { StatusOptionsModal } from '../modal_types/StatusOptionsModal.jsx'
+import { BoardContext } from '../../contexts/board/BoardContext'
+import { updateTaskColumnValue } from '../../store/actions/task.actions'
 
-export const Label = ({column, value, onChange}) => {
-    const color = column.settings.options.find(label => label._id === value)?.color || '#000'
-    const label = column.settings.options.find(label => label._id === value)?.label || 'Label'
+export const Label = ({ column, value, taskId, groupId }) => {
+    // Find the selected option based on value
+    const selectedOption = column.settings.options.find(option => option._id === value)
+    const color = selectedOption?.color || '#000'
+    const label = selectedOption?.label || 'Label'
 
     const { openModal, closeModal } = useModal()
+    const { board, loadBoard } = useContext(BoardContext)
     const labelRef = useRef()
+
+    const handleLabelUpdate = (selectedValue) => {
+        if (taskId && groupId && board) {
+            updateTaskColumnValue(board, groupId, taskId, column._id, selectedValue)
+                .then(() => loadBoard())
+                .catch(err => console.error('Failed to update task', err))
+        }
+        closeModal()
+    }
 
     const handleOpenModal = (e) => {
         e.stopPropagation()
@@ -16,15 +30,20 @@ export const Label = ({column, value, onChange}) => {
             <StatusOptionsModal
                 options={column.settings.options}
                 value={value}
-                onSelect={onChange || (() => {})}
+                onSelect={handleLabelUpdate}
                 onClose={closeModal}
             />,
-            { x:  rect.left - 30 , y: rect.bottom + 8 }
+            { x: rect.left, y: rect.bottom + 5 }
         )
     }
 
     return (
-        <div ref={labelRef} className="label-item" style={{backgroundColor: color, cursor: 'pointer'}} onClick={handleOpenModal}>
+        <div 
+            ref={labelRef} 
+            className="label-item" 
+            style={{ backgroundColor: color, cursor: 'pointer' }} 
+            onClick={handleOpenModal}
+        >
             <span>{label}</span>
         </div>
     )
