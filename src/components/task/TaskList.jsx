@@ -17,8 +17,8 @@ import {
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 
-export const TaskList = ({ group, columns }) => {
-    const [tasks, setTasks] = useState(group.tasks || []);
+export const TaskList = ({ group, columns,tasks }) => {
+    // const [tasks, setTasks] = useState(tasks || []);
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -32,8 +32,8 @@ export const TaskList = ({ group, columns }) => {
     )
 
     useEffect(() => {
-        setTasks(group.tasks || []);
-    }, [group.tasks]);
+        // setTasks(tasks || []);
+    }, [tasks]);
 
     const preventPropagation = (e) => {
         e.stopPropagation();
@@ -46,10 +46,10 @@ export const TaskList = ({ group, columns }) => {
             onMouseDown={preventPropagation}
             onPointerDown={preventPropagation}
         >
-            <SortableContext
+            {/* <SortableContext
                 items={tasks.map(task => task._id)}
                 strategy={verticalListSortingStrategy}
-            >
+            > */}
                 {tasks.map(task => {
                     return (
                         <TaskPreview
@@ -62,7 +62,7 @@ export const TaskList = ({ group, columns }) => {
                         />
                     )
                 })}
-            </SortableContext>
+            {/* </SortableContext> */}
         </div>
     )
 }

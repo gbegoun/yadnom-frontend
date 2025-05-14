@@ -17,7 +17,7 @@ import {
 } from "@dnd-kit/sortable"
 import { TaskPreview } from "../task/TaskPreview"
 
-export const GroupList = ({ columns, groups }) => {
+export const GroupList = ({ columns, groups, tasks }) => {
 
     const [items, setItems] = useState(groups)
     const [isSorting, setIsSorting] = useState(false)
@@ -26,7 +26,7 @@ export const GroupList = ({ columns, groups }) => {
     const [draggingTaskId, setDraggingTaskId] = useState(null)
     const [sourceGroupId, setSourceGroupId] = useState(null)
     const [draggingTask, setDraggingTask] = useState(null)
-    const [activeGroupId, setActiveGroupId] = useState(null)
+    const [activeGroupId, setActiveGroupId] = useState(0)
     const [dropIndices, setDropIndices] = useState({})
 
     const sensors = useSensors(
@@ -57,38 +57,30 @@ export const GroupList = ({ columns, groups }) => {
     const GetGroupIdForItemID = (itemId) => {
         for (const group of items) {
             if (group.tasks?.some(task => task._id === itemId)) {
-                console.log('Found group for task:', group._id);
-                return group._id;
+                return group._id
             }
         }
-        return null;
+        return null
     }
     const handleDragOver = useCallback((event) => {
         const { active, over } = event
-        // If not over anything, reset and return
         if (!over) {
-            setActiveGroupId(null)
+            // setActiveGroupId(0)
             return
         }
-        
-        // Only process if we're dragging a task
         if (draggingType === 'task') {
-            let targetGroupId = null;
-            
-            // If over a group directly
-            if (over.id) {
-                // Since tasks in TaskPreview don't have groupId in data,
-                // we need to find which group contains this task
-                targetGroupId = GetGroupIdForItemID(over.id);
-            }
-            
-            
-            // If we determined a group, update the active group
-            if (targetGroupId) {
-                setActiveGroupId(targetGroupId);
-            }
+            // let targetGroupId = null
+            // targetGroupId = GetGroupIdForItemID(over.id)
+            // setActiveGroupId(targetGroupId)
         }
-    }, [draggingType, items])
+
+
+        // if (active.data.current.task.groupid != over.data.current.task.groupid) {
+        //     const task = tasks.find(task => task._id === active.data.current.task._id);
+        //     task.groupid = over.data.current.task.groupid
+        //     tasks = tasks.map(t => t._id === task._id ? task : t);
+        // }
+    }, [draggingType])
 
     const handleDragEnd = useCallback((event) => {
         const { active, over } = event
@@ -125,6 +117,8 @@ export const GroupList = ({ columns, groups }) => {
         return items.find(item => item._id === draggingId)
     }, [draggingId, items])
 
+    const numberRange = Array.from({ length: 101 }, (_, i) => i + 6000);
+
     return (
         <DndContext
             sensors={sensors}
@@ -135,11 +129,11 @@ export const GroupList = ({ columns, groups }) => {
         >
             <div className="group-list">
                 <SortableContext
-                    items={items.map(item => item._id)}
+                    items={items.map(item => item._id).concat(numberRange)}
                     strategy={verticalListSortingStrategy}
                 >
                     {items.map(group => {
-                        const groupDropIndex = dropIndices[group._id];
+                        const groupDropIndex = dropIndices[group._id]
 
                         return (
                             <GroupPreview
@@ -147,13 +141,14 @@ export const GroupList = ({ columns, groups }) => {
                                 id={group._id}
                                 columns={columns}
                                 group={group}
+                                tasks={tasks}
                                 isSorting={isSorting}
                                 isDragging={group._id === draggingId}
                                 isActiveDropArea={group._id === activeGroupId}
                                 dropIndex={groupDropIndex}
                                 draggingTaskId={draggingTaskId}
                             />
-                        );
+                        )
                     })}
                 </SortableContext>
             </div>

@@ -64,7 +64,7 @@ async function _createBoards() {
     
     if (!boards || !boards.length) {
         console.log("Creating Demo Boards")
-        const module = await import("../../../demo-data.js");
+        const module = await import("../../../demo-data-new.js");
         const boards = module.demo_data["boards"];
         saveToStorage(STORAGE_KEY, boards)
     }

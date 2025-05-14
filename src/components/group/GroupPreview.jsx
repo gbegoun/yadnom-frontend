@@ -11,6 +11,7 @@ export const GroupPreview = ({
     id, 
     columns, 
     group, 
+    tasks,
     isSorting, 
     isDragging, 
     isActiveDropArea,
@@ -82,20 +83,21 @@ export const GroupPreview = ({
     } else {
         return (
             <div
-                ref={setNodeRef}
-                style={style}
-                {...attributes}
-                {...listeners}
-                className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+            className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
             >
-                <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
-                <TaskList 
-                    group={group} 
-                    columns={columns} 
-                    draggingTaskId={draggingTaskId}
-                    dropIndex={dropIndex}  // Pass through the drop index
-                />
-                <GroupFooter group={group} columns={columns} />
+            <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+            <TaskList 
+                group={group} 
+                columns={columns}
+                tasks={tasks.filter(task => task.groupid === group._id)}
+                draggingTaskId={draggingTaskId}
+                dropIndex={dropIndex}  // Pass through the drop index
+            />
+            <GroupFooter group={group} columns={columns} />
             </div>
         )
     }
