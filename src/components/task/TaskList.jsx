@@ -18,22 +18,6 @@ import {
 } from "@dnd-kit/sortable"
 
 export const TaskList = ({ group, columns,tasks }) => {
-    // const [tasks, setTasks] = useState(tasks || []);
-
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 10
-            }
-        }),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates
-        })
-    )
-
-    useEffect(() => {
-        // setTasks(tasks || []);
-    }, [tasks]);
 
     const preventPropagation = (e) => {
         e.stopPropagation();
@@ -46,10 +30,10 @@ export const TaskList = ({ group, columns,tasks }) => {
             onMouseDown={preventPropagation}
             onPointerDown={preventPropagation}
         >
-            {/* <SortableContext
+            <SortableContext
                 items={tasks.map(task => task._id)}
                 strategy={verticalListSortingStrategy}
-            > */}
+            >
                 {tasks.map(task => {
                     return (
                         <TaskPreview
@@ -62,7 +46,7 @@ export const TaskList = ({ group, columns,tasks }) => {
                         />
                     )
                 })}
-            {/* </SortableContext> */}
+            </SortableContext>
         </div>
     )
 }

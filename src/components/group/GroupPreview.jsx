@@ -93,7 +93,7 @@ export const GroupPreview = ({
             <TaskList 
                 group={group} 
                 columns={columns}
-                tasks={tasks.filter(task => task.groupid === group._id)}
+                tasks={tasks}
                 draggingTaskId={draggingTaskId}
                 dropIndex={dropIndex}  // Pass through the drop index
             />
