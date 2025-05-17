@@ -27,7 +27,7 @@ export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) 
                     )                
                 })}
             </div>
-            <div className="group-header-column-last-cell"/>
+            {/* <div className="group-header-column-last-cell"/> */}
         </div>
 
     )

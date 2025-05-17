@@ -1,0 +1,34 @@
+.horizontal-sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 10; // Higher than surrounding elements
+  background-color: inherit; // Ensure background covers scrolled content
+}
+
+.horizontal-sticky-right {
+  position: sticky;
+  right: 0;
+  z-index: 10;
+  background-color: inherit;
+}
+
+// For the first few columns that should remain visible
+.sticky-column {
+  position: sticky;
+  left: 0;
+  background-color: white;
+  z-index: 5;
+  
+  // Apply different left positions based on column index
+  &:nth-child(1) {
+    left: 0px;
+  }
+  
+  &:nth-child(2) {
+    left: 40px; // Adjust based on the width of your first column
+  }
+  
+  &:nth-child(3) {
+    left: 80px; // Adjust based on the combined width of first two columns
+  }
+}
