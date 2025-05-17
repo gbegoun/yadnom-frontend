@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, act } from "react"
+import { useEffect, useState, useCallback, useRef, act } from "react"
 import { GroupPreview } from "./GroupPreview"
 import {
     DndContext,
@@ -22,6 +22,13 @@ export const GroupList = ({ board }) => {
     const [groups, setGroups] = useState(board.groups || [])
     const [columns, setColumns] = useState(board.columns || [])
     const [tasks, setTasks] = useState(board.tasks || [])
+
+    // Add this effect to update state when board changes - Ofir
+    useEffect(() => {
+        setGroups(board.groups || [])
+        setColumns(board.columns || [])
+        setTasks(board.tasks || [])
+    }, [board])
 
     const [dragState, setDragState] = useState({
         isSorting: false,
