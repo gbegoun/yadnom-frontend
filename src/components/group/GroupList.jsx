@@ -17,7 +17,7 @@ import {
 } from "@dnd-kit/sortable"
 import { TaskPreview } from "../task/TaskPreview"
 
-export const GroupList = ({ board }) => {
+export const GroupList = ({ board, onBoardSave }) => {
 
     const [groups, setGroups] = useState(board.groups || [])
     const [columns, setColumns] = useState(board.columns || [])
@@ -46,7 +46,7 @@ export const GroupList = ({ board }) => {
     const handleDragStart = useCallback((event) => {
         const { active } = event
         const dragType = active.data.current?.type || 'group'
-        
+
         if (dragType === 'task') {
             setDragState({
                 ...dragState,
@@ -81,6 +81,7 @@ export const GroupList = ({ board }) => {
             }
             setTasks(arrayMove(tasks, activeIndex, overIndex))
         }
+
     }, [])
 
     const handleDragEnd = useCallback((event) => {
@@ -100,14 +101,14 @@ export const GroupList = ({ board }) => {
             return
         }
 
+        let updatedGroups = [...groups];
+
         if (dragState.draggingType === 'group' && active.id !== over.id) {
-            setGroups((groups) => {
-                const oldIndex = groups.findIndex(group => group._id === active.id)
-                const newIndex = groups.findIndex(group => group._id === over.id)
-                return arrayMove(groups, oldIndex, newIndex)
-            })
-        } else if (dragState.draggingType === 'task') {
-            // Task handling logic
+            const oldIndex = updatedGroups.findIndex(group => group._id === active.id);
+            const newIndex = updatedGroups.findIndex(group => group._id === over.id);
+            updatedGroups = arrayMove(updatedGroups, oldIndex, newIndex);
+
+            setGroups(updatedGroups);
         }
 
         setDragState({
@@ -120,7 +121,15 @@ export const GroupList = ({ board }) => {
             activeGroupId: null,
             dropIndices: {}
         })
-    }, [dragState.draggingType, dragState.sourceGroupId, dragState.activeGroupId])
+
+        const updatedBoard = {
+            ...board,
+            groups: updatedGroups,
+            tasks
+        };
+
+        onBoardSave(updatedBoard);
+    }, [dragState.draggingType, dragState.sourceGroupId, dragState.activeGroupId, onBoardSave, board, groups, tasks])
 
     return (
         <DndContext

@@ -16,6 +16,7 @@ export async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch(getCmdSetBoard(board))
+        return board
     } catch (err) {
         console.log('Cannot load board', err)
         throw err
@@ -46,7 +47,7 @@ export async function addNewBoard() {
 
 export async function updateBoard(board) {
     try {
-        const savedBoard = await boardService.save(board)
+        const savedBoard = await boardService.saveBoard(board)
         store.dispatch(getCmdUpdateBoard(savedBoard))
         return savedBoard
     } catch (err) {

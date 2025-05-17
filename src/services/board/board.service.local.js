@@ -25,8 +25,9 @@ async function query(filterBy = {}) {
     return boards
 }
 
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+async function getById(boardId) {
+    const board = await storageService.get(STORAGE_KEY, boardId)
+    return board
 }
 
 async function removeBoard(boardId) {
@@ -35,7 +36,7 @@ async function removeBoard(boardId) {
 
 async function saveBoard(board) {
     var savedBoard
-
+    
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
     } else {

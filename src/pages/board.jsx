@@ -4,21 +4,17 @@ import { GroupList } from '../components/group/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 import { useEffect, useState } from 'react';
 import { BoardContext } from '../contexts/board/BoardContext.jsx';
-import { addTaskGroup, addNewTask } from "../store/actions/board.actions.js"
+import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js"
 
 export const Board = () => {
     const { boardId } = useParams();
     const [board, setBoard] = useState(null);
 
     useEffect(() => {
-        loadBoard()
-    }, [boardId])
-
-    function loadBoard() {
-        boardService.getById(boardId)
+        loadBoard(boardId)
             .then(setBoard)
             .catch(err => { console.log(err) });
-    }
+    }, [boardId])
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
@@ -31,14 +27,18 @@ export const Board = () => {
     }
 
     const onNewTaskClicked = (groupId = null) => {
-        console.log('groupId', groupId)
         addNewTask(board, groupId)
             .then(() => {
                 loadBoard()
             })
     }
 
-    const { columns, groups } = board || {};
+    const onBoardSave = (updatedBoard) => {
+        updateBoard(updatedBoard)
+            .then(() => {
+                loadBoard()
+            })
+    }
 
     if (!board) return (<div>Loading...</div>)
     return (
@@ -46,7 +46,7 @@ export const Board = () => {
             <main className="board-container">
                 {board && <div>
                     <BoardHeader board={board} />
-                    <GroupList board={board} />
+                    <GroupList board={board} onBoardSave={onBoardSave}/>
                 </div>}
                 <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
             </main>
