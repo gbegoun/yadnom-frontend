@@ -1,6 +1,6 @@
 import { useRef, useContext } from 'react'
 import { useModal } from '../../contexts/modal/useModal'
-import { StatusOptionsModal } from '../modal_types/StatusOptionsModal.jsx'
+import { LabelOptionsModal } from '../modal_types/LabelOptionsModal.jsx'
 import { BoardContext } from '../../contexts/board/BoardContext'
 import { updateTaskColumnValue } from '../../store/actions/task.actions'
 
@@ -27,7 +27,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
         e.stopPropagation()
         const rect = labelRef.current.getBoundingClientRect()
         openModal(
-            <StatusOptionsModal
+            <LabelOptionsModal
                 options={column.settings.options}
                 value={value}
                 onSelect={handleLabelUpdate}

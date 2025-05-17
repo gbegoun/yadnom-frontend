@@ -1,6 +1,6 @@
 import SVGService from '../../services/svg/svg.service';
 
-export const StatusOptionsModal = ({ options, onSelect, onClose }) => {
+export const LabelOptionsModal = ({ options, onSelect, onClose }) => {
     
     const handleOptionClick = (optionId) => {
         onSelect(optionId)
@@ -9,11 +9,11 @@ export const StatusOptionsModal = ({ options, onSelect, onClose }) => {
 
     return (
         <>
-            <ul className="status-options-list">
+            <ul className="label-options-list">
                 {options.map(option => (
                     <li key={option._id}>
                         <button
-                            className="status-option-btn"
+                            className="label-option-btn"
                             style={{ backgroundColor: option.color, color: '#fff' }}
                             onClick={() => handleOptionClick(option._id)}
                         >
@@ -22,7 +22,7 @@ export const StatusOptionsModal = ({ options, onSelect, onClose }) => {
                     </li>
                 ))}
             </ul>
-            <hr className="status-options-divider" />
+            <hr className="label-options-divider" />
             <div className="edit-labels-row">
                 <SVGService.RenameIcon className="edit-labels-icon" />
                 <span className="edit-labels-text">Edit Labels</span>

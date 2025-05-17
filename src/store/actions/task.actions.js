@@ -23,7 +23,6 @@ export async function updateTaskColumnValue(board, groupId, taskId, columnId, va
         // Update the column value
         group.tasks[taskIndex].column_values[columnId] = value
         
-        // Save board changes
         const savedBoard = await boardService.saveBoard(board)
         store.dispatch(getCmdUpdateBoard(savedBoard))
         
