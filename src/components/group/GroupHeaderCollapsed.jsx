@@ -1,5 +1,6 @@
 export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) => {
 
+    const sorting = true
     return (
         <div className="group-header-collapsed">
             <div className="group-header-collapsed-title-row" style={{ color: color }}>
@@ -15,6 +16,7 @@ export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) 
                 <div className="group-header-title-text group-header-collapsed-title-text">{title}</div>
                 <div className="group-header-summary-text group-header-collapsed-summary-text">5 items</div>
             </div>
+            
             <div className="group-columns-collapsed-wrapper">
                 {columns.map((column) => {
                     return (
@@ -25,7 +27,7 @@ export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) 
                     )                
                 })}
             </div>
-            <div className="group-header-column-last-cell"/>
+            {/* <div className="group-header-column-last-cell"/> */}
         </div>
 
     )
