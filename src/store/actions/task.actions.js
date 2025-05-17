@@ -13,20 +13,17 @@ import { UPDATE_BOARD, SET_BOARD } from '../reducers/board.reducer'
  */
 export async function updateTaskColumnValue(board, groupId, taskId, columnId, value) {
     try {
-        // Find the group and task
-        const group = board.groups.find(g => g._id === groupId)
-        if (!group) throw new Error(`Group not found: ${groupId}`)
-        
-        const taskIndex = group.tasks.findIndex(t => t._id === taskId)
+        // Find the task in the board's top-level tasks array
+        const taskIndex = board.tasks.findIndex(t => t._id === taskId && t.groupid === groupId)
         if (taskIndex === -1) throw new Error(`Task not found: ${taskId}`)
-        
+
         // Update the column value
-        group.tasks[taskIndex].column_values[columnId] = value
-        
+        board.tasks[taskIndex].column_values[columnId] = value
+
         const savedBoard = await boardService.saveBoard(board)
         store.dispatch(getCmdUpdateBoard(savedBoard))
-        
-        return group.tasks[taskIndex]
+
+        return board.tasks[taskIndex]
     } catch (err) {
         console.error('Cannot update task column value', err)
         throw err
