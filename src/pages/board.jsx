@@ -46,7 +46,7 @@ export const Board = () => {
             <main className="board-container">
                 {board && <div>
                     <BoardHeader board={board} />
-                    <GroupList columns={columns} groups={groups} />
+                    <GroupList board={board} />
                 </div>}
                 <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
             </main>
