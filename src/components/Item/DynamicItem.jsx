@@ -12,10 +12,10 @@ export const DynamicItem = ({ column, value, taskId, groupId }) => {
             return <Dropdown column={column} value={value} taskId={taskId} groupId={groupId} />
         case 'people':
             return <People column={column} value={value} />
-        case 'files':
-            return <Files column={column} value={value} />
-        case 'progress':
-            return <Progress column={column} value={value} />
+        // case 'files':
+        //     return <Files column={column} value={value} />
+        // case 'progress':
+        //     return <Progress column={column} value={value} />
         default:
             return <span>{value}</span>
     }
