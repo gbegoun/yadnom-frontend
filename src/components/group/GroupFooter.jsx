@@ -3,11 +3,11 @@
 import { GroupFooterSummary } from './GroupFooterSummary.jsx';
 import { GroupFooterNewTask } from './GroupFooterNewTask.jsx';
 
-export const GroupFooter = ({ group, columns }) => {
+export const GroupFooter = ({ group, columns, tasks }) => {
     return (
         <div className="group-footer">
             <GroupFooterNewTask color={group.color} />
-            <GroupFooterSummary columns={columns} />
+            <GroupFooterSummary columns={columns} tasks={tasks} />
         </div>
     )
 }

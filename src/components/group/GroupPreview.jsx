@@ -6,6 +6,7 @@ import { GroupHeaderSorting } from "./GroupHeaderSorting";
 import { useState } from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { LabelSummary } from "../item/LabelSummary";
 
 export const GroupPreview = ({ 
     id, 
@@ -97,7 +98,7 @@ export const GroupPreview = ({
                 draggingTaskId={draggingTaskId}
                 dropIndex={dropIndex}  // Pass through the drop index
             />
-            <GroupFooter group={group} columns={columns} />
+            <GroupFooter group={group} columns={columns} tasks={tasks} />
             </div>
         )
     }
