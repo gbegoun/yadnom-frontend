@@ -53,6 +53,7 @@ export const demo_data = {
           "_id": "sprint_column",
           "title": "Sprint",
           "type": "dropdown",
+          "width": "130px",
           "settings": {
             "options": [
               {
@@ -128,12 +129,6 @@ export const demo_data = {
           "title": "Files",
           "type": "file",
           "settings": {}
-        },
-        {
-          "_id": "progress_column",
-          "title": "Progress",
-          "type": "progress",
-          "settings": {}
         }
       ],
       "groups": [
@@ -183,6 +178,7 @@ export const demo_data = {
           "column_values": {
             "status_column": "done",
             "sprint_column": "sprint1",
+            "priority_column": "high",
             "owners_column": [
               204
             ],
@@ -722,7 +718,7 @@ export const demo_data = {
           "creator_id": 207,
           "column_values": {
             "status_column": "working",
-            "sprint_column": "sprint4",
+            "sprint_column": "sprint3",
             "owners_column": [
               207,
               202

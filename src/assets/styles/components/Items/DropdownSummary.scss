@@ -1,0 +1,13 @@
+.dropdown-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .label-count{
+        background-color: #323338;
+        color:white;
+        font-size: 12px;
+        border-radius: 20px;
+        padding:  0px 6px;
+  }
+}
