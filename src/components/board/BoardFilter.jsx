@@ -39,7 +39,7 @@ export const BoardFilter = (/* { board } */) => {
         alert(`Searching for: ${searchText}`)
         setIsSearchVisible(false)
         e.target.reset()
-        // Here you would implement the search functionality
+        //todo: Here implement the search functionality
     }
 
     const handlePersonClick = () => {
