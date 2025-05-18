@@ -35,14 +35,26 @@
             
             .search-submit {
                 position: absolute;
-                right: 4px;
-                top: 50%;
+                right: 3%;
+                top: 22%;
                 transform: translateY(-50%);
                 background: none;
                 border: none;
                 padding: 4px;
                 cursor: pointer;
                 
+                .search-icon {
+                    color: #676879;
+                    width: 16px;
+                    height: 16px;
+                    opacity: 0.5;
+                    transition: opacity 0.15s;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
                 img {
                     width: 16px;
                     height: 16px;
