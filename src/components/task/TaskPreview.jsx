@@ -3,7 +3,7 @@ import { TaskPreviewItemList } from "./TaskPreviewItemList"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const TaskPreview = ({ id, task, columns, color, isDragging, groupId }) => {
+export const TaskPreview = ({ id, task, columns, color, isDragging }) => {
     const {
         attributes,
         listeners,
@@ -36,7 +36,7 @@ export const TaskPreview = ({ id, task, columns, color, isDragging, groupId }) =
             className={`task-preview`}
         >
             <TaskPreviewTitle task={task} color={color} />
-            <TaskPreviewItemList task={task} columns={columns} groupId={groupId} />
+            <TaskPreviewItemList task={task} columns={columns} />
             <div className="task-preview-last-cell" />
         </div>
     )

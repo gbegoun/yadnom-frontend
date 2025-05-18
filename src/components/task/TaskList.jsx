@@ -17,7 +17,7 @@ import {
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 
-export const TaskList = ({ group, columns,tasks }) => {
+export const TaskList = ({ group, columns, tasks }) => {
 
     const preventPropagation = (e) => {
         e.stopPropagation();

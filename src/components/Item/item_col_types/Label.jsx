@@ -33,7 +33,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 onSelect={handleLabelUpdate}
                 onClose={closeModal}
             />,
-            { x: rect.left, y: rect.bottom + 5 }
+            rect
         )
     }
 

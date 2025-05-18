@@ -1,8 +1,6 @@
 import { DynamicItem } from "../item/DynamicItem"
 
-export const TaskPreviewItemList = ({ task, columns, groupId }) => {
-    // If groupId isn't provided, try to find it from task
-    const taskGroupId = groupId || task.groupId
+export const TaskPreviewItemList = ({ task, columns }) => {
 
     return (
         <div className="task-preview-item-wrapper">
@@ -16,7 +14,7 @@ export const TaskPreviewItemList = ({ task, columns, groupId }) => {
                         column={column} 
                         value={task.column_values[column._id]}
                         taskId={task._id}
-                        groupId={taskGroupId}
+                        groupId={task.groupid}
                     />
                 </div>
             )}

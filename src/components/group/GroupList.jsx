@@ -23,7 +23,7 @@ export const GroupList = ({ board }) => {
     const [columns, setColumns] = useState(board.columns || [])
     const [tasks, setTasks] = useState(board.tasks || [])
 
-    // Add this effect to update state when board changes - Ofir
+    // Add this effect to update state when board changes - Ofir - temporary
     useEffect(() => {
         setGroups(board.groups || [])
         setColumns(board.columns || [])
