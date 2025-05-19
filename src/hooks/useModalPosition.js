@@ -4,8 +4,8 @@
 export const useModalPosition = () => {
     const centerBottomPosition = (rect) => ({
         top: rect.top,
-        bottom: rect.bottom,
-        left: rect.left - (rect.width / 2),  // Center the modal
+        bottom: rect.bottom + 8, // 8px padding from the target
+        left: rect.left /*- (rect.width / 2) */,  // Center the modal
         right: rect.right,
         width: rect.width,
         height: rect.height

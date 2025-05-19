@@ -38,9 +38,9 @@ export default function DateOptionsModal({ value, onSelect, onClose }) {
     const renderYearOptions = () => {
         const currentYear = new Date().getFullYear();
         return Array.from({ length: 10 }, (_, i) => currentYear + i)
-        .map(year => (
-            <option key={year} value={year}>{year}</option>
-        ));
+            .map(year => (
+                <option key={year} value={year}>{year}</option>
+            ));
     };
 
     const renderMonthOptions = () => (
@@ -53,30 +53,30 @@ export default function DateOptionsModal({ value, onSelect, onClose }) {
 
     const MonthSelector = () => (
         <select
-        value={monthValue}
-        onChange={handleMonthChange}
-        className="month-select"
+            value={monthValue}
+            onChange={handleMonthChange}
+            className="month-select"
         >
             {renderMonthOptions()}
         </select>
     );
-    
+
     const YearSelector = () => (
         <select
             value={yearValue}
             onChange={handleYearChange}
             className="year-select"
-            >
+        >
             {renderYearOptions()}
         </select>
     );
-    
+
     const WeekdayHeaders = () => (
         WEEKDAYS.map(day => (
             <div key={day} className="weekday-header">{day}</div>
         ))
     );
-    
+
     const monthValue = currentDate.substring(5, 7);
     const yearValue = currentDate.substring(0, 4);
 
@@ -89,7 +89,8 @@ export default function DateOptionsModal({ value, onSelect, onClose }) {
                 <div className="month-navigation">
                     <MonthSelector />
                     <YearSelector />
-                </div>                <div className="calendar-grid">
+                </div>
+                <div className="calendar-grid">
                     <WeekdayHeaders />
                     {generateCalendarDays(currentDate, handleDaySelect, onClose)}
                 </div>

@@ -31,7 +31,7 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
                 onSelect={handleDateUpdate}
                 onClose={closeModal}
             />, modifiedRect,
-            true // isFromItemList
+            true // isFromDynamicItem
         );
     };
 

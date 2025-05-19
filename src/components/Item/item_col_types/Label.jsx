@@ -37,7 +37,8 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 onSelect={handleLabelUpdate}
                 onClose={closeModal}
             />,
-            modifiedRect
+            modifiedRect,
+            true // isFromDynamicItem
         )
     }
 
