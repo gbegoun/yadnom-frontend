@@ -1,11 +1,9 @@
 export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) => {
 
-    const sorting = true
     return (
         <div className="group-header-collapsed">
             <div className="group-header-collapsed-title-row" style={{ color: color }}>
                 <div className="group-header-collapsed-menu" />
-
                 <div className="group-header-collapsed-left-indicator" style={{ backgroundColor: color }} />
                 <div className="collapse-group-icon-wrapper-collapsed" onClick={() => setIsCollapsed(false)}>
                     <svg className="collapse-group-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -20,14 +18,14 @@ export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) 
             <div className="group-columns-collapsed-wrapper">
                 {columns.map((column) => {
                     return (
-                        <div className="group-column-collapsed" key={column._id}>
+                        <div className="group-column-collapsed" key={column._id} style={{width: column.width}}>
                             <div className="group-column-collapsed-title">{column.title}</div>
                             <div className="group-column-collapsed-summary">{column.title}</div>
                         </div>
                     )                
-                })}
+                })}  
             </div>
-            {/* <div className="group-header-column-last-cell"/> */}
+            <div className="group-column-collapsed-last-cell" />             
         </div>
 
     )

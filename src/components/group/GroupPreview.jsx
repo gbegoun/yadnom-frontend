@@ -6,18 +6,17 @@ import { GroupHeaderSorting } from "./GroupHeaderSorting";
 import { useState } from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { LabelSummary } from "../item/LabelSummary";
 
-export const GroupPreview = ({ 
-    id, 
-    columns, 
-    group, 
+export const GroupPreview = ({
+    id,
+    columns,
+    group,
     tasks,
-    isSorting, 
-    isDragging, 
+    isSorting,
+    isDragging,
     isActiveDropArea,
-    dropIndex,  
-    draggingTaskId 
+    dropIndex,
+    draggingTaskId
 }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -27,7 +26,7 @@ export const GroupPreview = ({
         setNodeRef,
         transform,
         transition,
-    } = useSortable({ 
+    } = useSortable({
         id,
         data: {
             type: 'group',
@@ -72,33 +71,33 @@ export const GroupPreview = ({
     if (isCollapsed) {
         return (
             <div
-                ref={setNodeRef}
-                style={style}
-                {...attributes}
-                {...listeners}
-                className="group-preview collapsed"
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+            className="group-preview collapsed"
             >
-                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+            <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     } else {
         return (
             <div
-            ref={setNodeRef}
-            style={style}
-            {...attributes}
-            {...listeners}
-            className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
+                ref={setNodeRef}
+                style={style}
+                {...attributes}
+                {...listeners}
+                className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
             >
-            <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
-            <TaskList 
-                group={group} 
-                columns={columns}
-                tasks={tasks}
-                draggingTaskId={draggingTaskId}
-                dropIndex={dropIndex}  // Pass through the drop index
-            />
-            <GroupFooter group={group} columns={columns} tasks={tasks} />
+                <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <TaskList
+                    group={group}
+                    columns={columns}
+                    tasks={tasks}
+                    draggingTaskId={draggingTaskId}
+                    dropIndex={dropIndex}  // Pass through the drop index
+                />
+                <GroupFooter group={group} columns={columns} tasks={tasks} />
             </div>
         )
     }

@@ -1,6 +1,7 @@
 import { Dropdown } from "./Dropdown"
 
 export const DropdownSummary = ({ column, tasks }) => {
+    console.log(tasks)
     const getFirstLabelId = () => {
         return tasks[0].column_values[column._id]
     }
@@ -15,6 +16,11 @@ export const DropdownSummary = ({ column, tasks }) => {
     }
 
     const distinctValuesCount = countDistinctValues();
+    
+    if(!tasks || tasks.length === 0 || distinctValuesCount === 0)
+    {
+        return <div className="dropdown-summary"></div>
+    }
     return (
         <div className="dropdown-summary">
             <Dropdown className="first-label" column={column} value={getFirstLabelId()}/> 
