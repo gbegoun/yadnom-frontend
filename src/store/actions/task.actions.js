@@ -11,13 +11,16 @@ import { UPDATE_BOARD, SET_BOARD } from '../reducers/board.reducer'
  * @param {*} value - The new value for the column
  * @returns {Promise<Object>} - The updated task
  */
-export async function updateTaskColumnValue(board, groupId, taskId, columnId, value) {
+export async function updateTaskColumnValue(boardFromStore, groupId, taskId, columnId, value) {
     try {
-        // Find the task in the board's top-level tasks array
+        // Create a deep copy of the board to ensure immutability
+        const board = JSON.parse(JSON.stringify(boardFromStore));
+
+        // Find the task in the cloned board's top-level tasks array
         const taskIndex = board.tasks.findIndex(t => t._id === taskId && t.groupid === groupId)
         if (taskIndex === -1) throw new Error(`Task not found: ${taskId}`)
 
-        // Update the column value
+        // Update the column value in the cloned board
         board.tasks[taskIndex].column_values[columnId] = value
 
         const savedBoard = await boardService.saveBoard(board)
@@ -30,12 +33,44 @@ export async function updateTaskColumnValue(board, groupId, taskId, columnId, va
     }
 }
 
-function getCmdUpdateBoard(board) {
-    return {
-        type: UPDATE_BOARD,
-        board
+
+/**
+ * Updates a specific task's title
+ * @param {Object} board - The current board
+ * @param {String} groupId - The ID of the group containing the task
+ * @param {String} taskId - The ID of the task to update
+ * @param {String} newTitle - The new title for the task
+ * @returns {Promise<Object>} - The updated task
+ */
+export async function updateTaskTitle(boardFromStore, groupId, taskId, newTitle) {
+    try {
+        // Create a deep copy of the board to ensure immutability
+        const board = JSON.parse(JSON.stringify(boardFromStore));
+
+        // Find the group in the cloned board's groups array
+        const group = board.groups.find(g => g._id === groupId);
+        if (!group) {
+            throw new Error(`Group not found: ${groupId}`);
+        }
+
+        // Find the task in the group's tasks array
+        const taskIndex = group.tasks.findIndex(t => t._id === taskId);
+        if (taskIndex === -1) {
+            throw new Error(`Task not found: ${taskId} in group ${groupId}`);
+        }
+
+        group.tasks[taskIndex].title = newTitle;
+
+        const savedBoard = await boardService.saveBoard(board);
+        store.dispatch(getCmdUpdateBoard(savedBoard));
+        
+        return group.tasks[taskIndex];
+    } catch (err) {
+        console.error('Cannot update task title', err);
+        throw err;
     }
 }
+
 
 /**
  * Get a board by its ID
@@ -51,4 +86,12 @@ export function getBoardById(boardId) {
             })
             return board
         })
+}
+
+
+function getCmdUpdateBoard(board) {
+    return {
+        type: UPDATE_BOARD,
+        board
+    }
 }

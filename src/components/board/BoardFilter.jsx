@@ -14,6 +14,7 @@ import SVGService from '../../services/svg/svg.service'
 export const BoardFilter = (/* { board } */) => {
     const { openModal } = useModal()
     const [isSearchVisible, setIsSearchVisible] = useState(false)
+    
     const searchContainerRef = useRef(null)
     const personBtnRef = useRef(null)
     const filterBtnRef = useRef(null)
