@@ -1,7 +1,6 @@
 import { DynamicItem } from "../item/DynamicItem"
 
 export const TaskPreviewItemList = ({ task, columns }) => {
-
     return (
         <div className="task-preview-item-wrapper">
             {columns.map(column =>

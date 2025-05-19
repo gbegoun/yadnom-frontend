@@ -4,7 +4,7 @@ import SVGService from '../services/svg/svg.service';
 
 export const HomePage = () => {
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     const toggleIcon = () => {
         setIsExpanded(!isExpanded);
