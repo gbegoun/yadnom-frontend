@@ -1,0 +1,35 @@
+.date-modal-today-btn {
+    background: #f5f6fa;
+    border: 1px solid #d0d4e4;
+    border-radius: 4px;
+    color: #323338;
+    font-size: 14px;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 12px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    
+    &:hover {
+        background: #e9eaee;
+    }
+}
+
+.date-modal-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #d0d4e4;
+    border-radius: 4px;
+    color: #323338;
+    background: #f5f6fa;
+    transition: border 0.2s;
+    
+    &:focus {
+        border: 1.5px solid #0073ea;
+        outline: none;
+        background: #fff;
+    }
+}

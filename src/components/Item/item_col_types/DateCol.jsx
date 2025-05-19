@@ -1,32 +1,15 @@
 import { useRef, useContext } from 'react';
 import { useModal } from '../../../contexts/modal/useModal.jsx';
+import { useModalPosition } from '../../../contexts/modal/useModalPosition.js';
 import { BoardContext } from '../../../contexts/board/BoardContext.jsx';
 import { updateTaskColumnValue } from '../../../store/actions/task.actions.js';
-
-// Simple modal for picking a date
-const DateOptionsModal = ({ value, onSelect, onClose, includeTime }) => {
-    const handleChange = (e) => {
-        onSelect(e.target.value);
-        onClose();
-    };
-    return (
-        <div>
-            <input
-                type={includeTime ? 'datetime-local' : 'date'}
-                value={value ? value.substring(0, includeTime ? 16 : 10) : ''}
-                onChange={handleChange}
-                style={{ fontSize: 16, padding: 4 }}
-                autoFocus
-            />
-        </div>
-    );
-};
+import DateOptionsModal from '../../modal_types/DateOptionsModal.jsx';
 
 export const DateCol = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal();
+    const { centerBottomPosition } = useModalPosition();
     const { board, loadBoard } = useContext(BoardContext);
     const dateRef = useRef();
-    const includeTime = column?.settings?.include_time;
 
     const handleDateUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
@@ -40,13 +23,14 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
     const handleOpenModal = (e) => {
         e.stopPropagation();
         const rect = dateRef.current.getBoundingClientRect();
+        const modifiedRect = centerBottomPosition(rect);
+
         openModal(
             <DateOptionsModal
                 value={value}
                 onSelect={handleDateUpdate}
                 onClose={closeModal}
-                includeTime={includeTime}
-            />, rect
+            />, modifiedRect
         );
     };
 
@@ -54,9 +38,7 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
     let display = value;
     if (value) {
         const d = new Date(value);
-        display = includeTime
-            ? d.toLocaleString()
-            : d.toLocaleDateString();
+        display = d.toLocaleDateString();
     } else {
         display = 'Set date';
     }

@@ -3,6 +3,7 @@ import { useModal } from '../../../contexts/modal/useModal.jsx'
 import { LabelOptionsModal } from '../../modal_types/LabelOptionsModal.jsx'
 import { BoardContext } from '../../../contexts/board/BoardContext.jsx'
 import { updateTaskColumnValue } from '../../../store/actions/task.actions.js'
+import { useModalPosition } from '../../../contexts/modal/useModalPosition.js'
 
 export const Label = ({ column, value, taskId, groupId }) => {
     // Find the selected option based on value
@@ -13,6 +14,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal()
     const { board, loadBoard } = useContext(BoardContext)
     const labelRef = useRef()
+    const { centerBottomPosition } = useModalPosition()
 
     const handleLabelUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
@@ -26,6 +28,8 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const handleOpenModal = (e) => {
         e.stopPropagation()
         const rect = labelRef.current.getBoundingClientRect()
+        const modifiedRect = centerBottomPosition(rect)
+
         openModal(
             <LabelOptionsModal
                 options={column.settings.options}
@@ -33,7 +37,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 onSelect={handleLabelUpdate}
                 onClose={closeModal}
             />,
-            rect
+            modifiedRect
         )
     }
 
