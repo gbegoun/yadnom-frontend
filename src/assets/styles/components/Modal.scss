@@ -18,10 +18,28 @@
         width: auto;
         min-width: 200px;
         max-width: 90vw;
-        animation: modal-appear 0.2s ease-out;
+        animation: modal-appear 0.08s ease-out;
 
         &:focus {
             outline: none;
+        }
+    }
+
+    .modal-triangle {
+        position: absolute; // Relative to its styled parent div
+        width: 10px;
+        height: 10px;
+        background-color: #fff; // Match modal-content background
+        transform: rotate(45deg);
+        top: -5px;   // Moves the tip of the triangle 5px above its container's top edge
+        left: 0;     // Aligns with its container's left edge (container is already positioned)
+        box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05); // Optional subtle shadow
+        animation: triangle-appear 0.08s ease-out;
+
+        &.points-down {
+            top: auto; // Override the default top
+            bottom: -5px; // Tip is 5px below the container's bottom edge
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05); // Adjusted shadow for downward orientation
         }
     }
 }
@@ -29,10 +47,23 @@
 @keyframes modal-appear {
     from {
         opacity: 0;
-        transform: translateY(-8px);
+        transform: translateY(-4px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes triangle-appear {
+    from {
+        opacity: 0;
+        rotate: 45deg;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        rotate: 45deg;
         transform: translateY(0);
     }
 }
