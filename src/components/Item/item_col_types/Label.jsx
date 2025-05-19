@@ -3,7 +3,7 @@ import { useModal } from '../../../contexts/modal/useModal.jsx'
 import { LabelOptionsModal } from '../../modal_types/LabelOptionsModal.jsx'
 import { BoardContext } from '../../../contexts/board/BoardContext.jsx'
 import { updateTaskColumnValue } from '../../../store/actions/task.actions.js'
-import { useModalPosition } from '../../../contexts/modal/useModalPosition.js'
+import { useModalPosition } from '../../../hooks/useModalPosition.js'
 
 export const Label = ({ column, value, taskId, groupId }) => {
     // Find the selected option based on value

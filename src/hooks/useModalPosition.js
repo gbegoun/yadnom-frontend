@@ -6,7 +6,7 @@ export const useModalPosition = () => {
         top: rect.top,
         bottom: rect.bottom,
         left: rect.left - (rect.width / 2),  // Center the modal
-        right: rect.right - (rect.width / 2),
+        right: rect.right,
         width: rect.width,
         height: rect.height
     });
