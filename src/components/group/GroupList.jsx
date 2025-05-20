@@ -24,11 +24,11 @@ export const GroupList = ({ board }) => {
     const [tasks, setTasks] = useState(board.tasks || [])
 
     // Add this effect to update state when board changes - Ofir - temporary
-    useEffect(() => {
-        setGroups(board.groups || [])
-        setColumns(board.columns || [])
-        setTasks(board.tasks || [])
-    }, [board])
+    // useEffect(() => {
+    //     setGroups(board.groups || [])
+    //     setColumns(board.columns || [])
+    //     setTasks(board.tasks || [])
+    // }, [board])
 
     const [dragState, setDragState] = useState({
         isSorting: false,
