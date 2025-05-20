@@ -14,8 +14,22 @@ export async function loadBoards(filterBy) {
 
 export async function loadBoard(boardId) {
     try {
-        const board = await boardService.getById(boardId)
-        store.dispatch(getCmdSetBoard(board))
+        console.log('loadBoard called with boardId:', boardId);
+        // If no boardId is provided, use the current board's ID from the store
+        if (!boardId && store.getState().boardModule.board) {
+            boardId = store.getState().boardModule.board._id;
+            console.log('Using current board ID from store:', boardId);
+        }
+        
+        if (!boardId) {
+            console.error('No boardId provided and no board in store');
+            return null;
+        }
+        
+        const board = await boardService.getById(boardId);
+        console.log('Board loaded from service:', board ? `ID: ${board._id}` : 'no board');
+        store.dispatch(getCmdSetBoard(board));
+        console.log('SET_BOARD action dispatched');
         return board
     } catch (err) {
         console.log('Cannot load board', err)

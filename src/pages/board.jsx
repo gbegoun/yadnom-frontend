@@ -4,16 +4,28 @@ import { GroupList } from '../components/group/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
 import { useEffect, useState, useCallback } from 'react';
 import { BoardContext } from '../contexts/board/BoardContext.jsx';
-import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js"
+import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js";
+import { useSelector } from 'react-redux';
 
 export const Board = () => {
     const { boardId } = useParams();
-    const [board, setBoard] = useState(null);
+    const [localBoard, setLocalBoard] = useState(null);
+    // Get the board directly from Redux store
+    const reduxBoard = useSelector(state => state.boardModule.board);
+    
+    // Use Redux board if available, otherwise use local state
+    const board = reduxBoard || localBoard;
+    
+    console.log("Board component rendering with board:", board ? `ID: ${board._id}` : 'no board');
 
     useEffect(() => {
+        console.log("Board component: Loading board with ID:", boardId);
         loadBoard(boardId)
-            .then(setBoard)
-            .catch(err => { console.log(err) });
+            .then(loadedBoard => {
+                console.log("Board component: Board loaded successfully:", loadedBoard._id);
+                setLocalBoard(loadedBoard);
+            })
+            .catch(err => { console.log("Error loading board:", err); });
     }, [boardId])
 
     const onNewGroupClicked = (isTopPosition = true) => {

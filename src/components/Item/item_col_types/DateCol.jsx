@@ -9,12 +9,14 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal();
     const { centerBottomPosition } = useModalPosition();
     const { board, loadBoard } = useContext(BoardContext);
-    const dateRef = useRef();
-
-    const handleDateUpdate = (selectedValue) => {
+    const dateRef = useRef();    const handleDateUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
+            console.log('DateCol update: Calling updateTaskColumnValue with selectedValue:', selectedValue);
             updateTaskColumnValue(board, groupId, taskId, column._id, selectedValue)
-                .then(() => loadBoard && loadBoard())
+                .then(() => {
+                    console.log('DateCol update: Task updated, now loading board with ID:', board._id);
+                    if (loadBoard) loadBoard(board._id);
+                })
                 .catch(err => console.error('Failed to update due date', err));
         }
         closeModal();

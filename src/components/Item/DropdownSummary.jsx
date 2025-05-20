@@ -1,7 +1,7 @@
 import { Dropdown } from "./item_col_types/Dropdown";
 
 export const DropdownSummary = ({ column, tasks }) => {
-    console.log(tasks)
+    // console.log(tasks)
     const getFirstLabelId = () => {
         return tasks[0].column_values[column._id]
     }

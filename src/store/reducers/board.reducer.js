@@ -20,6 +20,7 @@ export function boardReducer(state = initialState, action) {
             newState = { ...state, boards: action.boards }
             break
         case SET_BOARD:
+            console.log('SET_BOARD reducer: Setting board with ID:', action.board?._id)
             newState = { ...state, board: action.board }
             break
         case REMOVE_BOARD:{
@@ -30,10 +31,19 @@ export function boardReducer(state = initialState, action) {
         }
         case ADD_NEW_BOARD:
             newState = { ...state, boards: [...state.boards, action.board] }
-            break
+            break;
         case UPDATE_BOARD:
+            console.log('UPDATE_BOARD reducer:', action.board?._id)
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            newState = { ...state, boards }
+            
+            // Also update the current board if it's the one being modified
+            if (state.board && state.board._id === action.board._id) {
+                console.log('Current board matches updated board, updating current board too')
+                newState = { ...state, boards, board: action.board }
+            } else {
+                console.log('Current board does not match updated board')
+                newState = { ...state, boards }
+            }
             break
         case ADD_BOARD_MSG:
             newState = { ...state, board: { ...state.board, msgs: [...state.board.msgs || [], action.msg] } }

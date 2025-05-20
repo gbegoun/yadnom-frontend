@@ -5,7 +5,7 @@ export const PeopleSummary = ({ column, tasks }) => {
         tasks.forEach(task => {
             const value = task.column_values[column._id];
             value.forEach(person => {
-                console.log('person', person);
+                // console.log('person', person);
                 if (person) uniqueValues.add(person);
             })
         });

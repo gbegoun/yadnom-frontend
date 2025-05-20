@@ -13,20 +13,31 @@ import { UPDATE_BOARD, SET_BOARD } from '../reducers/board.reducer'
  */
 export async function updateTaskColumnValue(boardFromStore, groupId, taskId, columnId, value) {
     try {
+        console.log('updateTaskColumnValue called with:', { groupId, taskId, columnId, value });
+        
         // Create a deep copy of the board to ensure immutability
         const board = JSON.parse(JSON.stringify(boardFromStore));
 
         // Find the task in the cloned board's top-level tasks array
         const taskIndex = board.tasks.findIndex(t => t._id === taskId && t.groupid === groupId)
         if (taskIndex === -1) throw new Error(`Task not found: ${taskId}`)
-
+        
         // Update the column value in the cloned board
         board.tasks[taskIndex].column_values[columnId] = value
+        console.log('Task updated in memory:', board.tasks[taskIndex]);        
+        const savedBoard = await boardService.saveBoard(board);
+        console.log('Board saved, dispatching UPDATE_BOARD action');
+        store.dispatch(getCmdUpdateBoard(savedBoard));
+        console.log('UPDATE_BOARD action dispatched');
 
-        const savedBoard = await boardService.saveBoard(board)
-        store.dispatch(getCmdUpdateBoard(savedBoard))
+        // Also explicitly update the current board in Redux to ensure UI refreshes
+        store.dispatch({
+            type: SET_BOARD,
+            board: savedBoard
+        });
+        console.log('SET_BOARD action also dispatched for immediate UI refresh');
 
-        return board.tasks[taskIndex]
+        return board.tasks[taskIndex];
     } catch (err) {
         console.error('Cannot update task column value', err)
         throw err

@@ -18,17 +18,19 @@ import {
 import { TaskPreview } from "../task/TaskPreview"
 
 export const GroupList = ({ board, onBoardSave }) => {
+    console.log("GroupList rendering with board:", board ? `ID: ${board._id}, tasks: ${board.tasks?.length}` : 'no board');
+    
+    const [groups, setGroups] = useState(board.groups || []);
+    const [columns, setColumns] = useState(board.columns || []);
+    const [tasks, setTasks] = useState(board.tasks || []);
 
-    const [groups, setGroups] = useState(board.groups || [])
-    const [columns, setColumns] = useState(board.columns || [])
-    const [tasks, setTasks] = useState(board.tasks || [])
-
-    // Add this effect to update state when board changes - Ofir - temporary
-    // useEffect(() => {
-    //     setGroups(board.groups || [])
-    //     setColumns(board.columns || [])
-    //     setTasks(board.tasks || [])
-    // }, [board])
+    // Effect to update state when board changes
+    useEffect(() => {
+        console.log("GroupList: board prop changed, updating local state");
+        setGroups(board.groups || []);
+        setColumns(board.columns || []);
+        setTasks(board.tasks || []);
+    }, [board]);
 
     const [dragState, setDragState] = useState({
         isSorting: false,
