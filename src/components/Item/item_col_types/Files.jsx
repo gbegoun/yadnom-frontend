@@ -1,4 +1,4 @@
-export const Date = () => {
+export const Files = () => {
     return (
         <div>
             <h1>Date</h1>

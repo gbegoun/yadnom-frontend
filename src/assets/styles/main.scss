@@ -35,6 +35,11 @@
 @import "components/BoardFilter";
 @import "components/BoardDetails";
 @import 'components/Modal.scss';
+@import "components/modal_types/LabelOptionsModal";
+@import "components/modal_types/DateOptionsModal";
+@import "components/modal_types/PeopleOptionsModal";
+
+
 @import 'components/Items/LabelSummary.scss';
 @import "components/Items/DropdownSummary";
 

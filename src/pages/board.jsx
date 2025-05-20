@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../components/board/BoardHeader.jsx';
 import { GroupList } from '../components/group/GroupList.jsx';
 import { boardService } from '../services/board/index.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BoardContext } from '../contexts/board/BoardContext.jsx';
 import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js"
 
@@ -42,7 +42,7 @@ export const Board = () => {
 
     if (!board) return (<div>Loading...</div>)
     return (
-        <BoardContext.Provider value={{ onNewGroupClicked, onNewTaskClicked }}>
+        <BoardContext.Provider value={{ board, onNewGroupClicked, onNewTaskClicked, loadBoard }}>
             <main className="board-container">
                 {board && <div>
                     <BoardHeader board={board} />

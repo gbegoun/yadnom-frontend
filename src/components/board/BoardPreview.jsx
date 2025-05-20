@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SVGService from '../../services/svg/svg.service';
 
 export const BoardPreview = ({ board, onRemoveBoard }) => {
     return (
-        <a key={board._id} href={`/board/${board._id}`} className="board-item">
+        <Link key={board._id} to={`/board/${board._id}`} className="board-item">
             <img src="../src/assets/icons/home_page_default_board_img.svg" alt="board image" />
             <div className="board-content">
                 <SVGService.BoardIcon className="board-icon" />
@@ -20,6 +21,6 @@ export const BoardPreview = ({ board, onRemoveBoard }) => {
                     Remove
                 </button>
             </div>
-        </a>
+        </Link>
     );
 };
