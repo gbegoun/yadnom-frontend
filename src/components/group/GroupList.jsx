@@ -91,7 +91,7 @@ export const GroupList = ({ board, onBoardSave }) => {
             setTasks(arrayMove(tasks, activeIndex, overIndex))
         }
 
-    }, [])
+    }, [tasks])
 
     const handleDragEnd = useCallback((event) => {
         const { active, over } = event
