@@ -25,36 +25,34 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
             if (inputRef.current) inputRef.current.focus();
         }, 0);
     };    
-    
-    const saveTitle = async (newTitle) => {
-        try {
-            if (newTitle !== task.title && board && groupId) {
-                console.log('Saving task title:', { taskId: task._id, groupId, newTitle });
-                
-                // Use the centralized action to update the task title
-                await updateTaskDirectProperty(board, groupId, task._id, 'title', newTitle);
-                console.log('Task title updated successfully');
-            }
-        } catch (err) {
-            console.error("Error updating task title:", err);
-            // Reset to original title on error
-            setInputValue(task.title);
+      const saveTitle = (newTitle) => {
+        if (newTitle !== task.title && board && groupId) {
+            
+            // Use the centralized action to update the task title
+            // The UI will update immediately due to the optimistic update pattern
+            updateTaskDirectProperty(board, groupId, task._id, 'title', newTitle)
+                .then(() => {
+                    console.log('Task title updated successfully');
+                })
+                .catch(err => {
+                    console.error("Error updating task title:", err);
+                    // No need to manually reset - the optimistic update system will handle reverting
+                    // the Redux state, and our component will update via the useEffect
+                });
         }
-    };
-
-    const handleInputBlur = async () => {
+    };    const handleInputBlur = () => {
         setIsEditing(false);
-        await saveTitle(inputValue);
+        saveTitle(inputValue);
     };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
-    const handleInputKeyDown = async (e) => {
+    const handleInputKeyDown = (e) => {
         if (e.key === 'Enter') {
             setIsEditing(false);
-            await saveTitle(inputValue);
+            saveTitle(inputValue);
         }
     };
 
@@ -84,21 +82,3 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
         </div>
     )
 }
-
-// const TaskPreviewTitleExpand = ({ task, color }) => {
-    
-// }
-
-// const TaskPreviewTitleName = ({ task, color }) => {
-//     return (
-//         <div className="task-title">{task.title}</div>
-//     )
-// }
-
-// const TaskPreviewTitleActions = ({ task, color }) => {
-//     return (
-//         <div className="task-actions">
-//             {/* Add action buttons or icons here */}
-//         </div>
-//     )
-// }

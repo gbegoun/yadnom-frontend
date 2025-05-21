@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef, act } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { GroupPreview } from "./GroupPreview";
 import {
     DndContext,
@@ -18,15 +18,18 @@ import {
 import { TaskPreview } from "../task/TaskPreview";
 
 export const GroupList = ({ board, onBoardSave }) => {
-    console.log("GroupList rendering with board:", board ? `ID: ${board._id}, tasks: ${board.tasks?.length}` : 'no board');
     
     const [groups, setGroups] = useState(board.groups || []);
     const [columns, setColumns] = useState(board.columns || []);
     const [tasks, setTasks] = useState(board.tasks || []);
 
+    // Can use useSelector to get board from Redux store if needed
+    // const groups = useSelector(state => state.boardModule.board.groups)
+    // const columns = useSelector(state => state.boardModule.board.columns)
+    // const tasks = useSelector(state => state.boardModule.board.tasks)
+
     // Effect to update state when board changes
     useEffect(() => {
-        console.log("GroupList: board prop changed, updating local state");
         setGroups(board.groups || []);
         setColumns(board.columns || []);
         setTasks(board.tasks || []);

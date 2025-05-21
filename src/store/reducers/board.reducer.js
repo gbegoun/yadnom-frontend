@@ -7,6 +7,12 @@ export const ADD_BOARD_MSG = 'ADD_BOARD_MSG'
 export const ADD_TASK_GROUP = 'ADD_TASK_GROUP'
 export const ADD_NEW_TASK = 'ADD_NEW_TASK'
 
+// New action types for optimistic updates
+export const UPDATE_TASK_PROPERTY_OPTIMISTIC = 'UPDATE_TASK_PROPERTY_OPTIMISTIC'
+export const UPDATE_TASK_COLUMN_OPTIMISTIC = 'UPDATE_TASK_COLUMN_OPTIMISTIC'
+export const ADD_GROUP_OPTIMISTIC = 'ADD_GROUP_OPTIMISTIC'
+export const ADD_TASK_OPTIMISTIC = 'ADD_TASK_OPTIMISTIC'
+
 const initialState = {
     boards: [],
     board: null
@@ -15,39 +21,48 @@ const initialState = {
 export function boardReducer(state = initialState, action) {
     var newState = state
     var boards
+
     switch (action.type) {
-        case SET_BOARDS:
+        case SET_BOARDS:{
             newState = { ...state, boards: action.boards }
             break
-        case SET_BOARD:
-            console.log('SET_BOARD reducer: Setting board with ID:', action.board?._id)
+        }
+
+        case SET_BOARD:{
             newState = { ...state, board: action.board }
             break
+        }
+
         case REMOVE_BOARD:{
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
             boards = state.boards.filter(board => board._id !== action.boardId)
             newState = { ...state, boards, lastRemovedBoard }
             break
         }
-        case ADD_NEW_BOARD:
+
+        case ADD_NEW_BOARD:{
             newState = { ...state, boards: [...state.boards, action.board] }
             break;
-        case UPDATE_BOARD:
-            console.log('UPDATE_BOARD reducer:', action.board?._id)
+        }
+
+        case UPDATE_BOARD:{
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
             
             // Also update the current board if it's the one being modified
             if (state.board && state.board._id === action.board._id) {
-                console.log('Current board matches updated board, updating current board too')
                 newState = { ...state, boards, board: action.board }
             } else {
                 console.log('Current board does not match updated board')
                 newState = { ...state, boards }
             }
             break
-        case ADD_BOARD_MSG:
+        }
+
+        case ADD_BOARD_MSG:{
             newState = { ...state, board: { ...state.board, msgs: [...state.board.msgs || [], action.msg] } }
             break
+        }
+
         case ADD_TASK_GROUP: {
             let newGroup = action.group
             let targetBoard = state.boards.find(board => board._id === action.boardId)
@@ -77,11 +92,97 @@ export function boardReducer(state = initialState, action) {
             break
         }
 
+        case UPDATE_TASK_PROPERTY_OPTIMISTIC: {
+            if (!state.board) return state;
+
+            const updatedBoard = { 
+                ...state.board,
+                tasks: state.board.tasks.map(task => 
+                    task._id === action.taskId 
+                        ? { ...task, [action.propertyName]: action.value }
+                        : task
+                )
+            };
+            
+            // Update both the current board and the boards array
+            boards = state.boards.map(board => 
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+            
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+        }
+        
+        case UPDATE_TASK_COLUMN_OPTIMISTIC: {
+            if (!state.board) return state;
+
+            const updatedBoard = { 
+                ...state.board,
+                tasks: state.board.tasks.map(task => {
+                    if (task._id === action.taskId) {
+                        return {
+                            ...task,
+                            column_values: {
+                                ...task.column_values,
+                                [action.columnId]: action.value
+                            }
+                        };
+                    }
+                    return task;
+                })
+            };
+            
+            boards = state.boards.map(board => 
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+            
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+        }
+        
+        case ADD_GROUP_OPTIMISTIC: {
+            if (!state.board) return state;
+
+            const updatedBoard = {
+                ...state.board,
+                groups: action.isPositionTop
+                    ? [action.group, ...state.board.groups]
+                    : [...state.board.groups, action.group]
+            };
+            
+            boards = state.boards.map(board => 
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+            
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+        }
+
+        case ADD_TASK_OPTIMISTIC: {
+            if (!state.board) return state;
+
+            const updatedBoard = {
+                ...state.board,
+                tasks: !state.board.tasks
+                    ? [action.task]  // If no tasks array exists yet
+                    : action.isPositionTop
+                        ? [action.task, ...state.board.tasks]  // Add to beginning
+                        : [...state.board.tasks, action.task]  // Add to end
+            };
+            
+            boards = state.boards.map(board => 
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+            
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+        }
         default:
     }
-    
     return newState
 }
+
+
 
 // unitTestReducer()
 

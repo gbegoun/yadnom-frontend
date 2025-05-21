@@ -20,7 +20,7 @@ export const boardService = {
 }
 window.cs = boardService
 
-async function query(filterBy = {}) {
+async function query(/*filterBy = {}*/) {
     var boards = await storageService.query(STORAGE_KEY)
     return boards
 }
