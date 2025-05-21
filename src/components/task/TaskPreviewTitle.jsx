@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect, useContext } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useClickOutside } from '../../hooks/useClickOutside'
 import { useSelector } from 'react-redux'
-import { BoardContext } from '../../contexts/board/BoardContext.jsx'
-import { boardService } from '../../services/board'
+import { updateTaskDirectProperty } from '../../store/actions/task.actions'
 
 export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -10,7 +9,6 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const inputRef = useRef(null);
     const inputWrapperRef = useRef(null);
     const board = useSelector(state => state.boardModule.board);
-    const { loadBoard } = useContext(BoardContext);
     
     // Keep input value in sync with task.title when task changes
     useEffect(() => {
@@ -26,36 +24,16 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
         setTimeout(() => {
             if (inputRef.current) inputRef.current.focus();
         }, 0);
-    };    const saveTitle = async (newTitle) => {
+    };    
+    
+    const saveTitle = async (newTitle) => {
         try {
             if (newTitle !== task.title && board && groupId) {
                 console.log('Saving task title:', { taskId: task._id, groupId, newTitle });
                 
-                // Create a new board with the updated task title
-                const updatedBoard = JSON.parse(JSON.stringify(board));
-                
-                // Find the task in the board's tasks array
-                const taskIndex = updatedBoard.tasks.findIndex(t => t._id === task._id);
-                
-                if (taskIndex !== -1) {
-                    // Update the title directly
-                    updatedBoard.tasks[taskIndex].title = newTitle;
-                      // Save the updated board
-                    console.log('Saving updated board with new task title');
-                    const savedBoard = await boardService.saveBoard(updatedBoard);
-                    console.log('Board saved successfully:', savedBoard._id);
-                    
-                    // Force a reload of the board from server to get fresh data
-                    if (loadBoard) {
-                        console.log('Reloading board with ID:', board._id);
-                        await loadBoard(board._id);
-                        console.log('Board reloaded successfully');
-                    } else {
-                        console.warn('loadBoard function not available in context');
-                    }
-                } else {
-                    console.error(`Task not found in board's tasks array: ${task._id}`);
-                }
+                // Use the centralized action to update the task title
+                await updateTaskDirectProperty(board, groupId, task._id, 'title', newTitle);
+                console.log('Task title updated successfully');
             }
         } catch (err) {
             console.error("Error updating task title:", err);
