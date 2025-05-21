@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 import { GroupPreview } from "./GroupPreview";
 import {
     DndContext,
@@ -16,7 +16,6 @@ import {
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 import { TaskPreview } from "../task/TaskPreview";
-import { useSelector } from "react-redux";
 
 export const GroupList = ({ board, onBoardSave }) => {
 
@@ -63,7 +62,6 @@ export const GroupList = ({ board, onBoardSave }) => {
     }
 
     const handleDragOver = (event) => {
-        console.log("12312415415")
         const { active, over } = event
         if (!over) return
         if (active.id === over.id) return
@@ -127,7 +125,6 @@ export const GroupList = ({ board, onBoardSave }) => {
             activeGroupId: null,
             dropIndices: {}
         })
-
         onBoardSave(board);
     }
 
