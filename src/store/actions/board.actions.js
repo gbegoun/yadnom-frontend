@@ -104,18 +104,35 @@ export async function addNewTask(board, groupId) {
         console.log('addNewTask', groupId)
         const task = getEmptyTask(board.columns)
 
+        // Make sure board.tasks exists
+        if (!board.tasks) board.tasks = []
+        
+        // Set the groupid on the task to link it to the correct group
         if (groupId) {
-            let group;
-            group = board.groups.find(group => group._id === groupId)
-            group.tasks.push(task)
+            task.groupid = groupId
+            // Add task to the board's tasks array
+            board.tasks.push(task)
         } else {
-            let group;
-            group = board.groups[0]
-            group.tasks.unshift(task)
+            // If no groupId specified, use the first group's ID
+            const firstGroupId = board.groups[0]?._id
+            if (!firstGroupId) {
+                throw new Error('No groups exist in this board')
+            }
+            task.groupid = firstGroupId
+            // Add task to the beginning of the board's tasks array
+            board.tasks.unshift(task)
         }
 
+        console.log('Added new task with ID:', task._id, 'to groupId:', task.groupid)
+        
         const savedBoard = await boardService.saveBoard(board)
         store.dispatch(getCmdUpdateBoard(savedBoard))
+        
+        // Also explicitly dispatch SET_BOARD to ensure immediate UI update
+        store.dispatch({
+            type: SET_BOARD,
+            board: savedBoard
+        })
 
         return task
 

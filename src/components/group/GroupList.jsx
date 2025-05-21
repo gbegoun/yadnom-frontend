@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback, useRef, act } from "react"
-import { GroupPreview } from "./GroupPreview"
+import { useEffect, useState, useCallback, useRef, act } from "react";
+import { GroupPreview } from "./GroupPreview";
 import {
     DndContext,
     closestCenter,
@@ -8,14 +8,14 @@ import {
     useSensor,
     useSensors,
     DragOverlay,
-} from "@dnd-kit/core"
+} from "@dnd-kit/core";
 import {
     arrayMove,
     SortableContext,
     sortableKeyboardCoordinates,
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
-import { TaskPreview } from "../task/TaskPreview"
+import { TaskPreview } from "../task/TaskPreview";
 
 export const GroupList = ({ board, onBoardSave }) => {
     console.log("GroupList rendering with board:", board ? `ID: ${board._id}, tasks: ${board.tasks?.length}` : 'no board');

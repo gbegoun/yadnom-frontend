@@ -32,11 +32,17 @@ export function getEmptyTask(columns = []) {
         title: 'New Task',
         created_at: Date.now(),
         updated_at: Date.now(),
-        column_values: {}
+        column_values: {},
+        groupid: null  // Will be set by addNewTask
     }
 
     columns.forEach(column => {
-        task.column_values[column._id] = column.defaultValue || null
+        // Initialize array columns (like people) as empty arrays
+        if (column.type === 'people') {
+            task.column_values[column._id] = [];
+        } else {
+            task.column_values[column._id] = column.defaultValue || null;
+        }
     })
     
     return task;
