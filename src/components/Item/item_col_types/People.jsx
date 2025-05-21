@@ -2,7 +2,7 @@ import { useRef, useContext } from "react";
 import { useModal } from "../../../contexts/modal/useModal";
 import { BoardContext } from "../../../contexts/board/BoardContext";
 import { PeopleOptionsModal } from "../../modal_types/PeopleOptionsModal";
-import { updateTaskColumnValue } from "../../../store/actions/task.actions.js";
+import { updateTaskColumnValue } from "../../../store/actions/board.actions.js";
 
 export const People = ({ value, taskId, groupId, column }) => {
     const ownersIds = value?.length ? value : [];

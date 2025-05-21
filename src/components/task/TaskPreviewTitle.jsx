@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useClickOutside } from '../../hooks/useClickOutside'
 import { useSelector } from 'react-redux'
-import { updateTaskDirectProperty } from '../../store/actions/task.actions'
+import { updateTaskDirectProperty } from '../../store/actions/board.actions'
 
 export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const [isEditing, setIsEditing] = useState(false);

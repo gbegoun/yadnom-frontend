@@ -2,7 +2,7 @@ import { useRef, useContext } from 'react'
 import { useModal } from '../../../contexts/modal/useModal.jsx'
 import { LabelOptionsModal } from '../../modal_types/LabelOptionsModal.jsx'
 import { BoardContext } from '../../../contexts/board/BoardContext.jsx'
-import { updateTaskColumnValue } from '../../../store/actions/task.actions.js'
+import { updateTaskColumnValue } from '../../../store/actions/board.actions.js'
 import { useModalPosition } from '../../../hooks/useModalPosition.js'
 
 export const Label = ({ column, value, taskId, groupId }) => {

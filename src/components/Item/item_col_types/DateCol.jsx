@@ -2,7 +2,7 @@ import { useRef, useContext } from 'react';
 import { useModal } from '../../../contexts/modal/useModal.jsx';
 import { useModalPosition } from '../../../hooks/useModalPosition.js';
 import { BoardContext } from '../../../contexts/board/BoardContext.jsx';
-import { updateTaskColumnValue } from '../../../store/actions/task.actions.js';
+import { updateTaskColumnValue } from '../../../store/actions/board.actions.js';
 import DateOptionsModal from '../../modal_types/DateOptionsModal.jsx';
 
 export const DateCol = ({ column, value, taskId, groupId }) => {
