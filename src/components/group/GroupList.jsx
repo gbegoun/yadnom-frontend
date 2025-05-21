@@ -19,22 +19,6 @@ import { TaskPreview } from "../task/TaskPreview";
 import { useSelector } from "react-redux";
 
 export const GroupList = ({ board, onBoardSave }) => {
-    
-    // const [groups, setGroups] = useState(board.groups || []);
-    // const [columns, setColumns] = useState(board.columns || []);
-    // const [tasks, setTasks] = useState(board.tasks || []);
-
-    // Can use useSelector to get board from Redux store if needed
-    // const groups = useSelector(state => state.boardModule.board.groups)
-    // const columns = useSelector(state => state.boardModule.board.columns)
-    // const tasks = useSelector(state => state.boardModule.board.tasks)
-
-    // Effect to update state when board changes
-    // useEffect(() => {
-    //     setGroups(board.groups || []);
-    //     setColumns(board.columns || []);
-    //     setTasks(board.tasks || []);
-    // }, [board]);
 
     const [dragState, setDragState] = useState({
         isSorting: false,
@@ -56,7 +40,7 @@ export const GroupList = ({ board, onBoardSave }) => {
         useSensor(KeyboardSensor)
     )
 
-    const handleDragStart = useCallback((event) => {
+    const handleDragStart = (event) => {
         const { active } = event
         const dragType = active.data.current?.type || 'group'
 
@@ -76,29 +60,37 @@ export const GroupList = ({ board, onBoardSave }) => {
                 isSorting: true
             })
         }
-    }, [dragState])
+    }
 
-    const handleDragOver = useCallback((event) => {
+    const handleDragOver = (event) => {
+        console.log("12312415415")
         const { active, over } = event
         if (!over) return
         if (active.id === over.id) return
 
-        console.log('dragRender')
         const isActiveATask = active.data.current?.type === 'task'
         const isOverATask = over.data.current?.type === 'task'
+        const isOverAGroup = over.data.current?.type === 'group'
 
         if (isActiveATask && isOverATask) {
             const activeIndex = board.tasks.findIndex(task => task._id === active.id)
             const overIndex = board.tasks.findIndex(task => task._id === over.id)
-            if (board.tasks[activeIndex].groupid !== board.tasks[overIndex].groupid) {
-                board.tasks[activeIndex].groupid = board.tasks[overIndex].groupid
+            const targetGroupId = board.tasks[overIndex].groupid
+            
+            if (board.tasks[activeIndex].groupid !== targetGroupId) {
+                board.tasks[activeIndex].groupid = targetGroupId
+                
             }
-            // setTasks(arrayMove(tasks, activeIndex, overIndex))
+            board.tasks = arrayMove(board.tasks, activeIndex, overIndex)
+            onBoardSave(board);
         }
+        
+        else if (isActiveATask && isOverAGroup) {
+            onBoardSave(board);
+        }
+    }
 
-    }, [])
-
-    const handleDragEnd = useCallback((event) => {
+    const handleDragEnd = (event) => {
         const { active, over } = event
 
         if (!over) {
@@ -123,8 +115,6 @@ export const GroupList = ({ board, onBoardSave }) => {
             updatedGroups = arrayMove(updatedGroups, oldIndex, newIndex);
             
             board.groups = updatedGroups;
-            updatedBoard(board)
-            // setGroups(updatedGroups);
         }
 
         setDragState({
@@ -138,14 +128,8 @@ export const GroupList = ({ board, onBoardSave }) => {
             dropIndices: {}
         })
 
-        const updatedBoard = {
-            ...board,
-            groups: updatedGroups,
-            tasks: board.tasks
-        };
-
-        onBoardSave(updatedBoard);
-    }, [dragState.draggingType, dragState.sourceGroupId, dragState.activeGroupId, onBoardSave, board, board.groups, board.tasks])
+        onBoardSave(board);
+    }
 
     return (
         <DndContext
