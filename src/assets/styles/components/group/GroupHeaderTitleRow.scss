@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 
 .group-header-title-row {
+    padding-bottom: 40px;
     font-family: 'Poppins', sans-serif;
     display: grid;
     grid-column: 1/-1;
     grid-template-columns: 46px 30px max-content max-content;
     height: 36px;
-    width: max-content;
+    width: 100%;
     color: var(--color-indicator, #000);
     position: sticky;
     left:0;
@@ -25,6 +26,7 @@
     justify-content: center;
 }
 .collapse-group-icon {
+    cursor: pointer;
     width: 22px;
     height: 22px;
 }
