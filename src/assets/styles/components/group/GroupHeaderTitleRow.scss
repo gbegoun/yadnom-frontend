@@ -45,10 +45,17 @@
 .group-header-summary-text {
     align-items: center;
     justify-content: center;
-    display: flex;
+    opacity: 0; /* Hide using opacity for transition */
+    display: flex; /* Keep it displayed but invisible */
     font-family: 'Figtree', sans-serif;
     font-weight: 400;
     font-size: 14px;
     margin-left: 4px;
     color: rgb(103, 104, 121);
+    transition: opacity 0.28s ease; /* Only transition opacity */
+}
+
+/* Show the summary text when hovering over the title row */
+.group-header-title-row:hover .group-header-summary-text {
+    opacity: 1;
 }
