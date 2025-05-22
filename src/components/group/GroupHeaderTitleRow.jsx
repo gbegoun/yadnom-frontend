@@ -13,8 +13,10 @@ export const GroupHeaderTitleRow = ({ title, color, setIsCollapsed, group }) => 
             </div>
             <div className="group-header-title-text">
                 <GroupTitle group={groupData} color={color} />
+            </div>            
+            <div className="group-header-summary-text group-header-summary-text--with-transition">
+                5 items
             </div>
-            <div className="group-header-summary-text">5 items</div>
         </div>
     )
 }

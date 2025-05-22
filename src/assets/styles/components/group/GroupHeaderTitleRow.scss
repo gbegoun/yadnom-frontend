@@ -43,19 +43,24 @@
 }
 
 .group-header-summary-text {
+    /* Common styling */
     align-items: center;
     justify-content: center;
-    opacity: 0; /* Hide using opacity for transition */
-    display: flex; /* Keep it displayed but invisible */
+    display: flex;
     font-family: 'Figtree', sans-serif;
     font-weight: 400;
     font-size: 14px;
     margin-left: 4px;
     color: rgb(103, 104, 121);
-    transition: opacity 0.28s ease; /* Only transition opacity */
 }
 
-/* Show the summary text when hovering over the title row */
-.group-header-title-row:hover .group-header-summary-text {
+/* Modifier for transition behavior */
+.group-header-summary-text--with-transition {
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.28s ease;
+}
+
+/* Show on hover */
+.group-header-title-row:hover .group-header-summary-text--with-transition {
     opacity: 1;
 }
