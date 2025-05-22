@@ -18,6 +18,7 @@ export const GroupPreview = ({
     dropIndex,
     draggingTaskId
 }) => {
+    
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const {
