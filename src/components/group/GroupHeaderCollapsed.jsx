@@ -1,4 +1,8 @@
-export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) => {
+import { GroupTitle } from './GroupTitle';
+
+export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed, group }) => {
+    // If a complete group object is provided, use it; otherwise create a simple one from title
+    const groupData = group || { title, _id: title, color };
 
     return (
         <div className="group-header-collapsed">
@@ -11,7 +15,9 @@ export const GroupHeaderCollapsed = ({ title, color, columns, setIsCollapsed }) 
                     </svg>
                 </div>
                 <div className="group-header-collapsed-blank" />
-                <div className="group-header-title-text group-header-collapsed-title-text">{title}</div>
+                <div className="group-header-title-text group-header-collapsed-title-text">
+                    <GroupTitle group={groupData} color={color} />
+                </div>
                 <div className="group-header-summary-text group-header-collapsed-summary-text">5 items</div>
             </div>
             

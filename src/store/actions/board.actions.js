@@ -3,7 +3,7 @@ import { store } from '../store';
 import { 
     ADD_NEW_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, 
     ADD_BOARD_MSG, ADD_TASK_GROUP, UPDATE_TASK_PROPERTY_OPTIMISTIC, UPDATE_TASK_COLUMN_OPTIMISTIC,
-    ADD_GROUP_OPTIMISTIC, ADD_TASK_OPTIMISTIC
+    UPDATE_GROUP_PROPERTY_OPTIMISTIC, ADD_GROUP_OPTIMISTIC, ADD_TASK_OPTIMISTIC
 } from '../reducers/board.reducer';
 
 // ================ BOARD ACTIONS ================
@@ -368,6 +368,59 @@ export async function updateTaskDirectProperty(boardFromStore, groupId, taskId, 
         return task;
     } catch (err) {
         console.error(`Cannot update task ${propertyName}`, err);
+        
+        // In case of error, we should revert the optimistic update
+        // by dispatching the original board data
+        if (boardFromStore) {
+            console.log('Error occurred, reverting optimistic update');
+            store.dispatch({
+                type: SET_BOARD,
+                board: boardFromStore
+            });
+        }
+        
+        throw err;
+    }
+}
+
+/**
+ * Updates any direct property of a group (like title, color, etc.)
+ * Uses optimistic updates pattern for smoother UX
+ * @param {Object} boardFromStore - The current board from Redux store
+ * @param {String} groupId - The ID of the group to update
+ * @param {String} propertyName - The name of the property to update
+ * @param {*} value - The new value for the property
+ * @returns {Promise<Object>} - The updated group
+ */
+export async function updateGroupDirectProperty(boardFromStore, groupId, propertyName, value) {
+    try {
+        
+        // 1. Dispatch optimistic update to update UI immediately
+        store.dispatch({
+            type: UPDATE_GROUP_PROPERTY_OPTIMISTIC,
+            groupId,
+            propertyName,
+            value
+        });
+        
+        // 2. Get the updated board from the store (after reducer has run)
+        const updatedBoard = store.getState().boardModule.board;
+        
+        // 3. Save the updated board to the server
+        const savedBoard = await boardService.saveBoard(updatedBoard);
+        
+        // 4. Dispatch success action with server response to confirm update
+        store.dispatch(getCmdUpdateBoard(savedBoard));
+        
+        // 5. Find and return the updated group
+        const group = savedBoard.groups.find(g => g._id === groupId);
+        if (!group) {
+            throw new Error(`Group not found in saved board: ${groupId}`);
+        }
+        
+        return group;
+    } catch (err) {
+        console.error(`Cannot update group ${propertyName}`, err);
         
         // In case of error, we should revert the optimistic update
         // by dispatching the original board data

@@ -18,7 +18,7 @@ export const GroupPreview = ({
     dropIndex,
     draggingTaskId
 }) => {
-    
+
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const {
@@ -57,8 +57,7 @@ export const GroupPreview = ({
 
     if (isSorting) {
         return (
-            <div
-                ref={setNodeRef}
+            <div ref={setNodeRef}
                 style={style}
                 {...attributes}
                 {...listeners}
@@ -71,26 +70,24 @@ export const GroupPreview = ({
 
     if (isCollapsed) {
         return (
-            <div
-            ref={setNodeRef}
-            style={style}
-            {...attributes}
-            {...listeners}
-            className="group-preview collapsed"
+            <div ref={setNodeRef}
+                style={style}
+                {...attributes}
+                {...listeners}
+                className="group-preview collapsed"
             >
-            <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} group={group} />
             </div>
         )
     } else {
         return (
-            <div
-                ref={setNodeRef}
+            <div ref={setNodeRef}
                 style={style}
                 {...attributes}
                 {...listeners}
                 className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
             >
-                <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeader group={group} columns={columns} setIsCollapsed={setIsCollapsed} />
                 <TaskList
                     group={group}
                     columns={columns}
