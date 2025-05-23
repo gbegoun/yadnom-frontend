@@ -35,7 +35,7 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
             true // isFromDynamicItem
         );
     };
-
+    
     // Format date for display - "Jan 22" format
     let display = value;
     if (value) {
@@ -43,31 +43,38 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
         const month = d.toLocaleString('en-US', { month: 'short' });
         const day = d.getDate();
         display = `${month} ${day}`;
-    } else {
-        display = 'Set date';
     }
 
     const handleDeleteDate = (e) => {
         e.stopPropagation(); // Prevent opening the date modal
         handleDateUpdate(null); // Set date to null to delete it
-    };
-
+    };    
+    
     return (
         <div
             ref={dateRef}
-            className="date-item"
+            className={`date-item ${!value ? 'date-item-empty' : ''}`}
             style={{ cursor: 'pointer' }}
             onClick={handleOpenModal}
-        >
-            <span>{display}</span>
-            {value && (
-                <button
-                    className="date-delete-btn"
-                    onClick={handleDeleteDate}
-                    aria-label="Delete date"
-                >
-                    <SVGService.XIcon className="date-delete-icon" />
-                </button>
+        >            {value ? (
+                <>
+                    <span>{display}</span>
+                    <button
+                        className="date-delete-btn"
+                        onClick={handleDeleteDate}
+                        aria-label="Delete date"
+                    >
+                        <SVGService.XIcon className="date-delete-icon" />
+                    </button>
+                </>            ) : (
+                <div className="date-icons-container">
+                    <div className="date-icon-wrapper add-icon">
+                        <span>+</span>
+                    </div>
+                    <div className="date-icon-wrapper calendar-icon">
+                        <SVGService.NewDateIcon className="calendar-svg-icon" />
+                    </div>
+                </div>
             )}
         </div>
     );
