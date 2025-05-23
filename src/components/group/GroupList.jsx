@@ -22,9 +22,7 @@ export const GroupList = ({ onBoardSave }) => {
     const storeBoard = useSelector(state => state.boardModule.board);
     const[board, setboard] = useState(null);
     
-    console.log('storeBoard', storeBoard)
     useEffect(() => {
-        console.log('useEffect triggered', storeBoard);
         if (storeBoard) {
             setboard(structuredClone(storeBoard));
         }

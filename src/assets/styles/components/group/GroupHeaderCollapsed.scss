@@ -4,6 +4,7 @@
     grid-column: 1/-1;
     grid-template-columns: subgrid;
     margin-bottom: 16px;
+    height: 60px;
 
 }
 
@@ -31,7 +32,6 @@
     grid-column: 2;
     grid-row: 1/-1;
     width: 6px;
-    height: 100%;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
@@ -91,9 +91,9 @@
 .group-column-collapsed
 {
     display: grid;
+    grid-template-rows: auto 35px;
     width:100px;
     border-right: 1px solid #d0d4e4;
-    grid-template-rows: 26px, 34px;
     
 }
 .group-column-collapsed-title {

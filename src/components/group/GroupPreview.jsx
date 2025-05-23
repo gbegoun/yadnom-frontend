@@ -77,7 +77,7 @@ export const GroupPreview = ({
             {...listeners}
             className="group-preview collapsed"
             >
-            <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+            <GroupHeaderCollapsed groupId={group._id} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     } else {
