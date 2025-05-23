@@ -9,7 +9,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const inputRef = useRef(null);
     const inputWrapperRef = useRef(null);
     const board = useSelector(state => state.boardModule.board);
-    
+
     // Keep input value in sync with task.title when task changes
     useEffect(() => {
         setInputValue(task.title);
@@ -24,10 +24,11 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
         setTimeout(() => {
             if (inputRef.current) inputRef.current.focus();
         }, 0);
-    };    
-      const saveTitle = (newTitle) => {
+    }
+        ;
+    const saveTitle = (newTitle) => {
         if (newTitle !== task.title && board && groupId) {
-            
+
             // Use the centralized action to update the task title
             // The UI will update immediately due to the optimistic update pattern
             updateTaskDirectProperty(board, groupId, task._id, 'title', newTitle)
@@ -40,7 +41,8 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                     // the Redux state, and our component will update via the useEffect
                 });
         }
-    };    const handleInputBlur = () => {
+    };
+    const handleInputBlur = () => {
         setIsEditing(false);
         saveTitle(inputValue);
     };

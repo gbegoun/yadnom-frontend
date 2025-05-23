@@ -1,4 +1,4 @@
-export const GroupHeaderSorting = ({ title, color }) => {
+export const GroupHeaderSorting = ({ title,tasks, color }) => {
 
     return (
         <div className="group-header-sorting">
@@ -13,7 +13,7 @@ export const GroupHeaderSorting = ({ title, color }) => {
                     </div>
                     <div className="group-header-sorting-blank" />
                     <div className="group-header-sorting-title-text">{title}</div>
-                    <div className="group-header-summary-text group-header-sorting-summary-text">5 items</div>
+                    <div className="group-header-collapsed-summary-text">{tasks.length} items</div>
                 </div>
             </div>
             <div className="group-column-sorting-last-cell" />

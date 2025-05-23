@@ -22,6 +22,7 @@ export function getEmptyGroup() {
     return {
         _id: makeId(),
         title: "New Group",
+        color: "blue",
         tasks: []
     }
 }

@@ -1,6 +1,6 @@
 import SVGService from '../../services/svg/svg.service';
 
-export const GroupHeaderTitleRow = ({ title, color, setIsCollapsed }) => {
+export const GroupHeaderTitleRow = ({ title, color, tasks, setIsCollapsed }) => {
 
     return (
         <div className="group-header-title-row" style={{ '--color-indicator': color }}>
@@ -9,7 +9,7 @@ export const GroupHeaderTitleRow = ({ title, color, setIsCollapsed }) => {
                 <SVGService.CollapseGroupIcon className="collapse-group-icon" />
             </div>
             <div className="group-header-title-text">{title}</div>
-            <div className="group-header-summary-text">5 items</div>
+            <div className="group-header-summary-text">{tasks.length} items</div>
         </div>
     )
 }

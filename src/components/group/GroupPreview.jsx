@@ -63,7 +63,7 @@ export const GroupPreview = ({
                 {...listeners}
                 className="group-preview collapsed"
             >
-                <GroupHeaderSorting title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeaderSorting title={group.title} tasks={tasks} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     }
@@ -71,13 +71,13 @@ export const GroupPreview = ({
     if (isCollapsed) {
         return (
             <div
-            ref={setNodeRef}
-            style={style}
-            {...attributes}
-            {...listeners}
-            className="group-preview collapsed"
+                ref={setNodeRef}
+                style={style}
+                {...attributes}
+                {...listeners}
+                className="group-preview collapsed"
             >
-            <GroupHeaderCollapsed groupId={group._id} setIsCollapsed={setIsCollapsed} />
+                <GroupHeaderCollapsed groupId={group._id} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     } else {
@@ -89,7 +89,7 @@ export const GroupPreview = ({
                 {...listeners}
                 className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
             >
-                <GroupHeader title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeader title={group.title} tasks={tasks} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
                 <TaskList
                     group={group}
                     columns={columns}

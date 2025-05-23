@@ -25,7 +25,7 @@ export const Board = () => {
             .catch(err => console.error('Error adding task group:', err));
     }
 
-    const onNewTaskClicked = (groupId = null, title=null) => {
+    const onNewTaskClicked = (groupId = null, title = null) => {
         console.log('Adding new task to group:', groupId);
         addNewTask(board, groupId, title)
             .catch(err => console.error('Error adding new task:', err));
@@ -44,8 +44,8 @@ export const Board = () => {
                     <>
                         <BoardHeader board={board} />
                         <GroupList board={board} onBoardSave={onBoardSave} />
+                        <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
                     </>)}
-                <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
             </main>
         </BoardContext.Provider>
     )

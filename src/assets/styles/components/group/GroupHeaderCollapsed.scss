@@ -77,7 +77,13 @@
     grid-column: 4;
     grid-row: 2;
     justify-content: flex-start;
+    align-items: center;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgb(103, 104, 121);
     border-bottom: 1px solid #d0d4e4;
+    
 }
 
 .group-columns-collapsed-wrapper {

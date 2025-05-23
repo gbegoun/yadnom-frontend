@@ -21,7 +21,7 @@ export const GroupHeaderCollapsed = ({ groupId, setIsCollapsed }) => {
                 </div>
                 <div className="group-header-collapsed-blank" />
                 <div className="group-header-title-text group-header-collapsed-title-text">{group.title}</div>
-                <div className="group-header-summary-text group-header-collapsed-summary-text">5 items</div>
+                <div className="group-header-collapsed-summary-text">{tasks.length} items</div>
             </div>
 
             <div className="group-columns-collapsed-wrapper">

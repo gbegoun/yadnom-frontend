@@ -49,4 +49,12 @@
     font-size: 14px;
     margin-left: 4px;
     color: rgb(103, 104, 121);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+
+    }
+
+.group-preview:hover .group-header-summary-text {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
