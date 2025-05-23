@@ -4,13 +4,14 @@ import { useModal } from '../../../contexts/modal/useModal.jsx';
 import { useModalPosition } from '../../../hooks/useModalPosition.js';
 import { updateTaskColumnValue } from '../../../store/actions/board.actions.js';
 import DateOptionsModal from '../../modal_types/DateOptionsModal.jsx';
+import SVGService from '../../../services/svg/svg.service.js';
 
 export const DateCol = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal();
     const { centerBottomPosition } = useModalPosition();
     const board = useSelector(state => state.boardModule.board);
     const dateRef = useRef();
-    
+
     const handleDateUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
             // With optimistic updates, UI will update immediately
@@ -34,7 +35,7 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
             true // isFromDynamicItem
         );
     };
-    
+
     // Format date for display - "Jan 22" format
     let display = value;
     if (value) {
@@ -46,6 +47,11 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
         display = 'Set date';
     }
 
+    const handleDeleteDate = (e) => {
+        e.stopPropagation(); // Prevent opening the date modal
+        handleDateUpdate(null); // Set date to null to delete it
+    };
+
     return (
         <div
             ref={dateRef}
@@ -54,6 +60,15 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
             onClick={handleOpenModal}
         >
             <span>{display}</span>
+            {value && (
+                <button
+                    className="date-delete-btn"
+                    onClick={handleDeleteDate}
+                    aria-label="Delete date"
+                >
+                    <SVGService.XIcon className="date-delete-icon" />
+                </button>
+            )}
         </div>
     );
 };

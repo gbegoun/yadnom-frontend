@@ -3,29 +3,71 @@
     color: #555;
     display: inline-flex;
     align-items: center;
-    justify-content: center;    
-    padding: 4px 10px;
+    justify-content: center; // Center the date text
+    padding: 4px 8px; // Slightly reduce horizontal padding
+    height: 24px; // Set fixed height
     border-radius: 5px;
     transition: all 0.2s ease;
-    position: relative; /* For the pseudo-element positioning */
-    
+    position: relative;
+    /* For the pseudo-element positioning */
+    box-sizing: border-box;
+
     &:hover::after {
         content: "";
         position: absolute;
-        top: 1px;
+        top: -1px;
         left: 4px;
         right: 4px;
-        bottom: 1px;
+        bottom: -1px;
         border: 1px solid #c9c9c9;
-        border-radius: 3px; /* Smaller radius for inner border */
-        pointer-events: none; /* So it doesn't interfere with clicks */
+        border-radius: 3px;
+        /* Smaller radius for inner border */
+        pointer-events: none;
+        /* So it doesn't interfere with clicks */
     }
-    
+
     &:hover {
-        background-color: #f8f8f8;
+        color: rgb(57, 57, 244);
     }
-    
+
     span {
         white-space: nowrap;
+        line-height: 1;
+        flex-grow: 1; // Allow the span to take available space
+        text-align: center; // Center the text
     }
+
+    .date-delete-btn {
+        display: none; // Hidden by default
+        background-color: #eaeaea;
+        border: none;
+        cursor: pointer;
+        padding: 1px;
+        line-height: 1;
+        z-index: 1; // Ensure it's above the pseudo-element
+        border-radius: 2px;
+        position: absolute; // Position absolutely
+        right: 2px; // Align to the right
+
+        .date-delete-icon {
+            width: 16px;
+            height: 16px;
+            color: #777;
+            display: block;
+
+            &:hover {
+                color: #333;
+                background-color: #e0e0e0;
+            }
+        }
+    }
+
+    &:hover .date-delete-btn {
+        display: flex; // Use flex instead of inline-block for better alignment
+        align-items: center;
+        justify-content: center;
+    }
+
+    // Make sure we have minimum width for proper layout
+    min-width: 90px;
 }
