@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { GroupPreview } from "./GroupPreview";
 import {
     DndContext,
@@ -17,7 +18,17 @@ import {
 } from "@dnd-kit/sortable"
 import { TaskPreview } from "../task/TaskPreview";
 
-export const GroupList = ({ board, onBoardSave }) => {
+export const GroupList = ({ onBoardSave }) => {
+    const storeBoard = useSelector(state => state.boardModule.board);
+    const[board, setboard] = useState(null);
+    
+    console.log('storeBoard', storeBoard)
+    useEffect(() => {
+        console.log('useEffect triggered', storeBoard);
+        if (storeBoard) {
+            setboard(structuredClone(storeBoard));
+        }
+    }, [storeBoard]);
 
     const [dragState, setDragState] = useState({
         isSorting: false,
@@ -74,18 +85,18 @@ export const GroupList = ({ board, onBoardSave }) => {
             const activeIndex = board.tasks.findIndex(task => task._id === active.id)
             const overIndex = board.tasks.findIndex(task => task._id === over.id)
             const targetGroupId = board.tasks[overIndex].groupid
-            
+
             if (board.tasks[activeIndex].groupid !== targetGroupId) {
                 board.tasks[activeIndex].groupid = targetGroupId
-                
+                setDragState(prev => ({
+                    ...prev,
+                    activeGroupId: targetGroupId
+                }))
             }
             board.tasks = arrayMove(board.tasks, activeIndex, overIndex)
-            onBoardSave(board);
         }
-        
-        else if (isActiveATask && isOverAGroup) {
-            onBoardSave(board);
-        }
+
+
     }
 
     const handleDragEnd = (event) => {
@@ -111,7 +122,7 @@ export const GroupList = ({ board, onBoardSave }) => {
             const oldIndex = updatedGroups.findIndex(group => group._id === active.id);
             const newIndex = updatedGroups.findIndex(group => group._id === over.id);
             updatedGroups = arrayMove(updatedGroups, oldIndex, newIndex);
-            
+
             board.groups = updatedGroups;
         }
 
@@ -128,6 +139,7 @@ export const GroupList = ({ board, onBoardSave }) => {
         onBoardSave(board);
     }
 
+    if(!board) return <div>Loading...</div>
     return (
         <DndContext
             sensors={sensors}

@@ -97,7 +97,7 @@ export const GroupPreview = ({
                     draggingTaskId={draggingTaskId}
                     dropIndex={dropIndex}  // Pass through the drop index
                 />
-                <GroupFooter group={group} columns={columns} tasks={tasks} />
+                <GroupFooter groupId={group._id} />
             </div>
         )
     }
