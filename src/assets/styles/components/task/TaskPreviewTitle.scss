@@ -1,7 +1,7 @@
 .task-preview-title-wrapper {
     display: grid;
     grid-column: 1;
-    grid-template-columns: repeat(4, fit-content(100%));  
+    grid-template-columns: repeat(4, fit-content(100%));
     position: sticky;
     left: 0;
     z-index: 3;
@@ -9,7 +9,7 @@
 }
 
 .task-preview-menu {
-    
+
     display: flex;
     grid-column: 1;
     width: 40px;
@@ -66,12 +66,15 @@
         display: inline-block;
         padding: 0px 4px;
         border-radius: 4px;
-        border: none;
-        
+        border: 1px solid transparent;
+        /* Always have a 1px border, but transparent */
+
         &:hover {
-            border: 1px solid #c9c9c9;
+            border-color: #c9c9c9;
+            /* Just change the color on hover */
         }
     }
+
 
     .task-title-input {
         display: inline-block;
