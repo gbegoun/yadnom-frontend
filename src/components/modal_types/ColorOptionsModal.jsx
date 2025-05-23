@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 // Colors exactly matching Monday.com color palette
 const colors = [
-    '#1F7D43', '#22C55E', '#A3E635', '#D4D61A', '#F59E0B',
-    '#7C3AED', '#9CA3AF', '#0284C7', '#60A5FA', '#BE185D',
-    '#E11D48', '#F43F5E', '#EC4899', '#F97316', '#FB923C',
-    '#7D4F40', '#D3D3D3', '#6B7280'
+    '#037F4C', '#00C875', '#9CD326', '#CAB641', '#FFCB00',
+    '#784BD1', '#9D50DD', '#007EB5', '#579BFC', '#66CCFF',
+    '#BB3354', '#DF2F4A', '#FF007F', '#FF5AC4', '#FF642E',
+    '#FDAB3D', '#7F5347', '#C4C4C4', '#757575'
 ];
 
 export const ColorOptionsModal = ({ currentColor, onSelectColor }) => {
