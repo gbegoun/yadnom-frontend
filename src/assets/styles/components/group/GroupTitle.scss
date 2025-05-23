@@ -81,6 +81,7 @@
         font-size: 16px; // Slightly larger for collapsed view
         line-height: 20px;
         height: 30px;
+        width: calc(700px / 2.5); // Set width to 1/3 for collapsed input
     }
 }
 
