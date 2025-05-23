@@ -12,7 +12,7 @@ export const GroupHeaderSorting = ({ title, color }) => {
                         </svg>
                     </div>
                     <div className="group-header-sorting-blank" />
-                    <div className="group-header-title-text group-header-collapsed-title-text">{title}</div>
+                    <div className="group-header-sorting-title-text">{title}</div>
                     <div className="group-header-summary-text group-header-sorting-summary-text">5 items</div>
                 </div>
             </div>

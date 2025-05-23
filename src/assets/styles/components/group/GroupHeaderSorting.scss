@@ -10,6 +10,7 @@
     grid-template-rows: auto auto;
 }
 
+
 .group-header-sorting-menu {
     grid-column: 1;
     grid-row: 1;
@@ -23,7 +24,6 @@
     width: 6px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    
 }
 
 .group-header-sorting-title{
@@ -52,18 +52,20 @@
 }
 
 .group-header-sorting-title-text {
+    box-sizing: border-box;
     grid-column: 4;
     grid-row: 1;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    font-family: poppins, sans-serif;
     padding-left: 5px;
+    font-size: 18px
 }
 
 .group-header-sorting-summary-text {
     display: flex;
     margin: 0;
-    padding: 8px;
     grid-column: 4;
     grid-row: 2;
     justify-content: flex-start;
