@@ -39,10 +39,11 @@ export const Board = () => {
     return (
         <BoardContext.Provider value={{ board, onNewGroupClicked, onNewTaskClicked, loadBoard }}>
             <main className="board-container">
-                {board && <div>
-                    <BoardHeader board={board} />
-                    <GroupList board={board} onBoardSave={onBoardSave} />
-                </div>}
+                {board && (
+                    <>
+                        <BoardHeader board={board} />
+                        <GroupList board={board} onBoardSave={onBoardSave} />
+                    </>)}
                 <button onClick={() => onNewGroupClicked(false)}>Add new group</button>
             </main>
         </BoardContext.Provider>

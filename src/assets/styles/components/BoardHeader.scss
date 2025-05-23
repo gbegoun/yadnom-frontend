@@ -7,6 +7,10 @@
     padding: 20px 0px;
     margin-bottom: 24px;
     margin-left:40px;
+    position:sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
 
     .info-row {
         display: flex;
