@@ -1,13 +1,14 @@
-import { useRef, useContext } from 'react';
+import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { useModal } from '../../../contexts/modal/useModal.jsx';
 import { useModalPosition } from '../../../hooks/useModalPosition.js';
-import { BoardContext } from '../../../contexts/board/BoardContext.jsx';
 import { updateTaskColumnValue } from '../../../store/actions/board.actions.js';
 import DateOptionsModal from '../../modal_types/DateOptionsModal.jsx';
 
 export const DateCol = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal();
-    const { centerBottomPosition } = useModalPosition();    const { board } = useContext(BoardContext);
+    const { centerBottomPosition } = useModalPosition();
+    const board = useSelector(state => state.boardModule.board);
     const dateRef = useRef();
     
     const handleDateUpdate = (selectedValue) => {
@@ -33,12 +34,14 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
             true // isFromDynamicItem
         );
     };
-
-    // Format date for display
+    
+    // Format date for display - "Jan 22" format
     let display = value;
     if (value) {
         const d = new Date(value);
-        display = d.toLocaleDateString();
+        const month = d.toLocaleString('en-US', { month: 'short' });
+        const day = d.getDate();
+        display = `${month} ${day}`;
     } else {
         display = 'Set date';
     }
