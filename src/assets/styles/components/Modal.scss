@@ -1,6 +1,6 @@
 .modal-overlay {
     position: fixed;
-    inset: 0;  // shorthand for top, right, bottom, left
+    inset: 0; // shorthand for top, right, bottom, left
     display: flex;
     width: 100%;
     height: 100%;
@@ -11,12 +11,12 @@
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 
+        box-shadow:
             0px 2px 20px rgba(0, 0, 0, 0.15),
             0px 4px 20px rgba(0, 0, 0, 0.1);
         position: fixed;
         width: auto;
-        min-width: 200px;
+        min-width: 142px;
         max-width: 90vw;
         animation: modal-appear 0.08s ease-out;
 
@@ -31,8 +31,8 @@
         height: 10px;
         background-color: #fff; // Match modal-content background
         transform: rotate(45deg);
-        top: -5px;   // Moves the tip of the triangle 5px above its container's top edge
-        left: 0;     // Aligns with its container's left edge (container is already positioned)
+        top: -5px; // Moves the tip of the triangle 5px above its container's top edge
+        left: 0; // Aligns with its container's left edge (container is already positioned)
         box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05); // Optional subtle shadow
         animation: triangle-appear 0.08s ease-out;
 
@@ -49,6 +49,7 @@
         opacity: 0;
         transform: translateY(-4px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -61,6 +62,7 @@
         rotate: 45deg;
         transform: translateY(-4px);
     }
+
     to {
         opacity: 1;
         rotate: 45deg;
