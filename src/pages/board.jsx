@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../components/board/BoardHeader.jsx';
 import { GroupList } from '../components/group/GroupList.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BoardContext } from '../contexts/board/BoardContext.jsx';
 import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js";
 import { useSelector } from 'react-redux';
@@ -25,8 +25,9 @@ export const Board = () => {
             .catch(err => console.error('Error adding task group:', err));
     }
 
-    const onNewTaskClicked = (groupId = null) => {
-        addNewTask(board, groupId)
+    const onNewTaskClicked = (groupId = null, title=null) => {
+        console.log('Adding new task to group:', groupId);
+        addNewTask(board, groupId, title)
             .catch(err => console.error('Error adding new task:', err));
     }
 

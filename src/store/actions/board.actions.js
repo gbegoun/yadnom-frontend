@@ -212,7 +212,7 @@ export async function addTaskGroup(board, isPositionTop = true) {
     }
 }
 
-export async function addNewTask(board, groupId) {
+export async function addNewTask(board, groupId, title) {
     try {
         console.log('addNewTask', groupId)
         const task = getEmptyTask(board.columns)
@@ -222,6 +222,10 @@ export async function addNewTask(board, groupId) {
         
         // Make sure board.tasks exists
         if (!updatedBoard.tasks) updatedBoard.tasks = []
+        
+        if(title){
+            task.title = title
+        }
         
         // Set the groupid on the task to link it to the correct group
         if (groupId) {

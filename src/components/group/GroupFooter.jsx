@@ -8,7 +8,7 @@ export const GroupFooter = ({ groupId }) => {
     const group = board?.groups?.find(group => group._id === groupId);
     return (
         <div className="group-footer">
-            <GroupFooterNewTask color={group.color} />
+            <GroupFooterNewTask groupId={groupId} color={group.color} />
             <GroupFooterSummary columns={board.columns} tasks={tasks} />
         </div>
     )
