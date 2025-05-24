@@ -27,7 +27,12 @@
     }
 
     &:hover:not(.date-item-empty) {
-        color: rgb(57, 57, 244);
+        color: rgb(44, 44, 208);
+
+        // Keep the completed text color on hover
+        .date-completed {
+            color: rgb(44, 44, 208);
+        }
     }
 
     span {
@@ -35,6 +40,7 @@
         line-height: 1;
         flex-grow: 1; // Allow the span to take available space
         text-align: center; // Center the text
+        position: relative; // For positioning checkmark icon
     }
 
     .date-delete-btn {
@@ -137,6 +143,45 @@
             width: 20px;
             height: 20px;
             color: #555;
+        }
+    }
+
+    // Strikethrough style for completed tasks
+    .date-completed {
+        position: relative;
+        display: inline-block;
+        text-decoration: line-through;
+        text-decoration-color: rgba(103, 104, 121, 0.6);
+        text-decoration-thickness: 1px;
+
+        /* Reduce padding to just 5px on each side */
+        padding: 0 5px;
+
+        /* Ensure decoration extends through the padding */
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+
+        /* Keep the text in the original position */
+        margin: 0 -1px;
+
+        /* Styling for the completed on time icon */
+        .completed-on-time-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            /* Position absolutely */
+            left: 20px;
+            /* Align to the left edge */
+            transform: translateX(-18px);
+            /* Move outside the text area */
+
+            svg {
+                width: 16px;
+                height: 16px;
+                color: #0c875a;
+                /* Green color for success */
+            }
         }
     }
 }
