@@ -14,10 +14,6 @@ export const GroupHeaderSorting = ({group, title, tasks, color }) => {
                         </svg>
                     </div>
                     <div className="group-header-sorting-blank" />
-                    <div className="group-header-title-text group-header-collapsed-title-text">
-                        <GroupTitle group={group} color={color} />
-                    </div>
-                    <div className="group-header-summary-text group-header-sorting-summary-text">5 items</div>
                     <div className="group-header-sorting-title-text">{title}</div>
                     <div className="group-header-collapsed-summary-text">{tasks.length} items</div>
                 </div>
