@@ -1,0 +1,33 @@
+// Set width for the color picker modal content
+.modal-content:has(.color-options-grid) {
+    width: 120px !important; // Extremely compact width
+    height: 115px !important; // Compact height
+    padding: 8px !important; // Minimal padding
+    border: 1px solid #e0e0e0; // Light border like in the image
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); // Subtle shadow
+}
+
+// Color grid styling
+.color-options-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px; // Minimal gap for ultra-compact layout
+}
+
+.color-option {
+    width: 20px; // Even smaller buttons for ultra-compact layout
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none; // No border initially
+    transition: transform 0.15s ease;
+
+    &:hover {
+        transform: scale(1.03);
+        opacity: 0.65;
+    }
+
+    &.selected {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #000;
+    }
+}

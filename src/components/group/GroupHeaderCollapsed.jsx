@@ -1,6 +1,6 @@
 import { DynamicSummary } from '../item/DynamicSummary';
 import { useSelector } from 'react-redux';
-
+import { GroupTitle } from './GroupTitle';
 
 export const GroupHeaderCollapsed = ({ groupId, setIsCollapsed }) => {
     const board = useSelector(state => state.boardModule.board);
@@ -20,8 +20,10 @@ export const GroupHeaderCollapsed = ({ groupId, setIsCollapsed }) => {
                     </svg>
                 </div>
                 <div className="group-header-collapsed-blank" />
-                <div className="group-header-title-text group-header-collapsed-title-text">{group.title}</div>
-                <div className="group-header-collapsed-summary-text">{tasks.length} items</div>
+                <div className="group-header-title-text group-header-collapsed-title-text">
+                    <GroupTitle group={groupData} color={color} />
+                </div>
+                <div className="group-header-summary-text group-header-collapsed-summary-text">5 items</div>
             </div>
 
             <div className="group-columns-collapsed-wrapper">

@@ -10,6 +10,7 @@ export const ADD_NEW_TASK = 'ADD_NEW_TASK'
 // New action types for optimistic updates
 export const UPDATE_TASK_PROPERTY_OPTIMISTIC = 'UPDATE_TASK_PROPERTY_OPTIMISTIC'
 export const UPDATE_TASK_COLUMN_OPTIMISTIC = 'UPDATE_TASK_COLUMN_OPTIMISTIC'
+export const UPDATE_GROUP_PROPERTY_OPTIMISTIC = 'UPDATE_GROUP_PROPERTY_OPTIMISTIC'
 export const ADD_GROUP_OPTIMISTIC = 'ADD_GROUP_OPTIMISTIC'
 export const ADD_TASK_OPTIMISTIC = 'ADD_TASK_OPTIMISTIC'
 
@@ -101,6 +102,27 @@ export function boardReducer(state = initialState, action) {
                     task._id === action.taskId 
                         ? { ...task, [action.propertyName]: action.value }
                         : task
+                )
+            };
+            
+            // Update both the current board and the boards array
+            boards = state.boards.map(board => 
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+            
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+        }
+        
+        case UPDATE_GROUP_PROPERTY_OPTIMISTIC: {
+            if (!state.board) return state;
+
+            const updatedBoard = { 
+                ...state.board,
+                groups: state.board.groups.map(group => 
+                    group._id === action.groupId 
+                        ? { ...group, [action.propertyName]: action.value }
+                        : group
                 )
             };
             
