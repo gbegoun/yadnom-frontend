@@ -3,16 +3,16 @@
     color: #555;
     display: inline-flex;
     align-items: center;
-    justify-content: center; // Center the date text
-    padding: 4px 8px 4px 10px; // Added left padding to make room for icons
-    height: 24px; // Set fixed height
+    justify-content: center;
+    padding: 4px 8px 4px 10px; // Left padding for icons
+    height: 24px;
     border-radius: 5px;
     transition: all 0.2s ease;
     position: relative;
-    /* For the pseudo-element positioning */
     box-sizing: border-box;
+    min-width: 90px;
 
-    /* Status icons displayed at the root level of date-item */
+    /* Status icons styling */
     .completed-on-time-icon,
     .completed-late-icon,
     .overdue-icon {
@@ -22,7 +22,6 @@
         position: absolute;
         left: 5px;
         z-index: 2;
-        /* Ensure icons are above other content */
         cursor: help;
 
         svg {
@@ -33,15 +32,14 @@
 
     .completed-on-time-icon svg,
     .completed-late-icon svg {
-        color: #00c116;
-        /* Green for success or completed */
+        color: #00c116; // Green for success/completed
     }
 
     .overdue-icon svg {
-        color: #e44258;
-        /* Red for overdue */
+        color: #e44258; // Red for overdue
     }
 
+    /* Hover style with border */
     &:hover::after {
         content: "";
         position: absolute;
@@ -51,39 +49,38 @@
         bottom: -1px;
         border: 1px solid #c9c9c9;
         border-radius: 3px;
-        /* Smaller radius for inner border */
         pointer-events: none;
-        /* So it doesn't interfere with clicks */
     }
 
     &:hover:not(.date-item-empty) {
         color: rgb(44, 44, 208);
 
-        // Keep the completed text color on hover
         .date-completed {
             color: rgb(44, 44, 208);
         }
     }
 
+    /* Text content styling */
     span {
         white-space: nowrap;
         line-height: 1;
-        flex-grow: 1; // Allow the span to take available space
-        text-align: center; // Center the text
-        position: relative; // For positioning checkmark icon
+        flex-grow: 1;
+        text-align: center;
+        position: relative;
     }
 
+    /* Delete button styling */
     .date-delete-btn {
-        display: none; // Hidden by default
+        display: none;
         background-color: #eaeaea;
         border: none;
         cursor: pointer;
         padding: 1px;
         line-height: 1;
-        z-index: 1; // Ensure it's above the pseudo-element
+        z-index: 1;
         border-radius: 2px;
-        position: absolute; // Position absolutely
-        right: 2px; // Align to the right
+        position: absolute;
+        right: 2px;
 
         .date-delete-icon {
             width: 16px;
@@ -99,15 +96,12 @@
     }
 
     &:hover .date-delete-btn {
-        display: flex; // Use flex instead of inline-block for better alignment
+        display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    // Make sure we have minimum width for proper layout
-    min-width: 90px;
-
-    // Special styling for empty date state
+    /* Empty date state styling */
     &.date-item-empty {
         background-color: transparent;
 
@@ -116,7 +110,6 @@
         }
 
         .date-icons-container {
-            // Hidden by default, will appear on hover
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.2s ease, visibility 0.2s ease;
@@ -125,15 +118,13 @@
             justify-content: center;
         }
 
-        &:hover {
-            .date-icons-container {
-                // Show on hover
-                opacity: 1;
-                visibility: visible;
-            }
+        &:hover .date-icons-container {
+            opacity: 1;
+            visibility: visible;
         }
     }
 
+    /* Date icons container */
     .date-icons-container {
         display: flex;
         align-items: center;
@@ -143,6 +134,7 @@
         height: 100%;
     }
 
+    /* Icon wrapper styling */
     .date-icon-wrapper {
         width: 24px;
         height: 24px;
@@ -152,13 +144,13 @@
         border-radius: 50%;
     }
 
+    /* Add icon styling */
     .add-icon {
         width: 14px;
         height: 14px;
         background-color: #0073ea;
         color: white;
         font-size: 16px;
-        // font-weight: bold;
 
         span {
             line-height: 0;
@@ -166,6 +158,7 @@
         }
     }
 
+    /* Calendar icon styling */
     .calendar-icon {
         background-color: #f5f5f5;
 
@@ -176,85 +169,16 @@
         }
     }
 
-    // Strikethrough style for completed tasks
+    /* Strikethrough style for completed tasks */
     .date-completed {
         position: relative;
         display: inline-block;
         text-decoration: line-through;
         text-decoration-color: rgba(103, 104, 121, 0.6);
         text-decoration-thickness: 1px;
-
-        /* Reduce padding to just 5px on each side */
         padding: 0 5px;
-
-        /* Ensure decoration extends through the padding */
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
-
-        /* Keep the text in the original position */
         margin: 0 -1px;
-
-        /* Styling for icons that show task status relative to date */
-        .completed-on-time-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            /* Position absolutely */
-            left: 5px;
-            /* Align to the left edge */
-            transform: translateX(0px);
-            cursor: help;
-            /* Show question mark cursor on hover */
-
-            svg {
-                width: 16px;
-                height: 16px;
-                color: #00c116;
-                /* Green color for success */
-            }
-        }
-
-        /* Icon for completed but late tasks - shown on the left like completed-on-time */
-        .completed-late-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            /* Position absolutely */
-            left: 5px;
-            /* Align to the left edge */
-            transform: translateX(0px);
-            cursor: help;
-            /* Show question mark cursor on hover */
-
-            svg {
-                width: 16px;
-                height: 16px;
-                color: #00c116;
-                /* Green for completed but late */
-            }
-        }
-
-        /* Icon for overdue tasks - also shown on the left */
-        .overdue-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            /* Position absolutely */
-            left: 5px;
-            /* Align to the left edge */
-            transform: translateX(0px);
-            cursor: help;
-            /* Show question mark cursor on hover */
-
-            svg {
-                width: 16px;
-                height: 16px;
-                color: #e44258;
-                /* Red for overdue */
-            }
-        }
     }
 }
