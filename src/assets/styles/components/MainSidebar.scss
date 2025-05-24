@@ -44,6 +44,22 @@
         }
     }
 
+    .sidebar-AddBoard-Button{
+        display:block;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #0073ea;
+        border-radius: 4px;
+        color: #ffffff;
+        height:32px;
+        margin: 8px;
+        font-size: 32px;
+        font-weight: 200;
+        cursor: pointer;
+    }
+
     .sidebar-section {
         margin-top: 6px;
         padding-top: 6px;

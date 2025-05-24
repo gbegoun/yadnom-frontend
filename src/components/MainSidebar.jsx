@@ -2,11 +2,35 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import SVGService from '../services/svg/svg.service';
 import { useEffect } from 'react';
-import { loadBoards } from '../store/actions/board.actions.js';
+import { loadBoards,addNewBoard } from '../store/actions/board.actions.js';
+import { useModal } from '../contexts/modal/useModal.jsx'
+import { NewBoardModal } from './modal_types/NewBoardModal.jsx'
 
 export const MainSidebar = () => {
     const boards = useSelector(storeState => storeState.boardModule.boards);
     const location = useLocation();
+
+    const { openModal, closeModal } = useModal();
+
+    const onAddClick = () => {
+        openModal(
+            <NewBoardModal
+                onClose={closeModal}
+                onAddNewBoard={onAddNewBoard}
+            />,
+            { backgroundOverlay: true }
+        );
+    }
+
+    const onAddNewBoard = (title) => {
+        closeModal();
+        loadBoards();
+        addNewBoard(title).then((newBoard) => {
+            if (newBoard) {
+                window.location.href = `/board/${newBoard._id}`;
+            }
+        });
+    }
 
     useEffect(() => {
         loadBoards();
@@ -23,13 +47,17 @@ export const MainSidebar = () => {
     return (
         <nav className="main-sidebar-nav">
             {/* Home button */}
-            <Link to="/" className={getHomeClass()}> 
+            <Link to="/" className={getHomeClass()}>
                 <SVGService.HomeIcon className="sidebar-icon" />
                 <span>Home</span>
             </Link>
 
             {/* Boards section */}
             <div className="sidebar-section">
+                <div className="sidebar-AddBoard-Button" onClick={onAddClick}>
+                    <SVGService.AddViewIcon className="sidebar-AddBoard-icon" />
+                </div>
+
                 <ul className="sidebar-list sidebar-boards">
                     {boards && boards.length ? boards.map(board => (
                         <li key={board._id}>
