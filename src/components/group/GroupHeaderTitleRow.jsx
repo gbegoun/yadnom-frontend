@@ -1,19 +1,19 @@
 import SVGService from '../../services/svg/svg.service';
 import { GroupTitle } from './GroupTitle';
 
-export const GroupHeaderTitleRow = ({ title, color, setIsCollapsed, group }) => {
+export const GroupHeaderTitleRow = ({ tasks,  setIsCollapsed, group }) => {
     // If a complete group object is provided, use it; otherwise create a simple one from title
-    const groupData = group || { title, _id: title, color };
 
+    console.log('group', group)
     return (
-        <div className="group-header-title-row" style={{ '--color-indicator': color }}>
+        <div className="group-header-title-row" style={{ '--color-indicator': group.color }}>
             <div className="group-header-title-menu" />
             <div className="collapse-group-icon-wrapper" onClick={() => setIsCollapsed(true)}>
                 <SVGService.CollapseGroupIcon className="collapse-group-icon" />
             </div>
             <div className="group-header-title-text">
-                <GroupTitle group={groupData} color={color} />
-            </div>            
+                <GroupTitle group={group} />
+            </div>
             <div className="group-header-summary-text">{tasks.length} items</div>
         </div>
     )

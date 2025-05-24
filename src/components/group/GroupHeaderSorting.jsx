@@ -1,6 +1,6 @@
 import { GroupTitle } from './GroupTitle';
 
-export const GroupHeaderSorting = ({ title,tasks, color }) => {
+export const GroupHeaderSorting = ({group, title, tasks, color }) => {
 
     return (
         <div className="group-header-sorting">

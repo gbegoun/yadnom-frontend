@@ -63,7 +63,7 @@ export const GroupPreview = ({
                 {...listeners}
                 className="group-preview collapsed"
             >
-                <GroupHeaderSorting title={group.title} tasks={tasks} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeaderSorting group={group} title={group.title} tasks={tasks} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     }
@@ -76,8 +76,8 @@ export const GroupPreview = ({
                 {...listeners}
                 className="group-preview collapsed"
             >
-                
-                <GroupHeaderCollapsed title={group.title} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} group={group} />
+
+                <GroupHeaderCollapsed groupId={group._id} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
     } else {
@@ -88,7 +88,7 @@ export const GroupPreview = ({
                 {...listeners}
                 className={`group-preview ${isDragging ? 'is-dragging' : ''} ${isActiveDropArea ? 'is-active-drop-area' : ''}`}
             >
-                <GroupHeader group={group} columns={columns} setIsCollapsed={setIsCollapsed} />
+                <GroupHeader  tasks={tasks} group={group} columns={columns} setIsCollapsed={setIsCollapsed} />
                 <TaskList
                     group={group}
                     columns={columns}

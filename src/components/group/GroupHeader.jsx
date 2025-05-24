@@ -1,12 +1,12 @@
 import { GroupHeaderColumnRow } from "./GroupHeaderColumnRow";
 import { GroupHeaderTitleRow } from "./GroupHeaderTitleRow";
 
-export const GroupHeader = ({ title, color, columns, tasks, setIsCollapsed }) => {
+export const GroupHeader = ({ tasks, title,  columns, group, setIsCollapsed }) => {
 
     return (
         <div className="group-header">
-            <GroupHeaderTitleRow title={title} tasks={tasks} color={color} setIsCollapsed={setIsCollapsed}/>
-            <GroupHeaderColumnRow columns={columns} color={color} />
+            <GroupHeaderTitleRow  tasks={tasks} title={title} setIsCollapsed={setIsCollapsed} group={group} />
+            <GroupHeaderColumnRow columns={columns} group={group} />
         </div>
     )
 }

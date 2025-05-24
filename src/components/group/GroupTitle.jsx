@@ -74,16 +74,16 @@ export const GroupTitle = ({ group }) => {
         e.stopPropagation();
         if (!colorPickerButtonRef.current) return;
         const rect = colorPickerButtonRef.current.getBoundingClientRect();
-        const modifiedRect = centerBottomPosition(rect);
+        const modifiedRect = colorModalPosition(rect);
 
         openModal(
             <ColorOptionsModal
                 currentColor={group.color}
                 onSelectColor={handleColorSelect}
-            />,
-            modifiedRect,
-            false // is not from dynamic item - it's from the group title
-        );
+            />, {
+                targetRect: rect,
+                isFromDynamicItem: false,
+            });
     };
 
     return (

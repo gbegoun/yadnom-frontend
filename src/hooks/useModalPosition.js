@@ -11,6 +11,15 @@ export const useModalPosition = () => {
         height: rect.height
     });
 
+    const colorModalPosition = (rect) => ({
+        top: rect.top - 8,
+        bottom: rect.bottom + 8, // 8px padding from the target
+        left: rect.left - 8,  // Center the modal
+        right: rect.right,
+        width: rect.width,
+        height: rect.height
+    });
+
     return {
         centerBottomPosition
         // We can add more positioning strategies here in the future

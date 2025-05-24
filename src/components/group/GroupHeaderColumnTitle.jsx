@@ -1,4 +1,4 @@
-export const GroupHeaderColumnTitle = ({ color}) => {
+export const GroupHeaderColumnTitle = ({ color }) => {
     return (
         <div className="group-header-column-title-wrapper">
             <div className="group-header-column-title-menu" />

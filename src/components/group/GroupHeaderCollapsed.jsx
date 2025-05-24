@@ -5,6 +5,10 @@ import { GroupTitle } from './GroupTitle';
 export const GroupHeaderCollapsed = ({ groupId, setIsCollapsed }) => {
     const board = useSelector(state => state.boardModule.board);
     const group = board?.groups?.find(group => group._id === groupId);
+
+    console.log('group', group)
+    console.log('groupId', groupId)
+
     const tasks = board?.tasks?.filter(task => task.groupid === groupId);
     console.log('tasks', tasks);
     const columns = board?.columns
@@ -21,9 +25,9 @@ export const GroupHeaderCollapsed = ({ groupId, setIsCollapsed }) => {
                 </div>
                 <div className="group-header-collapsed-blank" />
                 <div className="group-header-title-text group-header-collapsed-title-text">
-                    <GroupTitle group={groupData} color={color} />
+                    <GroupTitle group={group} />
                 </div>
-                <div className="group-header-summary-text group-header-collapsed-summary-text">5 items</div>
+                <div className=" group-header-collapsed-summary-text">{tasks.length} items</div>
             </div>
 
             <div className="group-columns-collapsed-wrapper">
