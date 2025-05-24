@@ -76,7 +76,6 @@ export const GroupPreview = ({
                 {...listeners}
                 className="group-preview collapsed"
             >
-                <GroupHeaderSorting group={group} title={group.title} tasks={tasks} color={group.color} columns={columns} setIsCollapsed={setIsCollapsed} />
                 <GroupHeaderCollapsed groupId={group._id} columns={columns} setIsCollapsed={setIsCollapsed} />
             </div>
         )
