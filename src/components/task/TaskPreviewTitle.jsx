@@ -17,6 +17,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
 
     useClickOutside(inputWrapperRef, () => {
         if (isEditing) setIsEditing(false);
+        saveTitle(inputValue);
     });
 
     const handleSpanClick = () => {
@@ -24,8 +25,8 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
         setTimeout(() => {
             if (inputRef.current) inputRef.current.focus();
         }, 0);
-    }
-        ;
+    };
+
     const saveTitle = (newTitle) => {
         if (newTitle !== task.title && board && groupId) {
 
@@ -42,6 +43,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                 });
         }
     };
+
     const handleInputBlur = () => {
         setIsEditing(false);
         saveTitle(inputValue);

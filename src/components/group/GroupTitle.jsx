@@ -13,7 +13,7 @@ export const GroupTitle = ({ group }) => {
     const inputWrapperRef = useRef(null);
     const board = useSelector(state => state.boardModule.board);
     const { openModal, closeModal } = useModal();
-    const { centerBottomPosition } = useModalPosition();
+    const { colorModalPosition } = useModalPosition();
     const colorPickerButtonRef = useRef(null);
 
     const handleSpanClick = () => {
@@ -26,6 +26,7 @@ export const GroupTitle = ({ group }) => {
 
     useClickOutside(inputWrapperRef, () => {
         if (isEditing) setIsEditing(false);
+        saveTitle(inputValue);
     });
 
     const saveTitle = (newTitle) => {
@@ -81,7 +82,7 @@ export const GroupTitle = ({ group }) => {
                 currentColor={group.color}
                 onSelectColor={handleColorSelect}
             />, {
-                targetRect: rect,
+                targetRect: modifiedRect,
                 isFromDynamicItem: false,
             });
     };
