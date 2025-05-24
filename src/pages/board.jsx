@@ -12,13 +12,12 @@ export const Board = () => {
 
     useEffect(() => {
         loadBoard(boardId)
-            .catch(err => { console.log("Error loading board:", err); });
+            .catch(err => { console.log("Error loading board:", err); });      
     }, [boardId])
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
             .then(group => {
-                // Add a new task to the newly created group
                 addNewTask(board, group._id)
                     .catch(err => console.error('Error adding task to new group:', err));
             })
@@ -36,6 +35,7 @@ export const Board = () => {
             .catch(err => console.error('Error saving board:', err));
     }
 
+    console.log(board)
     if (!board) return (<div>Loading...</div>)
     return (
         <BoardContext.Provider value={{ board, onNewGroupClicked, onNewTaskClicked, loadBoard }}>
