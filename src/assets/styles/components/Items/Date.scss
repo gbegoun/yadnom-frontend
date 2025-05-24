@@ -4,13 +4,43 @@
     display: inline-flex;
     align-items: center;
     justify-content: center; // Center the date text
-    padding: 4px 8px; // Slightly reduce horizontal padding
+    padding: 4px 8px 4px 10px; // Added left padding to make room for icons
     height: 24px; // Set fixed height
     border-radius: 5px;
     transition: all 0.2s ease;
     position: relative;
     /* For the pseudo-element positioning */
     box-sizing: border-box;
+
+    /* Status icons displayed at the root level of date-item */
+    .completed-on-time-icon,
+    .completed-late-icon,
+    .overdue-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 5px;
+        z-index: 2;
+        /* Ensure icons are above other content */
+        cursor: help;
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .completed-on-time-icon svg,
+    .completed-late-icon svg {
+        color: #00c116;
+        /* Green for success or completed */
+    }
+
+    .overdue-icon svg {
+        color: #e44258;
+        /* Red for overdue */
+    }
 
     &:hover::after {
         content: "";
@@ -164,23 +194,66 @@
         /* Keep the text in the original position */
         margin: 0 -1px;
 
-        /* Styling for the completed on time icon */
+        /* Styling for icons that show task status relative to date */
         .completed-on-time-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             position: absolute;
             /* Position absolutely */
-            left: 20px;
+            left: 5px;
             /* Align to the left edge */
-            transform: translateX(-18px);
-            /* Move outside the text area */
+            transform: translateX(0px);
+            cursor: help;
+            /* Show question mark cursor on hover */
 
             svg {
                 width: 16px;
                 height: 16px;
-                color: #0c875a;
+                color: #00c116;
                 /* Green color for success */
+            }
+        }
+
+        /* Icon for completed but late tasks - shown on the left like completed-on-time */
+        .completed-late-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            /* Position absolutely */
+            left: 5px;
+            /* Align to the left edge */
+            transform: translateX(0px);
+            cursor: help;
+            /* Show question mark cursor on hover */
+
+            svg {
+                width: 16px;
+                height: 16px;
+                color: #00c116;
+                /* Green for completed but late */
+            }
+        }
+
+        /* Icon for overdue tasks - also shown on the left */
+        .overdue-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            /* Position absolutely */
+            left: 5px;
+            /* Align to the left edge */
+            transform: translateX(0px);
+            cursor: help;
+            /* Show question mark cursor on hover */
+
+            svg {
+                width: 16px;
+                height: 16px;
+                color: #e44258;
+                /* Red for overdue */
             }
         }
     }
