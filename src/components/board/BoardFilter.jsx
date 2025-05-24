@@ -45,32 +45,32 @@ export const BoardFilter = (/* { board } */) => {
 
     const handlePersonClick = () => {
         const rect = personBtnRef.current.getBoundingClientRect()
-        openModal(<PersonFilterModal />, rect)
+        openModal(<PersonFilterModal />, {targetRect: rect})
     }
 
     const handleFilterClick = () => {
         const rect = filterBtnRef.current.getBoundingClientRect()
-        openModal(<AdvancedFilterModal />, rect)
+        openModal(<AdvancedFilterModal />, {targetRect: rect})
     }
 
     const handleSortClick = () => {
         const rect = sortBtnRef.current.getBoundingClientRect()
-        openModal(<SortTasksModal />, rect)
+        openModal(<SortTasksModal />, {targetRect: rect})
     }
 
     const handleHideClick = () => {
         const rect = hideBtnRef.current.getBoundingClientRect()
-        openModal(<HideColumnsModal />, rect)
+        openModal(<HideColumnsModal />, {targetRect: rect})
     }
 
     const handleGroupByClick = () => {
         const rect = groupByBtnRef.current.getBoundingClientRect()
-        openModal(<GroupByModal />, rect)
+        openModal(<GroupByModal />, {targetRect: rect})
     }
 
     const handleOptionsClick = () => {
         const rect = optionsBtnRef.current.getBoundingClientRect()
-        openModal(<OptionsModal />, rect)
+        openModal(<OptionsModal />, {targetRect: rect})
     }
 
     return (

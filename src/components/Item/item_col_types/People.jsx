@@ -34,8 +34,10 @@ export const People = ({ value, taskId, groupId, column }) => {
                 people={people}
                 onSelect={handleSelect}
                 onClose={closeModal}
-            />,
-            rect
+            />,{
+                targetRect: rect,
+            isFromDynamicItem: true,
+        }
         );
     };
 

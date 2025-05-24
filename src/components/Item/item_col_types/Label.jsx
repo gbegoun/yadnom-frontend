@@ -19,7 +19,6 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const { centerBottomPosition } = useModalPosition();
 
 
-
     const handleLabelUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
             // With optimistic updates, UI will update immediately
@@ -40,9 +39,10 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 value={value}
                 onSelect={handleLabelUpdate}
                 onClose={closeModal}
-            />,
-            modifiedRect,
-            true // isFromDynamicItem
+            />,{
+                targetRect: rect,
+            isFromDynamicItem: true,
+        }
         )
     }
 

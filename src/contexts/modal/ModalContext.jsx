@@ -10,6 +10,7 @@ export const ModalProvider = ({ children }) => {
     const modalRef = useRef(null)
     const targetRectRef = useRef(null)
     const isFromDynamicItemRef = useRef(false); // Added ref to track if modal is from DynamicItem
+    const backgroundOverlayRef = useRef(false); // Track if modal is opened with background
 
     const handleModalClick = (e) => e.stopPropagation()
 
@@ -45,7 +46,7 @@ export const ModalProvider = ({ children }) => {
             if (newModalX + modalRect.width > window.innerWidth) {
                 newModalX = window.innerWidth - modalRect.width - 16; // 16px padding from edge
             }
-            
+
             // Adjust for left overflow
             if (newModalX < 0) {
                 newModalX = 16;
@@ -54,7 +55,7 @@ export const ModalProvider = ({ children }) => {
             // Adjust for bottom overflow
             if (newModalY + modalRect.height > window.innerHeight) {
                 newModalY = targetRect.top - modalRect.height;
-                
+
                 if (newModalY < 0) {
                     newModalY = 16;
                 }
@@ -77,7 +78,7 @@ export const ModalProvider = ({ children }) => {
                 pointsDown = true;
                 // Position container so its bottom aligns with modal's bottom.
                 // The triangle itself is 10px high, so its container should be at modal bottom.
-                triangleContainerActualY = newModalY + modalRect.height -10; // Adjusted: container bottom aligns with modal bottom
+                triangleContainerActualY = newModalY + modalRect.height - 10; // Adjusted: container bottom aligns with modal bottom
             }
 
             const triangleContainerX = newModalX + (modalRect.width / 2) - 5; // 5 is half triangle width
@@ -93,16 +94,23 @@ export const ModalProvider = ({ children }) => {
         }
     }, [isModalOpen, modalContent, position.x, position.y, trianglePosition]); // Added missing dependencies
 
-    const openModal = (content, targetRect, isFromDynamicItem = false) => {
+    const openModal = (content, options = {}) => {
+        const {
+            targetRect = null,
+            isFromDynamicItem = false,
+            backgroundOverlay = false
+        } = options
+        
         setModalContent(content)
         targetRectRef.current = targetRect
         isFromDynamicItemRef.current = isFromDynamicItem; // Set the ref
+        backgroundOverlayRef.current = backgroundOverlay; // Track if background overlay is used
 
         // Initial position; useLayoutEffect will calculate the final one.
         if (targetRect) {
             setPosition({
-                x: targetRect.left, 
-                y: targetRect.bottom 
+                x: targetRect.left,
+                y: targetRect.bottom
             });
         } else {
             // Fallback if no targetRect, initial position to center of screen
@@ -111,7 +119,7 @@ export const ModalProvider = ({ children }) => {
                 y: window.innerHeight / 2
             });
         }
-        
+
         setIsModalOpen(true)
     }
 
@@ -143,6 +151,11 @@ export const ModalProvider = ({ children }) => {
                             <div className={`modal-triangle ${trianglePosition.pointsDown ? 'points-down' : ''}`}></div>
                         </div>
                     )}
+
+                    {backgroundOverlayRef.current && (
+                        <div className="modal-background-overlay" onClick={closeModal}></div>
+                    )}
+
                     <div
                         className="modal-content"
                         ref={modalRef}

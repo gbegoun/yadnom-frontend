@@ -5,10 +5,9 @@ import { boardService as local } from './board.service.local'
 import { boardService as remote } from './board.service.remote'
 import { columnTypes } from './column-types'
 
-export function getEmptyBoard() {
+export function getEmptyBoard(title) {
     return {
-        name: makeLorem(getRandomIntInclusive(1,3)), // Ofir - add for mockup data
-        description: makeLorem(getRandomIntInclusive(5,20)),    // Ofir - add for mockup data
+        name: title, 
         members: [],
         created_at: Date.now(),
         updated_at: Date.now(),

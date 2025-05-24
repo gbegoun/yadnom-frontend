@@ -7,9 +7,9 @@ import DateOptionsModal from '../../modal_types/DateOptionsModal.jsx';
 
 export const DateCol = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal();
-    const { centerBottomPosition } = useModalPosition();    const { board } = useContext(BoardContext);
+    const { centerBottomPosition } = useModalPosition(); const { board } = useContext(BoardContext);
     const dateRef = useRef();
-    
+
     const handleDateUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
             // With optimistic updates, UI will update immediately
@@ -29,8 +29,11 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
                 value={value}
                 onSelect={handleDateUpdate}
                 onClose={closeModal}
-            />, modifiedRect,
-            true // isFromDynamicItem
+            />, {
+                targetRect: rect,
+            isFromDynamicItem: true,
+        }
+
         );
     };
 
