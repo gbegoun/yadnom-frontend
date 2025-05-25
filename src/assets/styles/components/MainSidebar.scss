@@ -1,3 +1,9 @@
+// Sidebar fade-in animation
+.main-sidebar {
+    @include fade-in(0.3s, 0s);
+}
+
+
 .main-sidebar-nav {
     display: flex;
     flex-direction: column;

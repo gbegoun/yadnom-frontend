@@ -51,7 +51,7 @@ export const GroupPreview = ({
                 style={style}
                 {...attributes}
                 {...listeners}
-                className="group-dragging-placeholer" />
+                className="group-dragging-placeholder" />
         )
     }
 

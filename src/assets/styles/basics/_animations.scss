@@ -1,0 +1,56 @@
+// Simple animation utility classes for fade-in effects
+
+// Base fade-in classes
+.fade-in {
+    @include fade-in();
+}
+
+.fade-in-fast {
+    @include fade-in($animation-duration-fast);
+}
+
+.fade-in-slow {
+    @include fade-in($animation-duration-slow);
+}
+
+// Delayed fade-ins
+.fade-in-delay-1 {
+    @include fade-in($animation-duration-normal, 0.1s);
+}
+
+.fade-in-delay-2 {
+    @include fade-in($animation-duration-normal, 0.2s);
+}
+
+.fade-in-delay-3 {
+    @include fade-in($animation-duration-normal, 0.3s);
+}
+
+// Hover effects with transitions
+.fade-hover {
+    transition: opacity $animation-duration-fast ease-out;
+    
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+// Specific component animations
+.board-enter {
+    @include fade-in(0.4s, 0s);
+}
+
+.button-enter {
+    @include fade-in(0.3s, 0.2s);
+}
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

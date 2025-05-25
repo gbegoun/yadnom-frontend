@@ -56,3 +56,25 @@
         }
     }
   }
+
+/* Animation Mixins */
+
+// Keyframe for simple fade-in animation
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// Simple fade-in mixin
+@mixin fade-in($duration: 0.3s, $delay: 0s, $timing: ease-out) {
+    opacity: 0;
+    animation-fill-mode: both;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-timing-function: $timing;
+    animation-name: fadeIn;
+}

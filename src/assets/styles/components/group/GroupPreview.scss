@@ -1,12 +1,11 @@
 .group-preview {
     display: grid;
     height: min-content;
-    grid-column: 1/-1;
-    grid-template-columns: subgrid;
-    
+    grid-column: 1/-1;    grid-template-columns: subgrid;
+    @include fade-in(0.3s, 0s);
 }
 
-.group-dragging-placeholer {
+.group-dragging-placeholder {
     display: grid;
     grid-column: 1/-1;
     grid-template-columns: subgrid;
