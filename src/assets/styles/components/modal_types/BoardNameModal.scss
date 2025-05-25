@@ -1,0 +1,76 @@
+.board-name-modal {
+    min-width: 280px;
+    max-width: 406px;
+
+    .modal-header {
+        margin-bottom: 16px;
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #323338;
+        }
+    }
+
+    .modal-body {
+        margin-bottom: 20px;
+
+        .board-name-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:focus {
+                border-color: #0073ea;
+                box-shadow: 0 0 0 2px rgba(0, 115, 234, 0.1);
+            }
+
+            &::placeholder {
+                color: #999;
+            }
+        }
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &.cancel-btn {
+                background-color: #f5f6f8;
+                color: #323338;
+
+                &:hover {
+                    background-color: #ecedf0;
+                }
+            }
+
+            &.save-btn {
+                background-color: #0073ea;
+                color: white;
+
+                &:hover:not(:disabled) {
+                    background-color: #0060c7;
+                }
+
+                &:disabled {
+                    background-color: #ccc;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
