@@ -7,18 +7,19 @@ import { useRef } from 'react';
 
 export const BoardHeader = ({ board }) => {
     const { openModal } = useModal();
-    const boardTitleRef = useRef(null);    const handleBoardNameClick = () => {
+    const boardTitleRef = useRef(null); const handleBoardNameClick = () => {
         if (!board) return;
-        
+
         const rect = boardTitleRef.current.getBoundingClientRect();
+
         openModal(
-            <BoardNameModal 
-                board={board} 
+            <BoardNameModal
+                board={board}
                 onSave={handleSaveBoardName}
             />,
             {
                 targetRect: rect,
-                backgroundOverlay: true
+
             }
         );
     };
@@ -41,9 +42,10 @@ export const BoardHeader = ({ board }) => {
     return (
         <div className='board-header'>
             <div className='info-row'>
-                <div className='title-container'>                    <h2 
+                <div className='title-container'>
+                    <h2
                         ref={boardTitleRef}
-                        className='board-title clickable' 
+                        className='board-title clickable'
                         onClick={handleBoardNameClick}
                         title="Click to edit board name"
                     >

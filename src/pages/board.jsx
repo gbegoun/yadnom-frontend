@@ -43,7 +43,7 @@ export const Board = () => {
            .catch(err => console.error('Error saving board:', err));
     };
 
-    console.log(board);
+
     if (!board) return (<div className='loading'></div>); 
     
     // Check if board has all necessary data loaded
