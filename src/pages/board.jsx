@@ -1,43 +1,27 @@
 import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../components/board/BoardHeader.jsx';
 import { GroupList } from '../components/group/GroupList.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BoardContext } from '../contexts/board/BoardContext.jsx';
 import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js";
 import { useSelector } from 'react-redux';
 import SVGService from '../services/svg/svg.service.js';
+import { useBoardAnimations } from '../hooks/useBoardAnimations.js';
 
 export const Board = () => {
     const { boardId } = useParams();
     const board = useSelector(state => state.boardModule.board);
-    const [showAddButton, setShowAddButton] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
+    
+    // Custom hook for animation coordination
+    const { isAnimating, showAddButton, resetAnimations } = useBoardAnimations(board);
 
     useEffect(() => {
         // Reset animation state when boardId changes
-        setIsAnimating(false);
-        setShowAddButton(false);
-        
+        resetAnimations();
         loadBoard(boardId)
             .catch(err => { console.log("Error loading board:", err); });
-    }, [boardId]);
-
-    // Coordinate all animations to start together
-    useEffect(() => {
-        if (board && board.groups && board.tasks && board.columns) {
-            // Small delay to ensure DOM is ready, then trigger all animations together
-            const timer = setTimeout(() => {
-                setIsAnimating(true);
-                // Slightly longer delay for the add button to appear after content
-                setTimeout(() => setShowAddButton(true), 200);
-            }, 50);
             
-            return () => clearTimeout(timer);
-        } else {
-            setIsAnimating(false);
-            setShowAddButton(false);
-        }
-    }, [board]);
+    }, [boardId, resetAnimations]);
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
@@ -60,7 +44,7 @@ export const Board = () => {
     };
 
     console.log(board);
-    if (!board) return (<div className='loading'>Loading...</div>); 
+    if (!board) return (<div className='loading'></div>); 
     
     // Check if board has all necessary data loaded
     const isBoardFullyLoaded = board && board.groups && board.tasks && board.columns;

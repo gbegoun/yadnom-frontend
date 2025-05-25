@@ -137,7 +137,7 @@ export const GroupList = ({ onBoardSave }) => {
         onBoardSave(board);
     }
 
-    if(!board) return <div className="loading">Loading...</div>
+    if(!board) return <div className="loading"></div>
     
     return (
         <DndContext
