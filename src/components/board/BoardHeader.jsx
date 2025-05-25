@@ -2,6 +2,12 @@ import { BoardFilter } from './BoardFilter.jsx';
 import SVGService from '../../services/svg/svg.service';
 
 export const BoardHeader = ({ board }) => {
+    
+
+    if (!board) {
+        return <div className='board-header'>Loading...</div>;
+    }
+
     return (
         <div className='board-header'>
             <div className='info-row'>
