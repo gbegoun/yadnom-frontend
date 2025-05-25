@@ -7,9 +7,7 @@ import { useRef } from 'react';
 
 export const BoardHeader = ({ board }) => {
     const { openModal } = useModal();
-    const boardTitleRef = useRef(null);
-
-    const handleBoardNameClick = () => {
+    const boardTitleRef = useRef(null);    const handleBoardNameClick = () => {
         if (!board) return;
         
         const rect = boardTitleRef.current.getBoundingClientRect();
@@ -19,7 +17,8 @@ export const BoardHeader = ({ board }) => {
                 onSave={handleSaveBoardName}
             />,
             {
-                targetRect: rect
+                targetRect: rect,
+                backgroundOverlay: true
             }
         );
     };
