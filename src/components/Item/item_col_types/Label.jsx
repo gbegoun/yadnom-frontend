@@ -1,4 +1,4 @@
-import { useRef} from 'react'
+import { useRef } from 'react'
 import { useModal } from '../../../contexts/modal/useModal.jsx'
 import { LabelOptionsModal } from '../../modal_types/LabelOptionsModal.jsx'
 import { BoardContext } from '../../../contexts/board/BoardContext.jsx'
@@ -7,7 +7,7 @@ import { useModalPosition } from '../../../hooks/useModalPosition.js'
 import { useSelector } from 'react-redux'
 
 export const Label = ({ column, value, taskId, groupId }) => {
-    
+
     const board = useSelector(state => state.boardModule.board);
 
     // Find the selected option based on value
@@ -16,8 +16,6 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const label = selectedOption?.label || 'Label'
     const { openModal, closeModal } = useModal();
     const labelRef = useRef();
-    const { centerBottomPosition } = useModalPosition();
-
 
     const handleLabelUpdate = (selectedValue) => {
         if (taskId && groupId && board) {
@@ -31,7 +29,6 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const handleOpenModal = (e) => {
         e.stopPropagation()
         const rect = labelRef.current.getBoundingClientRect()
-        const modifiedRect = centerBottomPosition(rect)
 
         openModal(
             <LabelOptionsModal
@@ -39,8 +36,8 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 value={value}
                 onSelect={handleLabelUpdate}
                 onClose={closeModal}
-            />,{
-                targetRect: rect,
+            />, {
+            targetRect: rect,
             isFromDynamicItem: true,
         }
         )
