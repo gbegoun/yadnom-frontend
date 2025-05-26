@@ -75,6 +75,11 @@ export const demo_data = {
                 "_id": "testing",
                 "label": "Testing",
                 "color": "#9d50dd"
+              },
+              {
+                "_id": "Default",
+                "label": " ",
+                "color": "#c4c4c4"
               }
             ]
           }
