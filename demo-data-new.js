@@ -1,4 +1,31 @@
 export const demo_data = {
+  "users": [
+    {
+      "_id": 201,
+      "fullName": "CEO Cat",
+      "imageUrl": "/src/assets/Profile_pics_temporary/cat.jpg"
+    },
+    {
+      "_id": 202,
+      "fullName": "Caffeine Cow",
+      "imageUrl": "/src/assets/Profile_pics_temporary/cow.jpg"
+    },
+    {
+      "_id": 203,
+      "fullName": "Duck Developer",
+      "imageUrl": "/src/assets/Profile_pics_temporary/duck.jpg"
+    },
+    {
+      "_id": 204,
+      "fullName": "Mouse Manager",
+      "imageUrl": "/src/assets/Profile_pics_temporary/mouse.jpg"
+    },
+    {
+      "_id": 205,
+      "fullName": "Tired Turtle",
+      "imageUrl": "/src/assets/Profile_pics_temporary/turtle.jpg"
+    }
+  ],
   "boards": [
     {
       "_id": "B1001",
@@ -6,7 +33,10 @@ export const demo_data = {
       "description": "End-to-end development of our new project management platform with kanban and dashboard capabilities (demo data)",
       "members": [
         201,
-        202
+        202,
+        203,
+        204,
+        205
       ],
       "created_by": [
         201
@@ -45,6 +75,11 @@ export const demo_data = {
                 "_id": "testing",
                 "label": "Testing",
                 "color": "#9d50dd"
+              },
+              {
+                "_id": "Default",
+                "label": " ",
+                "color": "#c4c4c4"
               }
             ]
           }
@@ -112,6 +147,11 @@ export const demo_data = {
                 "_id": "low",
                 "label": "Low",
                 "color": "#00c875"
+              },
+              {
+                "_id": "Default",
+                "label": " ",
+                "color": "#c4c4c4"
               }
             ]
           }
@@ -463,7 +503,7 @@ export const demo_data = {
             "sprint_column": "sprint2",
             "owners_column": [
               202,
-              206
+              205
             ],
             "priority_column": "critical",
             "due_date_column": "2025-02-15",
@@ -502,7 +542,7 @@ export const demo_data = {
             "sprint_column": "sprint3",
             "owners_column": [
               202,
-              206
+              205
             ],
             "priority_column": "high",
             "due_date_column": "2025-03-15",
@@ -516,12 +556,12 @@ export const demo_data = {
           "title": "Create activity logging system",
           "created_at": "2025-03-01T09:15:00Z",
           "updated_at": "2025-03-12T11:30:00Z",
-          "creator_id": 206,
+          "creator_id": 205,
           "column_values": {
             "status_column": "working",
             "sprint_column": "sprint3",
             "owners_column": [
-              206
+              205
             ],
             "priority_column": "medium",
             "due_date_column": "2025-03-20",
@@ -535,12 +575,12 @@ export const demo_data = {
           "title": "Implement notification service",
           "created_at": "2025-03-05T11:30:00Z",
           "updated_at": "2025-03-20T15:40:00Z",
-          "creator_id": 206,
+          "creator_id": 205,
           "column_values": {
             "status_column": "planning",
             "sprint_column": "sprint4",
             "owners_column": [
-              206
+              205
             ],
             "priority_column": "medium",
             "due_date_column": "2025-04-05",
@@ -654,12 +694,12 @@ export const demo_data = {
           "title": "Set up CI/CD pipeline",
           "created_at": "2025-01-18T09:15:00Z",
           "updated_at": "2025-01-30T13:30:00Z",
-          "creator_id": 207,
+          "creator_id": 204,
           "column_values": {
             "status_column": "done",
             "sprint_column": "sprint1",
             "owners_column": [
-              207
+              204
             ],
             "priority_column": "high",
             "due_date_column": "2025-01-30",
@@ -675,12 +715,12 @@ export const demo_data = {
           "title": "Configure staging environment",
           "created_at": "2025-02-01T10:00:00Z",
           "updated_at": "2025-02-12T15:30:00Z",
-          "creator_id": 207,
+          "creator_id": 204,
           "column_values": {
             "status_column": "done",
             "sprint_column": "sprint2",
             "owners_column": [
-              207
+              204
             ],
             "priority_column": "high",
             "due_date_column": "2025-02-12",
@@ -694,12 +734,12 @@ export const demo_data = {
           "title": "Set up monitoring and alerts",
           "created_at": "2025-02-15T11:30:00Z",
           "updated_at": "2025-03-01T14:15:00Z",
-          "creator_id": 207,
+          "creator_id": 204,
           "column_values": {
             "status_column": "done",
             "sprint_column": "sprint3",
             "owners_column": [
-              207
+              204
             ],
             "priority_column": "medium",
             "due_date_column": "2025-03-01",
@@ -715,12 +755,12 @@ export const demo_data = {
           "title": "Database scaling strategy",
           "created_at": "2025-03-02T09:30:00Z",
           "updated_at": "2025-03-20T13:45:00Z",
-          "creator_id": 207,
+          "creator_id": 204,
           "column_values": {
             "status_column": "working",
             "sprint_column": "sprint3",
             "owners_column": [
-              207,
+              204,
               202
             ],
             "priority_column": "medium",
@@ -739,12 +779,12 @@ export const demo_data = {
       "name": "Marketing Campaign Q3 2025",
       "description": "Q3 2025 Marketing initiatives and campaigns for product launch",
       "members": [
-        208,
-        209,
-        210
+        202,
+        203,
+        202
       ],
       "created_by": [
-        208
+        202
       ],
       "created_at": "2025-05-01T09:00:00Z",
       "updated_at": "2025-05-13T10:30:00Z",
@@ -855,12 +895,12 @@ export const demo_data = {
           "title": "Q3 Social Media Calendar",
           "created_at": "2025-05-01T10:00:00Z",
           "updated_at": "2025-05-13T11:30:00Z",
-          "creator_id": 208,
+          "creator_id": 202,
           "column_values": {
             "status_column": "in_progress",
             "channel_column": "social",
             "owners_column": [
-              208
+              202
             ],
             "budget_column": 1500,
             "due_date_column": "2025-05-20"
@@ -872,12 +912,12 @@ export const demo_data = {
           "title": "Instagram Stories Campaign",
           "created_at": "2025-05-02T09:00:00Z",
           "updated_at": "2025-05-13T14:15:00Z",
-          "creator_id": 208,
+          "creator_id": 202,
           "column_values": {
             "status_column": "not_started",
             "channel_column": "social",
             "owners_column": [
-              209
+              203
             ],
             "budget_column": 2000,
             "due_date_column": "2025-06-01"
@@ -889,12 +929,12 @@ export const demo_data = {
           "title": "Newsletter Template Design",
           "created_at": "2025-05-03T11:00:00Z",
           "updated_at": "2025-05-13T09:45:00Z",
-          "creator_id": 209,
+          "creator_id": 203,
           "column_values": {
             "status_column": "completed",
             "channel_column": "email",
             "owners_column": [
-              210
+              202
             ],
             "budget_column": 800,
             "due_date_column": "2025-05-10"

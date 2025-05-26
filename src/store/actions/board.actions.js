@@ -76,9 +76,9 @@ export async function removeBoard(boardId) {
 }
 
 export async function addNewBoard(title='New Board') {
-    // Create a new empty board
-    const newBoard = boardService.getEmptyBoard(title)
-    
+    // Create a new default board
+    const newBoard = boardService.getDefaultBoard(title)
+
     try {
         // Immediately dispatch to update UI
         store.dispatch(getCmdAddNewBoard(newBoard))

@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
 import { HomePage } from "./pages/HomePage.jsx"
 import { Board } from "./pages/Board.jsx"
 import { MainHeader } from "./components/MainHeader.jsx"
@@ -6,8 +7,16 @@ import { MainSidebar } from "./components/MainSidebar.jsx"
 import { ModalProvider } from './contexts/modal/ModalContext.jsx'
 import { store } from './store/store.js'
 import { Provider } from 'react-redux'
+import { loadUsers } from './store/actions/user.actions.js'
+import { loadBoards } from './store/actions/board.actions.js'
 
 function RootCmp() {
+  useEffect(() => {
+    // Load users and boards when the application starts
+    loadUsers()
+    loadBoards()
+  }, [])
+
   return (
 
     <Provider store={store}>

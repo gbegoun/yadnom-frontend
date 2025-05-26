@@ -1,6 +1,6 @@
 .group-list {
     display: grid;
     grid-template-columns: min-content min-content minmax(100px, 1fr);
-    grid-auto-rows: min-content;    
-
+    grid-auto-rows: min-content;
+    @include fade-in(0.3s, 0s);
 }

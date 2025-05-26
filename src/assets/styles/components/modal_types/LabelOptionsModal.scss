@@ -1,20 +1,24 @@
 .label-options-list {
   list-style: none;
-  padding: 0;
+  padding: 10px 0 0 0;
   margin: 0;
-  width: 160px;
+  width: 180px;
 
   li {
     margin: 0;
     padding: 4.5px;
+    display: flex;
+    justify-content: center;
   }
 
   .label-option-btn {
-    display: block;
-    line-height: 10px;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    width: 85%;
     text-align: center;
-    padding: 12px 0;
+    padding: 0;
     border: none;
     border-radius: 2px;
     font-size: 14px;
@@ -24,9 +28,25 @@
     transition: opacity 0.2s ease;
     color: white;
     font-family: 'Figtree', sans-serif;
+    height: 32px;
+    /* Fixed height for all buttons including empty one */
+    box-sizing: border-box;
+    /* Include padding in the height calculation */
+    min-height: 32px;
+    /* Ensure minimum height even if content is empty */
 
     &:hover {
       opacity: 0.9;
+    }
+
+    /* Styling for empty labels to maintain consistent height */
+    &.empty-label {
+      &::after {
+        content: "\00a0\00a0";
+        /* Two non-breaking spaces for more consistent spacing */
+        display: inline-block;
+        height: 32px;
+      }
     }
   }
 }
@@ -35,43 +55,46 @@
   border: 0;
   height: 1px;
   background-color: #e8e8e8;
-  margin: 4px 0;
-  width: 100%;
+  margin: 4px auto;
+  width: 90%;
 }
 
 .edit-labels-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 8px;
+  padding: 0px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  width: 100%;
 
-  &:hover {
-    background-color: #f5f5f5;
+  .edit-labels-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    padding: 8px 12px;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 0;
+
+    .edit-labels-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      color: #676879;
+    }
+
+    .edit-labels-text {
+      font-size: 14px;
+      color: #323338;
+      font-family: 'Figtree', sans-serif;
+    }
+
+    &:hover {
+      background-color: #ededed;
+    }
   }
-
-  .edit-labels-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-    color: #676879;
-  }
-
-  .edit-labels-text {
-    font-size: 14px;
-    color: #323338;
-    font-family: 'Figtree', sans-serif;
-  }
-}
-
-// Modal container styling
-.modal-content {
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  padding: 8px;
-  z-index: 1000;
-  min-width: 220px;
 }

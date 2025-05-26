@@ -20,11 +20,11 @@ import { TaskPreview } from "../task/TaskPreview";
 
 export const GroupList = ({ onBoardSave }) => {
     const storeBoard = useSelector(state => state.boardModule.board);
-    const[board, setboard] = useState(null);
-    
+    const [board, setBoard] = useState(null);
+
     useEffect(() => {
         if (storeBoard) {
-            setboard(structuredClone(storeBoard));
+            setBoard(structuredClone(storeBoard));
         }
     }, [storeBoard]);
 
@@ -137,7 +137,8 @@ export const GroupList = ({ onBoardSave }) => {
         onBoardSave(board);
     }
 
-    if(!board) return <div>Loading...</div>
+    if(!board) return <div className="loading"></div>
+    
     return (
         <DndContext
             sensors={sensors}

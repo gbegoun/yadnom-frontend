@@ -3,9 +3,10 @@
     grid-column: 1/-1;
     grid-template-columns: subgrid;
     background-color: white;
+    @include fade-in(0.3s, 0s);
 }
 
-.task-preview:hover{
+.task-preview:hover {
     z-index: 5;
     background-color: white;
 }
@@ -15,9 +16,10 @@
 .task-preview:hover .task-preview-last-cell {
     background-color: rgb(247, 247, 247);
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
-    
+
 }
-.task-preview:hover .task-title{
+
+.task-preview:hover .task-title {
     z-index: 5;
     background-color: rgb(247, 247, 247);
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
@@ -42,7 +44,7 @@
     border-bottom: 1px solid #d0d4e4;
     border-right: 1px solid #d0d4e4;
     overflow: hidden;
-    text-overflow: ellipsis;    
+    text-overflow: ellipsis;
     white-space: nowrap;
     color: rgb(102, 102, 102);
 }
