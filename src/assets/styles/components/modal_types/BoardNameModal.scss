@@ -1,52 +1,49 @@
 .board-name-modal {
-    min-width: 280px;
-    max-width: 340px;
-    padding: 0;
+    width: 420px;
+    padding: 0px;
 
     .board-name-header {
+        font-family: poppins, sans-serif;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 8px;
-        padding: 16px 16px 0;
+        margin-bottom: 15px;
+        padding: 8px 14px 0;
 
-        .board-name-input {
-            border: none;
-            background: transparent;
-            padding: 0;
-            margin: 0;
-            font-size: 18px;
-            font-weight: 600;
+        .board-name-input,
+        .board-name-text {
+            font-family: poppins, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
             color: #323338;
             width: 85%;
-            outline: none;
+            height: 30px;
+            box-sizing: border-box;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease, border 0.15s;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            display: inline-block;
+        }
 
-            &:focus {
-                border-bottom: 1px solid #c3c6d4;
-                white-space: normal;
-                overflow: visible;
-                text-overflow: unset;
+        .board-name-input {
+            border: 1px solid #3558e4;
+            background: #fff;
+            outline: none;
+
+             &:focus {
+                outline: none;
             }
         }
 
         .board-name-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: #323338;
-            width: 85%;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-            transition: background-color 0.2s ease;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            border: 1px solid transparent;
+            cursor: text;
 
             &:hover {
-                background-color: #f6f7fb;
+                border: 1px solid #c3c6d4;
             }
         }
 
@@ -54,16 +51,20 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
             color: #c3c6d4;
+            border-radius: 4px;
+            position: relative;
+            top: -4px;
 
             &:hover {
-                color: #fdab3d;
+                background-color: #f0f1f5;
             }
 
             .star-icon {
+                color: #323338;
                 width: 100%;
                 height: 100%;
             }
@@ -71,38 +72,75 @@
     }
 
     .board-description {
-        padding: 0 16px 16px;
-        margin-bottom: 8px;
-        border-bottom: 1px solid #e6e9ef;
+        padding: 0 12px 16px;
+        border-bottom: none;
+        position: relative;
 
-        .board-description-text {
+
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 95%; // or adjust as needed for divider length
+            height: 2px;
+            background: #e6e9ef;
+            border-radius: 1px;
+        }
+
+        .board-description-text,
+        .board-description-input {
             color: #676879;
             font-size: 14px;
             line-height: 1.5;
-            cursor: pointer;
             border-radius: 4px;
-            padding: 4px;
-            transition: background-color 0.2s ease;
+            padding: 8px;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid transparent;
+            background: white;
+            transition: background-color 0.2s ease, border 0.15s;
+            font-family: inherit;
+            outline: none;
+            min-height: 60px;
+            height: 60px;
+            resize: none;
+            overflow: hidden;
+            display: block;
+        }
+
+        .board-description-text {
+            cursor: text;
+            // On hover, show border like input
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+            text-overflow: ellipsis;
+            line-height: 1.5;
+            max-height: 4em; // exactly 2 lines
+            min-height: unset;
+            height: unset;
 
             &:hover {
-                background-color: #f6f7fb;
+                border: 1px solid #c3c6d4;
             }
         }
 
         .board-description-input {
-            width: 100%;
-            border: 1px solid #c3c6d4;
-            border-radius: 4px;
-            padding: 8px;
-            background: white;
-            color: #323338;
-            font-size: 14px;
-            line-height: 1.5;
-            resize: vertical;
-            min-height: 60px;
-            outline: none;
-            font-family: inherit;
-
+            border: 1px solid #3558e4;
+            height: 110px;
+            // Remove resize and scrollbars
+            resize: none;
+            overflow: hidden;
+            // Remove outline on focus
+            &:focus {
+                outline: none;
+            }
             &::placeholder {
                 color: #c3c6d4;
             }
@@ -110,7 +148,8 @@
     }
 
     .board-info-section {
-        padding: 0 16px 16px;
+        padding: 0 20px 16px;
+        cursor: default;
 
         .section-title {
             margin: 16px 0 12px;
@@ -136,57 +175,59 @@
                 align-items: center;
                 font-size: 14px;
                 color: #323338;
+                padding-right: 0;
+                border-radius: 4px;
+                transition: background-color 0.2s;
+                position: relative;
 
-                .board-type {
-                    display: flex;
-                    align-items: center;
+                &:hover {
+                    background-color: #f0f1f5;
+                }
+            }
 
-                    .icon {
-                        margin-right: 8px;
-                        color: #676879;
-                    }
+            .user-avatar {
+                display: flex;
+                align-items: center;
+                padding: 2px 10px 2px 10px;
+                background: none;
+                border-radius: 0;
+                cursor: pointer;
+
+                .avatar-image {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    object-position: center top;
+                    margin-right: 10px;
+                    // border: 1px solid #e6e9ef;
+                    overflow: hidden;
+                    max-width: 28px;
+                    max-height: 28px;
+                    min-width: 28px;
+                    min-height: 28px;
                 }
 
-                .user-avatar {
+                .avatar-initials {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
+                    width: 24px;
+                    height: 24px;
+                    background-color: #784bd1;
+                    color: white;
+                    border-radius: 50%;
+                    font-size: 12px;
+                    margin-right: 8px;
+                }
 
-                    .avatar-image {
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        object-position: center top;
-                        margin-right: 10px;
-                        // border: 1px solid #e6e9ef;
-                        overflow: hidden;
-                        max-width: 28px;
-                        max-height: 28px;
-                        min-width: 28px;
-                        min-height: 28px;
-                    }
+                .user-name {
+                    font-size: 14px;
+                    margin-right: 4px;
+                }
 
-                    .avatar-initials {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 24px;
-                        height: 24px;
-                        background-color: #784bd1;
-                        color: white;
-                        border-radius: 50%;
-                        font-size: 12px;
-                        margin-right: 8px;
-                    }
-
-                    .user-name {
-                        font-size: 14px;
-                        margin-right: 4px;
-                    }
-
-                    .created-info {
-                        font-size: 14px;
-                    }
+                .created-info {
+                    font-size: 14px;
                 }
             }
         }

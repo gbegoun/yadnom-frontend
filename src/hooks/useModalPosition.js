@@ -21,9 +21,19 @@ export const useModalPosition = () => {
         height: rect.height
     });
 
+    const boardNameModalPosition = (rect) => ({
+        top: rect.top - 8,
+        bottom: rect.bottom + 8, // 8px padding from the target
+        left: rect.left,  // Center the modal
+        right: rect.right,
+        width: rect.width,
+        height: rect.height
+    });
+
     return {
         centerBottomPosition,
-        colorModalPosition
+        colorModalPosition,
+        boardNameModalPosition
         // We can add more positioning strategies here in the future
         // like rightPosition, leftPosition, etc.
     };

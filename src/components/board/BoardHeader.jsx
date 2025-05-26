@@ -3,14 +3,19 @@ import SVGService from '../../services/svg/svg.service';
 import { useModal } from '../../contexts/modal/useModal';
 import { BoardNameModal } from '../modal_types/BoardNameModal.jsx';
 import { updateBoard } from '../../store/actions/board.actions.js';
+import { useModalPosition } from '../../hooks/useModalPosition';
 import { useRef } from 'react';
 
 export const BoardHeader = ({ board }) => {
     const { openModal } = useModal();
-    const boardTitleRef = useRef(null); const handleBoardNameClick = () => {
+    const boardTitleRef = useRef(null);
+    const { boardNameModalPosition } = useModalPosition();
+
+    const handleBoardNameClick = () => {
         if (!board) return;
 
         const rect = boardTitleRef.current.getBoundingClientRect();
+        const modifiedRect = boardNameModalPosition(rect);
 
         openModal(
             <BoardNameModal
@@ -18,7 +23,7 @@ export const BoardHeader = ({ board }) => {
                 onSave={handleSaveBoardName}
             />,
             {
-                targetRect: rect,
+                targetRect: modifiedRect,
 
             }
         );
