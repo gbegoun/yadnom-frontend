@@ -45,13 +45,13 @@ export const BoardHeader = ({ board }) => {
                 <div className='info-row'>
                     <div className='title-container'>
                         <h2
-                        ref={boardTitleRef}
-                        className='board-title clickable'
-                        onClick={handleBoardNameClick}
-                        title="Click to edit board name"
-                    >
-                        {board.name}
-                    </h2>
+                            ref={boardTitleRef}
+                            className='board-title clickable'
+                            onClick={handleBoardNameClick}
+                            title="Click to edit board name"
+                        >
+                            {board.name}
+                        </h2>
                         <SVGService.CollapseGroupIcon alt="collapse" />
                     </div>
                     <div className='users-integration'>
