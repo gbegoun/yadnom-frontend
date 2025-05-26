@@ -5,10 +5,10 @@ import { boardService as local } from './board.service.local'
 import { boardService as remote } from './board.service.remote'
 import { columnTypes } from './column-types'
 
-export function getEmptyBoard(title) {
+export function getDefaultBoard(title) {
     return {
         name: title, 
-        members: [],
+        members: [201],
         created_at: Date.now(),
         updated_at: Date.now(),
         columns: getDefaultColumns(),
