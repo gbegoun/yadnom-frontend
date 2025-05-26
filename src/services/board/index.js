@@ -113,6 +113,9 @@ export function getEmptyTask(columns = []) {
         // Initialize array columns (like people) as empty arrays
         if (column.type === 'people') {
             task.column_values[column._id] = [];
+        } else if (column.type === 'status' || column._id === 'status_column' || column.type === 'label' || column._id === 'priority_column') {
+            // Set default value for status columns to 'Default' (the empty status)
+            task.column_values[column._id] = 'Default';
         } else {
             task.column_values[column._id] = column.defaultValue || null;
         }
