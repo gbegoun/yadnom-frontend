@@ -53,6 +53,7 @@ export const GroupFooterNewTask = ({ color, groupId }) => {
                                 ref={inputRef}
                                 className="new-task-title-input"
                                 value={inputValue}
+                                placeholder="+ Add item"
                                 onChange={handleInputChange}
                                 onBlur={handleInputBlur}
                                 onKeyDown={handleInputKeyDown}
