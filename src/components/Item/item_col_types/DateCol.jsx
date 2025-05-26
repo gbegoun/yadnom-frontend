@@ -9,7 +9,7 @@ import * as calendarService from '../../../services/calendar.service.js';
 
 export const DateCol = ({ column, value, taskId, groupId }) => {
     const { openModal, closeModal } = useModal();
-    const { colorModalPosition } = useModalPosition();
+    const { centerBottomPosition } = useModalPosition();
     const board = useSelector(state => state.boardModule.board);
     const task = board?.tasks?.find(t => t._id === taskId);
     const isTaskDone = task?.column_values?.status_column === 'done';
@@ -30,7 +30,7 @@ export const DateCol = ({ column, value, taskId, groupId }) => {
     const handleOpenModal = (e) => {
         e.stopPropagation();
         const rect = dateRef.current.getBoundingClientRect();
-        const modifiedRect = colorModalPosition(rect);
+        const modifiedRect = centerBottomPosition(rect);
 
         openModal(
             <DateOptionsModal
