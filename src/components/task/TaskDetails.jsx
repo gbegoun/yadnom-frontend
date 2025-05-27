@@ -24,7 +24,7 @@ export const TaskDetails = (taskId) => {
                 </div>
             </div>
             <div className="content">
-                <TaskDetailsUpdateInput onUpdate={() => { }} />
+                <input className="input-textbox frame" type="text" placeholder="Write an update" />
                 <TaskCommentList comments={task.comments || []} />
             </div>
         </div >

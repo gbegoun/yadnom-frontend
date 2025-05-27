@@ -1,0 +1,99 @@
+.task-comment-preview {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    display: flex;
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 5px;
+        padding: 16px;
+        margin-left: 1px;
+        margin-top: 1px;
+        ;
+
+        .comment-author {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-direction: row;
+            color: #333;
+
+
+            .comment-author-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .comment-author-name {
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 700;
+            }
+        }
+
+        .comment-creationTime {
+            font-size: 15px;
+            line-height: 22.5px;
+            font-weight: 400;
+            color: #676879;
+        }
+    }
+
+    .comment-text {
+        font-size: 15px;
+        line-height: 22.5px;
+        font-weight: 400;
+        padding-left: 24px;
+        padding-right: 16px;
+        padding-bottom: 16px;
+        color: #333;
+
+        p {
+            margin-bottom: 8px;
+        }
+    }
+
+    .comment-replies {
+        border-top: 1px solid #d0d4e4;
+        padding: 8px 0 8px 8px;
+
+        .reply-input-wrapper {
+            display: flex;
+            flex-direction: row;
+
+            .current-user-image-wrapper {
+                width: 40px;
+                margin-top: 8px;
+                .current-user-image {
+                    width: 30.4px;
+                    height: 30.4px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+            }
+
+            .reply-input {
+                // font-family: poppins, sans-serif;
+                width: 100%;
+                padding: 16px;
+                margin-right: 16px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                border: 1px solid #d0d4e4;
+                border-radius: 8px;
+                font-size: 14px;
+                line-height: 21px;
+                font-weight: 400;
+                color: #333;
+            }
+
+        }
+    }
+
+}

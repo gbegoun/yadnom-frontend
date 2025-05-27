@@ -6,7 +6,8 @@
     transition: width 0.15s ease-in-out;
     padding-top: 20px;
     padding-left: 24;
-    
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px
+;
     &.open {
         width: 670px;
     }

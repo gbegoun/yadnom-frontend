@@ -229,21 +229,24 @@ export const demo_data = {
             "progress_column": 100
           },
           "groupid": "grp_ui_design",
-          "comments":[
+          "comments": [
             {
-              user:201,
+              _id: "c1001",
+              authorId: 201,
               creationTime: "2025-01-13T10:00:00Z",
               text: "Great insights from the user research! Let's ensure we address these in our design.",
               replies: [
                 {
-                  user: 2,
+                  _id: "c1003",
+                  authorId: 201,
                   creationTime: "2025-01-13T11:00:00Z",
                   text: "Absolutely! The feedback will be crucial for our next steps.",
                 }
-              ]              
+              ]
             },
             {
-              user: 204,
+              _id: "c1002",
+              authorId: 201,
               creationTime: "2025-01-14T09:30:00Z",
               text: "I've started drafting the design concepts based on the research findings."
             }
