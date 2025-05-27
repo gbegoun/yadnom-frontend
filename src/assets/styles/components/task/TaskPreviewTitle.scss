@@ -1,7 +1,7 @@
 .task-preview-title-wrapper {
     display: grid;
     grid-column: 1;
-    grid-template-columns: repeat(4, fit-content(100%));
+    grid-template-columns: repeat(5, fit-content);
     position: sticky;
     left: 0;
     z-index: 3;
@@ -67,7 +67,8 @@
         padding: 0px 4px;
         border-radius: 4px;
         border: 1px solid transparent;
-        max-width: 230px; /* Limit width to ensure truncation */
+        max-width: 230px;
+        /* Limit width to ensure truncation */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -93,6 +94,26 @@
         height: 25px;
         box-sizing: border-box;
         transition: border 0.15s;
+        border-right: 1px solid #d0d4e4;
         cursor: text;
     }
+
+}
+
+.task-title-sidebar-button {
+    display: inline-block;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #d0d4e4;
+    border-right: 1px solid #d0d4e4;
+    grid-column: 5;
+    width: 65px;
+    cursor: pointer;
+
+    :hover{
+        color: #0073ea;
+    }
+
 }
