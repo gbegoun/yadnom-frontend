@@ -65,7 +65,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
     };
 
     const onSidebarButtonClick = () => {
-        openPanel({type:'task', taskId: task._id});
+        openPanel({ type: 'task', taskId: task._id });
     }
 
     return (
@@ -92,7 +92,15 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                 )}
             </div>
             <div className="task-title-sidebar-button" onClick={() => onSidebarButtonClick()}>
-                <SVGService.AddCommentIcon className='add-comment-icon' />
+                {task.comments && task.comments.length > 0 ? (
+                    <div className='has-comments-icon-wrapper'>
+                        <SVGService.BoardDiscussionIcon className='has-comments-icon' />
+                        <div className="comment-count-circle">
+                            <span className='comments-count'>{task.comments.length}</span>
+                        </div>
+                    </div>
+                ) : <SVGService.AddCommentIcon className='add-comment-icon' />}
+
             </div>
         </div>
     )
