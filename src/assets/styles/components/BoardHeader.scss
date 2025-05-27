@@ -1,10 +1,8 @@
 .board-header {
-    display: grid;
     font-size: 14px;
-    grid-template-rows: auto auto auto;
     align-items: center;
+    justify-content: space-between ;
     gap: 10px;
-    margin-bottom: 24px;
     position: sticky;
     top: 0;
     left: 0;
@@ -18,6 +16,7 @@
         width: 100dvw;
         padding-left: 40px;
         padding-top: 20px;
+        padding-bottom: 22px;
 
         .info-row {
             display: flex;
@@ -38,16 +37,6 @@
                     color: #323338;
                     padding-left: 5px;
                     margin: 0;
-                }
-
-                img {
-                    color: #676879;
-                    width: 24px;
-                    height: 24px;
-                    margin-bottom: 0;
-                    margin-left: 5px;
-                    justify-self: flex-start;
-                    padding-right: 5px;
                 }
 
                 &:hover {
@@ -109,13 +98,12 @@
                 padding-right: 6px;
                 gap: 5px;
 
-                img {
-                    color: #676879;
-                    width: 17px;
-                    margin-bottom: 0;
-                    margin-left: 5px;
-                    padding-right: 5px;
+                .add-view-icon {
+                    color: #383940;
+                    width: 12px;
+                    height: 12px;
                 }
+
 
                 &:hover {
                     background-color: #e9eaee;

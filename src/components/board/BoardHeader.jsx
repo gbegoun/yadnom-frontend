@@ -69,7 +69,7 @@ export const BoardHeader = ({ board }) => {
                         <SVGService.OptionsIcon alt="options" />
                     </div>
                     <div className='add-new-table-card'>
-                        <SVGService.AddViewIcon alt="add view" />
+                        <SVGService.AddViewIcon className="add-view-icon" alt="add view" />
                     </div>
                 </div>
                 <div className='filter-plus-new-item-row'>
