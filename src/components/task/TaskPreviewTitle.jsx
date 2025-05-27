@@ -64,6 +64,10 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
         }
     };
 
+    const onSidebarButtonClick = () => {
+        openPanel({type:'task', taskId: task._id});
+    }
+
     return (
         <div className="task-preview-title-wrapper">
             <div className="task-preview-menu" />
@@ -87,7 +91,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                     <span className="task-title-inner" onClick={handleSpanClick}>{inputValue}</span>
                 )}
             </div>
-            <div className="task-title-sidebar-button" onClick={() => openPanel('task', task._id)}>
+            <div className="task-title-sidebar-button" onClick={() => onSidebarButtonClick()}>
                 <SVGService.AddCommentIcon className='add-comment-icon' />
             </div>
         </div>

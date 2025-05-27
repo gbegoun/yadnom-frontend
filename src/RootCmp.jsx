@@ -9,7 +9,7 @@ import { store } from './store/store.js'
 import { Provider } from 'react-redux'
 import { loadUsers } from './store/actions/user.actions.js'
 import { loadBoards } from './store/actions/board.actions.js'
-import { RightSidePanel } from './components/RightSidePanel.jsx'
+import { RightPanel } from './components/RightPanel.jsx'
 import { RightPanelProvider } from './contexts/rightPanel/RightPanelContext.jsx'
 
 function RootCmp() {
@@ -43,7 +43,7 @@ function RootCmp() {
               </main>
 
               <div className="right-side-panel-container">
-                <RightSidePanel />
+                <RightPanel />
               </div>
             </div>
           </div>

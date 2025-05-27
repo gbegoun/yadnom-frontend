@@ -4,13 +4,10 @@ const RightPanelContext = createContext();
 
 export const RightPanelProvider = ({ children }) => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
+    const [panelData, setPanelData] = useState(null);
 
-    const togglePanel = () => {
-        setIsPanelOpen(!isPanelOpen);
-    };
-
-    const openPanel = () => {
-        console.log('Opening right panel');
+    const openPanel = (data = null) => {
+        setPanelData(data);
         setIsPanelOpen(true);
     };
 
@@ -18,12 +15,21 @@ export const RightPanelProvider = ({ children }) => {
         setIsPanelOpen(false);
     };
 
+    const togglePanel = (data = null) => {
+        if (isPanelOpen) {
+            closePanel();
+        } else {
+            openPanel(data);
+        }
+    };
+
     return (
         <RightPanelContext.Provider value={{
             isPanelOpen,
-            togglePanel,
+            panelData,
             openPanel,
-            closePanel
+            closePanel,
+            togglePanel
         }}>
             {children}
         </RightPanelContext.Provider>
