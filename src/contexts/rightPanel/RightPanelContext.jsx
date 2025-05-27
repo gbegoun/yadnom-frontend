@@ -7,6 +7,11 @@ export const RightPanelProvider = ({ children }) => {
     const [panelData, setPanelData] = useState(null);
 
     const openPanel = (data = null) => {
+        if (JSON.stringify(data) === JSON.stringify(panelData)) {
+            togglePanel();
+            setPanelData(null);
+            return;
+        }
         setPanelData(data);
         setIsPanelOpen(true);
     };
