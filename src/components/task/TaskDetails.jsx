@@ -19,7 +19,7 @@ export const TaskDetails = (taskId) => {
                 <div className="tabs">
                     <div className="tab active">
                         <SVGService.HomeIcon className="home-icon tab-icon" />
-                        <div className="tab-label">Updates</div>
+                        <div className="tab-label">Updates{task.comments && ` / ${task.comments.length}`}</div>
                     </div>
                 </div>
             </div>
