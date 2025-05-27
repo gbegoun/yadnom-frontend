@@ -8,7 +8,6 @@ export const RightPanel = () => {
 
     const SetContent = () => {
         if (!panelData) {
-            console.error('No panel data provided');
             return null
         }
         if (panelData.type === "task") {
