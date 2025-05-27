@@ -3,6 +3,8 @@ import { useClickOutside } from '../../hooks/useClickOutside'
 import { useSelector } from 'react-redux'
 import { updateTaskDirectProperty } from '../../store/actions/board.actions'
 import SVGService from '../../services/svg/svg.service.js';
+import { useRightPanel } from '../../contexts/rightPanel/RightPanelContext.jsx'
+
 
 export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -10,6 +12,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const inputRef = useRef(null);
     const inputWrapperRef = useRef(null);
     const board = useSelector(state => state.boardModule.board);
+    const { openPanel } = useRightPanel();
 
     // Keep input value in sync with task.title when task changes
     useEffect(() => {
@@ -84,8 +87,8 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                     <span className="task-title-inner" onClick={handleSpanClick}>{inputValue}</span>
                 )}
             </div>
-            <div className="task-title-sidebar-button">
-                <SVGService.AddCommentIcon className='add-comment-icon'/>
+            <div className="task-title-sidebar-button" onClick={() => openPanel('task', task._id)}>
+                <SVGService.AddCommentIcon className='add-comment-icon' />
             </div>
         </div>
     )

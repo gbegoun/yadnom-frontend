@@ -1,11 +1,40 @@
 .right-side-panel {
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     height: 100%;
     width: 0;
-    overflow: hidden; /* Prevents content from showing when width is 0 */
-    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    transition: width 0.15s ease-in-out;
+    padding-top: 20px;
+    padding-left: 24;
+    
+    
     
     &.open {
-        width: 400px;
+        padding-right: 20px;
+        width: 670px;
+    }
+
+    .close-button {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        top: 0;
+        left: 24px;
+        color: rgb(139, 139, 139);
+        cursor: pointer;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .close-icon {
+            width: 100%;
+            height: 100%;
+        }
     }
 }

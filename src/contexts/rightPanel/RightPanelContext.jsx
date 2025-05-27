@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from 'react';
 
-const PanelContext = createContext();
+const RightPanelContext = createContext();
 
-export const PanelProvider = ({ children }) => {
+export const RightPanelProvider = ({ children }) => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
 
     const togglePanel = () => {
@@ -10,6 +10,7 @@ export const PanelProvider = ({ children }) => {
     };
 
     const openPanel = () => {
+        console.log('Opening right panel');
         setIsPanelOpen(true);
     };
 
@@ -18,21 +19,21 @@ export const PanelProvider = ({ children }) => {
     };
 
     return (
-        <PanelContext.Provider value={{
+        <RightPanelContext.Provider value={{
             isPanelOpen,
             togglePanel,
             openPanel,
             closePanel
         }}>
             {children}
-        </PanelContext.Provider>
+        </RightPanelContext.Provider>
     );
 };
 
-export const usePanel = () => {
-    const context = useContext(PanelContext);
+export const useRightPanel = () => {
+    const context = useContext(RightPanelContext);
     if (!context) {
-        throw new Error('usePanel must be used within a PanelProvider');
+        throw new Error('useRightPanel must be used within a RightPanelProvider');
     }
     return context;
 };

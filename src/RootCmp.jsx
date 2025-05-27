@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import { loadUsers } from './store/actions/user.actions.js'
 import { loadBoards } from './store/actions/board.actions.js'
 import { RightSidePanel } from './components/RightSidePanel.jsx'
-import { PanelProvider } from './contexts/panel/PanelContext';
+import { RightPanelProvider } from './contexts/rightPanel/RightPanelContext.jsx'
 
 function RootCmp() {
   useEffect(() => {
@@ -23,30 +23,31 @@ function RootCmp() {
 
     <Provider store={store}>
       <ModalProvider>
-        <div className="app-container">
-          <header className="main-header">
-            <MainHeader />
-          </header>
+        <RightPanelProvider>
+          <div className="app-container">
+            <header className="main-header">
+              <MainHeader />
+            </header>
 
-          <div className="main-layout">
-            <aside className="main-sidebar">
-              <MainSidebar />
-            </aside>
+            <div className="main-layout">
+              <aside className="main-sidebar">
+                <MainSidebar />
+              </aside>
 
-            <main className="main-content">
-              <Routes>
-                <Route path="" element={<HomePage />} />
-                <Route path="/board/:boardId" element={<Board />} />
-                <Route path="*" element={<h1>404 Not Found</h1>} />
-              </Routes>
-            </main>
-            <PanelProvider>
+              <main className="main-content">
+                <Routes>
+                  <Route path="" element={<HomePage />} />
+                  <Route path="/board/:boardId" element={<Board />} />
+                  <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+              </main>
+
               <div className="right-side-panel-container">
                 <RightSidePanel />
               </div>
-            </PanelProvider>
+            </div>
           </div>
-        </div>
+        </RightPanelProvider>
       </ModalProvider>
     </Provider>
 
