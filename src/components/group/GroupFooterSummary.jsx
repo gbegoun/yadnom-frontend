@@ -5,7 +5,13 @@ export const GroupFooterSummary = ({ columns, tasks }) => {
         <div className="group-footer-summary">
             <div className="group-footer-summary-blank" />
             <div className="group-footer-summary-item-wrapper">
-                {columns.map(column => <div key={column._id} className="group-footer-summary-item"  style={{width:column.width}}><DynamicSummary column={column} tasks={tasks}/></div>)}
+                {columns.map(column =>
+                    <div
+                        key={column._id}
+                        className="group-footer-summary-item"
+                        style={{ width: column.width }}>
+                        <DynamicSummary column={column} tasks={tasks} />
+                    </div>)}
             </div>
             <div className="group-footer-last-cell" />
         </div>

@@ -1,0 +1,104 @@
+
+.people-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    min-height: 32px;
+    border-radius: 4px;
+
+    .people-avatars-summary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .user-avatar-summary {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -8px;
+        /* Creates the overlapping effect */
+
+        &:first-child {
+            margin-left: 0;
+            /* First avatar doesn't need the negative margin */
+        }
+
+        /* Creates a white border around avatar for better visibility when overlapping */
+        &::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: white;
+            z-index: -1;
+        }
+
+        .avatar-image-summary {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 1px solid #e6e9ef;
+        }
+
+        .avatar-initials-summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #784bd1;
+            color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: help; /* Shows tooltip cursor */
+        }
+    }
+
+    .additional-count-summary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background-color: #5b9add;
+        color: white;
+        border-radius: 50%;
+        font-size: 10px;
+        font-weight: 500;
+        margin-left: -8px;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: white;
+            z-index: -1;
+        }
+    }
+
+    /* Default profile styling */
+    .default-profile-summary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .default-profile-icon-summary {
+            width: 24px;
+            height: 24px;
+            color: #c4c4c4;
+        }
+    }
+}

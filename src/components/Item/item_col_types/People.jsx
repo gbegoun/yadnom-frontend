@@ -15,10 +15,10 @@ export const People = ({ value, taskId, groupId, column }) => {
     const peopleRef = useRef();
 
     // Helper functions similar to BoardNameModal
-    const getUserById = (userId) => users.find(user => user._id === userId || user._id === userId.toString());
+    const getUserByIdFromUsers = (userId) => users.find(user => user._id === userId || user._id === userId.toString());
 
     const getUserDisplayInfo = (userId) => {
-        const user = getUserById(userId);
+        const user = getUserByIdFromUsers(userId);
         if (!user) return { initials: '??', name: 'Unknown User', imgUrl: null };
         const name = user.fullName || user.fullname || user.username || 'Unknown User';
         const initials = name.split(' ').map(n => n[0]).join('').toUpperCase() || '??';
