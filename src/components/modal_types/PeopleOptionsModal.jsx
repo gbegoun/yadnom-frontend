@@ -12,11 +12,11 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
             onBulkUpdate(selectedUsers);
         }
     }, [selectedUsers, onBulkUpdate]);
-    
-      // Get user information by ID with fallback values - using useCallback to memoize
+
+    // Get user information by ID with fallback values - using useCallback to memoize
     const getUserInfo = useCallback((userId) => {
         const user = users.find(user => user._id === userId || user._id === userId.toString());
-        
+
         // Handle case when user is not found
         if (!user) {
             return {
@@ -25,7 +25,7 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
                 imgUrl: null
             };
         }
-        
+
         // Extract user data with fallbacks
         const name = user.fullName || user.fullname || user.username || 'Unknown User';
         const initials = name.split(' ')
@@ -33,7 +33,7 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
             .join('')
             .toUpperCase() || '??';
         const imgUrl = user.imageUrl || user.imgUrl || null;
-        
+
         return { initials, name, imgUrl };
     }, [users]);
 
@@ -57,15 +57,20 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
             >
                 {userInfo.initials}
             </span>
-        </div>    );    // Handle adding a suggested user (only add, don't remove)
+        </div>);
+
+    // Handle adding a suggested user (only add, don't remove)
     const handleSuggestedUserAdd = (person) => {
         // Only add if not already selected
         if (!selectedUsers.includes(person._id)) {
             setSelectedUsers(prevSelected => [...prevSelected, person._id]);
         }
     };
-      // Get suggested people (first 4 users)
-    const suggestedPeople = people.slice(0, 4);
+
+    // Get suggested people (first 4 unselected users)
+    const suggestedPeople = people
+        .filter(person => !selectedUsers.includes(person._id)) // Filter out already selected users
+        .slice(0, 4); // Take first 4 unselected users
 
     return (
         <div className="people-options-container">
@@ -77,7 +82,7 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
                         return (
                             <div key={userId} className="selected-user-pill">
                                 {renderAvatar(userInfo, true)}
-                                <span className="selected-user-name">{userInfo.name}</span>                                <button 
+                                <span className="selected-user-name">{userInfo.name}</span>                                <button
                                     className="remove-user-btn"
                                     onClick={(e) => {
                                         e.stopPropagation();
@@ -89,7 +94,7 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
                             </div>
                         );
                     })}
-                </div>            )}
+                </div>)}
 
             {/* Suggested people section */}
             <div className="people-section">
@@ -98,21 +103,21 @@ export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = 
                     {suggestedPeople.map(person => {
                         const userInfo = getUserInfo(person._id);
                         const isSelected = selectedUsers.includes(person._id);
-                        
+
                         return (
                             <li key={person._id}>                                <button
-                                    className={`people-option-btn ${isSelected ? 'selected' : ''}`}
-                                    onClick={() => handleSuggestedUserAdd(person)}
-                                    disabled={isSelected}
-                                >
-                                    {renderAvatar(userInfo)}
-                                    <span className="user-option-name">{userInfo.name}</span>
-                                </button>
+                                className={`people-option-btn ${isSelected ? 'selected' : ''}`}
+                                onClick={() => handleSuggestedUserAdd(person)}
+                                disabled={isSelected}
+                            >
+                                {renderAvatar(userInfo)}
+                                <span className="user-option-name">{userInfo.name}</span>
+                            </button>
                             </li>
                         );
                     })}
                 </ul>            </div>
-            
+
             {/* New member option */}
             <div className="invite-new-member">
                 <span className="invite-icon">
