@@ -21,18 +21,6 @@
             max-width: 100%;
             height: 22px;
 
-            .user-option-avatar.small {
-
-                .option-avatar-image,
-                .option-avatar-initials {
-                    width: 18px;
-                    height: 18px;
-                    font-size: 8px;
-                    border-radius: 50%;
-                    margin-right: 2px;
-                }
-            }
-
             .selected-user-name {
                 font-size: 12px;
                 color: #323338;
@@ -83,44 +71,6 @@
         }
     }
 
-    .search-container {
-        position: relative;
-        margin: 0 8px 12px;
-
-        .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #676879;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            svg {
-                width: 18px;
-                height: 18px;
-            }
-        }
-
-        .people-search-input {
-            width: 100%;
-            padding: 8px 8px 8px 34px;
-            border-radius: 4px;
-            border: 1px solid #e6e9ef;
-            font-size: 14px;
-            outline: none;
-
-            &:focus {
-                border-color: #0073ea;
-            }
-
-            &::placeholder {
-                color: #aaacb4;
-            }
-        }
-    }
-
     .section-title {
         font-size: 14px;
         margin: 4px 12px;
@@ -160,38 +110,6 @@
 
             &:hover {
                 background: #f0f1f5;
-            }
-
-            .user-option-avatar {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-
-                .option-avatar-image {
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    object-position: center center;
-                    border: 1px solid #e6e9ef;
-                    background-color: #f5f6f8;
-                }
-
-                .option-avatar-initials {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 24px;
-                    height: 24px;
-                    background-color: #784bd1;
-                    color: white;
-                    border-radius: 50%;
-                    font-size: 10px;
-                    font-weight: 500;
-                    text-transform: uppercase;
-                }
             }
 
             .user-option-name {

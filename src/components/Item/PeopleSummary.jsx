@@ -2,13 +2,14 @@
 import { useSelector } from "react-redux";
 import SVGService from "../../services/svg/svg.service.js";
 import { userService } from "../../services/user/index.js";
+import { UserAvatarFromInfo } from "../shared/UserAvatar.jsx";
 
 export const PeopleSummary = ({ column, tasks }) => {
     const users = useSelector(state => state.userModule.users);
 
     const getOwners = () => {
         const uniqueValues = new Set();
-        
+
         tasks.forEach(task => {
             const value = task.column_values?.[column._id];
             if (value && Array.isArray(value)) {
@@ -19,8 +20,8 @@ export const PeopleSummary = ({ column, tasks }) => {
             }
         });
         return Array.from(uniqueValues).sort();
-    }    
-    
+    }
+
     // Get user info for all owners
     const ownerIds = getOwners();
     const selectedUsers = ownerIds.map(id => userService.getUserDisplayInfo(id, users)).filter(user => user);
@@ -31,26 +32,13 @@ export const PeopleSummary = ({ column, tasks }) => {
             {selectedUsers.length > 0 ? (
                 <div className="people-avatars-summary">
                     {selectedUsers.slice(0, MAX_VISIBLE_AVATARS).map((userInfo, index) => (
-                        <div key={ownerIds[index]} className="user-avatar-summary">
-                            {userInfo.imgUrl ? (
-                                <img
-                                    src={userInfo.imgUrl}
-                                    alt={userInfo.name}
-                                    className="avatar-image-summary"
-                                    onError={e => {
-                                        e.target.style.display = 'none';
-                                        e.target.nextSibling.style.display = 'flex';
-                                    }}
-                                />
-                            ) : null}
-                            <span
-                                className="avatar-initials-summary"
-                                style={{ display: userInfo.imgUrl ? 'none' : 'flex' }}
-                                title={userInfo.name}
-                            >
-                                {userInfo.initials}
-                            </span>
-                        </div>
+                        <UserAvatarFromInfo
+                            key={ownerIds[index]}
+                            userInfo={userInfo}
+                            size="small"
+                            className="people-summary-avatar-item"
+                            showTooltip={true}
+                        />
                     ))}
                     {selectedUsers.length > MAX_VISIBLE_AVATARS && (
                         <div className="additional-count-summary">

@@ -25,6 +25,25 @@ function getUserDisplayInfo(userId, users) {
     return { initials, name, imgUrl: user.imageUrl || user.imgUrl || null };
 }
 
+// Additional utility functions for working with user collections
+function getUsersDisplayInfo(userIds, users) {
+    return userIds.map(id => getUserDisplayInfo(id, users)).filter(user => user);
+}
+
+function filterUsersByName(users, searchTerm) {
+    if (!searchTerm) return users;
+    const term = searchTerm.toLowerCase();
+    return users.filter(user => {
+        const name = user.fullName || user.fullname || user.username || '';
+        return name.toLowerCase().includes(term);
+    });
+}
+
+function getUserInitials(user) {
+    const name = user.fullName || user.fullname || user.username || 'Unknown User';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase() || '??';
+}
+
 
 // Export the user service based on the environment
 const service = VITE_LOCAL === 'true' ? local : remote
@@ -34,7 +53,10 @@ export const userService = {
     ...service,
     getEmptyUser,
     getUserByIdFromUsers,
-    getUserDisplayInfo
+    getUserDisplayInfo,
+    getUsersDisplayInfo,
+    filterUsersByName,
+    getUserInitials
 }
 
 // Easy access to this service from the dev tools console

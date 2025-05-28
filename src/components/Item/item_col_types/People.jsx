@@ -5,6 +5,7 @@ import { updateTaskColumnValue } from "../../../store/actions/board.actions.js";
 import { useSelector } from "react-redux";
 import SVGService from "../../../services/svg/svg.service.js";
 import { userService } from "../../../services/user/index.js";
+import { UserAvatarFromInfo } from "../../shared/UserAvatar.jsx";
 
 export const People = ({ value, taskId, groupId, column }) => {
     const board = useSelector(state => state.boardModule.board);
@@ -60,29 +61,16 @@ export const People = ({ value, taskId, groupId, column }) => {
                     <span>+</span>
                 </div>
             </div>
-
             {selectedUsers.length > 0 ? (
                 <div className="people-avatars">
                     {selectedUsers.slice(0, MAX_VISIBLE_AVATARS).map((userInfo, index) => (
-                        <div key={ownersIds[index]} className="user-avatar">
-                            {userInfo.imgUrl ? (
-                                <img
-                                    src={userInfo.imgUrl}
-                                    alt={userInfo.name}
-                                    className="avatar-image"
-                                    onError={e => {
-                                        e.target.style.display = 'none';
-                                        e.target.nextSibling.style.display = 'flex';
-                                    }}
-                                />
-                            ) : null}
-                            <span
-                                className="avatar-initials"
-                                style={{ display: userInfo.imgUrl ? 'none' : 'flex' }}
-                            >
-                                {userInfo.initials}
-                            </span>
-                        </div>
+                        <UserAvatarFromInfo
+                            key={ownersIds[index]}
+                            userInfo={userInfo}
+                            size="small"
+                            className="people-avatar-item"
+                            showTooltip={true}
+                        />
                     ))}
                     {selectedUsers.length > MAX_VISIBLE_AVATARS && (
                         <div className="additional-count">

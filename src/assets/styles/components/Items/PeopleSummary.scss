@@ -1,4 +1,3 @@
-
 .people-summary {
     display: flex;
     align-items: center;
@@ -15,17 +14,13 @@
         gap: 0;
     }
 
-    .user-avatar-summary {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    /* Styling for UserAvatar components in PeopleSummary */
+    .people-summary-avatar-item {
         margin-left: -8px;
-        /* Creates the overlapping effect */
+        position: relative;
 
         &:first-child {
             margin-left: 0;
-            /* First avatar doesn't need the negative margin */
         }
 
         /* Creates a white border around avatar for better visibility when overlapping */
@@ -37,30 +32,6 @@
             border-radius: 50%;
             background-color: white;
             z-index: -1;
-        }
-
-        .avatar-image-summary {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center top;
-            border: 1px solid #e6e9ef;
-        }
-
-        .avatar-initials-summary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background-color: #784bd1;
-            color: white;
-            border-radius: 50%;
-            font-size: 10px;
-            font-weight: 500;
-            text-transform: uppercase;
-            cursor: help; /* Shows tooltip cursor */
         }
     }
 
