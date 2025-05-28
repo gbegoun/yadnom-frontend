@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useClickOutside } from '../../hooks/useClickOutside'
 import { useSelector } from 'react-redux'
 import { updateTaskDirectProperty } from '../../store/actions/board.actions'
+import SVGService from '../../services/svg/svg.service.js';
 
 export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -82,6 +83,9 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                 ) : (
                     <span className="task-title-inner" onClick={handleSpanClick}>{inputValue}</span>
                 )}
+            </div>
+            <div className="task-title-sidebar-button">
+                <SVGService.AddCommentIcon className='add-comment-icon'/>
             </div>
         </div>
     )
