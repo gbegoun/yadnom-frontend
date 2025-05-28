@@ -1,8 +1,7 @@
 import SVGService from '../../services/svg/svg.service.js';
 import { TaskCommentList } from './TaskCommentList.jsx';
-import { TaskDetailsUpdateInput } from './TaskDetailsUpdateInput.jsx';
 import { useSelector } from 'react-redux';
-import { addTaskGroup, addNewTask, updateBoard, loadBoard, addCommentOptimistic } from "../../store/actions/board.actions.js";
+import { addCommentOptimistic, deleteCommentOptimistic } from "../../store/actions/board.actions.js";
 
 
 export const TaskDetails = ({ taskId }) => {
@@ -20,13 +19,17 @@ export const TaskDetails = ({ taskId }) => {
 
         if (commentText) {
             const comment = {
-                authorId: 201,
                 text: commentText,
                 replies: []
             };
             addCommentOptimistic(taskId, comment);
             input.value = '';
         }
+    }
+
+    const onCommentDelete = (commentId) => {
+        console.log('Deleting comment with ID:', commentId);
+        deleteCommentOptimistic(taskId, commentId);
     }
 
     const handleKeyDown = (e) => {
@@ -54,7 +57,7 @@ export const TaskDetails = ({ taskId }) => {
                     onBlur={addComment}
                     onKeyDown={handleKeyDown}
                 />
-                <TaskCommentList comments={task.comments || []} />
+                <TaskCommentList comments={task.comments || []} onCommentDelete={onCommentDelete} />
             </div>
         </div >
     )

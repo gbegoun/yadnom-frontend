@@ -1,0 +1,30 @@
+.comment-menu {
+    background-color: rgb(255, 255, 255);
+
+    .delete-comment {
+        padding: 0px 4px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        cursor: pointer;
+        padding: 6px;
+        line-height: 20px;
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+        }
+
+        .label {
+            font-size: 14px;
+
+        }
+
+        &:hover {
+            background-color: #f0f0f1;
+        }
+    }
+}

@@ -3,7 +3,7 @@ import { store } from '../store';
 import {
     ADD_NEW_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD,
     ADD_BOARD_MSG, ADD_TASK_GROUP, UPDATE_TASK_PROPERTY_OPTIMISTIC, UPDATE_TASK_COLUMN_OPTIMISTIC,
-    UPDATE_GROUP_PROPERTY_OPTIMISTIC, ADD_GROUP_OPTIMISTIC, ADD_TASK_OPTIMISTIC, ADD_COMMENT
+    UPDATE_GROUP_PROPERTY_OPTIMISTIC, ADD_GROUP_OPTIMISTIC, ADD_TASK_OPTIMISTIC, ADD_COMMENT, DELETE_COMMENT
 } from '../reducers/board.reducer';
 import { makeId } from '../../services/util.service';
 // ================ BOARD ACTIONS ================
@@ -459,9 +459,12 @@ export function getBoardById(boardId) {
 // ================ COMMENT ACTIONS ================
 export function addCommentOptimistic(taskId, comment) {
     try {
+        const currentUser = store.getState().userModule.user;
+
         const formattedComment = {
             ...comment,
             _id: comment._id || makeId(6, 'c'),
+            authorId: 201,
             createdAt: comment.createdAt || new Date().toISOString()
         };
 
@@ -492,6 +495,37 @@ export function addCommentOptimistic(taskId, comment) {
     }
 }
 
+export function deleteCommentOptimistic(taskId, commentId) {
+    try {
+        store.dispatch({
+            type: DELETE_COMMENT,
+            taskId,
+            commentId
+        });
+
+        const updatedBoard = store.getState().boardModule.board;
+        console.log(updatedBoard)
+        return boardService.saveBoard(updatedBoard)
+            .then(savedBoard => {
+                store.dispatch(getCmdUpdateBoard(savedBoard));
+                return savedBoard;
+            });
+    } catch (err) {
+        console.error('Cannot delete comment', err);
+
+        const board = store.getState().boardModule.board;
+        if (board) {
+            console.log('Error occurred, reverting optimistic update');
+            store.dispatch({
+                type: SET_BOARD,
+                board: board
+            });
+        }
+
+        throw err;
+    }
+
+}
 // ================ ACTION CREATORS ================
 
 function getCmdSetBoards(boards) {

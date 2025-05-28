@@ -15,8 +15,7 @@ export const ADD_GROUP_OPTIMISTIC = 'ADD_GROUP_OPTIMISTIC'
 export const ADD_TASK_OPTIMISTIC = 'ADD_TASK_OPTIMISTIC'
 
 export const ADD_COMMENT = 'ADD_COMMENT'
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-export const REMOVE_COMMENT = 'REMOVE_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 const initialState = {
     boards: [],
@@ -206,13 +205,11 @@ export function boardReducer(state = initialState, action) {
 
         case ADD_COMMENT: {
 
-            console.log(action)
             if (!state.board) return state;
 
             const updatedBoard = {
                 ...state.board,
                 tasks: state.board.tasks.map(task => {
-                    console.log('task._id', task._id, 'action.taskId', action.taskId, task._id == action.taskId)
                     if (task._id == action.taskId) {
                         console.log('Adding comment to task', task._id, action.formattedComment)
                         return {
@@ -234,7 +231,34 @@ export function boardReducer(state = initialState, action) {
             newState = { ...state, board: updatedBoard, boards };
             break;
         }
+        
+        case DELETE_COMMENT: {
+            if (!state.board) return state;
 
+            const updatedBoard = {
+                ...state.board,
+                tasks: state.board.tasks.map(task => {
+                    if (task._id == action.taskId) {
+                        console.log('Deleting comment from task', task._id, action.commentId)
+                        return {
+                            ...task,
+                            comments: task.comments
+                                ? task.comments.filter(comment => comment._id !== action.commentId)
+                                : []
+                        };
+                    }
+                    return task;
+                })
+            };
+
+            boards = state.boards.map(board =>
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+
+        }
         default:
     }
     return newState

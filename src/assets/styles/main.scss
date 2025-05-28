@@ -36,6 +36,7 @@
 @import "components/board/BoardContainer";
 @import "components/BoardFilter";
 @import "components/BoardDetails";
+
 @import 'components/Modal.scss';
 @import "components/modal_types/LabelOptionsModal";
 @import "components/modal_types/DateOptionsModal";
@@ -43,7 +44,10 @@
 @import "components/modal_types/ColorOptionsModal";
 @import "components/modal_types/NewBoardModal.scss";
 @import "components/modal_types/BoardNameModal.scss";
+@import "components/modal_types/CommentMenu.scss";
+
 @import "components/RightPanel.scss";
+
 @import "components/task/taskDetails.scss";
 @import "components/task/TaskDetailsUpdateInput.scss";
 @import "components/task/TaskCommentPreview";

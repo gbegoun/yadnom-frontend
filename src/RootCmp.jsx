@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { HomePage } from "./pages/HomePage.jsx"
-import { Board } from "./pages/Board.jsx"
+import { Board } from "./pages/board.jsx"
 import { MainHeader } from "./components/MainHeader.jsx"
 import { MainSidebar } from "./components/MainSidebar.jsx"
 import { ModalProvider } from './contexts/modal/ModalContext.jsx'

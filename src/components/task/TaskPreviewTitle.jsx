@@ -65,7 +65,6 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
     };
 
     const onSidebarButtonClick = () => {
-        console.log("**********", task._id);
         openPanel({ type: 'task', taskId: task._id });
     }
 
