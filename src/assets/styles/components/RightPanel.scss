@@ -1,9 +1,6 @@
-.right-panel-container {
-    height: 200px;
-    border: 1px solid rgb(0, 68, 255);
-}
-
 .right-panel {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(255, 255, 255);
     height: 100%;
     width: 0;
@@ -11,7 +8,6 @@
     transition: width 0.15s ease-in-out;
     padding-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
-    // border: 1px solid red;
 
     &.open {
         width: 670px;
@@ -40,5 +36,11 @@
             width: 100%;
             height: 100%;
         }
+
+        
+    }
+    .panel-content {
+        height: 100%;
+        overflow: hidden;
     }
 }

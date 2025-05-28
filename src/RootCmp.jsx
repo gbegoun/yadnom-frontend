@@ -42,9 +42,7 @@ function RootCmp() {
                 </Routes>
               </main>
 
-              <div className="right-panel-container">
-                <RightPanel />
-              </div>
+              <RightPanel />
             </div>
           </div>
         </RightPanelProvider>
