@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { useModal } from "../../../contexts/modal/useModal";
-import { BoardContext } from "../../../contexts/board/BoardContext";
 import { PeopleOptionsModal } from "../../modal_types/PeopleOptionsModal";
 import { updateTaskColumnValue } from "../../../store/actions/board.actions.js";
 import { useSelector } from "react-redux";
@@ -12,7 +11,7 @@ export const People = ({ value, taskId, groupId, column }) => {
 
     const ownersIds = value?.length ? value : [];
 
-    const { openModal, closeModal } = useModal();
+    const { openModal } = useModal();
     const peopleRef = useRef();
 
     // Helper functions similar to BoardNameModal
@@ -31,25 +30,20 @@ export const People = ({ value, taskId, groupId, column }) => {
         const userInfo = getUserDisplayInfo(id);
         return { _id: id, name: userInfo.name };
     });
-    
-    const handleSelect = async (person) => {
+
+    // Handle bulk update from modal - receives the complete new selection
+    const handleBulkUpdate = async (newSelectedIds) => {
         if (taskId && groupId && column && board) {
-            // With optimistic updates, UI will update immediately
-            const updatedValue = ownersIds.includes(person._id) 
-                ? ownersIds.filter(id => id !== person._id)  // Remove if already selected
-                : [...ownersIds, person._id];                // Add if not already selected
-                
-            await updateTaskColumnValue(board, groupId, taskId, column._id, updatedValue)
+            await updateTaskColumnValue(board, groupId, taskId, column._id, newSelectedIds)
                 .catch(err => console.error('Failed to update people', err));
         }
-    };    const handleOpenModal = (e) => {
+    }; const handleOpenModal = (e) => {
         e.stopPropagation();
         const rect = peopleRef.current.getBoundingClientRect();
         openModal(
             <PeopleOptionsModal
                 people={people}
-                onSelect={handleSelect}
-                onClose={closeModal}
+                onBulkUpdate={handleBulkUpdate}
                 initialSelectedIds={ownersIds} // Pass currently selected users
             />, {
             targetRect: rect,

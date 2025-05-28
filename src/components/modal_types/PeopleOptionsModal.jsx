@@ -2,11 +2,16 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 import SVGService from '../../services/svg/svg.service';
 
-export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedIds = [] }) => {
+export const PeopleOptionsModal = ({ people, onBulkUpdate, initialSelectedIds = [] }) => {
     const users = useSelector(state => state.userModule.users);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filteredPeople, setFilteredPeople] = useState(people);
     const [selectedUsers, setSelectedUsers] = useState(initialSelectedIds);
+
+    // Send bulk update when selectedUsers changes
+    useEffect(() => {
+        if (onBulkUpdate) {
+            onBulkUpdate(selectedUsers);
+        }
+    }, [selectedUsers, onBulkUpdate]);
     
       // Get user information by ID with fallback values - using useCallback to memoize
     const getUserInfo = useCallback((userId) => {
@@ -52,23 +57,15 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
             >
                 {userInfo.initials}
             </span>
-        </div>
-    );
-      // Handle selection of a user
-    const handleUserSelect = (person) => {
-        onSelect(person);
-        // Toggle selection: remove if already selected, add if not
-        setSelectedUsers(prevSelected => {
-            if (prevSelected.includes(person._id)) {
-                return prevSelected.filter(id => id !== person._id);
-            } else {
-                return [...prevSelected, person._id];
-            }
-        });
+        </div>    );    // Handle adding a suggested user (only add, don't remove)
+    const handleSuggestedUserAdd = (person) => {
+        // Only add if not already selected
+        if (!selectedUsers.includes(person._id)) {
+            setSelectedUsers(prevSelected => [...prevSelected, person._id]);
+        }
     };
-    
-    // Get suggested people (first 2 users for demo purposes)
-    const suggestedPeople = people.slice(0, 2);
+      // Get suggested people (first 4 users)
+    const suggestedPeople = people.slice(0, 4);
 
     return (
         <div className="people-options-container">
@@ -80,8 +77,7 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
                         return (
                             <div key={userId} className="selected-user-pill">
                                 {renderAvatar(userInfo, true)}
-                                <span className="selected-user-name">{userInfo.name}</span>
-                                <button 
+                                <span className="selected-user-name">{userInfo.name}</span>                                <button 
                                     className="remove-user-btn"
                                     onClick={(e) => {
                                         e.stopPropagation();
@@ -93,23 +89,8 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
                             </div>
                         );
                     })}
-                </div>
-            )}
+                </div>            )}
 
-            {/* Search bar */}
-            <div className="search-container">
-                <span className="search-icon">
-                    <SVGService.SearchIcon />
-                </span>
-                <input
-                    type="text"
-                    className="people-search-input"
-                    placeholder="Search names, roles or teams"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-            </div>
-            
             {/* Suggested people section */}
             <div className="people-section">
                 <h4 className="section-title">Suggested people</h4>
@@ -119,10 +100,10 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
                         const isSelected = selectedUsers.includes(person._id);
                         
                         return (
-                            <li key={person._id}>
-                                <button
+                            <li key={person._id}>                                <button
                                     className={`people-option-btn ${isSelected ? 'selected' : ''}`}
-                                    onClick={() => handleUserSelect(person)}
+                                    onClick={() => handleSuggestedUserAdd(person)}
+                                    disabled={isSelected}
                                 >
                                     {renderAvatar(userInfo)}
                                     <span className="user-option-name">{userInfo.name}</span>
@@ -130,33 +111,7 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
                             </li>
                         );
                     })}
-                </ul>
-            </div>
-            
-            {/* All filtered members */}
-            {searchTerm && (
-                <div className="people-section">
-                    <h4 className="section-title">Search Results</h4>
-                    <ul className="people-options-list">
-                        {filteredPeople.map(person => {
-                            const userInfo = getUserInfo(person._id);
-                            const isSelected = selectedUsers.includes(person._id);
-                            
-                            return (
-                                <li key={person._id}>
-                                    <button
-                                        className={`people-option-btn ${isSelected ? 'selected' : ''}`}
-                                        onClick={() => handleUserSelect(person)}
-                                    >
-                                        {renderAvatar(userInfo)}
-                                        <span className="user-option-name">{userInfo.name}</span>
-                                    </button>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-            )}
+                </ul>            </div>
             
             {/* New member option */}
             <div className="invite-new-member">
@@ -165,9 +120,6 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
                 </span>
                 <span>Invite a new member by email</span>
             </div>
-            
-            {/* Close button */}
-            {/* Removed close button as requested */}
         </div>
     );
 };
