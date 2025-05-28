@@ -54,6 +54,11 @@ ul {
 
 input {
     max-width: 100%;
+    border: 1px solid #0f3ae4;
+
+    &:focus{
+        border-color: #24429b;
+    }
 }
 
 .loading {

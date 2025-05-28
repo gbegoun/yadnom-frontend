@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import SVGService from '../../services/svg/svg.service';
 
 export const TaskCommentPreview = ({ comment }) => {
     const users = useSelector(state => state.userModule.users);
@@ -14,6 +15,9 @@ export const TaskCommentPreview = ({ comment }) => {
                     <span className="comment-author-name">{user.fullname}</span>
                 </div>
                 <div className="comment-creationTime">{new Date(comment.creationTime).toLocaleDateString()}</div>
+                <div className="comment-menu-wrapper">
+                    <SVGService.OptionsIcon className="comment-menu-icon" />
+                </div>
             </div>
             <div className="comment-text">
                 <p>{comment.text}</p>

@@ -16,11 +16,11 @@ export const RightPanel = () => {
     }
 
     return (
-        <div className={`right-side-panel ${isPanelOpen ? 'open' : ''}`}>
+        <div className={`right-panel ${isPanelOpen ? 'open' : ''}`}>
             <div className="close-button" onClick={() => closePanel()}><SVGService.XIcon className='close-icon' /></div>
             <div className="panel-content">
                 {SetContent()}
             </div>
         </div>
-    );
-};
+    )
+}

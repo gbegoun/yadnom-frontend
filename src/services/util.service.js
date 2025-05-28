@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
-export function makeId(length = 12) {
-    return nanoid(length)
+export function makeId(length = 12, prefix = '') {
+    return prefix + nanoid(length)
 }
 
 export function makeLorem(size = 100) {

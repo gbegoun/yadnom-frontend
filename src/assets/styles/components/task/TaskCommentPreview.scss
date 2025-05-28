@@ -42,6 +42,23 @@
             font-weight: 400;
             color: #676879;
         }
+
+        .comment-menu-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            width: 24px;
+            height: 24px;
+            color: #323338;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: #f0f0f0;
+                cursor: pointer;
+            }
+        }
+
     }
 
     .comment-text {
@@ -69,6 +86,7 @@
             .current-user-image-wrapper {
                 width: 40px;
                 margin-top: 8px;
+
                 .current-user-image {
                     width: 30.4px;
                     height: 30.4px;
@@ -91,6 +109,11 @@
                 line-height: 21px;
                 font-weight: 400;
                 color: #333;
+
+                &:focus {
+                    border-color: #0073ea;
+                    outline: none;
+                }
             }
 
         }

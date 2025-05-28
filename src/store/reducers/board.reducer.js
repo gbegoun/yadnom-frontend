@@ -14,6 +14,10 @@ export const UPDATE_GROUP_PROPERTY_OPTIMISTIC = 'UPDATE_GROUP_PROPERTY_OPTIMISTI
 export const ADD_GROUP_OPTIMISTIC = 'ADD_GROUP_OPTIMISTIC'
 export const ADD_TASK_OPTIMISTIC = 'ADD_TASK_OPTIMISTIC'
 
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+export const REMOVE_COMMENT = 'REMOVE_COMMENT'
+
 const initialState = {
     boards: [],
     board: null
@@ -24,31 +28,31 @@ export function boardReducer(state = initialState, action) {
     var boards
 
     switch (action.type) {
-        case SET_BOARDS:{
+        case SET_BOARDS: {
             newState = { ...state, boards: action.boards }
             break
         }
 
-        case SET_BOARD:{
+        case SET_BOARD: {
             newState = { ...state, board: action.board }
             break
         }
 
-        case REMOVE_BOARD:{
+        case REMOVE_BOARD: {
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
             boards = state.boards.filter(board => board._id !== action.boardId)
             newState = { ...state, boards, lastRemovedBoard }
             break
         }
 
-        case ADD_NEW_BOARD:{
+        case ADD_NEW_BOARD: {
             newState = { ...state, boards: [...state.boards, action.board] }
             break;
         }
 
-        case UPDATE_BOARD:{
+        case UPDATE_BOARD: {
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            
+
             // Also update the current board if it's the one being modified
             if (state.board && state.board._id === action.board._id) {
                 newState = { ...state, boards, board: action.board }
@@ -59,7 +63,7 @@ export function boardReducer(state = initialState, action) {
             break
         }
 
-        case ADD_BOARD_MSG:{
+        case ADD_BOARD_MSG: {
             newState = { ...state, board: { ...state.board, msgs: [...state.board.msgs || [], action.msg] } }
             break
         }
@@ -81,7 +85,7 @@ export function boardReducer(state = initialState, action) {
         case ADD_NEW_TASK: {
             let taskBoard = action.board
             let taskGroup = action.group
-            
+
             if (!taskGroup.tasks) taskGroup.tasks = []
 
             if (action.position === 'top') taskGroup.tasks.unshift(action.task)
@@ -96,49 +100,49 @@ export function boardReducer(state = initialState, action) {
         case UPDATE_TASK_PROPERTY_OPTIMISTIC: {
             if (!state.board) return state;
 
-            const updatedBoard = { 
+            const updatedBoard = {
                 ...state.board,
-                tasks: state.board.tasks.map(task => 
-                    task._id === action.taskId 
+                tasks: state.board.tasks.map(task =>
+                    task._id === action.taskId
                         ? { ...task, [action.propertyName]: action.value }
                         : task
                 )
             };
-            
+
             // Update both the current board and the boards array
-            boards = state.boards.map(board => 
+            boards = state.boards.map(board =>
                 board._id === updatedBoard._id ? updatedBoard : board
             );
-            
+
             newState = { ...state, board: updatedBoard, boards };
             break;
         }
-        
+
         case UPDATE_GROUP_PROPERTY_OPTIMISTIC: {
             if (!state.board) return state;
 
-            const updatedBoard = { 
+            const updatedBoard = {
                 ...state.board,
-                groups: state.board.groups.map(group => 
-                    group._id === action.groupId 
+                groups: state.board.groups.map(group =>
+                    group._id === action.groupId
                         ? { ...group, [action.propertyName]: action.value }
                         : group
                 )
             };
-            
+
             // Update both the current board and the boards array
-            boards = state.boards.map(board => 
+            boards = state.boards.map(board =>
                 board._id === updatedBoard._id ? updatedBoard : board
             );
-            
+
             newState = { ...state, board: updatedBoard, boards };
             break;
         }
-        
+
         case UPDATE_TASK_COLUMN_OPTIMISTIC: {
             if (!state.board) return state;
 
-            const updatedBoard = { 
+            const updatedBoard = {
                 ...state.board,
                 tasks: state.board.tasks.map(task => {
                     if (task._id === action.taskId) {
@@ -153,15 +157,15 @@ export function boardReducer(state = initialState, action) {
                     return task;
                 })
             };
-            
-            boards = state.boards.map(board => 
+
+            boards = state.boards.map(board =>
                 board._id === updatedBoard._id ? updatedBoard : board
             );
-            
+
             newState = { ...state, board: updatedBoard, boards };
             break;
         }
-        
+
         case ADD_GROUP_OPTIMISTIC: {
             if (!state.board) return state;
 
@@ -171,11 +175,11 @@ export function boardReducer(state = initialState, action) {
                     ? [action.group, ...state.board.groups]
                     : [...state.board.groups, action.group]
             };
-            
-            boards = state.boards.map(board => 
+
+            boards = state.boards.map(board =>
                 board._id === updatedBoard._id ? updatedBoard : board
             );
-            
+
             newState = { ...state, board: updatedBoard, boards };
             break;
         }
@@ -191,14 +195,46 @@ export function boardReducer(state = initialState, action) {
                         ? [action.task, ...state.board.tasks]  // Add to beginning
                         : [...state.board.tasks, action.task]  // Add to end
             };
-            
-            boards = state.boards.map(board => 
+
+            boards = state.boards.map(board =>
                 board._id === updatedBoard._id ? updatedBoard : board
             );
-            
+
             newState = { ...state, board: updatedBoard, boards };
             break;
         }
+
+        case ADD_COMMENT: {
+
+            console.log(action)
+            if (!state.board) return state;
+
+            const updatedBoard = {
+                ...state.board,
+                tasks: state.board.tasks.map(task => {
+                    console.log('task._id', task._id, 'action.taskId', action.taskId, task._id == action.taskId)
+                    if (task._id == action.taskId) {
+                        console.log('Adding comment to task', task._id, action.formattedComment)
+                        return {
+                            ...task,
+                            comments: task.comments
+                                ? [...task.comments, action.formattedComment]
+                                : [action.formattedComment]
+                        };
+                    }
+                    return task;
+                })
+            };
+            console.log('updatedBoard', updatedBoard)
+
+            boards = state.boards.map(board =>
+                board._id === updatedBoard._id ? updatedBoard : board
+            );
+
+            newState = { ...state, board: updatedBoard, boards };
+            break;
+        }
+
         default:
     }
     return newState
