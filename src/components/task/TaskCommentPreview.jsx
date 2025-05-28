@@ -14,7 +14,7 @@ export const TaskCommentPreview = ({ comment }) => {
                     <img className="comment-author-icon" src={user.imgUrl} />
                     <span className="comment-author-name">{user.fullname}</span>
                 </div>
-                <div className="comment-creationTime">{new Date(comment.creationTime).toLocaleDateString()}</div>
+                <div className="comment-createdAt">{new Date(comment.createdAt).toLocaleDateString()}</div>
                 <div className="comment-menu-wrapper">
                     <SVGService.OptionsIcon className="comment-menu-icon" />
                 </div>
@@ -22,14 +22,14 @@ export const TaskCommentPreview = ({ comment }) => {
             <div className="comment-text">
                 <p>{comment.text}</p>
             </div>
-            <div className="comment-replies">
+            {/* <div className="comment-replies">
                 <div className="reply-input-wrapper">
                     <div className="current-user-image-wrapper">
                         <img className="current-user-image" src={user.imgUrl} />
                     </div>
                     <input className="reply-input" type="text" placeholder="Write a reply" />
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

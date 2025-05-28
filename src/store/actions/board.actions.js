@@ -457,7 +457,7 @@ export function getBoardById(boardId) {
 }
 
 // ================ COMMENT ACTIONS ================
-export function addCommentOptimistic(taskId, comment) {    
+export function addCommentOptimistic(taskId, comment) {
     try {
         const formattedComment = {
             ...comment,
