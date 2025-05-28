@@ -1,0 +1,239 @@
+.people-options-container {
+    width: 280px;
+    padding: 6px 0;
+    font-family: 'Figtree', sans-serif;
+
+    // Selected users at the top
+    .selected-users-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 0 8px 8px;
+        
+        .selected-user-pill {
+            display: flex;
+            align-items: center;
+            padding: 2px 8px 2px 2px;
+            border-radius: 16px;
+            background-color: #e5f4ff; // Light blue background
+            gap: 4px;
+            max-width: 100%;
+            
+            .user-option-avatar.small {
+                .option-avatar-image, .option-avatar-initials {
+                    width: 22px;
+                    height: 22px;
+                    font-size: 9px;
+                }
+            }
+            
+            .selected-user-name {
+                font-size: 12px;
+                color: #0073ea;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            
+            .remove-user-btn {
+                background: none;
+                border: none;
+                padding: 0;
+                color: #0073ea;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    
+    // Search box
+    .search-container {
+        position: relative;
+        margin: 0 8px 12px;
+        
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #676879;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        
+        .people-search-input {
+            width: 100%;
+            padding: 8px 8px 8px 34px;
+            border-radius: 4px;
+            border: 1px solid #e6e9ef;
+            font-size: 14px;
+            outline: none;
+            
+            &:focus {
+                border-color: #0073ea;
+            }
+            
+            &::placeholder {
+                color: #aaacb4;
+            }
+        }
+    }
+    
+    // Section headers
+    .section-title {
+        font-size: 14px;
+        margin: 4px 12px;
+        color: #676879;
+        font-weight: 500;
+    }
+    
+    // People lists
+    .people-options-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    
+        li {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .people-option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            text-align: left;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: #323338;
+            background: transparent;
+            gap: 10px;
+    
+            &:hover {
+                background-color: #f0f1f5;
+            }
+            
+            &.selected {
+                background-color: #e5f4ff;
+            }
+    
+            .user-option-avatar {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+    
+                .option-avatar-image {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    object-position: center center;
+                    border: 1px solid #e6e9ef;
+                    background-color: #f5f6f8;
+                }
+    
+                .option-avatar-initials {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+                    background-color: #784bd1;
+                    color: white;
+                    border-radius: 50%;
+                    font-size: 12px;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
+            }
+    
+            .user-option-name {
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+    
+    // Invite new member option
+    .invite-new-member {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        cursor: pointer;
+        margin-top: 4px;
+        
+        &:hover {
+            background-color: #f0f1f5;
+        }
+        
+        .invite-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            color: #676879;
+            
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        span {
+            font-size: 14px;
+            color: #323338;
+        }
+    }
+}
+
+.people-options-divider {
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid #e6e9ef;
+}
+
+.close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    color: #676879;
+
+    &:hover {
+        background-color: #f0f1f5;
+    }
+}

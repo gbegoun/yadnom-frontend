@@ -1,20 +1,177 @@
-export const PeopleOptionsModal = ({ people, onClose, onSelect }) => {
+import { useSelector } from 'react-redux';
+import { useState, useEffect, useCallback } from 'react';
+import SVGService from '../../services/svg/svg.service';
+
+export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedIds = [] }) => {
+    const users = useSelector(state => state.userModule.users);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredPeople, setFilteredPeople] = useState(people);
+    const [selectedUsers, setSelectedUsers] = useState(initialSelectedIds);
+    
+      // Get user information by ID with fallback values - using useCallback to memoize
+    const getUserInfo = useCallback((userId) => {
+        const user = users.find(user => user._id === userId || user._id === userId.toString());
+        
+        // Handle case when user is not found
+        if (!user) {
+            return {
+                initials: '??',
+                name: 'Unknown User',
+                imgUrl: null
+            };
+        }
+        
+        // Extract user data with fallbacks
+        const name = user.fullName || user.fullname || user.username || 'Unknown User';
+        const initials = name.split(' ')
+            .map(namePart => namePart[0])
+            .join('')
+            .toUpperCase() || '??';
+        const imgUrl = user.imageUrl || user.imgUrl || null;
+        
+        return { initials, name, imgUrl };
+    }, [users]);
+
+    // Render avatar (image or initials based on availability)
+    const renderAvatar = (userInfo, small = false) => (
+        <div className={`user-option-avatar ${small ? 'small' : ''}`}>
+            {userInfo.imgUrl && (
+                <img
+                    src={userInfo.imgUrl}
+                    alt={userInfo.name}
+                    className="option-avatar-image"
+                    onError={e => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                    }}
+                />
+            )}
+            <span
+                className="option-avatar-initials"
+                style={{ display: userInfo.imgUrl ? 'none' : 'flex' }}
+            >
+                {userInfo.initials}
+            </span>
+        </div>
+    );
+      // Handle selection of a user
+    const handleUserSelect = (person) => {
+        onSelect(person);
+        // Toggle selection: remove if already selected, add if not
+        setSelectedUsers(prevSelected => {
+            if (prevSelected.includes(person._id)) {
+                return prevSelected.filter(id => id !== person._id);
+            } else {
+                return [...prevSelected, person._id];
+            }
+        });
+    };
+    
+    // Get suggested people (first 3 users for demo purposes)
+    const suggestedPeople = people.slice(0, 3);
+
     return (
-        <>
-            <ul className="people-options-list">
-                {people.map(person => (
-                    <li key={person._id}>
-                        <button
-                            className="people-option-btn"
-                            onClick={() => onSelect(person)}
-                        >
-                            {person.name}
-                        </button>
-                    </li>
-                ))}
-            </ul>
+        <div className="people-options-container">
+            {/* Selected user(s) at the top */}
+            {selectedUsers.length > 0 && (
+                <div className="selected-users-container">
+                    {selectedUsers.map(userId => {
+                        const userInfo = getUserInfo(userId);
+                        return (
+                            <div key={userId} className="selected-user-pill">
+                                {renderAvatar(userInfo, true)}
+                                <span className="selected-user-name">{userInfo.name}</span>
+                                <button 
+                                    className="remove-user-btn"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedUsers(selectedUsers.filter(id => id !== userId));
+                                    }}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
+            {/* Search bar */}
+            <div className="search-container">
+                <span className="search-icon">
+                    <SVGService.SearchIcon />
+                </span>
+                <input
+                    type="text"
+                    className="people-search-input"
+                    placeholder="Search names, roles or teams"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
+            
+            {/* Suggested people section */}
+            <div className="people-section">
+                <h4 className="section-title">Suggested people</h4>
+                <ul className="people-options-list">
+                    {suggestedPeople.map(person => {
+                        const userInfo = getUserInfo(person._id);
+                        const isSelected = selectedUsers.includes(person._id);
+                        
+                        return (
+                            <li key={person._id}>
+                                <button
+                                    className={`people-option-btn ${isSelected ? 'selected' : ''}`}
+                                    onClick={() => handleUserSelect(person)}
+                                >
+                                    {renderAvatar(userInfo)}
+                                    <span className="user-option-name">{userInfo.name}</span>
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
+            
+            {/* All filtered members */}
+            {searchTerm && (
+                <div className="people-section">
+                    <h4 className="section-title">Search Results</h4>
+                    <ul className="people-options-list">
+                        {filteredPeople.map(person => {
+                            const userInfo = getUserInfo(person._id);
+                            const isSelected = selectedUsers.includes(person._id);
+                            
+                            return (
+                                <li key={person._id}>
+                                    <button
+                                        className={`people-option-btn ${isSelected ? 'selected' : ''}`}
+                                        onClick={() => handleUserSelect(person)}
+                                    >
+                                        {renderAvatar(userInfo)}
+                                        <span className="user-option-name">{userInfo.name}</span>
+                                    </button>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            )}
+            
+            {/* New member option */}
+            <div className="invite-new-member">
+                <span className="invite-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="currentColor"/>
+                        <path d="M8 9C5.33333 9 0 10.3333 0 13V16H16V13C16 10.3333 10.6667 9 8 9Z" fill="currentColor"/>
+                    </svg>
+                </span>
+                <span>Invite a new member by email</span>
+            </div>
+            
+            {/* Close button */}
             <hr className="people-options-divider" />
-            <button onClick={onClose}>Close</button>
-        </>
-    )
-}
+            <button className="close-button" onClick={onClose}>Close</button>
+        </div>
+    );
+};
