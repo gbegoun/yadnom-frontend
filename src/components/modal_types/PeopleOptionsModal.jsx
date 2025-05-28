@@ -67,8 +67,8 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
         });
     };
     
-    // Get suggested people (first 3 users for demo purposes)
-    const suggestedPeople = people.slice(0, 3);
+    // Get suggested people (first 2 users for demo purposes)
+    const suggestedPeople = people.slice(0, 2);
 
     return (
         <div className="people-options-container">
@@ -88,7 +88,7 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
                                         setSelectedUsers(selectedUsers.filter(id => id !== userId));
                                     }}
                                 >
-                                    ×
+                                    <span>&times;</span>
                                 </button>
                             </div>
                         );
@@ -161,17 +161,13 @@ export const PeopleOptionsModal = ({ people, onClose, onSelect, initialSelectedI
             {/* New member option */}
             <div className="invite-new-member">
                 <span className="invite-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="currentColor"/>
-                        <path d="M8 9C5.33333 9 0 10.3333 0 13V16H16V13C16 10.3333 10.6667 9 8 9Z" fill="currentColor"/>
-                    </svg>
+                    <SVGService.InviteMembersIcon />
                 </span>
                 <span>Invite a new member by email</span>
             </div>
             
             {/* Close button */}
-            <hr className="people-options-divider" />
-            <button className="close-button" onClick={onClose}>Close</button>
+            {/* Removed close button as requested */}
         </div>
     );
 };
