@@ -3,6 +3,7 @@ import { useModal } from '../../contexts/modal/useModal';
 import { useSelector } from 'react-redux';
 import { updateBoard } from '../../store/actions/board.actions';
 import SVGService from '../../services/svg/svg.service';
+import { userService } from '../../services/user/index.js';
 
 export const BoardNameModal = () => {
     // Redux state
@@ -15,23 +16,14 @@ export const BoardNameModal = () => {
     const [boardDescription, setBoardDescription] = useState(board?.description || '');
     const [isEditingTitle, setIsEditingTitle] = useState(false);
     const [isEditingDescription, setIsEditingDescription] = useState(false);
-    const inputRef = useRef();
-
-    // --- User helpers ---
-    const getUserById = (userId) => users.find(user => user._id === userId || user._id === userId.toString());
-    const getUserDisplayInfo = (userId) => {
-        const user = getUserById(userId);
-        if (!user) return { initials: '??', name: 'Unknown User', imgUrl: null };
-        const name = user.fullname || user.username || 'Unknown User';
-        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase() || '??';
-        return { initials, name, imgUrl: user.imgUrl || null };
-    };
-
+    
+    const inputRef = useRef();    
+    
     // --- Board info ---
     let ownerInfo = { initials: '??', name: 'Unknown' };
-    if (board?.members?.length > 0) ownerInfo = getUserDisplayInfo(board.members[0]);
+    if (board?.members?.length > 0) ownerInfo = userService.getUserDisplayInfo(board.members[0], users);
     let creatorInfo = ownerInfo;
-    if (board?.created_by?.length > 0) creatorInfo = getUserDisplayInfo(board.created_by[0]);
+    if (board?.created_by?.length > 0) creatorInfo = userService.getUserDisplayInfo(board.created_by[0], users);
     let formattedDate = 'Unknown';
     if (board?.created_at) {
         const date = new Date(board.created_at);

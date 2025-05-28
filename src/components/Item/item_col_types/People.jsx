@@ -4,30 +4,19 @@ import { PeopleOptionsModal } from "../../modal_types/PeopleOptionsModal";
 import { updateTaskColumnValue } from "../../../store/actions/board.actions.js";
 import { useSelector } from "react-redux";
 import SVGService from "../../../services/svg/svg.service.js";
+import { userService } from "../../../services/user/index.js";
 
 export const People = ({ value, taskId, groupId, column }) => {
     const board = useSelector(state => state.boardModule.board);
     const users = useSelector(state => state.userModule.users);
 
     const ownersIds = value?.length ? value : [];
-
     const { openModal } = useModal();
     const peopleRef = useRef();
 
-    // Helper functions similar to BoardNameModal
-    const getUserByIdFromUsers = (userId) => users.find(user => user._id === userId || user._id === userId.toString());
-
-    const getUserDisplayInfo = (userId) => {
-        const user = getUserByIdFromUsers(userId);
-        if (!user) return { initials: '??', name: 'Unknown User', imgUrl: null };
-        const name = user.fullName || user.fullname || user.username || 'Unknown User';
-        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase() || '??';
-        return { initials, name, imgUrl: user.imageUrl || user.imgUrl || null };
-    };
-
     // Show all board members as options
     const people = (board?.members || []).map((id) => {
-        const userInfo = getUserDisplayInfo(id);
+        const userInfo = userService.getUserDisplayInfo(id, users);
         return { _id: id, name: userInfo.name };
     });
 
@@ -37,7 +26,9 @@ export const People = ({ value, taskId, groupId, column }) => {
             await updateTaskColumnValue(board, groupId, taskId, column._id, newSelectedIds)
                 .catch(err => console.error('Failed to update people', err));
         }
-    }; const handleOpenModal = (e) => {
+    };
+
+    const handleOpenModal = (e) => {
         e.stopPropagation();
         const rect = peopleRef.current.getBoundingClientRect();
         openModal(
@@ -53,8 +44,8 @@ export const People = ({ value, taskId, groupId, column }) => {
     };
 
     // Get user info for selected owners
-    const selectedUsers = ownersIds.map(id => getUserDisplayInfo(id)).filter(user => user);
-    const maxVisibleAvatars = 3;
+    const selectedUsers = ownersIds.map(id => userService.getUserDisplayInfo(id, users)).filter(user => user);
+    const MAX_VISIBLE_AVATARS = 3;
 
     return (
         <div
@@ -72,7 +63,7 @@ export const People = ({ value, taskId, groupId, column }) => {
 
             {selectedUsers.length > 0 ? (
                 <div className="people-avatars">
-                    {selectedUsers.slice(0, maxVisibleAvatars).map((userInfo, index) => (
+                    {selectedUsers.slice(0, MAX_VISIBLE_AVATARS).map((userInfo, index) => (
                         <div key={ownersIds[index]} className="user-avatar">
                             {userInfo.imgUrl ? (
                                 <img
@@ -93,9 +84,9 @@ export const People = ({ value, taskId, groupId, column }) => {
                             </span>
                         </div>
                     ))}
-                    {selectedUsers.length > maxVisibleAvatars && (
+                    {selectedUsers.length > MAX_VISIBLE_AVATARS && (
                         <div className="additional-count">
-                            +{selectedUsers.length - maxVisibleAvatars}
+                            +{selectedUsers.length - MAX_VISIBLE_AVATARS}
                         </div>
                     )}
                 </div>
