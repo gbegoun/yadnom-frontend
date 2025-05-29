@@ -13,7 +13,13 @@ export const MainSidebar = () => {
     const { openModal, closeModal } = useModal();
 
     const onAddClick = () => {
-        openModal(<AdvancedFilterModal />, {targetRect: rect})
+        openModal(
+            <NewBoardModal
+                onClose={closeModal}
+                onAddNewBoard={onAddNewBoard}
+            />,
+            { backgroundOverlay: true }
+        );
     }
 
     const onAddNewBoard = (title) => {
