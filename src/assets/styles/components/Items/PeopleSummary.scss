@@ -5,6 +5,7 @@
     padding: 4px 8px;
     min-height: 32px;
     border-radius: 4px;
+    cursor: default;
 
     .people-avatars-summary {
         display: flex;
@@ -14,16 +15,17 @@
         gap: 0;
     }
 
-    /* Styling for UserAvatar components in PeopleSummary */
+    /* Only keep overlap/positioning for avatar containers */
     .people-summary-avatar-item {
         margin-left: -8px;
         position: relative;
+        cursor: default;
 
         &:first-child {
             margin-left: 0;
         }
 
-        /* Creates a white border around avatar for better visibility when overlapping */
+        /* White border for overlap effect */
         &::before {
             content: '';
             position: absolute;
@@ -60,7 +62,7 @@
         }
     }
 
-    /* Default profile styling */
+    /* Default profile icon styling */
     .default-profile-summary {
         display: flex;
         align-items: center;
