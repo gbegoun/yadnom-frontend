@@ -4,6 +4,11 @@
     grid-template-columns: subgrid;
     background-color: white;
     @include fade-in(0.3s, 0s);
+    cursor: grab;
+}
+
+.task-preview.is-dragging {
+    cursor: grabbing !important;
 }
 
 .task-preview:hover {
@@ -25,6 +30,11 @@
     z-index: 5;
     background-color: rgba(209, 217, 225, 0.343);
     box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.13);
+}
+
+.task-preview:hover .task-preview-menu-icon {
+    opacity: 1;
+    visibility: visible;
 }
 
 .task-preview-item-wrapper {

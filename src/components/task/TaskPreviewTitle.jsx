@@ -63,7 +63,9 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
 
     return (
         <div className="task-preview-title-wrapper">
-            <div className="task-preview-menu" />
+            <div className="task-preview-menu" >
+                <SVGService.OptionsIcon className='task-preview-menu-icon' />
+            </div>
             <div className="task-left-indicator" style={{ backgroundColor: color }} />
             <div className="task-checkbox-wrapper">
                 <input className="task-checkbox" name="" type="checkbox" aria-label="" value="" />
@@ -85,7 +87,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                 )}
             </div>
             <div className="task-title-sidebar-button">
-                <SVGService.AddCommentIcon className='add-comment-icon'/>
+                <SVGService.AddCommentIcon className='add-comment-icon' />
             </div>
         </div>
     )

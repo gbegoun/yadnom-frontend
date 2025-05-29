@@ -3,6 +3,7 @@
     max-height: 300px;
     padding: 6px 0;
     font-family: 'Figtree', sans-serif;
+    margin-left: 5px;
 
     .selected-users-container {
         display: flex;
@@ -73,7 +74,7 @@
 
     .section-title {
         font-size: 14px;
-        margin: 4px 12px;
+        margin: 8px 12px;
         color: #676879;
         font-weight: 500;
     }
@@ -113,6 +114,7 @@
             }
 
             .user-option-name {
+                margin-left: 6px;
                 flex: 1;
                 overflow: hidden;
                 text-overflow: ellipsis;

@@ -4,7 +4,6 @@ import { GroupPreview } from "./GroupPreview";
 import {
     DndContext,
     closestCenter,
-    KeyboardSensor,
     PointerSensor,
     useSensor,
     useSensors,
@@ -13,7 +12,6 @@ import {
 import {
     arrayMove,
     SortableContext,
-    sortableKeyboardCoordinates,
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 import { TaskPreview } from "../task/TaskPreview";
@@ -42,10 +40,9 @@ export const GroupList = ({ onBoardSave }) => {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                distance: 10
+                distance: 0
             }
-        }),
-        useSensor(KeyboardSensor)
+        })
     )
 
     const handleDragStart = (event) => {
@@ -77,7 +74,6 @@ export const GroupList = ({ onBoardSave }) => {
 
         const isActiveATask = active.data.current?.type === 'task'
         const isOverATask = over.data.current?.type === 'task'
-        const isOverAGroup = over.data.current?.type === 'group'
 
         if (isActiveATask && isOverATask) {
             const activeIndex = board.tasks.findIndex(task => task._id === active.id)
@@ -137,8 +133,8 @@ export const GroupList = ({ onBoardSave }) => {
         onBoardSave(board);
     }
 
-    if(!board) return <div className="loading"></div>
-    
+    if (!board) return <div className="loading"></div>
+
     return (
         <DndContext
             sensors={sensors}
@@ -147,7 +143,7 @@ export const GroupList = ({ onBoardSave }) => {
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
         >
-            <div className="group-list">
+            <div className={`group-list ${dragState.draggingId || dragState.draggingTaskId ? 'dnd-context-dragging' : ''}`}>
                 <SortableContext
                     items={board.groups.map(group => group._id)}
                     strategy={verticalListSortingStrategy}
@@ -172,9 +168,9 @@ export const GroupList = ({ onBoardSave }) => {
                     })}
                 </SortableContext>
             </div>
-            <DragOverlay>
+            <DragOverlay >
                 {dragState.draggingId && dragState.draggingType === 'group' && (
-                    <div className="drag-overlay">
+                    <div className="drag-overlay" style={{ cursor: 'grabbing' }} >
                         <GroupPreview
                             id={dragState.draggingId}
                             columns={board.columns}

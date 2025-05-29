@@ -25,6 +25,7 @@ export const TaskPreview = ({ id, task, columns, color, isDragging, groupId }) =
 
     if (isDragging) {
         style.opacity = 0.5;
+        style.cursor = 'grabbing'; 
     }
 
     return (
@@ -33,7 +34,7 @@ export const TaskPreview = ({ id, task, columns, color, isDragging, groupId }) =
             style={style} 
             {...attributes} 
             {...listeners}
-            className={`task-preview`}
+            className={`task-preview ${isDragging ? 'is-dragging' : ''}`}
         >
             <TaskPreviewTitle task={task} color={color} groupId={groupId} />
             <TaskPreviewItemList task={task} columns={columns} />

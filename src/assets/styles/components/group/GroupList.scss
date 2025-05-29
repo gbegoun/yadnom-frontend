@@ -4,3 +4,17 @@
     grid-auto-rows: min-content;
     @include fade-in(0.3s, 0s);
 }
+
+.dnd-context-dragging * {
+    cursor: grabbing !important;
+}
+
+// Add this for immediate cursor change on mouse down
+.group-list *:active {
+    cursor: grabbing !important;
+}
+
+// Or more specifically target draggable elements
+[data-handler-id]:active {
+    cursor: grabbing !important;
+}
