@@ -2,7 +2,6 @@ import { Dropdown } from '../Item/item_col_types/Dropdown.jsx';
 import { Label } from '../Item/item_col_types/Label.jsx';
 import { People } from '../Item/item_col_types/People.jsx';
 import { Files } from '../Item/item_col_types/Files.jsx';
-import { Progress } from '../Item/item_col_types/Progress.jsx';
 import { DateCol } from '../Item/item_col_types/DateCol.jsx';
 
 export const DynamicItem = ({ column, value, taskId, groupId }) => {
@@ -15,8 +14,8 @@ export const DynamicItem = ({ column, value, taskId, groupId }) => {
             return <People column={column} value={value} taskId={taskId} groupId={groupId} />
         case 'date':
             return <DateCol column={column} value={value} taskId={taskId} groupId={groupId} />
-        // case 'files':
-        //     return <Files column={column} value={value} taskId={taskId} groupId={groupId} />
+        case 'file':
+            return <Files column={column} value={value} taskId={taskId} groupId={groupId} />
         // case 'progress':
         //     return <Progress column={column} value={value} taskId={taskId} groupId={groupId} />
         default:
