@@ -272,7 +272,28 @@ export const demo_data = {
             ],
             "progress_column": 100
           },
-          "groupid": "grp_ui_design"
+          "groupid": "grp_ui_design",
+          comments:[
+            {
+              _id: "c2001",
+              authorId: 204,
+              createdAt: "2025-05-29T14:20:00Z",
+              text: "The design system looks comprehensive. Great work on establishing consistent patterns!"
+            },
+            {
+              _id: "c2002", 
+              authorId: 202,
+              createdAt: "2025-03-15T09:45:00Z",
+              text: "Initial feedback: Let's make sure we include accessibility guidelines in the design system from the start."
+            },
+            {
+              _id: "c2003",
+              authorId: 201, 
+              createdAt: "2024-02-15T16:30:00Z",
+              text: "Looking forward to seeing how this design system evolves. It will be the foundation for our entire UI."
+            }
+          ]
+
         },
         {
           "_id": 6003,

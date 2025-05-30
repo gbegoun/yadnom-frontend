@@ -21,6 +21,43 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
         onCommentDelete(comment._id);
     }
 
+    const getTimeFromUpdatedAt = () => {
+        const updatedAt = new Date(comment.createdAt);
+        const now = new Date();
+
+        const diffInYears = now.getFullYear() - updatedAt.getFullYear();
+        if (diffInYears > 0) {
+            return `${updatedAt.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
+        }
+
+        const diffInMonths = now.getMonth() - updatedAt.getMonth();
+        if (diffInMonths > 0) {
+            return `${updatedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+        }
+
+        const diffInDays = now.getDate() - updatedAt.getDate();
+        if (diffInDays > 0) {
+            return `${diffInDays}d`;
+        }
+
+        const diffInHours = now.getHours() - updatedAt.getHours();
+        if (diffInHours > 0) {
+            return `${diffInHours}h`;
+        }
+
+        const diffInMinutes = now.getMinutes() - updatedAt.getMinutes();
+        if (diffInMinutes > 0) {
+            return `${diffInMinutes}m`;
+        }
+
+        const diffInSeconds = now.getSeconds() - updatedAt.getSeconds();
+        if (diffInSeconds > 0) {
+            return `${diffInSeconds}s`;
+        }
+
+        return 'just now';
+
+    }
 
 
     if (!user) {
@@ -33,7 +70,7 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
                     <img className="comment-author-icon" src={user.imgUrl} />
                     <span className="comment-author-name">{user.fullname}</span>
                 </div>
-                <div className="comment-createdAt">{new Date(comment.createdAt).toLocaleDateString()}</div>
+                <div className="comment-createdAt">{getTimeFromUpdatedAt()}</div>
                 <div className="comment-menu-wrapper" onClick={(event) => onMenuClick(event)}>
                     <SVGService.OptionsIcon className="comment-menu-icon" />
                 </div>
