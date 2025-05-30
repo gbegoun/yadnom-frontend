@@ -215,7 +215,7 @@ export function boardReducer(state = initialState, action) {
                         return {
                             ...task,
                             comments: task.comments
-                                ? [...task.comments, action.formattedComment]
+                                ? [action.formattedComment, ...task.comments]
                                 : [action.formattedComment]
                         };
                     }
