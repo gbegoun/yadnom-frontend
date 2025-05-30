@@ -228,7 +228,30 @@ export const demo_data = {
             ],
             "progress_column": 100
           },
-          "groupid": "grp_ui_design"
+          "groupid": "grp_ui_design",
+          "comments": [
+            {
+              _id: "c1001",
+              authorId: 201,
+              createdAt: "2025-01-13T10:00:00Z",
+              text: "Great insights from the user research! Let's ensure we address these in our design.",
+              replies: [
+                {
+                  _id: "c1003",
+                  authorId: 201,
+                  createdAt: "2025-01-13T11:00:00Z",
+                  text: "Absolutely! The feedback will be crucial for our next steps.",
+                }
+              ]
+            },
+            {
+              _id: "c1002",
+              authorId: 201,
+              createdAt: "2025-01-14T09:30:00Z",
+              text: "I've started drafting the design concepts based on the research findings."
+            }
+
+          ]
         },
         {
           "_id": 6002,
@@ -249,7 +272,28 @@ export const demo_data = {
             ],
             "progress_column": 100
           },
-          "groupid": "grp_ui_design"
+          "groupid": "grp_ui_design",
+          comments:[
+            {
+              _id: "c2001",
+              authorId: 204,
+              createdAt: "2025-05-29T14:20:00Z",
+              text: "The design system looks comprehensive. Great work on establishing consistent patterns!"
+            },
+            {
+              _id: "c2002", 
+              authorId: 202,
+              createdAt: "2025-03-15T09:45:00Z",
+              text: "Initial feedback: Let's make sure we include accessibility guidelines in the design system from the start."
+            },
+            {
+              _id: "c2003",
+              authorId: 201, 
+              createdAt: "2024-02-15T16:30:00Z",
+              text: "Looking forward to seeing how this design system evolves. It will be the foundation for our entire UI."
+            }
+          ]
+
         },
         {
           "_id": 6003,

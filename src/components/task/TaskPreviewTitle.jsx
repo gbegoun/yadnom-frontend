@@ -3,6 +3,8 @@ import { useClickOutside } from '../../hooks/useClickOutside'
 import { useSelector } from 'react-redux'
 import { updateTaskDirectProperty } from '../../store/actions/board.actions'
 import SVGService from '../../services/svg/svg.service.js';
+import { useRightPanel } from '../../contexts/rightPanel/RightPanelContext.jsx'
+
 
 export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -10,6 +12,7 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
     const inputRef = useRef(null);
     const inputWrapperRef = useRef(null);
     const board = useSelector(state => state.boardModule.board);
+    const { openPanel } = useRightPanel();
 
     // Keep input value in sync with task.title when task changes
     useEffect(() => {
@@ -61,6 +64,10 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
         }
     };
 
+    const onSidebarButtonClick = () => {
+        openPanel({ type: 'task', taskId: task._id });
+    }
+
     return (
         <div className="task-preview-title-wrapper">
             <div className="task-preview-menu" >
@@ -86,8 +93,16 @@ export const TaskPreviewTitle = ({ task, color, groupId }) => {
                     <span className="task-title-inner" onClick={handleSpanClick}>{inputValue}</span>
                 )}
             </div>
-            <div className="task-title-sidebar-button">
-                <SVGService.AddCommentIcon className='add-comment-icon' />
+            <div className="task-title-sidebar-button" onClick={() => onSidebarButtonClick()}>
+                {task.comments && task.comments.length > 0 ? (
+                    <div className='has-comments-icon-wrapper'>
+                        <SVGService.BoardDiscussionIcon className='has-comments-icon' />
+                        <div className="comment-count-circle">
+                            <span className='comments-count'>{task.comments.length}</span>
+                        </div>
+                    </div>
+                ) : <SVGService.AddCommentIcon className='add-comment-icon' />}
+
             </div>
         </div>
     )

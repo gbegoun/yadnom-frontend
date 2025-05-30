@@ -16,8 +16,8 @@ export async function loadUsers() {
     } finally {
         store.dispatch({ type: LOADING_DONE })
     }
-}
 
+}
 export async function removeUser(userId) {
     try {
         await userService.remove(userId)

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
-export function makeId(length = 12) {
-    return nanoid(length)
+export function makeId(length = 12, prefix = '') {
+    return prefix + nanoid(length)
 }
 
 export function makeLorem(size = 100) {
@@ -19,7 +19,6 @@ export function getRandomIntInclusive(min, max) {
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
 }
-
 
 export function randomPastTime() {
     const HOUR = 1000 * 60 * 60
