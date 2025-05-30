@@ -92,5 +92,69 @@
             font-size: 14px;
             padding: 6px 12px;
         }
+
+        .workspace-section {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin:2px 0 2px 4px;
+
+
+            .workspace-header {
+                display: flex;
+                align-items: center;
+                border: 1px solid #d0d4e4;
+                border-radius: 6px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                padding-left:4px;
+                padding-right: 4px;
+                flex: 1;
+
+
+                .workspace-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 6px;
+                    background-color: #ff158a;
+                    color: white;
+                    font-size: 14px;
+                }
+
+                .workspace-title {
+                    padding-left: 6px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #323338;
+                }
+            }
+
+            .sidebar-AddBoard-Button {
+                display: block;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #0073ea;
+                border-radius: 4px;
+                color: #ffffff;
+                height: 32px;
+                width: 32px;
+                margin: 4px;
+                font-size: 32px;
+                font-weight: 200;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #005bb5; // Slightly darker blue
+                }
+
+            }
+
+        }
     }
 }

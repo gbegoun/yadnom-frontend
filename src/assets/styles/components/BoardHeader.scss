@@ -15,7 +15,26 @@
         width: 100dvw;
         padding-left: 40px;
         padding-top: 20px;
-        padding-bottom: 22px;
+        padding-bottom: 23px;
+        position: relative;
+
+        // Create gradient that extends beyond the bottom
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0.8) 30%,
+                rgba(255, 255, 255, 0.3) 70%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            pointer-events: none;
+            z-index: 1; // Ensure it's above the group header
+        }
 
         .info-row {
             display: flex;

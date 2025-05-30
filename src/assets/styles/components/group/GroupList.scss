@@ -2,7 +2,8 @@
     display: grid;
     grid-template-columns: min-content min-content minmax(100px, 1fr);
     grid-auto-rows: min-content;
-    @include fade-in(0.3s, 0s);
+    background-color: white;
+    @include fade-in(0.7s, 0s);
 }
 
 .dnd-context-dragging * {

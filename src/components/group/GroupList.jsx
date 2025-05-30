@@ -187,8 +187,12 @@ export const GroupList = ({ onBoardSave }) => {
                             id={dragState.draggingTask._id}
                             task={dragState.draggingTask}
                             columns={board.columns}
-                            color={board.groups[0].color}
-                            groupId={board.groups[0]._id}
+                            color={
+                                board.groups.find(
+                                    group => group._id === dragState.draggingTask.groupid
+                                )?.color || board.groups[0].color
+                            }
+                            groupId={dragState.draggingTask.groupid}
                             isDragging={true}
                         />
                     </div>
