@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import SVGService from '../services/svg/svg.service';
 import { useEffect } from 'react';
-import { loadBoards,addNewBoard } from '../store/actions/board.actions.js';
+import { loadBoards, addNewBoard } from '../store/actions/board.actions.js';
 import { useModal } from '../contexts/modal/useModal.jsx'
 import { NewBoardModal } from './modal_types/NewBoardModal.jsx'
 
@@ -54,8 +54,14 @@ export const MainSidebar = () => {
 
             {/* Boards section */}
             <div className="sidebar-section">
-                <div className="sidebar-AddBoard-Button" onClick={onAddClick}>
-                    <SVGService.AddViewIcon className="sidebar-AddBoard-icon" />
+                <div className="workspace-section">
+                    <div className="workspace-header">
+                        <div className="workspace-icon">W</div>
+                        <span className="workspace-title">Workspace</span>
+                    </div>
+                    <div className="sidebar-AddBoard-Button" onClick={onAddClick}>
+                        <SVGService.AddViewIcon className="sidebar-AddBoard-icon" />
+                    </div>
                 </div>
 
                 <ul className="sidebar-list sidebar-boards">

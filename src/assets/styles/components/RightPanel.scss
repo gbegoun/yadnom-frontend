@@ -1,0 +1,46 @@
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.15s ease-in-out;
+    padding-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+
+    &.open {
+        width: 540px;
+    }
+
+    .close-button {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        top: 0;
+        left: 20px;
+        color: rgb(139, 139, 139);
+        cursor: pointer;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .close-icon {
+            width: 100%;
+            height: 100%;
+        }
+
+        
+    }
+    .panel-content {
+        height: 100%;
+        overflow: hidden;
+    }
+}
