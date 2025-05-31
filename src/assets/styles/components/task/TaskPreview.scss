@@ -11,9 +11,36 @@
     cursor: grabbing !important;
 }
 
-.task-preview:hover {
-    z-index: 5;
-    background-color: white;
+
+//---------- Hovering effects ------------- //
+.task-preview.selected {
+  background-color: rgb(216, 234, 252); // Light blue background
+  border: rgb(156, 178, 247) 1px solid; // Blue border
+  
+  // Override background for all child elements that have explicit backgrounds
+  .task-preview-title-wrapper,
+  .task-preview-menu,
+  .task-checkbox-wrapper,
+  .task-title,
+  .task-title-sidebar-button,
+  .task-preview-item,
+  .task-preview-last-cell {
+    background-color: rgb(216, 234, 252) !important;
+    box-shadow: none;
+  }
+
+  // Special case for the menu
+  .task-preview-menu {
+    margin: -1px 0 -1px -1px; // Offset the parent border
+    border: 1px solid white; // Or match your background color
+    background-color: white !important; // Ensure the menu background is white
+  }
+}
+
+
+.task-preview:hover .label-item {
+    opacity: 0.75;
+    visibility: visible;
 }
 
 .task-preview:hover .task-checkbox-wrapper,
@@ -36,6 +63,7 @@
     opacity: 1;
     visibility: visible;
 }
+
 
 .task-preview-item-wrapper {
     grid-column: 2;

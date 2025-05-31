@@ -38,3 +38,25 @@
 .portrait-ratio {
     @include aspect-ratio(9, 16);
 }
+
+/* First, create a single, highly specific selector */
+.drag-overlay .task-preview,
+.drag-overlay .task-preview.selected {
+    background-color: white !important;
+    border: none !important;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1) !important;
+    
+    /* Target all the specific elements that have explicit backgrounds */
+    .task-preview-title-wrapper,
+    .task-preview-menu,
+    .task-checkbox-wrapper,
+    .task-title,
+    .task-title-sidebar-button,
+    .task-preview-item,
+    .task-preview-last-cell {
+        background-color: white !important; 
+        box-shadow: none !important;
+    }
+}
+
+

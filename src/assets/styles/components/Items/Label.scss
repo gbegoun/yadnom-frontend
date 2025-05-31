@@ -4,4 +4,6 @@
     align-items: center;
     height:100%;
     color:white;
+    position: relative; // <-- Add this line
+    overflow: hidden; 
 }

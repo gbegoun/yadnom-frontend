@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { BoardHeader } from '../components/board/BoardHeader.jsx';
 import { GroupList } from '../components/group/GroupList.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BoardContext } from '../contexts/board/BoardContext.jsx';
 import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actions/board.actions.js";
 import { useSelector } from 'react-redux';
@@ -43,6 +43,12 @@ export const Board = () => {
            .catch(err => console.error('Error saving board:', err));
     };
 
+    const [selectedTaskId, setSelectedTaskId] = useState(null);
+    
+    const handleTaskSelect = (taskId) => {
+        setSelectedTaskId(prevId => prevId === taskId ? null : taskId);
+    };
+
 
     if (!board) return (<div className='loading'></div>); 
     
@@ -50,7 +56,14 @@ export const Board = () => {
     const isBoardFullyLoaded = board && board.groups && board.tasks && board.columns;
     
     return (
-        <BoardContext.Provider value={{ board, onNewGroupClicked, onNewTaskClicked, loadBoard }}>
+        <BoardContext.Provider value={{ 
+            board, 
+            onNewGroupClicked, 
+            onNewTaskClicked, 
+            loadBoard,
+            selectedTaskId,  // Add this
+            onTaskSelect: handleTaskSelect  // Add this
+        }}>
             <main className={`board-container ${isAnimating ? 'board-enter' : ''}`}>
                 {isBoardFullyLoaded && isAnimating && (
                     <>
