@@ -79,4 +79,11 @@
             }
         }
     }
+
+    &.files-item-empty.has-file {
+        .files-icons-container {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    }
 }
