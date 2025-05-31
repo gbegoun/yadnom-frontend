@@ -4,6 +4,7 @@ import { LabelOptionsModal } from '../../modal_types/LabelOptionsModal.jsx'
 import { updateTaskColumnValue } from '../../../store/actions/board.actions.js'
 import { useSelector } from 'react-redux'
 import { useConfetti } from '../../../hooks/useConfetti.js'
+import { useModalPosition } from '../../../hooks/useModalPosition.js'
 
 export const Label = ({ column, value, taskId, groupId }) => {
     // Core refs and state
@@ -11,6 +12,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const labelRef = useRef();
     const confettiRef = useRef();
     const { openModal, closeModal } = useModal();
+    const { centerBottomPosition } = useModalPosition();
 
     // Create a unique ID for this label's confetti canvas
     const canvasId = `confetti-canvas-${taskId}-${column._id}`;
@@ -61,6 +63,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const handleOpenModal = (e) => {
         e.stopPropagation();
         const rect = labelRef.current.getBoundingClientRect();
+        const modifiedRect = centerBottomPosition(rect);
 
         openModal(
             <LabelOptionsModal
@@ -69,7 +72,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 onSelect={handleLabelUpdate}
                 onClose={closeModal}
             />, {
-            targetRect: rect,
+            targetRect: modifiedRect,
             isFromDynamicItem: true,
         }
         );
