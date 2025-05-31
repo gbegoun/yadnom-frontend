@@ -25,14 +25,13 @@ export const httpService = {
 
 async function ajax(endpoint, method = 'GET', data = null) {
     const url = `${BASE_URL}${endpoint}`
-    const loggedinUser = getCurrentUser()
 
     let config = { url, method }
 
     if (method === 'GET') {
-        config.params = { ...data, loggedinUser }
+        config.params = data
     } else {
-        config.data = { ...data, loggedinUser }
+        config.data = data
     }
 
     console.log('🔍 Sending request with config:', config)
