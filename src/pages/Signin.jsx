@@ -1,33 +1,64 @@
-import { LoginSignup } from "../components/LoginSignup"
+import { useNavigate } from "react-router-dom"
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
-import { login } from "../store/actions/user.actions"
+import { login, signup } from "../store/actions/user.actions"
 import '../assets/styles/pages/signin.scss'
 
 export default function Signin() {
+    const navigate = useNavigate()
 
     async function onLogin(credentials) {
         try {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
+            setTimeout(() => {
+                showSuccessMsg(`Redirecting to home page...`)
+                navigate('/') // Redirect to home page after successful login
+            }, 2000);
         } catch (err) {
             showErrorMsg('Cannot login')
         }
+    }
+
+    async function onSignup(credentials) {
+        try {
+            const user = await signup(credentials)
+            showSuccessMsg(`Welcome new user: ${user.fullname}`)
+            setTimeout(() => {
+                navigate('/') // Redirect to home page after successful signup
+            }, 2000);
+        } catch (err) {
+            showErrorMsg('Cannot signup')
+        }
+    }
+
+    function handleSubmit(ev) {
+        ev.preventDefault();
+        const formData = new FormData(ev.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+        
+        // For signup, use email as username and create fullname for now
+        const credentials = {
+            username: email, // Use email as username
+            password: password,
+            fullname: email.split('@')[0], // Use email prefix as fullname
+            email: email // Keep email field for future use
+        };
+        
+        // Try signup first (create new user), fallback to login if user exists
+        onSignup(credentials).catch(() => {
+            // If signup fails, try login with just username and password
+            onLogin({ username: email, password: password });
+        });
     }
 
     return (
         <div className="signin-page">
             <div className="signin-left">
                 <div className="signin-content">
-                    <h1>Welcome to monday.com</h1>
+                    <h1>Welcome to Yadnom.com</h1>
                     <p className="subtitle">Get started - it's free. No credit card needed.</p>
-                    <button className="google-btn">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google logo" className="google-logo" />
-                        Continue with Google
-                    </button>
-                    <div className="divider">
-                        <span>Or</span>
-                    </div>
-                    <form className="signin-form" onSubmit={e => { e.preventDefault(); onLogin({ email: e.target.email.value, password: e.target.password.value }) }}>
+                    <form className="signin-form" onSubmit={handleSubmit}>
                         <input type="email" name="email" placeholder="name@company.com" required />
                         <input type="password" name="password" placeholder="Password" required />
                         <button type="submit" className="continue-btn">Continue</button>

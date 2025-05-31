@@ -53,7 +53,7 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
-    if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+    if (!userCred.imgUrl) userCred.imgUrl = 'https://res.cloudinary.com/drunensjg/image/upload/v1748513702/default_profile_pic_jxjpai.svg'
 
     const user = await storageService.post(STORAGE_KEY, userCred)
     return saveLoggedinUser(user)

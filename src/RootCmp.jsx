@@ -44,7 +44,7 @@ function RootCmp() {
 
                 <main className="main-content">
                   <Routes>
-                    <Route path="" element={<HomePage />} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/board/:boardId" element={<Board />} />
                     <Route path="*" element={<h1>404 Not Found</h1>} />
                   </Routes>

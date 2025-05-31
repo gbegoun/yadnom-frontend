@@ -6,10 +6,9 @@ import { UserAvatar } from './shared/UserAvatar';
 export const MainHeader = () => {
     const board = useSelector(state => state.boardModule.board);
     const users = useSelector(state => state.userModule.users);
+    const loggedInUser = useSelector(state => state.userModule.user);
 
     const boardManagerId = board?.created_by[0];
-
-    if (!board || !users) return <div className='loading'>Loading...</div>;
 
     return (
         <div className="main-header">
@@ -23,13 +22,25 @@ export const MainHeader = () => {
                 <SVGService.DotsCubeIcon className="main-header-products-switcher" />
                 <div className='avatar-container'>
                     <img src="../src/assets/icons/simple_logo.png" alt="Products Switcher" className="main-header-simple-logo" />
-                    <UserAvatar
-                        userId={boardManagerId}
-                        users={users}
-                        size="normal"
-                        className="main-header-profile"
-                        showTooltip={true}
-                    />
+                    {board && boardManagerId && users ? (
+                        <UserAvatar
+                            userId={boardManagerId}
+                            users={users}
+                            size="normal"
+                            className="main-header-avatar"
+                            showTooltip={true}
+                        />
+                    ) : loggedInUser && users ? (
+                        <UserAvatar
+                            userId={loggedInUser._id}
+                            users={users}
+                            size="normal"
+                            className="main-header-avatar"
+                            showTooltip={true}
+                        />
+                    ) : (
+                        <SVGService.DefaultProfilePic className="main-header-profile" />
+                    )}
                 </div>
             </div>
         </div>
