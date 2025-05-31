@@ -3,8 +3,8 @@ import { httpService } from '../http.service'
 export const boardService = {
     query,
     getById,
-    save,
-    remove,
+    saveBoard,
+    removeBoard,
     addBoardMsg
 }
 
@@ -16,10 +16,10 @@ function getById(boardId) {
     return httpService.get(`board/${boardId}`)
 }
 
-async function remove(boardId) {
+async function removeBoard(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
-async function save(board) {
+async function saveBoard(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await httpService.put(`board/${board._id}`, board)
