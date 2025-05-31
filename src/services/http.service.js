@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import { store } from '../store/store'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
@@ -24,20 +25,38 @@ export const httpService = {
 
 async function ajax(endpoint, method = 'GET', data = null) {
     const url = `${BASE_URL}${endpoint}`
-    const params = (method === 'GET') ? data : null
-    
-    const options = { url, method, data, params }
+    const loggedinUser = getCurrentUser()
+
+    let config = { url, method }
+
+    if (method === 'GET') {
+        config.params = { ...data, loggedinUser }
+    } else {
+        config.data = { ...data, loggedinUser }
+    }
+
+    console.log('🔍 Sending request with config:', config)
 
     try {
-        const res = await axios(options)
+        const res = await axios(config)
         return res.data
     } catch (err) {
         console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data)
         console.dir(err)
-        if (err.response && err.response.status === 401) {
-            sessionStorage.clear()
-            window.location.assign('/')
-        }
         throw err
+    }
+}
+
+
+
+//////temp
+
+function getCurrentUser() {
+    try {
+        const state = store.getState()
+        return state.userModule?.user || null
+    } catch (err) {
+        console.warn('Could not get current user from store:', err)
+        return null
     }
 }

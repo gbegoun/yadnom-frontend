@@ -496,6 +496,12 @@ export function addCommentOptimistic(taskId, comment) {
 }
 
 export function deleteCommentOptimistic(taskId, commentId) {
+
+    console.log('deleteCommentOptimistic', taskId, commentId);
+    const currentBoard = store.getState().boardModule.board;
+    const task = currentBoard.tasks.find(t => t._id === taskId);
+    const originalComment = task?.comments?.find(c => c._id === commentId);
+
     try {
         store.dispatch({
             type: DELETE_COMMENT,
@@ -503,22 +509,19 @@ export function deleteCommentOptimistic(taskId, commentId) {
             commentId
         });
 
-        const updatedBoard = store.getState().boardModule.board;
-        console.log(updatedBoard)
-        return boardService.saveBoard(updatedBoard)
-            .then(savedBoard => {
-                store.dispatch(getCmdUpdateBoard(savedBoard));
-                return savedBoard;
+        return boardService.removeComment(currentBoard._id, taskId, commentId)
+            .then(response => {
+                console.log('Comment deleted successfully');
+                return response;
             });
     } catch (err) {
         console.error('Cannot delete comment', err);
 
-        const board = store.getState().boardModule.board;
-        if (board) {
-            console.log('Error occurred, reverting optimistic update');
+        if (originalComment) {
             store.dispatch({
-                type: SET_BOARD,
-                board: board
+                type: ADD_COMMENT,
+                taskId,
+                formattedComment: originalComment
             });
         }
 

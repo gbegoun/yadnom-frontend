@@ -1,7 +1,6 @@
 import { userService } from '../../services/user'
 import { socketService } from '../../services/socket.service'
 import { store } from '../store'
-
 import { showErrorMsg } from '../../services/event-bus.service'
 import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer'
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from '../reducers/user.reducer'
@@ -78,5 +77,25 @@ export async function loadUser(userId) {
     } catch (err) {
         showErrorMsg('Cannot load user')
         console.log('Cannot load user', err)
+    }
+}
+
+export function setLoggedInUserFromLocalStorage() {
+    try {
+        const user = JSON.parse(localStorage.getItem('loggedInUser')) || null;
+        if (!user) {
+            throw new Error('No logged in user found in localStorage');
+        }
+        
+        store.dispatch({
+            type: SET_USER,
+            user
+        });
+        
+        console.log('Logged in user set to:', user);
+        return user;
+    } catch (err) {
+        console.log('Cannot set logged in user', err);
+        throw err;
     }
 }

@@ -8,12 +8,18 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
 
     const { openModal, closeModal } = useModal();
 
-    const users = useSelector(state => state.userModule.users);
-    const user = users.find(user => user._id == comment.authorId);
+    const user = useSelector(state => state.userModule.user)
+    const board = useSelector(state => state.boardModule.board);
+    // console.log("Creator",board.)
+    const commenter = useSelector(state => state.userModule.users).find(user => user._id == comment.authorId);
+    const isCommenter = user?._id == comment.authorId;
+    const isBoardCreator = user?._id == board?.created_by;
+
 
     const onMenuClick = (event) => {
+        console.log("isBoardCreator", isBoardCreator)
         const rect = event.target.getBoundingClientRect();
-        openModal(<CommentMenu onCommentDelete={onCommentDeleteClicked} />, { targetRect: rect });
+        openModal(<CommentMenu onCommentDelete={onCommentDeleteClicked} isCommenter={isCommenter} isBoardCreator={isBoardCreator} />, { targetRect: rect });
     }
 
     const onCommentDeleteClicked = () => {
@@ -59,16 +65,16 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
 
     }
 
-
     if (!user) {
         return <div className="task-comment-preview frame">Loading...</div>;
     }
+
     return (
         <div className="task-comment-preview frame">
             <div className="comment-header">
                 <div className="comment-author">
-                    <img className="comment-author-icon" src={user.imgUrl} />
-                    <span className="comment-author-name">{user.fullname}</span>
+                    <img className="comment-author-icon" src={commenter.imgUrl} />
+                    <span className="comment-author-name">{commenter.fullname}</span>
                 </div>
                 <div className="comment-createdAt">{getTimeFromUpdatedAt()}</div>
                 <div className="comment-menu-wrapper" onClick={(event) => onMenuClick(event)}>
