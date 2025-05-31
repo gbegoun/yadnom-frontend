@@ -16,7 +16,7 @@ export const Label = ({ column, value, taskId, groupId }) => {
     const canvasId = `confetti-canvas-${taskId}-${column._id}`;
 
     // Initialize confetti hook
-    const { triggerConfetti, hasPlayed, resetConfetti } = useConfetti({
+    const { triggerConfetti, resetConfetti } = useConfetti({
         elementId: canvasId,
         containerRef: labelRef,
         canvasRef: confettiRef
@@ -94,6 +94,10 @@ export const Label = ({ column, value, taskId, groupId }) => {
                 }}
             />
             <span style={{ position: 'relative', zIndex: 2 }}>{label}</span>
+            <div className="corner-fold-wrapper">
+                <div className="corner-shadow" />
+                <div className="corner-fold" />
+            </div>
         </div>
     );
 };

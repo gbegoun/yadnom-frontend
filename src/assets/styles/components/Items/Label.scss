@@ -4,6 +4,54 @@
     align-items: center;
     height:100%;
     color:white;
-    position: relative; // <-- Add this line
+    position: relative;
     overflow: hidden; 
+}
+.corner-fold-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Shadow triangle with transition from top-right to bottom-left */
+.corner-shadow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid rgba(0, 0, 0, 0.25); /* shadow color */
+  border-right: 10px solid transparent;
+  transform: translate(10px, -10px) scale(0); /* Start from outside top-right */
+  transform-origin: top right; /* Set the origin for the transformation */
+  opacity: 0;
+  transition: transform 0.2s ease-in-out, opacity 0.1s ease-in-out;
+  z-index: 1;
+}
+
+.corner-fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 10px solid rgba(255, 255, 255, 1); /* fold color */
+  border-left: 10px solid transparent;
+  z-index: 2;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+/* Show both triangles only on hover */
+.label-item:hover .corner-fold,
+.label-item:hover .corner-shadow {
+  opacity: 1;
+}
+
+/* Modify the hover effect to include the transform */
+.label-item:hover .corner-shadow {
+  transform: translate(-1px, 1px) scale(1); /* End position slightly offset */
+  opacity: 1;
 }
