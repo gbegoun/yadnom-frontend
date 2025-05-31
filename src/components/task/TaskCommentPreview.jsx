@@ -11,8 +11,8 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
     const user = useSelector(state => state.userModule.user)
     const board = useSelector(state => state.boardModule.board);
     // console.log("Creator",board.)
-    const commenter = useSelector(state => state.userModule.users).find(user => user._id == comment.authorId);
-    const isCommenter = user?._id == comment.authorId;
+    const commenter = useSelector(state => state.userModule.users).find(user => user._id == comment.created_by);
+    const isCommenter = user?._id == comment.created_by;
     const isBoardCreator = user?._id == board?.created_by;
 
 
