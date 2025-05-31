@@ -41,11 +41,11 @@ export const TaskDetails = ({ taskId }) => {
     return (
         <div className="task-details">
             <div className="header">
-                <h2>{task.title}</h2>
+                <h2>{task?.title}</h2>
                 <div className="tabs">
                     <div className="tab active">
                         <SVGService.HomeIcon className="home-icon tab-icon" />
-                        <div className="tab-label">Updates{task.comments && ` / ${task.comments.length}`}</div>
+                        <div className="tab-label">Updates{task?.comments && ` / ${task.comments.length}`}</div>
                     </div>
                 </div>
             </div>
