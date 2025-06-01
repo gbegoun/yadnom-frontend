@@ -3,7 +3,7 @@ import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import { login, signup } from "../store/actions/user.actions"
 import '../assets/styles/pages/signin.scss'
 
-export default function Signin() {
+export default function SignUp() {
     const navigate = useNavigate()
 
     async function onLogin(credentials) {

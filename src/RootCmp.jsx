@@ -12,7 +12,8 @@ import { loadBoards } from './store/actions/board.actions.js'
 import { RightPanel } from './components/RightPanel.jsx'
 import { RightPanelProvider } from './contexts/rightPanel/RightPanelContext.jsx'
 import { login } from './store/actions/user.actions.js';
-import Signin from './pages/Signin.jsx'
+import SignUp from './pages/SignUp.jsx'
+
 
 function RootCmp() {
   const location = useLocation();
@@ -31,7 +32,7 @@ function RootCmp() {
       <ModalProvider>
         <RightPanelProvider>
           <Routes>
-            <Route path='/login' element={<Signin />} />
+            <Route path='/login' element={<SignUp />} />
           </Routes>
           {!isLoginPage && (
             <div className="app-container">
