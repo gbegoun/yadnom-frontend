@@ -27,7 +27,6 @@ export async function removeUser(userId) {
 }
 
 export async function login(credentials) {
-    console.log('UserActions: login with credentials', credentials)
     try {
         const user = await userService.login(credentials)
         store.dispatch({
@@ -37,13 +36,11 @@ export async function login(credentials) {
         socketService.login(user._id)
         return user
     } catch (err) {
-        console.log('Cannot login', err)
         throw err
     }
 }
 
 export async function signup(credentials) {
-    console.log('UserActions: signup with credentials', credentials)
     try {
         const user = await userService.signup(credentials)
         store.dispatch({
@@ -53,7 +50,6 @@ export async function signup(credentials) {
         socketService.login(user._id)
         return user
     } catch (err) {
-        console.log('Cannot signup', err)
         throw err
     }
 }

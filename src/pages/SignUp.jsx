@@ -16,6 +16,7 @@ export default function SignUp() {
             }, 2000);
         } catch (err) {
             showErrorMsg('Cannot login')
+            throw err
         }
     }
 
@@ -28,6 +29,7 @@ export default function SignUp() {
             }, 2000);
         } catch (err) {
             showErrorMsg('Cannot signup')
+            throw err
         }
     }
 
@@ -48,19 +50,19 @@ export default function SignUp() {
         };
 
         // Try signup first (create new user), fallback to login if user exists
+        // try {
+        //     await onSignup(credentials)
+        //     console.log('Signup successful, user created');
+        // } catch (err) {
+        //     console.log('Signup failed, trying login with existing user');
         try {
-            await onSignup(credentials)
-            console.log('Signup successful, user created');
+            await onLogin({ username: email, password: password })
         } catch (err) {
-            console.log('Signup failed, trying login with existing user');
-            try {
-                await onLogin({ username: email, password: password })
-            } catch (err) {
-                console.error('Login failed, please try again');
-                showErrorMsg('An error occurred during signup/login. Please try again.');
-                return;
-            }
+            console.error('Login failed, please try again');
+            showErrorMsg('An error occurred during signup/login. Please try again.');
+            return;
         }
+        // }
     }
 
     return (
