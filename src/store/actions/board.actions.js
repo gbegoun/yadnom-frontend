@@ -457,17 +457,18 @@ export function getBoardById(boardId) {
 }
 
 // ================ COMMENT ACTIONS ================
-export function addCommentOptimistic(taskId, comment) {
+export async function addCommentOptimistic(taskId, comment) {
     try {
-        const currentUser = store.getState().userModule.user;
-
+        const currentUser = await store.getState().userModule.user;
+        console.log('Current !!!!!!!!!!!!!user:', currentUser);
         const formattedComment = {
             ...comment,
             _id: comment._id || makeId(6, 'c'),
-            created_by: 201,
+            created_by: currentUser._id,
             createdAt: comment.createdAt || new Date().toISOString()
         };
 
+        console.log('Adding comment optimistically:', formattedComment);
         store.dispatch({
             type: ADD_COMMENT,
             taskId,

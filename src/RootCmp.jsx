@@ -7,11 +7,10 @@ import { MainSidebar } from "./components/MainSidebar.jsx"
 import { ModalProvider } from './contexts/modal/ModalContext.jsx'
 import { store } from './store/store.js'
 import { Provider } from 'react-redux'
-import { loadUsers } from './store/actions/user.actions.js'
+import { loadUsers, loginUserFromCookies } from './store/actions/user.actions.js'
 import { loadBoards } from './store/actions/board.actions.js'
 import { RightPanel } from './components/RightPanel.jsx'
 import { RightPanelProvider } from './contexts/rightPanel/RightPanelContext.jsx'
-import { login } from './store/actions/user.actions.js';
 import SignUp from './pages/SignUp.jsx'
 
 
@@ -20,10 +19,20 @@ function RootCmp() {
   const isLoginPage = location.pathname === '/login';
 
   useEffect(() => {
-    // Load users and boards when the application starts
-    loadUsers()
-    loadBoards()
-    // login({username:"ceocat",password:"meow123"});
+    const initializeApp = async () => {
+      try {
+        await loginUserFromCookies();
+        await loadUsers()
+        await loadBoards()
+      } catch (err) {
+
+        console.log('No user found in cookies, continuing as guest');
+        // Still load other data even if no user
+        // await loadUsers();
+        // await loadBoards();
+      }
+    }
+    initializeApp();
   }, [])
 
   return (

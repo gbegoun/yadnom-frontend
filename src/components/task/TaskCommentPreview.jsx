@@ -9,9 +9,12 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
     const { openModal, closeModal } = useModal();
 
     const user = useSelector(state => state.userModule.user)
+    const users = useSelector(state => state.userModule.users);
     const board = useSelector(state => state.boardModule.board);
     // console.log("Creator",board.)
+    // console.log("Users", users)
     const commenter = useSelector(state => state.userModule.users).find(user => user._id == comment.created_by);
+    console.log("Commenter", commenter)
     const isCommenter = user?._id == comment.created_by;
     const isBoardCreator = user?._id == board?.created_by;
 
@@ -65,7 +68,7 @@ export const TaskCommentPreview = ({ comment, onCommentDelete }) => {
 
     }
 
-    if (!user) {
+    if (!commenter) {
         return <div className="task-comment-preview frame">Loading...</div>;
     }
 

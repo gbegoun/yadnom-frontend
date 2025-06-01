@@ -56,7 +56,8 @@ export const userService = {
     getUserDisplayInfo,
     getUsersDisplayInfo,
     filterUsersByName,
-    getUserInitials
+    getUserInitials,
+    
 }
 
 // Easy access to this service from the dev tools console

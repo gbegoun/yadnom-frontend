@@ -2,13 +2,21 @@ import { Link } from 'react-router-dom';
 import SVGService from '../services/svg/svg.service';
 import { useSelector } from 'react-redux';
 import { UserAvatar } from './shared/UserAvatar';
+import { useState, useEffect } from 'react';
 
 export const MainHeader = () => {
+    console.log("🏗️ MainHeader component mounting/rendering");
     // const board = useSelector(state => state.boardModule.board);
     const users = useSelector(state => state.userModule.users);
-    // const loggedInUser = useSelector(state => state.userModule.user);
+    const loggedInUser = useSelector(state => state.userModule.user);
 
-    const boardManagerId = 201;
+    console.log("Logged in user:", loggedInUser);
+    console.log("Logged in user ID:", loggedInUser?._id);
+
+    if (!loggedInUser || !loggedInUser._id) {
+        console.log("❌ EARLY RETURN - No logged in user, showing loading");
+        return <div style={{ color: 'red', fontSize: '20px' }}>Loading user data...</div>;
+    }
 
     return (
         <div className="main-header">
@@ -23,7 +31,7 @@ export const MainHeader = () => {
                 <div className='avatar-container'>
                     <img src="https://res.cloudinary.com/drunensjg/image/upload/v1748779177/simple_logo_hsxrpe.png" alt="Products Switcher" className="main-header-simple-logo" />
                     <UserAvatar
-                        userId={boardManagerId}
+                        userId={loggedInUser._id}
                         users={users}
                         size="normal"
                         className="main-header-avatar"

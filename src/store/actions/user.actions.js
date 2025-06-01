@@ -84,16 +84,35 @@ export function setLoggedInUserFromLocalStorage() {
         if (!user) {
             throw new Error('No logged in user found in localStorage');
         }
-        
+
         store.dispatch({
             type: SET_USER,
             user
         });
-        
+
         console.log('Logged in user set to:', user);
         return user;
     } catch (err) {
         console.log('Cannot set logged in user', err);
         throw err;
+    }
+}
+
+export async function loginUserFromCookies() {
+    try {
+        const user = await userService.verifyToken();
+
+        store.dispatch({
+            type: SET_USER,
+            user
+        });
+
+        // socketService.login(user._id);
+
+        return user;
+    } catch (err) {
+        console.log('No valid session found', err);
+        // Don't throw - let app continue as guest
+        return null;
     }
 }
