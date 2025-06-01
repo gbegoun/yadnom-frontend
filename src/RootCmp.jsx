@@ -22,7 +22,7 @@ function RootCmp() {
     // Load users and boards when the application starts
     loadUsers()
     loadBoards()
-    login({username:"ceocat",password:"meow123"});
+    // login({username:"ceocat",password:"meow123"});
   }, [])
 
   return (

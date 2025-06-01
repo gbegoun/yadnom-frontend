@@ -31,12 +31,14 @@ export default function Signin() {
         }
     }
 
-    function handleSubmit(ev) {
+    async function handleSubmit(ev) {
+        console.log('Signin: handleSubmit', ev);
         ev.preventDefault();
-        const formData = new FormData(ev.target);
+        const form = ev.target.closest('form');
+        const formData = new FormData(form);
         const email = formData.get('email');
         const password = formData.get('password');
-        
+
         // For signup, use email as username and create fullname for now
         const credentials = {
             username: email, // Use email as username
@@ -44,12 +46,21 @@ export default function Signin() {
             fullname: email.split('@')[0], // Use email prefix as fullname
             email: email // Keep email field for future use
         };
-        
+
         // Try signup first (create new user), fallback to login if user exists
-        onSignup(credentials).catch(() => {
-            // If signup fails, try login with just username and password
-            onLogin({ username: email, password: password });
-        });
+        try {
+            await onSignup(credentials)
+            console.log('Signup successful, user created');
+        } catch (err) {
+            console.log('Signup failed, trying login with existing user');
+            try {
+                await onLogin({ username: email, password: password })
+            } catch (err) {
+                console.error('Login failed, please try again');
+                showErrorMsg('An error occurred during signup/login. Please try again.');
+                return;
+            }
+        }
     }
 
     return (
@@ -58,10 +69,10 @@ export default function Signin() {
                 <div className="signin-content">
                     <h1>Welcome to Yadnom.com</h1>
                     <p className="subtitle">Get started - it's free. No credit card needed.</p>
-                    <form className="signin-form" onSubmit={handleSubmit}>
+                    <form className="signin-form">
                         <input type="email" name="email" placeholder="name@company.com" required />
                         <input type="password" name="password" placeholder="Password" required />
-                        <button type="submit" className="continue-btn">Continue</button>
+                        <button type="button" onClick={(ev) => handleSubmit(ev)} className="continue-btn">Continue</button>
                     </form>
                     <p className="terms">By proceeding, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
                     <p className="login-link">Already have an account? <a href="#">Log in</a></p>
