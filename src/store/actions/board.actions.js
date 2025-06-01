@@ -464,7 +464,7 @@ export function addCommentOptimistic(taskId, comment) {
         const formattedComment = {
             ...comment,
             _id: comment._id || makeId(6, 'c'),
-            authorId: 201,
+            created_by: 201,
             createdAt: comment.createdAt || new Date().toISOString()
         };
 
@@ -495,7 +495,13 @@ export function addCommentOptimistic(taskId, comment) {
     }
 }
 
-export function deleteCommentOptimistic(taskId, commentId) {
+export async function deleteCommentOptimistic(taskId, commentId) {
+
+    const currentBoard = store.getState().boardModule.board;
+    const task = currentBoard.tasks.find(t => t._id === taskId);
+    const originalComments = task?.comments;
+    console.log('Original comments:', originalComments);
+
     try {
         store.dispatch({
             type: DELETE_COMMENT,
@@ -503,23 +509,17 @@ export function deleteCommentOptimistic(taskId, commentId) {
             commentId
         });
 
-        const updatedBoard = store.getState().boardModule.board;
-        console.log(updatedBoard)
-        return boardService.saveBoard(updatedBoard)
-            .then(savedBoard => {
-                store.dispatch(getCmdUpdateBoard(savedBoard));
-                return savedBoard;
-            });
+        await boardService.removeComment(currentBoard._id, taskId, commentId)
+
     } catch (err) {
         console.error('Cannot delete comment', err);
 
-        const board = store.getState().boardModule.board;
-        if (board) {
-            console.log('Error occurred, reverting optimistic update');
+        if (originalComments) {
+            task.comments = originalComments
             store.dispatch({
-                type: SET_BOARD,
-                board: board
-            });
+                type: UPDATE_BOARD,
+                board: currentBoard
+            })
         }
 
         throw err;

@@ -5,7 +5,8 @@ export const boardService = {
     getById,
     saveBoard,
     removeBoard,
-    addBoardMsg
+    addBoardMsg,
+    removeComment
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -32,4 +33,8 @@ async function saveBoard(board) {
 async function addBoardMsg(boardId, txt) {
     const savedMsg = await httpService.post(`board/${boardId}/msg`, {txt})
     return savedMsg
+}
+
+async function removeComment(boardId, taskId, commentId) {
+    return httpService.delete(`board/${boardId}/tasks/${taskId}/comments/${commentId}`)
 }
