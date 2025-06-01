@@ -5,8 +5,6 @@ import { UserAvatar } from './shared/UserAvatar';
 import { useState, useEffect } from 'react';
 
 export const MainHeader = () => {
-    console.log("🏗️ MainHeader component mounting/rendering");
-    // const board = useSelector(state => state.boardModule.board);
     const users = useSelector(state => state.userModule.users);
     const loggedInUser = useSelector(state => state.userModule.user);
 
@@ -14,7 +12,6 @@ export const MainHeader = () => {
     console.log("Logged in user ID:", loggedInUser?._id);
 
     if (!loggedInUser || !loggedInUser._id) {
-        console.log("❌ EARLY RETURN - No logged in user, showing loading");
         return <div style={{ color: 'red', fontSize: '20px' }}>Loading user data...</div>;
     }
 
