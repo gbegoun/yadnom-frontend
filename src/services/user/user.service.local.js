@@ -100,14 +100,11 @@ async function _createUsers() {
         const module = await import("../../../demo-data-new.js")
         const demoUsers = module.demo_data["users"]
         
-        // Transform mini-users to full user objects
-        const fullUsers = demoUsers.map(miniUser => ({
-            _id: miniUser._id.toString(),
-            username: miniUser.fullName.toLowerCase().replace(/\s+/g, '_'),
+        // Add missing fields to demo users
+        const fullUsers = demoUsers.map(user => ({
+            ...user,
             password: 'demo123', // Default password for demo users
-            fullname: miniUser.fullName,
-            imgUrl: miniUser.imageUrl,
-            isAdmin: miniUser._id === 201 // Make first user admin (CEO Cat)
+            isAdmin: user._id === "201" // Make first user admin (Ofir Rozanes)
         }))
         
         saveToStorage(STORAGE_KEY, fullUsers)

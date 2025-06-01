@@ -1,29 +1,40 @@
 export const demo_data = {
   "users": [
     {
-      "_id": 201,
-      "fullName": "CEO Cat",
-      "imageUrl": "/src/assets/Profile_pics_temporary/cat.jpg"
+      "_id": "201",
+      "fullname": "Ofir Rozanes",
+      "username": "OfirRozanes",
+      "imgUrl": "https://res.cloudinary.com/drunensjg/image/upload/v1748778858/120529164_10223010086825264_327174506124287101_n_zmc8fn_c_crop_w_350_yv1ghn.jpg"
     },
     {
-      "_id": 202,
-      "fullName": "Caffeine Cow",
-      "imageUrl": "/src/assets/Profile_pics_temporary/cow.jpg"
+      "_id": "202",
+      "fullname": "Gal Begoun",
+      "username": "GalBegoun",
+      "imgUrl": "https://res.cloudinary.com/drunensjg/image/upload/v1748777976/image_qnaobe.png"
     },
     {
-      "_id": 203,
-      "fullName": "Duck Developer",
-      "imageUrl": "/src/assets/Profile_pics_temporary/duck.jpg"
+      "_id": "203",
+      "fullname": "Musa Testor",
+      "username": "MusaTestor",
+      "imgUrl": "https://res.cloudinary.com/drunensjg/image/upload/v1748778573/image_hbudkf.jpg"
     },
     {
-      "_id": 204,
-      "fullName": "Mouse Manager",
-      "imageUrl": "/src/assets/Profile_pics_temporary/mouse.jpg"
+      "_id": "204",
+      "fullname": "Yocheved Underbird",
+      "username": "YochevedUnderbird",
+      "imgUrl": "https://res.cloudinary.com/drunensjg/image/upload/v1748778875/image_1_r3jnla.jpg"
     },
     {
-      "_id": 205,
-      "fullName": "Tired Turtle",
-      "imageUrl": "/src/assets/Profile_pics_temporary/turtle.jpg"
+      "_id": "205",
+      "fullname": "Trunia Pavelov",
+      "username": "TruniaPavelov",
+      "imgUrl": "https://res.cloudinary.com/drunensjg/image/upload/v1748778878/image_2_fzcrpu.jpg"
+    },
+    {
+      "_id": "206",
+      "fullname": "Naim Lechavski",
+      "username": "NaimLechavski",
+      "imgUrl": "https://res.cloudinary.com/drunensjg/image/upload/v1748778882/image_3_ye078g.jpg"
     }
   ],
   "boards": [
@@ -273,7 +284,7 @@ export const demo_data = {
             "progress_column": 100
           },
           "groupid": "grp_ui_design",
-          comments:[
+          comments: [
             {
               _id: "c2001",
               created_by: 204,
@@ -281,14 +292,14 @@ export const demo_data = {
               text: "The design system looks comprehensive. Great work on establishing consistent patterns!"
             },
             {
-              _id: "c2002", 
+              _id: "c2002",
               created_by: 202,
               createdAt: "2025-03-15T09:45:00Z",
               text: "Initial feedback: Let's make sure we include accessibility guidelines in the design system from the start."
             },
             {
               _id: "c2003",
-              created_by: 201, 
+              created_by: 201,
               createdAt: "2024-02-15T16:30:00Z",
               text: "Looking forward to seeing how this design system evolves. It will be the foundation for our entire UI."
             }
