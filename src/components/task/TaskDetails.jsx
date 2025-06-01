@@ -28,7 +28,6 @@ export const TaskDetails = ({ taskId }) => {
     }
 
     const onCommentDelete = (commentId) => {
-        console.log('Deleting comment with ID:', commentId);
         deleteCommentOptimistic(taskId, commentId);
     }
 

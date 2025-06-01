@@ -11,6 +11,8 @@ import { loadUsers } from './store/actions/user.actions.js'
 import { loadBoards } from './store/actions/board.actions.js'
 import { RightPanel } from './components/RightPanel.jsx'
 import { RightPanelProvider } from './contexts/rightPanel/RightPanelContext.jsx'
+import { login } from './store/actions/user.actions.js';
+
 import { SignUp } from './pages/SignUp.jsx'
 
 function RootCmp() {
@@ -21,6 +23,7 @@ function RootCmp() {
     // Load users and boards when the application starts
     loadUsers()
     loadBoards()
+    login({username:"ceocat",password:"meow123"});
   }, [])
 
   return (

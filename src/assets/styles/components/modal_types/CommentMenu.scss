@@ -26,5 +26,14 @@
         &:hover {
             background-color: #f0f0f1;
         }
+
+        &.disabled {
+            cursor: not-allowed;
+            color: #d0d4e4;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
     }
 }
