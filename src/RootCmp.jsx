@@ -12,8 +12,8 @@ import { loadBoards } from './store/actions/board.actions.js'
 import { RightPanel } from './components/RightPanel.jsx'
 import { RightPanelProvider } from './contexts/rightPanel/RightPanelContext.jsx'
 import { login } from './store/actions/user.actions.js';
+import SignUp from './pages/SignUp.jsx'
 
-import { SignUp } from './pages/SignUp.jsx'
 
 function RootCmp() {
   const location = useLocation();
