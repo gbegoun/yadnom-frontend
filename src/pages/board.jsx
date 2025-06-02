@@ -44,7 +44,7 @@ export const Board = () => {
         updateBoard(updatedBoard)
             .catch(err => console.error('Error saving board:', err));
     };
-
+    
     const [selectedTaskId, setSelectedTaskId] = useState(null);
 
     const handleTaskSelect = (taskId) => {
@@ -54,21 +54,36 @@ export const Board = () => {
     useEffect(() => {
         if (!boardId) return;
 
-        function handleBoardUpdate(updatedBoard) {
-            console.log('Socket received board update:', updatedBoard._id);
-            store.dispatch({ type: 'UPDATE_BOARD', board: updatedBoard });
-        }
+        console.log('🔄 Socket useEffect running for boardId:', boardId);
 
-        console.log('Setting up socket listeners for board:', boardId);
+        // Simple approach: just join the room, listener is managed globally
         joinBoard(boardId);
-        onBoardUpdated(handleBoardUpdate);
 
         return () => {
-            console.log('Cleaning up socket listeners for board:', boardId);
+            console.log('🧹 Socket useEffect cleanup for boardId:', boardId);
             leaveBoard(boardId);
-            offBoardUpdated(handleBoardUpdate);
         };
     }, [boardId]);
+    
+    // Separate useEffect to handle socket updates without cleanup issues
+    useEffect(() => {
+        const handleUpdate = (updatedBoard) => {
+            console.log('Socket received board update:', updatedBoard._id);
+            const currentBoardId = store.getState().boardModule.board?._id;
+            if (currentBoardId && updatedBoard._id === currentBoardId) {
+                setTimeout(() => {
+                    console.log('Dispatching socket board update to store');
+                    store.dispatch({ type: 'UPDATE_BOARD', board: updatedBoard });
+                }, 50);
+            }
+        };
+
+        onBoardUpdated(handleUpdate);
+
+        return () => {
+            offBoardUpdated(handleUpdate);
+        };
+    }, []); // Run once on mount
 
     if (!board) return (<div className='loading'></div>);
 
