@@ -34,7 +34,6 @@ export default function SignUp() {
     }
 
     async function handleSubmit(ev) {
-        console.log('Signin: handleSubmit', ev);
         ev.preventDefault();
         const form = ev.target.closest('form');
         const formData = new FormData(form);

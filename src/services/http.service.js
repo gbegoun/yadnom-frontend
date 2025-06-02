@@ -34,7 +34,6 @@ async function ajax(endpoint, method = 'GET', data = null) {
         config.data = data
     }
 
-    console.log('🔍 Sending request with config:', config)
 
     try {
         const res = await axios(config)

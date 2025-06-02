@@ -15,8 +15,8 @@ const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
 const { DEV } = import.meta.env
 const baseUrl = (import.meta.env.PROD) ? '' : '//localhost:3030'
-// export const socketService = createSocketService()
-export const socketService = createDummySocketService()
+export const socketService = createSocketService()
+// export const socketService = createDummySocketService()
 
 // for debugging from console
 window.socketService = socketService

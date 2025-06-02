@@ -107,7 +107,7 @@ export async function loginUserFromCookies() {
             user
         });
 
-        // socketService.login(user._id);
+        socketService.login(user._id);
 
         return user;
     } catch (err) {

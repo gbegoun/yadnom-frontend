@@ -8,9 +8,6 @@ export const MainHeader = () => {
     const users = useSelector(state => state.userModule.users);
     const loggedInUser = useSelector(state => state.userModule.user);
 
-    console.log("Logged in user:", loggedInUser);
-    console.log("Logged in user ID:", loggedInUser?._id);
-
     if (!loggedInUser || !loggedInUser._id) {
         return <div style={{ color: 'red', fontSize: '20px' }}>Loading user data...</div>;
     }
