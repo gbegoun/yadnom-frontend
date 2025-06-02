@@ -44,7 +44,7 @@ export const Board = () => {
         updateBoard(updatedBoard)
             .catch(err => console.error('Error saving board:', err));
     };
-    
+
     const [selectedTaskId, setSelectedTaskId] = useState(null);
 
     const handleTaskSelect = (taskId) => {
@@ -64,7 +64,7 @@ export const Board = () => {
             leaveBoard(boardId);
         };
     }, [boardId]);
-    
+
     // Separate useEffect to handle socket updates without cleanup issues
     useEffect(() => {
         const handleUpdate = (updatedBoard) => {

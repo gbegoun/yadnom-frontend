@@ -9,7 +9,11 @@ export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
 export const SOCKET_EVENT_REVIEW_REMOVED = 'review-removed'
 export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
+
+// Actual socket events
 export const SOCKET_EVENT_BOARD_UPDATED = 'board-updated'
+export const SOCKET_EVENT_LEAVE_BOARD = 'leave-board'
+export const SOCKET_EVENT_JOIN_BOARD = 'join-board'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
@@ -114,14 +118,16 @@ function createSocketService() {
 //   return socketService
 // }
 
+
+/* Socket functions for board management */
 export function joinBoard(boardId) {
   console.log('Joining board room:', boardId)
-  socketService.emit('join-board', boardId)
+  socketService.emit(SOCKET_EVENT_JOIN_BOARD, boardId)
 }
 
 export function leaveBoard(boardId) {
   console.log('Leaving board room:', boardId)
-  socketService.emit('leave-board', boardId)
+  socketService.emit(SOCKET_EVENT_LEAVE_BOARD, boardId)
 }
 
 export function onBoardUpdated(cb) {

@@ -6,6 +6,8 @@ import {
     UPDATE_GROUP_PROPERTY_OPTIMISTIC, ADD_GROUP_OPTIMISTIC, ADD_TASK_OPTIMISTIC, ADD_COMMENT, DELETE_COMMENT
 } from '../reducers/board.reducer';
 import { makeId } from '../../services/util.service';
+
+
 // ================ BOARD ACTIONS ================
 
 export async function loadBoards(filterBy) {
@@ -19,9 +21,9 @@ export async function loadBoards(filterBy) {
 }
 
 // Persistent board update listener (reference never changes)
-function handleBoardUpdate(updatedBoard) {
-    store.dispatch(getCmdUpdateBoard(updatedBoard))
-}
+// function handleBoardUpdate(updatedBoard) {
+//     store.dispatch(getCmdUpdateBoard(updatedBoard))
+// }
 
 export async function loadBoard(boardId) {
     try {
