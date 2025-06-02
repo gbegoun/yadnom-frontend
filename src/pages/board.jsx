@@ -7,6 +7,7 @@ import { addTaskGroup, addNewTask, updateBoard, loadBoard } from "../store/actio
 import { useSelector } from 'react-redux';
 import SVGService from '../services/svg/svg.service.js';
 import { useBoardAnimations } from '../hooks/useBoardAnimations.js';
+import { joinBoard, leaveBoard, onBoardUpdated, offBoardUpdated } from '../services/socket.service';
 
 export const Board = () => {
     const { boardId } = useParams();
@@ -22,6 +23,20 @@ export const Board = () => {
             .catch(err => { console.log("Error loading board:", err); });
             
     }, [boardId, resetAnimations]);
+
+    // In the Board component, join the board room and listen for updates when the board loads
+    useEffect(() => {
+        if (!boardId) return;
+        joinBoard(boardId);
+        onBoardUpdated((updatedBoard) => {
+            // Optionally, you could dispatch an action here if not handled in board.actions.js
+            // dispatch({ type: 'UPDATE_BOARD', board: updatedBoard });
+        });
+        return () => {
+            leaveBoard(boardId);
+            offBoardUpdated();
+        };
+    }, [boardId]);
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)

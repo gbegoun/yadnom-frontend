@@ -9,6 +9,7 @@ export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
 export const SOCKET_EVENT_REVIEW_REMOVED = 'review-removed'
 export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
+export const SOCKET_EVENT_BOARD_UPDATED = 'board-updated'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
@@ -104,6 +105,21 @@ function createDummySocketService() {
   }
   window.listenersMap = listenersMap
   return socketService
+}
+
+export function joinBoard(boardId) {
+  socketService.emit('join-board', boardId)
+}
+
+export function leaveBoard(boardId) {
+  socketService.emit('leave-board', boardId)
+}
+
+export function onBoardUpdated(cb) {
+  socketService.on(SOCKET_EVENT_BOARD_UPDATED, cb)
+}
+export function offBoardUpdated(cb) {
+  socketService.off(SOCKET_EVENT_BOARD_UPDATED, cb)
 }
 
 

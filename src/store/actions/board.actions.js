@@ -6,6 +6,7 @@ import {
     UPDATE_GROUP_PROPERTY_OPTIMISTIC, ADD_GROUP_OPTIMISTIC, ADD_TASK_OPTIMISTIC, ADD_COMMENT, DELETE_COMMENT
 } from '../reducers/board.reducer';
 import { makeId } from '../../services/util.service';
+import { joinBoard, onBoardUpdated, offBoardUpdated } from '../../services/socket.service'
 // ================ BOARD ACTIONS ================
 
 export async function loadBoards(filterBy) {
@@ -17,6 +18,8 @@ export async function loadBoards(filterBy) {
         throw err
     }
 }
+
+let boardUpdateListener = null;
 
 export async function loadBoard(boardId) {
     try {
@@ -33,6 +36,16 @@ export async function loadBoard(boardId) {
 
         const board = await boardService.getById(boardId);
         store.dispatch(getCmdSetBoard(board));
+
+        // Join the board room for real-time updates
+        joinBoard(boardId)
+        // Remove any previous listeners to avoid duplicates
+        if (boardUpdateListener) offBoardUpdated(boardUpdateListener)
+        // Listen for real-time board updates
+        boardUpdateListener = (updatedBoard) => {
+            store.dispatch(getCmdUpdateBoard(updatedBoard))
+        }
+        onBoardUpdated(boardUpdateListener)
 
         return board
     } catch (err) {
