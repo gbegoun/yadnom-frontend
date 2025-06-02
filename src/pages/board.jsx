@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux';
 import SVGService from '../services/svg/svg.service.js';
 import { useBoardAnimations } from '../hooks/useBoardAnimations.js';
 import { joinBoard, leaveBoard, onBoardUpdated, offBoardUpdated } from '../services/socket.service';
+import { store } from '../store/store';
 
 export const Board = () => {
     const { boardId } = useParams();
     const board = useSelector(state => state.boardModule.board);
-    
+
     // Custom hook for animation coordination
     const { isAnimating, showAddButton, resetAnimations } = useBoardAnimations(board);
 
@@ -21,22 +22,8 @@ export const Board = () => {
         resetAnimations();
         loadBoard(boardId)
             .catch(err => { console.log("Error loading board:", err); });
-            
-    }, [boardId, resetAnimations]);
 
-    // In the Board component, join the board room and listen for updates when the board loads
-    useEffect(() => {
-        if (!boardId) return;
-        joinBoard(boardId);
-        onBoardUpdated((updatedBoard) => {
-            // Optionally, you could dispatch an action here if not handled in board.actions.js
-            // dispatch({ type: 'UPDATE_BOARD', board: updatedBoard });
-        });
-        return () => {
-            leaveBoard(boardId);
-            offBoardUpdated();
-        };
-    }, [boardId]);
+    }, [boardId, resetAnimations]);
 
     const onNewGroupClicked = (isTopPosition = true) => {
         addTaskGroup(board, isTopPosition)
@@ -55,26 +42,44 @@ export const Board = () => {
 
     const onBoardSave = (updatedBoard) => {
         updateBoard(updatedBoard)
-           .catch(err => console.error('Error saving board:', err));
+            .catch(err => console.error('Error saving board:', err));
     };
 
     const [selectedTaskId, setSelectedTaskId] = useState(null);
-    
+
     const handleTaskSelect = (taskId) => {
         setSelectedTaskId(prevId => prevId === taskId ? null : taskId);
     };
 
+    useEffect(() => {
+        if (!boardId) return;
 
-    if (!board) return (<div className='loading'></div>); 
-    
+        function handleBoardUpdate(updatedBoard) {
+            console.log('Socket received board update:', updatedBoard._id);
+            store.dispatch({ type: 'UPDATE_BOARD', board: updatedBoard });
+        }
+
+        console.log('Setting up socket listeners for board:', boardId);
+        joinBoard(boardId);
+        onBoardUpdated(handleBoardUpdate);
+
+        return () => {
+            console.log('Cleaning up socket listeners for board:', boardId);
+            leaveBoard(boardId);
+            offBoardUpdated(handleBoardUpdate);
+        };
+    }, [boardId]);
+
+    if (!board) return (<div className='loading'></div>);
+
     // Check if board has all necessary data loaded
     const isBoardFullyLoaded = board && board.groups && board.tasks && board.columns;
-    
+
     return (
-        <BoardContext.Provider value={{ 
-            board, 
-            onNewGroupClicked, 
-            onNewTaskClicked, 
+        <BoardContext.Provider value={{
+            board,
+            onNewGroupClicked,
+            onNewTaskClicked,
             loadBoard,
             selectedTaskId,  // Add this
             onTaskSelect: handleTaskSelect  // Add this
@@ -86,8 +91,8 @@ export const Board = () => {
                         <GroupList board={board} onBoardSave={onBoardSave} />
                     </>)}
                 {showAddButton && (
-                    <button 
-                        className="add-group-btn button-enter" 
+                    <button
+                        className="add-group-btn button-enter"
                         onClick={() => onNewGroupClicked(false)}
                     >
                         <SVGService.AddViewIcon className="add-group-btn-icon" />

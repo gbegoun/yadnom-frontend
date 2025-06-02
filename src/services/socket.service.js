@@ -31,6 +31,13 @@ function createSocketService() {
   const socketService = {
     setup() {
       socket = io(baseUrl)
+      console.log('Socket.io connecting to:', baseUrl)
+      socket.on('connect', () => {
+        console.log('Socket connected:', socket.id)
+      })
+      socket.on('disconnect', () => {
+        console.log('Socket disconnected')
+      })
       const user = userService.getLoggedinUser()
       if (user) this.login(user._id)
     },
