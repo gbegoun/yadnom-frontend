@@ -14,7 +14,7 @@
 
     .board-header-container {
         background-color: rgb(255, 255, 255);
-        width: 100dvw;
+        width: 90dvw;
         padding-left: 40px;
         padding-top: 20px;
         padding-bottom: 23px;
@@ -75,6 +75,7 @@
             display: flex;
             align-items: center;
             border-bottom: 1px solid #ddd;
+            width: 78dvw;
 
             .tables-row-card {
                 display: flex;

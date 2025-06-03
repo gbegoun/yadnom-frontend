@@ -5,6 +5,8 @@
 
 // Add group button animation (the one we were fixing)
 .add-group-btn {
+    left: 40px;
+    position: sticky;
     margin: 2px 0px 60px 38px;
     color: #323338;
     display: inline-flex; // Changed from flex to inline-flex

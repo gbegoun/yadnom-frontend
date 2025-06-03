@@ -59,9 +59,9 @@ export const BoardHeader = ({ board }) => {
                         </h2>
                         <SVGService.CollapseGroupIcon alt="collapse" />
                     </div>
-                    <div className='users-integration'>
+                    {/* <div className='users-integration'>
                         activity log
-                    </div>
+                    </div> */}
                 </div>
                 <div className='tables-row'>
                     <div className='tables-row-card'>
