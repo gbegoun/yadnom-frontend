@@ -1,8 +1,10 @@
 .group-preview {
     display: grid;
     height: min-content;
-    grid-column: 1/-1;    grid-template-columns: subgrid;
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
     @include fade-in(0.3s, 0s);
+    margin-bottom: 10px;
 }
 
 .group-dragging-placeholder {
