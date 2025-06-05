@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { HomePage } from "./pages/HomePage.jsx"
 import { Board } from "./pages/board.jsx"
+import { Welcome } from "./pages/Welcome.jsx"
 import { MainHeader } from "./components/MainHeader.jsx"
 import { MainSidebar } from "./components/MainSidebar.jsx"
 import { ModalProvider } from './contexts/modal/ModalContext.jsx'
@@ -17,6 +18,7 @@ import SignUp from './pages/SignUp.jsx'
 function RootCmp() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
+  const isWelcomePage = location.pathname === '/welcome';
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -42,8 +44,9 @@ function RootCmp() {
         <RightPanelProvider>
           <Routes>
             <Route path='/login' element={<SignUp />} />
+            <Route path='/welcome' element={<Welcome />} />
           </Routes>
-          {!isLoginPage && (
+          {!isLoginPage && !isWelcomePage && (
             <div className="app-container">
               <header className="main-header">
                 <MainHeader />
