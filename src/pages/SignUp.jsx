@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
-import { login, signup } from "../store/actions/user.actions"
-import '../assets/styles/pages/signin.scss'
+import { login,/* signup */} from "../store/actions/user.actions"
+import '../assets/styles/pages/SignUp.scss'
 
 export default function SignUp() {
     const navigate = useNavigate()
@@ -13,25 +13,25 @@ export default function SignUp() {
             setTimeout(() => {
                 showSuccessMsg(`Redirecting to home page...`)
                 navigate('/') // Redirect to home page after successful login
-            }, 2000);
+            }, 400);
         } catch (err) {
             showErrorMsg('Cannot login')
             throw err
         }
     }
 
-    async function onSignup(credentials) {
-        try {
-            const user = await signup(credentials)
-            showSuccessMsg(`Welcome new user: ${user.fullname}`)
-            setTimeout(() => {
-                navigate('/') // Redirect to home page after successful signup
-            }, 2000);
-        } catch (err) {
-            showErrorMsg('Cannot signup')
-            throw err
-        }
-    }
+    // async function onSignup(credentials) {
+    //     try {
+    //         const user = await signup(credentials)
+    //         showSuccessMsg(`Welcome new user: ${user.fullname}`)
+    //         setTimeout(() => {
+    //             navigate('/') // Redirect to home page after successful signup
+    //         }, 2000);
+    //     } catch (err) {
+    //         showErrorMsg('Cannot signup')
+    //         throw err
+    //     }
+    // }
 
     async function handleSubmit(ev) {
         ev.preventDefault();
@@ -41,12 +41,12 @@ export default function SignUp() {
         const password = formData.get('password');
 
         // For signup, use email as username and create fullname for now
-        const credentials = {
-            username: email, // Use email as username
-            password: password,
-            fullname: email.split('@')[0], // Use email prefix as fullname
-            email: email // Keep email field for future use
-        };
+        // const credentials = {
+        //     username: email, // Use email as username
+        //     password: password,
+        //     fullname: email.split('@')[0], // Use email prefix as fullname
+        //     email: email // Keep email field for future use
+        // };
 
         // Try signup first (create new user), fallback to login if user exists
         // try {

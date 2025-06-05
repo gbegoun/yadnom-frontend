@@ -84,7 +84,18 @@
     padding-left: 4px;
     padding-right: 4px;
 
+    .add-task-span{
+        cursor: pointer;
+        margin-left: 13px;
+        border: 1px solid transparent;
+        padding: 1px 150px 1px 15px;
+        border-radius: 3px;
+        opacity: 0.8;
 
+        &:hover {
+            border: 1px solid #7375809a;
+        }
+    }
 }
 
 .group-footer-new-task-blank {

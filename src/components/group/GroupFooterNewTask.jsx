@@ -60,7 +60,7 @@ export const GroupFooterNewTask = ({ color, groupId }) => {
                             />
                         </span>
                     ) : (
-                        <span onClick={handleSpanClick}>+ Add task</span>
+                        <span onClick={handleSpanClick} className='add-task-span'>+ Add task</span>
                     )}
 
                 </div>
