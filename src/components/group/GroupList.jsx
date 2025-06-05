@@ -40,7 +40,7 @@ export const GroupList = ({ onBoardSave }) => {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                distance: 0
+                distance: 5
             }
         })
     )

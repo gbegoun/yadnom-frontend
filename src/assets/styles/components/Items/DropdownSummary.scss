@@ -10,4 +10,14 @@
         border-radius: 20px;
         padding:  0px 6px;
   }
+
+  // Cancel hover effects for dropdown inside summary
+  .dropdown-item:hover {
+    background-color: transparent !important;
+  }
+
+  .dropdown-item:hover .dropdown-icons-container {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }
