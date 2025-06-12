@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import { login,/* signup */} from "../store/actions/user.actions"
-import '../assets/styles/pages/SignUp.scss'
 
 export default function SignUp() {
     const navigate = useNavigate()
+    const [guestMode, setGuestMode] = useState(false)
 
     async function onLogin(credentials) {
         try {
@@ -37,31 +38,27 @@ export default function SignUp() {
         ev.preventDefault();
         const form = ev.target.closest('form');
         const formData = new FormData(form);
-        const email = formData.get('email');
-        const password = formData.get('password');
+        let credentials
 
-        // For signup, use email as username and create fullname for now
-        // const credentials = {
-        //     username: email, // Use email as username
-        //     password: password,
-        //     fullname: email.split('@')[0], // Use email prefix as fullname
-        //     email: email // Keep email field for future use
-        // };
+        if (guestMode) {
+            credentials = {
+                username: 'OfirRozanes',
+                password: 'ofir123'
+            }
+            
+        } else {
+            const email = formData.get('email');
+            const password = formData.get('password');
+            credentials = { username: email, password: password }
+        }
 
-        // Try signup first (create new user), fallback to login if user exists
-        // try {
-        //     await onSignup(credentials)
-        //     console.log('Signup successful, user created');
-        // } catch (err) {
-        //     console.log('Signup failed, trying login with existing user');
         try {
-            await onLogin({ username: email, password: password })
+            await onLogin(credentials)
         } catch (err) {
             console.error('Login failed, please try again');
             showErrorMsg('An error occurred during signup/login. Please try again.');
             return;
         }
-        // }
     }
 
     return (
@@ -71,8 +68,25 @@ export default function SignUp() {
                     <h1>Welcome to Yadnom.com</h1>
                     <p className="subtitle">Get started - it's free. No credit card needed.</p>
                     <form className="signin-form">
-                        <input type="email" name="email" placeholder="name@company.com" required />
-                        <input type="password" name="password" placeholder="Password" required />
+                        <div className="guest-toggle-wrapper">
+                            <span className="guest-toggle-label">Guest Mode</span>
+                            <label className="guest-switch">
+                                <input
+                                    type="checkbox"
+                                    checked={guestMode}
+                                    onChange={() => setGuestMode(g => !g)}
+                                />
+                                <span className="guest-slider"></span>
+                                <span className="guest-knob" style={{ left: guestMode ? '22px' : '4px' }}></span>
+                            </label>
+                            <span className={`guest-toggle-state${guestMode ? ' on' : ''}`}>{guestMode ? 'ON' : 'OFF'}</span>
+                        </div>
+                        {!guestMode && (
+                            <>
+                                <input type="email" name="email" placeholder="name@company.com" required />
+                                <input type="password" name="password" placeholder="Password" required />
+                            </>
+                        )}
                         <button type="button" onClick={(ev) => handleSubmit(ev)} className="continue-btn">Continue</button>
                     </form>
                     <p className="terms">By proceeding, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
