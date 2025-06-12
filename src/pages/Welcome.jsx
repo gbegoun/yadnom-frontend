@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../store/actions/user.actions';
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service';
 import '../assets/styles/pages/welcome.scss';
 
 export const Welcome = () => {
@@ -33,6 +35,18 @@ export const Welcome = () => {
         navigate('/login');
     };
 
+    async function handleGuestStart() {
+        try {
+            const user = await login({ username: 'OfirRozanes', password: 'ofir123' });
+            showSuccessMsg(`Welcome: ${user.fullname || 'Guest'}`);
+            setTimeout(() => {
+                navigate('/');
+            }, 400);
+        } catch (err) {
+            showErrorMsg('Cannot login as guest');
+        }
+    }
+
     return (
         <div className="welcome-page scrollable-bg">
             <header className="welcome-header-bar">
@@ -46,6 +60,7 @@ export const Welcome = () => {
                 <div className="welcome-header-right">
                     <button className="welcome-header-login" onClick={handleLogin}>Log in</button>
                     <button className="welcome-header-get-started" onClick={handleGetStarted}>Get Started</button>
+                    <button className="welcome-header-get-started" onClick={handleGuestStart}>Get Started As a Guest</button>
                 </div>
             </header>
 
@@ -63,20 +78,27 @@ export const Welcome = () => {
                     Streamline workflows, gain clear visibility across teams, and empower<br />
                     smarter decisions with AI seamlessly woven into your work.
                 </p>
-                <button className="get-started-btn" onClick={handleGetStarted}>
-                    Get Started →
-                </button>
+                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
+                    <button className="get-started-btn" onClick={handleGetStarted}>
+                        Get Started →
+                    </button>
+                    <button className="get-started-guest-btn" onClick={handleGuestStart}>
+                        Get started as a guest
+                    </button>
+                </div>
                 <p className="welcome-note">
                     No credit card needed &nbsp; <span className="dot">•</span> &nbsp; Unlimited time on Free plan
                 </p>
-            </div>            <div className="welcome-bottom-area">
-                <div className="welcome-board-and-categories">                    <div className="board-preview">
-                    <img
-                        src="https://res.cloudinary.com/drunensjg/image/upload/v1749126419/%D7%A6%D7%99%D7%9C%D7%95%D7%9D_%D7%9E%D7%A1%D7%9A_2025-06-05_152635_gv9mzu.png"
-                        alt="Project planning board"
-                        className="board-preview-image"
-                    />
-                </div>
+            </div>
+            <div className="welcome-bottom-area">
+                <div className="welcome-board-and-categories">
+                    <div className="board-preview">
+                        <img
+                            src="https://res.cloudinary.com/drunensjg/image/upload/v1749126419/%D7%A6%D7%99%D7%9C%D7%95%D7%9D_%D7%9E%D7%A1%D7%9A_2025-06-05_152635_gv9mzu.png"
+                            alt="Project planning board"
+                            className="board-preview-image"
+                        />
+                    </div>
 
                     <div className="category-selector">
                         <h3>What would you like to manage?</h3>
@@ -92,9 +114,14 @@ export const Welcome = () => {
                                 </button>
                             ))}
                         </div>
-                        <button className="category-get-started" onClick={handleGetStarted}>
-                            Get Started →
-                        </button>
+                        <div style={{ display: 'flex', gap: '10px', width: '100%', justifyContent: 'center', marginTop: '10px' }}>
+                            <button className="category-get-started" onClick={handleGetStarted}>
+                                Get Started →
+                            </button>
+                            <button className="category-get-started-guest" onClick={handleGuestStart}>
+                                Get started as a guest
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

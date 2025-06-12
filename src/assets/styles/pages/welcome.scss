@@ -81,7 +81,8 @@ body:has(.welcome-page) {
         }
     }
 
-    .get-started-btn {
+    .get-started-btn,
+    .get-started-guest-btn {
         background: linear-gradient(45deg, #6c63ff, #5a52d5);
         color: white;
         border: none;
@@ -93,11 +94,19 @@ body:has(.welcome-page) {
         transition: all 0.3s ease;
         box-shadow: 0 4px 16px rgba(108, 99, 255, 0.18);
         margin-bottom: 18px;
-
+        display: inline-block;
+        text-align: center;
+        
         &:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(108, 99, 255, 0.22);
         }
+    }
+
+    .get-started-guest-btn {
+        margin-bottom: 18px;
+        margin-left: 0;
+        background: linear-gradient(45deg, #5a52d5, #6c63ff);
     }
 
     .welcome-note {
@@ -228,7 +237,8 @@ body:has(.welcome-page) {
         }
     }
 
-    .category-get-started {
+    .category-get-started,
+    .category-get-started-guest {
         width: 100%;
         background: linear-gradient(45deg, #6c63ff, #5a52d5);
         color: white;
@@ -239,11 +249,18 @@ body:has(.welcome-page) {
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-
+        margin-bottom: 0;
+        display: inline-block;
+        text-align: center;
+        
         &:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 16px rgba(108, 99, 255, 0.18);
         }
+    }
+    .category-get-started-guest {
+        background: linear-gradient(45deg, #5a52d5, #6c63ff);
+        margin-left: 0;
     }
 }
 
@@ -303,7 +320,8 @@ body:has(.welcome-page) {
             }
         }
 
-        .welcome-header-get-started {
+        .welcome-header-get-started,
+        .welcome-header-guest-btn {
             background: #6c63ff;
             color: #fff;
             font-weight: 600;
@@ -314,10 +332,17 @@ body:has(.welcome-page) {
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(108, 99, 255, 0.13);
             transition: background 0.18s;
-
+            margin-left: 0;
+            display: inline-block;
+            text-align: center;
+            
             &:hover {
                 background: #5a52d5;
             }
+        }
+        .welcome-header-guest-btn {
+            background: #6c63ff;
+            margin-left: 0;
         }
     }
 }
