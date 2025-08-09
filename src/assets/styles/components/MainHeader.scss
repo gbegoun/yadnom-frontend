@@ -65,3 +65,10 @@
         }
     }
 }
+
+@include for-mobile-layout {
+    .main-header-right-group { gap: 8px; }
+    .optional-mobile-hide { display: none; }
+    .avatar-container { width: auto; padding: 4px 6px; gap:4px; }
+    .main-header-divider { display: none; }
+}

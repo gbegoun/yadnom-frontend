@@ -37,12 +37,13 @@ export const GroupList = ({ onBoardSave }) => {
         dropIndices: {}
     })
 
+    // Better mobile drag experience: use a long-press delay on touch devices to avoid accidental drags while scrolling
+    const isTouchDevice = typeof window !== 'undefined' && (('ontouchstart' in window) || navigator.maxTouchPoints > 0)
     const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 5
-            }
-        })
+        useSensor(PointerSensor, isTouchDevice
+            ? { activationConstraint: { delay: 180, tolerance: 8 } } // long-press & small movement tolerance
+            : { activationConstraint: { distance: 5 } } // immediate drag for desktop precision
+        )
     )
 
     const handleDragStart = (event) => {

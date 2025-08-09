@@ -172,3 +172,21 @@
         }
     }
 }
+
+@include for-mobile-layout {
+    .task-preview-title-wrapper {
+        position: relative;
+    }
+    .task-preview-title-wrapper::before {
+        content: '\2630'; // hamburger-like drag hint
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        line-height: 1;
+        color: #999;
+        pointer-events: none;
+    }
+    .task-title { padding-left: 26px; width: 240px; }
+}

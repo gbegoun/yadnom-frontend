@@ -32,6 +32,7 @@ export const People = ({ value, taskId, groupId, column }) => {
     const handleOpenModal = (e) => {
         e.stopPropagation();
         const rect = peopleRef.current.getBoundingClientRect();
+        
         openModal(
             <PeopleOptionsModal
                 people={people}

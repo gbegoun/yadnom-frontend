@@ -7,14 +7,19 @@
     height: 100dvh; 
     overflow: hidden; 
 
+    &.sidebar-open {
+        .main-sidebar { transform: translateX(0); box-shadow: 2px 0 12px rgba(0,0,0,0.15); }
+        .mobile-backdrop { opacity: 1; pointer-events: auto; }
+    }
+
     .main-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: inherit;
-        padding: 0px 10px 0px 4px;
+    background-color: inherit;
+    padding: 0 10px 0 6px;
         height: 48px;
-        width: 100vw;
+    width: 100%;
     }
 
     .main-layout {
@@ -24,6 +29,8 @@
         background-color: #ECEFF8;
         padding-left: 12px;
         overflow: hidden; 
+    /* Allow board inner scrolling horizontally on narrow screens while keeping header fixed height context */
+    .board-container { overflow-x: auto; overscroll-behavior-x: contain; }
 
         .main-sidebar {
             width: 212px;
@@ -31,6 +38,7 @@
             border-top-left-radius: 15px;
             height: 100%; 
             overflow-y: auto; 
+            transition: transform 0.3s ease;
         }
 
         .main-content {
@@ -59,4 +67,71 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
+}
+
+/* Mobile / small viewport adjustments */
+@include for-mobile-layout {
+    .app-container {
+        .main-header {
+            padding: 0 8px;
+            .main-header-logo { height: 24px; }
+            .mobile-hamburger-btn { display: flex; margin-right: 4px; }
+        }
+        .main-layout {
+            grid-template-columns: 1fr; /* collapse to single column */
+            padding-left: 0;
+            position: relative;
+            .main-sidebar {
+                position: fixed;
+                top: 48px; /* header height */
+                left: 0;
+                bottom: 0;
+                z-index: 200;
+                transform: translateX(-100%);
+                max-width: 78vw;
+                width: 200px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            .main-content { 
+                border-top-left-radius: 0; 
+                padding: 0 0 8px; 
+                /* Create a horizontal scroll context for wide board tables */
+                .board-container { 
+                    min-width: 620px; /* ensures columns don't squish too much */
+                    padding: 0 6px; 
+                }
+            }
+        }
+        .mobile-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+    }
+    .main-header-right-group { gap: 10px; }
+}
+
+/* Hamburger button styling */
+.mobile-hamburger-btn {
+    display: none; /* shown only on mobile via media mixin */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-right: 4px;
+    cursor: pointer;
+    &:focus { outline: 2px solid #579BFC; outline-offset: 2px; }
+    span { display: block; width: 20px; height: 2px; background: #323338; border-radius: 2px; transition: background 0.2s; }
+    &:hover span { background: #0073EA; }
 }

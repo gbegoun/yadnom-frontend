@@ -94,3 +94,8 @@
     grid-column: 3;
     border-bottom: 1px solid #d0d4e4;
 }
+
+@include for-mobile-layout {
+    .task-preview-item { width: 92px; font-size: 12px; }
+    .task-preview { touch-action: pan-y; } // allow vertical scroll while enabling horizontal drag recognition via delay
+}

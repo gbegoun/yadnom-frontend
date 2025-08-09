@@ -35,3 +35,8 @@
     border-top: 1px solid #d0d4e4;
 }
 
+@include for-mobile-layout {
+    .group-header-column-row { height: 32px; }
+    .group-header-column-cell { width: 92px; font-size: 12px; padding-left:2px; padding-right:2px; }
+}
+

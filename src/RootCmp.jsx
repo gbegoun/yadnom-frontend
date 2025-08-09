@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { HomePage } from "./pages/HomePage.jsx"
 import { Board } from "./pages/board.jsx"
 import { Welcome } from "./pages/Welcome.jsx"
@@ -19,6 +19,11 @@ function RootCmp() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isWelcomePage = location.pathname === '/welcome';
+
+  // Mobile sidebar toggle state
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const toggleSidebar = () => setIsSidebarOpen(prev => !prev)
+  const closeSidebar = () => setIsSidebarOpen(false)
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -47,13 +52,13 @@ function RootCmp() {
             <Route path='/welcome' element={<Welcome />} />
           </Routes>
           {!isLoginPage && !isWelcomePage && (
-            <div className="app-container">
+            <div className={`app-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
               <header className="main-header">
-                <MainHeader />
+                <MainHeader onToggleSidebar={toggleSidebar} />
               </header>
 
               <div className="main-layout">
-                <aside className="main-sidebar">
+                <aside className="main-sidebar" onClick={(e)=> e.stopPropagation()}>
                   <MainSidebar />
                 </aside>
 
@@ -67,6 +72,8 @@ function RootCmp() {
 
                 <RightPanel />
               </div>
+              {/* Mobile backdrop */}
+              {isSidebarOpen && <div className="mobile-backdrop" onClick={closeSidebar}></div>}
             </div>
           )}
         </RightPanelProvider>
