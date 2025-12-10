@@ -36,17 +36,21 @@ function RootCmp() {
           await loadUsers()
           await loadBoards()
         } else {
-          // No user, navigate to welcome page
-          navigate('/welcome', { replace: true })
+          // No user - only redirect to welcome if user is on home page
+          if (location.pathname === '/' || location.pathname === '') {
+            navigate('/welcome', { replace: true })
+          }
         }
       } catch (err) {
-        console.log('No user found in cookies, navigating to welcome');
-        // Navigate to welcome on error
-        navigate('/welcome', { replace: true })
+        console.log('No user found in cookies, continuing as guest');
+        // Only redirect to welcome if user is on home page
+        if (location.pathname === '/' || location.pathname === '') {
+          navigate('/welcome', { replace: true })
+        }
       }
     }
     initializeApp();
-  }, [navigate])
+  }, [navigate, location.pathname])
 
   return (
 
