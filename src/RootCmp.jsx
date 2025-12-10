@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { HomePage } from "./pages/HomePage.jsx"
 import { Board } from "./pages/board.jsx"
@@ -17,6 +17,7 @@ import SignUp from './pages/SignUp.jsx'
 
 function RootCmp() {
   const location = useLocation();
+  const navigate = useNavigate();
   const isLoginPage = location.pathname === '/login';
   const isWelcomePage = location.pathname === '/welcome';
 
@@ -28,19 +29,24 @@ function RootCmp() {
   useEffect(() => {
     const initializeApp = async () => {
       try {
-        await loginUserFromCookies();
-        await loadUsers()
-        await loadBoards()
+        const user = await loginUserFromCookies();
+        
+        if (user) {
+          // User exists, load their data
+          await loadUsers()
+          await loadBoards()
+        } else {
+          // No user, navigate to welcome page
+          navigate('/welcome', { replace: true })
+        }
       } catch (err) {
-
-        console.log('No user found in cookies, continuing as guest');
-        // Still load other data even if no user
-        // await loadUsers();
-        // await loadBoards();
+        console.log('No user found in cookies, navigating to welcome');
+        // Navigate to welcome on error
+        navigate('/welcome', { replace: true })
       }
     }
     initializeApp();
-  }, [])
+  }, [navigate])
 
   return (
 
